@@ -42,5 +42,11 @@ public class Area {
 		public boolean containsGeoLocation(GeoLocation location){
 			return false;	
 		}
+		
+	public void addGeolocation(GeoLocation geo){
+		
+		containedGeoLocations.add(geo);
+		
+	}
 
 }

@@ -1,7 +1,6 @@
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -16,8 +15,18 @@ public class BuildAreas {
 	
 public List<Area> AreaBuild(Context appcontext){
 	
+	//create quad area	
+	Area ld = new Area();
+	
+	GeoLocation geo = new GeoLocation();
+	geo.setLongitude(53.52568);
+	geo.setLatitude(-113.52562);
+	ld.addGeolocation(geo);
+	listAreas.add(ld);
 	
 	
+	
+ 
 	
 	return listAreas;
 	

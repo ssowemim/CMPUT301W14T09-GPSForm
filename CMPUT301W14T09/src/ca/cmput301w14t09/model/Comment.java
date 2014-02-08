@@ -1,8 +1,9 @@
-package model;
+package ca.cmput301w14t09.model;
 
-import java.util.Date;
 import java.util.Collection;
-import view.EditCommentActivity;
+import java.util.Date;
+
+import ca.cmput301w14t09.view.EditCommentActivity;
 
 
 

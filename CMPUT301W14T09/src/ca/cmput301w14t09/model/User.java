@@ -1,4 +1,4 @@
-package model;
+package ca.cmput301w14t09.model;
 
 
 

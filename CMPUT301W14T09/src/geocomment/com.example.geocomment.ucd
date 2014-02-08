@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="com.example.geocomment" size="1320,845" id="view" metadata="uml2-1.0" initialized="true" zoom="0.75" scrolledX="-3" scrolledY="-3" tag="1000" key="32303037303533312D313030302067656F436F6D6D656E742F6D636D6F72726973">
+  <children xsi:type="editmodel:PackageEditModel" name="model" location="1,1" size="1033,584" id="model">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.0" name="Area" location="107,53" size="279,75" id="model/Area" runTimeClassModel="containsGeoLocation,containedGeoLocations,areaName">
+      <children xsi:type="editmodel:CompartmentEditModel" size="256,36">
+        <children xsi:type="editmodel:AttributeEditModel" name="areaName" id="model/Area#areaName"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="containedGeoLocations" id="model/Area#containedGeoLocations"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="GeoLocation" location="171,256" size="141,121" id="model/GeoLocation" runTimeClassModel="calculateProximity(Lmodel.GeoLocation;),name,longitude,latitude">
+      <children xsi:type="editmodel:CompartmentEditModel" size="104,54">
+        <children xsi:type="editmodel:AttributeEditModel" name="latitude" location="8,29" id="model/GeoLocation#latitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="longitude" id="model/GeoLocation#longitude"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="name" id="model/GeoLocation#name"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="118,18">
+        <children xsi:type="editmodel:MethodEditModel" name="calculateProximity" id="model/GeoLocation#calculateProximity(Lmodel.GeoLocation;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/Area@area+model/GeoLocation@geoLocation" source="//@children.0/@children.1" target="//@children.0/@children.0" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" label="//@children.0/@children.1/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="geoLocation" location="70,0" id="model/Area@area+model/GeoLocation@geoLocation|model/GeoLocation#geoLocation" attachSource="true" multiplicityLabel="//@children.0/@children.1/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.0/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - geoLocation" location="248,237" size="68,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="229,237" size="5,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="area" location="134,75" id="model/Area@area+model/GeoLocation@geoLocation|model/Area#area" multiplicityLabel="//@children.0/@children.1/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.0/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - area" location="248,135" size="31,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="229,135" size="5,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="model/Comment@comment+model/GeoLocation@geoLocation1" source="//@children.0/@children.1" target="//@children.0/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.1/@children.1" label="//@children.0/@children.1/@sourceConnections.1/@children.2" sourceEnd="//@children.0/@children.1/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="geoLocation1" location="139,62" id="model/Comment@comment+model/GeoLocation@geoLocation1|model/GeoLocation#geoLocation1" attachSource="true" multiplicityLabel="//@children.0/@children.1/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.1/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - geoLocation1" location="319,325" size="74,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="319,299" size="5,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="comment" location="-3,44" id="model/Comment@comment+model/GeoLocation@geoLocation1|model/Comment#comment" multiplicityLabel="//@children.0/@children.1/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.1/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - comment" location="355,297" size="54,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="404,323" size="5,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.6/@sourceConnections.1 //@children.0/@children.1/@sourceConnections.1 //@children.0/@children.3/@sourceConnections.0" name="Comment" location="415,272" size="167,211" id="model/Comment" runTimeClassModel="postDate,geoLocation,parent,setUnreadMarker,attachment,setFavorite,commentText,area,favoriteCount,authorName,setFavorite1,setPicture,setAttachment">
+      <children xsi:type="editmodel:CompartmentEditModel" size="144,144">
+        <children xsi:type="editmodel:AttributeEditModel" name="area" id="model/Comment#area"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="attachment" id="model/Comment#attachment"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="authorName" id="model/Comment#authorName"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="commentText" id="model/Comment#commentText"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="favoriteCount" id="model/Comment#favoriteCount"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="geoLocation" id="model/Comment#geoLocation"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="parent" id="model/Comment#parent"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="postDate" id="model/Comment#postDate"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="89,18">
+        <children xsi:type="editmodel:MethodEditModel" name="setFavorite1" id="model/Comment#setFavorite1"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/UnreadMarker@unreadMarker+model/Comment@comment1" source="//@children.0/@children.2" target="//@children.0/@children.7" targetEnd="//@children.0/@children.2/@sourceConnections.0/@children.1" label="//@children.0/@children.2/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="comment1" location="167,206" id="model/UnreadMarker@unreadMarker+model/Comment@comment1|model/Comment#comment1" attachSource="true" multiplicityLabel="//@children.0/@children.2/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.2/@sourceConnections.0/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - comment1" location="589,459" size="60,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="589,485" size="18,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="unreadMarker" location="0,4" id="model/UnreadMarker@unreadMarker+model/Comment@comment1|model/UnreadMarker#unreadMarker" multiplicityLabel="//@children.0/@children.2/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.2/@sourceConnections.0/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - unreadMarker" location="758,459" size="76,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="816,485" size="18,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="view/EditCommentActivity@editCommentActivity+model/Comment@comment" source="//@children.0/@children.2" target="//@children.1/@children.0" targetEnd="//@children.0/@children.2/@sourceConnections.1/@children.1" label="//@children.0/@children.2/@sourceConnections.1/@children.2" sourceEnd="//@children.0/@children.2/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="comment" location="120,211" id="view/EditCommentActivity@editCommentActivity+model/Comment@comment|model/Comment#comment" attachSource="true" multiplicityLabel="//@children.0/@children.2/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.0/@children.2/@sourceConnections.1/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - comment" location="475,491" size="54,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="543,491" size="18,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="editCommentActivity" location="10,0" id="view/EditCommentActivity@editCommentActivity+model/Comment@comment|view/EditCommentActivity#editCommentActivity" multiplicityLabel="//@children.0/@children.2/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@children.2/@sourceConnections.1/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - editCommentActivity" location="613,623" size="109,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="581,623" size="18,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="Picture" location="50,534" size="145,67" id="model/Picture" runTimeClassModel="validatePictureSize(Landroid.graphics.Bitmap;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="122,18">
+        <children xsi:type="editmodel:MethodEditModel" name="validatePictureSize" id="model/Picture#validatePictureSize(Landroid.graphics.Bitmap;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" id="model/Comment@comment+model/Picture@picture" source="//@children.0/@children.3" target="//@children.0/@children.2" targetEnd="//@children.0/@children.3/@sourceConnections.0/@children.1" label="//@children.0/@children.3/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="picture" location="143,48" id="model/Comment@comment+model/Picture@picture|model/Picture#picture" attachSource="true" multiplicityLabel="//@children.0/@children.3/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.3/@sourceConnections.0/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - picture" location="203,539" size="43,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="203,513" size="18,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="comment" location="-3,172" id="model/Comment@comment+model/Picture@picture|model/Comment#comment" multiplicityLabel="//@children.0/@children.3/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.3/@sourceConnections.0/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - comment" location="355,425" size="54,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="404,451" size="5,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.5/@sourceConnections.0" name="User" location="759,41" size="184,111" id="model/User" runTimeClassModel="userName,deviceId,currentLocation,profile">
+      <children xsi:type="editmodel:CompartmentEditModel" size="161,72">
+        <children xsi:type="editmodel:AttributeEditModel" name="currentLocation" id="model/User#currentLocation"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="deviceId" id="model/User#deviceId"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="profile" id="model/User#profile"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="userName" id="model/User#userName"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.6/@sourceConnections.0 //@children.0/@children.7/@sourceConnections.0" name="Profile" location="687,223" size="259,121" id="model/Profile" runTimeClassModel="authorName,setUser,unreadComments,favorites">
+      <children xsi:type="editmodel:CompartmentEditModel" size="236,54">
+        <children xsi:type="editmodel:AttributeEditModel" name="authorName" id="model/Profile#authorName"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="favorites" id="model/Profile#favorites"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="unreadComments" id="model/Profile#unreadComments"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="67,18">
+        <children xsi:type="editmodel:MethodEditModel" name="setUser" id="model/Profile#setUser"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/User@user+model/Profile@profile1" source="//@children.0/@children.5" target="//@children.0/@children.4" targetEnd="//@children.0/@children.5/@sourceConnections.0/@children.1" label="//@children.0/@children.5/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.5/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="profile1" location="163,0" id="model/User@user+model/Profile@profile1|model/Profile#profile1" attachSource="true" multiplicityLabel="//@children.0/@children.5/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.5/@sourceConnections.0/@children.0/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - profile1" location="857,205" size="46,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="825,205" size="18,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="user" location="91,111" id="model/User@user+model/Profile@profile1|model/User#user" multiplicityLabel="//@children.0/@children.5/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.5/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - user" location="857,159" size="30,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="825,159" size="18,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="Favorite" location="710,388" size="139,75" id="model/Favorite" runTimeClassModel="name,setProfile,comment">
+      <children xsi:type="editmodel:CompartmentEditModel" size="116,36">
+        <children xsi:type="editmodel:AttributeEditModel" name="comment" id="model/Favorite#comment"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="name" id="model/Favorite#name"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/Profile@profile1+model/Favorite@favorite1" source="//@children.0/@children.6" target="//@children.0/@children.5" targetEnd="//@children.0/@children.6/@sourceConnections.0/@children.1" label="//@children.0/@children.6/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.6/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="favorite1" location="69,0" id="model/Profile@profile1+model/Favorite@favorite1|model/Favorite#favorite1" attachSource="true" multiplicityLabel="//@children.0/@children.6/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.6/@sourceConnections.0/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - favorite1" location="787,369" size="52,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="768,369" size="5,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="profile1" location="92,121" id="model/Profile@profile1+model/Favorite@favorite1|model/Profile#profile1" multiplicityLabel="//@children.0/@children.6/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.6/@sourceConnections.0/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - profile1" location="787,351" size="46,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="768,351" size="5,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/Comment@comment2+model/Favorite@favorite1" source="//@children.0/@children.6" target="//@children.0/@children.2" targetEnd="//@children.0/@children.6/@sourceConnections.1/@children.1" label="//@children.0/@children.6/@sourceConnections.1/@children.2" sourceEnd="//@children.0/@children.6/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="favorite1" location="0,37" id="model/Comment@comment2+model/Favorite@favorite1|model/Favorite#favorite1" attachSource="true" multiplicityLabel="//@children.0/@children.6/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.0/@children.6/@sourceConnections.1/@children.0/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - favorite1" location="651,406" size="52,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="685,432" size="18,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="comment2" location="167,153" id="model/Comment@comment2+model/Favorite@favorite1|model/Comment#comment2" multiplicityLabel="//@children.0/@children.6/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.0/@children.6/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - comment2" location="589,406" size="60,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="589,432" size="18,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.0" name="UnreadMarker" location="841,474" size="155,103" id="model/UnreadMarker" runTimeClassModel="unread,generateNewMarkers(),comment">
+      <children xsi:type="editmodel:CompartmentEditModel" size="116,36">
+        <children xsi:type="editmodel:AttributeEditModel" name="comment" id="model/UnreadMarker#comment"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="unread" id="model/UnreadMarker#unread"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="132,18">
+        <children xsi:type="editmodel:MethodEditModel" name="generateNewMarkers" id="model/UnreadMarker#generateNewMarkers()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="model/Profile@profile+model/UnreadMarker@unreadMarker" source="//@children.0/@children.7" target="//@children.0/@children.5" targetEnd="//@children.0/@children.7/@sourceConnections.0/@children.1" label="//@children.0/@children.7/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.7/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" name="unreadMarker" location="52,0" id="model/Profile@profile+model/UnreadMarker@unreadMarker|model/UnreadMarker#unreadMarker" attachSource="true" multiplicityLabel="//@children.0/@children.7/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.0/@children.7/@sourceConnections.0/@children.0/@children.0" aggregationKind="Composition" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - unreadMarker" location="900,455" size="76,12" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="881,455" size="5,12" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="profile" location="206,121" id="model/Profile@profile+model/UnreadMarker@unreadMarker|model/Profile#profile" multiplicityLabel="//@children.0/@children.7/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@children.7/@sourceConnections.0/@children.1/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - profile" location="900,351" size="40,12" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="*" location="881,351" size="5,12" anchorKind="LastPart"/>
+        </children>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,12" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference"/>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="view" location="4,589" size="1028,172" id="view">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.1" name="EditCommentActivity" location="593,54" size="187,29" id="view/EditCommentActivity" runTimeClassModel="">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="SelectLocationActivity" location="801,106" size="194,29" id="view/SelectLocationActivity" runTimeClassModel="">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="MainActivity" location="69,54" size="160,67" id="view/MainActivity" runTimeClassModel="onCreateOptionsMenu(Landroid.view.Menu;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="137,18">
+        <children xsi:type="editmodel:MethodEditModel" name="onCreateOptionsMenu" id="view/MainActivity#onCreateOptionsMenu(Landroid.view.Menu;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference"/>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="controller" location="1075,2" size="101,60" id="controller">
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

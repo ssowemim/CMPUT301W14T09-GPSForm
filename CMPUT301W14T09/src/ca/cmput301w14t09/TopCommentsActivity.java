@@ -2,9 +2,13 @@ package ca.cmput301w14t09;
 
 
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class TopCommentsActivity extends Activity {
 
@@ -19,6 +23,19 @@ public class TopCommentsActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.top_comments, menu);
 		return true;
+	}
+	
+	public void popUp(View v){
+		
+		Dialog dialog = new Dialog(this);
+
+        dialog.setContentView(R.layout.pop_up_comment);
+        dialog.setTitle("New Top Comment");
+
+        EditText editText=(EditText)dialog.findViewById(R.id.editText);
+        Button save=(Button)dialog.findViewById(R.id.save);
+        Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
+        dialog.show();
 	}
 
 }

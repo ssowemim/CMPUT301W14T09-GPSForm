@@ -27,6 +27,14 @@
             android:name="ca.cmput301w14t09.TopCommentsActivity"
             android:label="@string/title_activity_top_comments" >
         </activity>
+        <activity
+            android:name="ca.cmput301w14t09.FavoritesActivity"
+            android:label="@string/title_activity_favorites" >
+        </activity>
+        <activity
+            android:name="ca.cmput301w14t09.CommentListActivity"
+            android:label="@string/title_activity_comment_list" >
+        </activity>
     </application>
 
 </manifest>

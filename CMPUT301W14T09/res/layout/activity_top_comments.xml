@@ -42,7 +42,8 @@
          android:layout_alignBaseline="@+id/comment"
          android:layout_alignBottom="@+id/comment"
          android:layout_toLeftOf="@+id/comment"
-         android:text="Favorites" />
+         android:text="Favorites"
+         android:onClick="viewFavorites" />
 
      <Button
          android:id="@+id/button3"

@@ -4,6 +4,7 @@ package ca.cmput301w14t09;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -36,6 +37,12 @@ public class TopCommentsActivity extends Activity {
         Button save=(Button)dialog.findViewById(R.id.save);
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
         dialog.show();
+	}
+	
+	public void viewFavorites(View v){
+		Intent intent = new Intent(this, FavoritesActivity.class);
+		startActivity(intent);
+		
 	}
 
 }

@@ -2,9 +2,10 @@ package view;
 
 import java.util.ArrayList;
 
-import com.example.geocomment.R;
-import com.example.geocomment.R.layout;
-import com.example.geocomment.R.menu;
+
+import ca.geocomment.R;
+import ca.geocomment.R.layout;
+import ca.geocomment.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

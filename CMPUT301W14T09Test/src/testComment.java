@@ -13,7 +13,11 @@ public class testComment extends TestCase {
 		
 		String content = "test comment!";
 		
-
+		comments.setCommentText(content);
+		
+		String commentString = comments.getCommentText();
+		
+		assertTrue(commentString.equals(content));
 	}
 
 }

@@ -18,7 +18,7 @@ public class TopCommentsActivity extends Activity {
 		setContentView(R.layout.activity_top_comments);
 		
 		//location button, this proboly needs to be taken out but for testing I want to make this button go to my geolocation
-		//activity
+		//activity to test to see if geolocation can be found 
 	    Button btnSimple3 = (Button) findViewById(R.id.locationbutton);
 	    btnSimple3.setOnClickListener(new View.OnClickListener() {
 					

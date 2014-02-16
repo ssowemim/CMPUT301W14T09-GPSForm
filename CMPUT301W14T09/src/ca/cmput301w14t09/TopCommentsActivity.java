@@ -1,9 +1,9 @@
 package ca.cmput301w14t09;
 
-
-
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,6 +16,22 @@ public class TopCommentsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
+		
+		//location button, this proboly needs to be taken out but for testing I want to make this button go to my geolocation
+		//activity
+	    Button btnSimple3 = (Button) findViewById(R.id.locationbutton);
+	    btnSimple3.setOnClickListener(new View.OnClickListener() {
+					
+		@Override
+		public void onClick(View v) {
+			
+			Intent intent2 = new Intent(TopCommentsActivity.this,Location.class);
+			startActivity(intent2);  
+											
+	   }
+ });
+	    
+	    
 	}
 
 	@Override

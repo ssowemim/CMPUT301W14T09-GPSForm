@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_top_comments">TopCommentsActivity</string>
     <string name="title_activity_find_geolocation">FindGeolocation</string>
+    <string name="title_activity_location">Location</string>
 
 </resources>

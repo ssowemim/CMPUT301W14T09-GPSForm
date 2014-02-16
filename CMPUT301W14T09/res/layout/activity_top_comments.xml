@@ -8,16 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TopCommentsActivity" >
 
-    <Button
-        android:id="@+id/comment"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button1"
-        android:layout_marginLeft="5dp"
-        android:text="Comment"
-        android:onClick="popUp" />
-
      <ListView
          android:id="@+id/CounterList"
          android:layout_width="fill_parent"
@@ -28,29 +18,46 @@
          android:scrollbars="vertical" >
      </ListView>
 
-     <Spinner
-         android:id="@+id/spinner1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/favorite"
-         android:layout_below="@+id/favorite" />
-
-     <Button
-         android:id="@+id/favorite"
-         android:layout_width="140dp"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/comment"
-         android:layout_alignBottom="@+id/comment"
-         android:layout_toLeftOf="@+id/comment"
-         android:text="Favorites" />
-
      <Button
          android:id="@+id/button3"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:layout_alignLeft="@+id/CounterList"
-         android:layout_alignParentBottom="true"
-         android:layout_alignRight="@+id/CounterList"
+         android:layout_below="@+id/CounterList"
+         android:layout_marginTop="21dp"
          android:text="Delete User" />
+
+     <Button
+         android:id="@+id/locationbutton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBottom="@+id/button3"
+         android:layout_toRightOf="@+id/favorite"
+         android:text="Location(Test)" />
+
+     <Spinner
+         android:id="@+id/spinner1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_above="@+id/CounterList"
+         android:layout_alignParentLeft="true" />
+
+     <Button
+         android:id="@+id/favorite"
+         android:layout_width="140dp"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentTop="true"
+         android:text="Favorites" />
+
+     <Button
+         android:id="@+id/comment"
+         android:layout_width="140dp"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/favorite"
+         android:layout_alignBottom="@+id/favorite"
+         android:layout_toRightOf="@+id/favorite"
+         android:onClick="popUp"
+         android:text="Comment" />
 
 </RelativeLayout>

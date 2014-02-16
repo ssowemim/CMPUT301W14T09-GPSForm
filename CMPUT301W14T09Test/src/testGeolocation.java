@@ -28,9 +28,12 @@ public class testGeolocation extends TestCase {
 		double lat = geo.getLatitude();
 		
 		double lon = geo.getLongitude();
-		
+        
+		assertTrue(lat.setLatitudeSuccesful() || lon.setLatitudeSuccesful());
+        
 		assertTrue(lat1 == lat);
 		assertTrue(lon1 == lon);
+        
 			
 	}
 

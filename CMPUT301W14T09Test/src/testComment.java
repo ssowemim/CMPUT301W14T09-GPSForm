@@ -16,7 +16,11 @@ public class testComment extends TestCase {
 		comments.setCommentText(content);
 		
 		String commentString = comments.getCommentText();
-		
+		/**
+            Comment Succesful returns true if comment was succesfully made
+         **/
+        assertTrue(commentSuccesful());
+        
 		assertTrue(commentString.equals(content));
 	}
 

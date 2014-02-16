@@ -17,6 +17,11 @@ public class testUser extends TestCase {
 		
 		String getUserName = user.getUserName();
 		
+        /**
+         Checks to see if the user was created succesfully
+         **/
+        assertTrue(user.userCreationSuccesful());
+        
 		assertTrue(getUserName.equals(getUserName));
 	}
 

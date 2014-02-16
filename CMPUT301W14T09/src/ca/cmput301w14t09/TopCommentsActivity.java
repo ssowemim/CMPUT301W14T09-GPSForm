@@ -19,6 +19,7 @@ public class TopCommentsActivity extends Activity {
 		
 		//location button, this proboly needs to be taken out but for testing I want to make this button go to my geolocation
 		//activity to test to see if geolocation can be found 
+		//This will proboly be part of the location controller. 
 	    Button btnSimple3 = (Button) findViewById(R.id.locationbutton);
 	    btnSimple3.setOnClickListener(new View.OnClickListener() {
 					

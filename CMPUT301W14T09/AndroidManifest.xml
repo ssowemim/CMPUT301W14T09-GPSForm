@@ -27,6 +27,10 @@
             android:name="ca.cmput301w14t09.TopCommentsActivity"
             android:label="@string/title_activity_top_comments" >
         </activity>
+        <activity
+            android:name="ca.cmput301w14t09.FindGeolocation"
+            android:label="@string/title_activity_find_geolocation" >
+        </activity>
     </application>
 
 </manifest>

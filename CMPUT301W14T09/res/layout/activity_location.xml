@@ -12,6 +12,6 @@
         android:id="@+id/locationtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Location Text" />
+        android:text="Your Location Text, Go to Emulator Control and in Location Controls click send to display location (TEST)" />
 
 </RelativeLayout>

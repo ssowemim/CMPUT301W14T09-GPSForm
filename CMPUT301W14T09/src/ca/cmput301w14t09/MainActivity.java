@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.cmput301w14t09.FileManaging.FileLoading;
+import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.model.User;
 
 
@@ -21,16 +22,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		editText = (EditText) findViewById(R.id.editUsername);
+		UserList = (ListView) findViewById(R.id.UserList);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		
-		editText = (EditText) findViewById(R.id.editText1);
-		UserList = (ListView) findViewById(R.id.UserList);
-		
 		return true;
 	}
 
@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
 	public void newUser(View v){
 		User user = new User();
 		user.setUserName(editText.getText().toString());
+		FileSaving.saveInFile(user.getUserName(), this);
 		topComments(user);
 	}
 	

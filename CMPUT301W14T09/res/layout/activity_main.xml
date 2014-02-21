@@ -8,19 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
 
- <ListView
-     android:id="@+id/UserList"
-     android:layout_width="fill_parent"
-     android:layout_height="263dp"
-     android:layout_above="@+id/editText1"
-     android:layout_alignLeft="@+id/editText1"
-     android:layout_marginBottom="26dp"
-     android:layout_weight="1"
-     android:scrollbars="vertical" >
- </ListView>
-
  <EditText
-     android:id="@+id/editText1"
+     android:id="@+id/editUsername"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_above="@+id/button2"
@@ -50,6 +39,15 @@
      android:layout_alignParentRight="true"
      android:onClick="newUser"
      android:text="Continue" />
+
+ <ListView
+     android:id="@+id/UserList"
+     android:layout_width="fill_parent"
+     android:layout_height="263dp"
+     android:layout_alignLeft="@+id/editText1"
+     android:layout_alignParentTop="true"
+     android:scrollbars="vertical" >
+ </ListView>
 
 </RelativeLayout>
 

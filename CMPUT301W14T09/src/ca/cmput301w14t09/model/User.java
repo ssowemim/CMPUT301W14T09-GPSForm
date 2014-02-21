@@ -1,9 +1,15 @@
 package ca.cmput301w14t09.model;
 
+import java.io.Serializable;
 
 
-public class User {
 
+public class User implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @uml.property  name="profile" readOnly="true"
 	 */

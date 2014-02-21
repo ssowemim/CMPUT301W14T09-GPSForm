@@ -9,33 +9,24 @@
     tools:context=".MainActivity" >
 
  <ListView
-     android:id="@+id/CounterList"
+     android:id="@+id/UserList"
      android:layout_width="fill_parent"
      android:layout_height="263dp"
+     android:layout_above="@+id/editText1"
+     android:layout_alignLeft="@+id/editText1"
+     android:layout_marginBottom="26dp"
      android:layout_weight="1"
      android:scrollbars="vertical" >
-
-    </ListView>
-
- <Button
-     android:id="@+id/button1"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/CounterList"
-     android:layout_alignRight="@+id/CounterList"
-     android:layout_below="@+id/editText1"
-     android:layout_marginTop="18dp"
-     android:text="Continue"
-     android:onClick="topComments" />
+ </ListView>
 
  <EditText
      android:id="@+id/editText1"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/CounterList"
-     android:layout_alignRight="@+id/CounterList"
-     android:layout_below="@+id/CounterList"
-     android:layout_marginTop="18dp"
+     android:layout_above="@+id/button2"
+     android:layout_alignParentLeft="true"
+     android:layout_alignParentRight="true"
+     android:layout_marginBottom="59dp"
      android:ems="10"
      android:hint="New Username" />
 
@@ -43,11 +34,22 @@
      android:id="@+id/button2"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/button1"
+     android:layout_alignLeft="@+id/editText1"
      android:layout_alignParentBottom="true"
-     android:layout_alignRight="@+id/button1"
-     android:text="Continue as Guest"
-     android:onClick="topComments" />
+     android:layout_alignParentRight="true"
+     android:layout_marginBottom="14dp"
+     android:onClick="guestUser"
+     android:text="Continue as Guest" />
+
+ <Button
+     android:id="@+id/button1"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_above="@+id/button2"
+     android:layout_alignLeft="@+id/button2"
+     android:layout_alignParentRight="true"
+     android:onClick="newUser"
+     android:text="Continue" />
 
 </RelativeLayout>
 

@@ -26,7 +26,7 @@ public class Area {
 	
 	private String areaName;
 
-	
+	//test
 	public String getAreaName() {
 		return areaName;
 	}

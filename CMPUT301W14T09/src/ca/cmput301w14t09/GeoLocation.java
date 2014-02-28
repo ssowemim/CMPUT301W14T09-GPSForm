@@ -14,8 +14,7 @@ public class GeoLocation {
 	private double latitude;
 	private double longitude;
 	private String name;
-	private Collection<Area> area;
-	private Collection<Comment> comment;
+	
 
 	
 	public double getLatitude() {
@@ -45,26 +44,7 @@ public class GeoLocation {
 		this.name = name;
 	}
 
-	public Collection<Area> getArea() {
-		return area;
-	}
 
-	
-	public void setArea(Collection<Area> area) {
-		this.area = area;
-	}
-
-
-	public Collection<Comment> getComment() {
-		return comment;
-	}
-
-	
-	public void setComment(Collection<Comment> comment) {
-		this.comment = comment;
-	}
-
-	
 	public double calculateProximity(GeoLocation targetLocation){
 			return 0;
 	}

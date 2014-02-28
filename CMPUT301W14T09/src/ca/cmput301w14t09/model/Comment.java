@@ -3,7 +3,7 @@ package ca.cmput301w14t09.model;
 import java.util.Collection;
 import java.util.Date;
 
-import ca.cmput301w14t09.Area;
+
 import ca.cmput301w14t09.GeoLocation;
 import ca.cmput301w14t09.view.EditCommentActivity;
 
@@ -101,119 +101,52 @@ public class Comment {
 		return geoLocation;
 	}
 
-	/**
-	 * Setter of the property <tt>geoLocation</tt>
-	 * @param geoLocation  The geoLocation to set.
-	 * @uml.property  name="geoLocation"
-	 */
 	public void setGeoLocation(GeoLocation geoLocation) {
 		this.geoLocation = geoLocation;
 	}
 
-	/**
-	 * @uml.property  name="area"
-	 */
-	private Area area;
-
-	/**
-	 * Getter of the property <tt>area</tt>
-	 * @return  Returns the area.
-	 * @uml.property  name="area"
-	 */
-	public Area getArea() {
-		return area;
-	}
-
-	/**
-	 * Setter of the property <tt>area</tt>
-	 * @param area  The area to set.
-	 * @uml.property  name="area"
-	 */
-	public void setArea(Area area) {
-		this.area = area;
-	}
-
-	/**
-	 * @uml.property  name="authorName"
-	 */
 	private String authorName;
 
-	/**
-	 * Getter of the property <tt>authorName</tt>
-	 * @return  Returns the authorName.
-	 * @uml.property  name="authorName"
-	 */
+	
 	public String getAuthorName() {
 		return authorName;
 	}
 
-	/**
-	 * Setter of the property <tt>authorName</tt>
-	 * @param authorName  The authorName to set.
-	 * @uml.property  name="authorName"
-	 */
+	
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
 
-	/**
-	 * @uml.property  name="commentText"
-	 */
+	
 	private String commentText;
 
-	/**
-	 * Getter of the property <tt>commentText</tt>
-	 * @return  Returns the commentText.
-	 * @uml.property  name="commentText"
-	 */
+	
 	public String getCommentText() {
 		return commentText;
 	}
 
-	/**
-	 * Setter of the property <tt>commentText</tt>
-	 * @param commentText  The commentText to set.
-	 * @uml.property  name="commentText"
-	 */
+	
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
 	}
 
-	/**
-	 * @uml.property   name="favorite1"
-	 * @uml.associationEnd   inverse="comment2:model.Favorite"
-	 */
+	
 	private Favorite favorite1;
 
-	/** 
-	 * Getter of the property <tt>favorite1</tt>
-	 * @return  Returns the favorite1.
-	 * @uml.property  name="favorite1"
-	 */
+	
 	public Favorite getFavorite1() {
 		return favorite1;
 	}
 
-	/** 
-	 * Setter of the property <tt>favorite1</tt>
-	 * @param favorite1  The favorite1 to set.
-	 * @uml.property  name="favorite1"
-	 */
+	
 	public void setFavorite1(Favorite favorite1) {
 		this.favorite1 = favorite1;
 	}
 
-	/**
-	 * @uml.property   name="unreadMarker"
-	 * @uml.associationEnd   inverse="comment1:model.UnreadMarker"
-	 */
+	
 	private UnreadMarker unreadMarker;
 
-	/** 
-	 * Getter of the property <tt>unreadMarker</tt>
-	 * @return  Returns the unreadMarker.
-	 * @uml.property  name="unreadMarker"
-	 */
+	
 	public UnreadMarker getUnreadMarker() {
 		return unreadMarker;
 	}

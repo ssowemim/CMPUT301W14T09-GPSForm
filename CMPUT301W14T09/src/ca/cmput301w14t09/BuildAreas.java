@@ -7,7 +7,7 @@ import android.content.Context;
 
 
 //class that is responsible for building the areas needed for geolocations.
-
+//test
 
 public class BuildAreas {
 	

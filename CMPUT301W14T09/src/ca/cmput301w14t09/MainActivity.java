@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,6 +19,7 @@ public class MainActivity extends Activity {
 	
 	protected ListView UserList;
 	protected EditText editText;
+	protected User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,21 @@ public class MainActivity extends Activity {
 		
 		editText = (EditText) findViewById(R.id.editUsername);
 		UserList = (ListView) findViewById(R.id.UserList);
+		
+		 UserList.setOnItemClickListener(new OnItemClickListener(){
+
+	            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+	                    long arg3) {
+
+	                String getUser = (String) (UserList.getItemAtPosition(arg2));
+	                user = new User();
+	                user = loadUser(getUser);
+	                topComments(user);
+
+
+	            }
+
+	        });
 	}
 
 	@Override
@@ -44,7 +62,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void newUser(View v){
-		User user = new User();
+		user = new User();
 		user.setUserName(editText.getText().toString());
 		FileSaving.saveInFile(user.getUserName(), this);
 		topComments(user);
@@ -57,9 +75,14 @@ public class MainActivity extends Activity {
 	}
 
 	public void guestUser(View v){
-		User user = new User();
+		user = new User();
 		user.setUserName("Guest");
 		topComments(user);
+	}
+	
+	public User loadUser(String text){
+		user = FileLoading.returnUser(text, this);
+		return user;
 	}
 
 }

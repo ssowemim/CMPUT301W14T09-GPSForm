@@ -24,6 +24,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int CounterList=0x7f080007;
         public static final int FavoritesList=0x7f080000;
         public static final int UserList=0x7f080005;
@@ -49,6 +50,27 @@ public final class R {
         public static final int guest_box=0x7f030004;
         public static final int list_view=0x7f030005;
         public static final int pop_up_comment=0x7f030006;
+=======
+        public static final int CounterList=0x7f080000;
+        public static final int action_settings=0x7f08000b;
+        public static final int button1=0x7f080001;
+        public static final int button2=0x7f080003;
+        public static final int button3=0x7f080007;
+        public static final int cancel=0x7f08000a;
+        public static final int comment=0x7f080004;
+        public static final int editText=0x7f080008;
+        public static final int editText1=0x7f080002;
+        public static final int favorite=0x7f080006;
+        public static final int save=0x7f080009;
+        public static final int spinner1=0x7f080005;
+    }
+    public static final class layout {
+        public static final int activity_comment_list=0x7f030000;
+        public static final int activity_favorites=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_top_comments=0x7f030003;
+        public static final int pop_up_comment=0x7f030004;
+>>>>>>> branch 'saveBranch' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
     }
     public static final class menu {
         public static final int comment_list=0x7f070000;

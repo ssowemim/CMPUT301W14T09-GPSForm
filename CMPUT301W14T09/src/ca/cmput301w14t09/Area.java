@@ -9,14 +9,13 @@ public class Area {
 	private String areaName;
 
 	private ArrayList<GeoLocation> containedGeoLocations;
+	
+	private Collection<GeoLocation> geoLocation;
 
 	public ArrayList<GeoLocation> getContainedGeoLocations() {
 		return containedGeoLocations;
 	}
 	
-	private Collection<GeoLocation> geoLocation;
-
-
 	public void setContainedGeoLocations(
 			ArrayList<GeoLocation> containedGeoLocations) {
 				this.containedGeoLocations = containedGeoLocations;

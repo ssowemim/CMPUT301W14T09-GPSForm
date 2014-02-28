@@ -22,14 +22,10 @@ public class GeoLocation {
 		return latitude;
 	}
 
-	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	
-	
-	
 	public double getLongitude() {
 		return longitude;
 	}

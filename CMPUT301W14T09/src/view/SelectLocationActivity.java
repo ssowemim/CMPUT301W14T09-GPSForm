@@ -1,8 +1,9 @@
 package view;
 
 import java.util.ArrayList;
+
+import ca.cmput301w14t09.model.LocationController;
 import model.Area;
-import controller.LocationController;
 
 public class SelectLocationActivity {
 

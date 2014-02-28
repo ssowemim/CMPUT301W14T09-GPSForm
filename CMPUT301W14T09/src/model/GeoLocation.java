@@ -2,7 +2,8 @@ package model;
 
 
 import java.util.Collection;
-import controller.LocationController;
+
+import ca.cmput301w14t09.model.LocationController;
 
 
 

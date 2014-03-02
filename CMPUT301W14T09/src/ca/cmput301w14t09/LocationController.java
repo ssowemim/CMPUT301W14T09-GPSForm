@@ -7,16 +7,17 @@ import model.GeoLocation;
 import view.SelectLocationActivity;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class LocationController {
 
-		private GeoLocation geoLocation;
+		public GeoLocation geo;
 		private SelectLocationActivity selectLocationActivity;
 		
 		public GeoLocation getGeoLocation() {
-			return geoLocation;
+			return geo;
 		}
 
 		
@@ -37,10 +38,10 @@ public class LocationController {
 	
 
 		public void setGeoLocation(GeoLocation geoLocation) {
-			this.geoLocation = geoLocation;
+			//to do
 		}
 		
-		public LocationListener NewListener(final TextView tv){
+		public LocationListener NewListener(final TextView tv, final EditText tv2, final EditText tv3){
 			
 			// Retrieve location updates through LocationListener interface
 			final LocationListener locationListener = new LocationListener(){
@@ -69,8 +70,12 @@ public class LocationController {
 						
 						double lat = location.getLatitude();
 						double lng = location.getLongitude();
+						
+						
 						Date date = new Date(location.getTime());
 						tv.setText("your location is " +lat+"\n" + lng +"\n" + date.toString());
+						tv2.setText(""+lng);
+						tv3.setText(""+lat);
 						System.out.println("got here");
 						
 					}else{

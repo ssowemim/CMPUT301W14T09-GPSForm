@@ -14,4 +14,27 @@
         android:layout_height="wrap_content"
         android:text="Your Location Text, Go to Emulator Control and in Location Controls click send to display location (TEST)" />
 
+    <EditText
+        android:id="@+id/lattext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/locationtext"
+        android:layout_below="@+id/locationtext"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/longtext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lattext3"
+        android:layout_below="@+id/lattext3"
+        android:layout_marginTop="33dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
 </RelativeLayout>

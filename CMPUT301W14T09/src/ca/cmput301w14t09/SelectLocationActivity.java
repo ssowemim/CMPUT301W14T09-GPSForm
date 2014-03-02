@@ -19,7 +19,7 @@ public class SelectLocationActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.locationtext);
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
-		//new Location Controller
+		//new Location Controller hello
 		LocationController lc = new LocationController();
 		
 		//new Listener for location change

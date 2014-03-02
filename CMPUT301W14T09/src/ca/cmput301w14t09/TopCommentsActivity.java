@@ -26,7 +26,7 @@ public class TopCommentsActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			//git clock off check test test test
-			Intent intent2 = new Intent(TopCommentsActivity.this,Location.class);
+			Intent intent2 = new Intent(TopCommentsActivity.this,SelectLocationActivity.class);
 			startActivity(intent2);  
 											
 	   }

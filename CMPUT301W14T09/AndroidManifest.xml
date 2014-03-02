@@ -33,7 +33,7 @@
             android:label="@string/title_activity_find_geolocation" >
         </activity>
         <activity
-            android:name="ca.cmput301w14t09.Location"
+            android:name="ca.cmput301w14t09.SelectLocationActivity"
             android:label="@string/title_activity_location" >
         </activity>
     </application>

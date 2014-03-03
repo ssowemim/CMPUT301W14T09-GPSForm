@@ -5,6 +5,8 @@ import android.content.Context;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,12 +31,20 @@ public class SelectLocationActivity extends Activity {
 		
 		//new Listener for location detecting
 		LocationListener locationListener = lc.NewListener(tv,tv2,tv3);
-		
+	
 		//set up location update request.
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 		
+		//get button id
+		Button btnSimple2 = (Button) findViewById(R.id.changebutton);
+		
+		//new Listener for button update
+		OnClickListener onclickListener = lc.UpdateListener(btnSimple2);
+		
+		
 		//set geolocation to current location
 		lc.setGeoLocation();
+		
 		
 		
 	}

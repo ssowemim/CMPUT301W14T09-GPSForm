@@ -7,6 +7,9 @@ import model.GeoLocation;
 import view.SelectLocationActivity;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -87,8 +90,22 @@ public class LocationController {
 			return locationListener;
 		}
 
-
 		
+		public OnClickListener UpdateListener(Button btnSimple2){
+			//Button increments count, Click me
+			
+			
+			btnSimple2.setOnClickListener(new View.OnClickListener() {
+				
+			@Override
+			public void onClick(View v) {
+					
+				System.out.println("UPdate complete");
+				 
+			}
+	 });
+			return null;
+				
+		}
 		
-
 }

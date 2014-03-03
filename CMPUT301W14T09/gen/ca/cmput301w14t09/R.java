@@ -31,6 +31,7 @@ public final class R {
         public static final int button2=0x7f080009;
         public static final int button3=0x7f08000a;
         public static final int cancel=0x7f080010;
+        public static final int changebutton=0x7f080005;
         public static final int comment=0x7f08000d;
         public static final int editText=0x7f08000e;
         public static final int favorite=0x7f08000b;
@@ -41,7 +42,6 @@ public final class R {
         public static final int longtext3=0x7f080003;
         public static final int save=0x7f08000f;
         public static final int spinner1=0x7f08000c;
-        public static final int updatelocationbutton=0x7f080005;
     }
     public static final class layout {
         public static final int activity_location=0x7f030000;

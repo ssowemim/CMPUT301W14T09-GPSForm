@@ -56,13 +56,12 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:id="@+id/updatelocationbutton"
+        android:id="@+id/changebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/longtext3"
-        android:layout_below="@+id/longtext3"
-        android:layout_marginRight="18dp"
-        android:layout_marginTop="70dp"
-        android:text="Update Location" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="81dp"
+        android:layout_toLeftOf="@+id/TextView02"
+        android:text="Change your location" />
 
 </RelativeLayout>

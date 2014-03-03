@@ -7,6 +7,7 @@ import model.GeoLocation;
 import view.SelectLocationActivity;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -91,7 +92,7 @@ public class LocationController {
 		}
 
 		
-		public OnClickListener UpdateListener(Button btnSimple2){
+		public OnClickListener UpdateListener(Button btnSimple2, final EditText tv2, final EditText tv3){
 			//Button increments count, Click me
 			
 			
@@ -100,7 +101,26 @@ public class LocationController {
 			@Override
 			public void onClick(View v) {
 					
-				System.out.println("UPdate complete");
+				//System.out.println("UPdate complete");
+				
+				//lng
+				String text = tv2.getText().toString();
+				
+				//lat
+				String text1 = tv3.getText().toString();
+				
+				//lng
+				double double1 = Double.parseDouble(text);
+				lng = double1;
+				
+				//lat
+				double double2 = Double.parseDouble(text1);
+				lat = double2;
+				
+				//sets geolocation to new given one
+				setGeoLocation();
+				
+				
 				 
 			}
 	 });

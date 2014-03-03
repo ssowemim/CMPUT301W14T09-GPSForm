@@ -39,7 +39,7 @@ public class SelectLocationActivity extends Activity {
 		Button btnSimple2 = (Button) findViewById(R.id.changebutton);
 		
 		//new Listener for button update
-		OnClickListener onclickListener = lc.UpdateListener(btnSimple2);
+		OnClickListener onclickListener = lc.UpdateListener(btnSimple2, tv2, tv3);
 		
 		
 		//set geolocation to current location

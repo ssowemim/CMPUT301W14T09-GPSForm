@@ -2,14 +2,18 @@ package ca.cmput301w14t09;
 
 
 
+import ElasticSearch.ElasticSearchOperations;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.User;
 
 public class TopCommentsActivity extends Activity {
@@ -17,11 +21,17 @@ public class TopCommentsActivity extends Activity {
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
+	protected ListView commentList;
+	Comment comment;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
+		
+		commentList = (ListView) findViewById(R.id.CommentList);
 	}
 
 	@Override
@@ -34,6 +44,16 @@ public class TopCommentsActivity extends Activity {
 		
 		return true;
 		
+		
+	}
+	
+	@Override
+	protected void onStart(){
+		super.onStart();
+		String[] topComments = ElasticSearchOperations.pullTopComments();
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.list_view, topComments);
+		commentList.setAdapter(adapter);
 		
 	}
 	
@@ -53,6 +73,18 @@ public class TopCommentsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
+				dialog.dismiss();
+				
+			}
+		});
+        
+        save.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				comment = new Comment();
+				comment.setCommentText("this is a test top comment");
+				ElasticSearchOperations.postTopComment(comment);
 				dialog.dismiss();
 				
 			}

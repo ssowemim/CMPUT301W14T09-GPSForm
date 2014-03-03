@@ -13,13 +13,19 @@ import android.widget.TextView;
 
 public class LocationController {
 
-		public GeoLocation geo;
+		private GeoLocation geo = new GeoLocation();
 		private SelectLocationActivity selectLocationActivity;
+		private double lat;
+		private double lng;
 		
 		public GeoLocation getGeoLocation() {
 			return geo;
 		}
 
+		public void setGeoLocation() {
+			geo.setLatitude(lat);
+			geo.setLongitude(lng);
+		}
 		
 		public ArrayList<String> getLocationNames(){
 			return null;
@@ -35,11 +41,6 @@ public class LocationController {
 					this.selectLocationActivity = selectLocationActivity;
 				}
 
-	
-
-		public void setGeoLocation(GeoLocation geoLocation) {
-			//to do
-		}
 		
 		public LocationListener NewListener(final TextView tv, final EditText tv2, final EditText tv3){
 			
@@ -68,8 +69,8 @@ public class LocationController {
 					
 					if(location != null){
 						
-						double lat = location.getLatitude();
-						double lng = location.getLongitude();
+						lat = location.getLatitude();
+						lng = location.getLongitude();
 						
 						
 						Date date = new Date(location.getTime());

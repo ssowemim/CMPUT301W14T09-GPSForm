@@ -24,14 +24,17 @@ public class SelectLocationActivity extends Activity {
 		// Obtain LocationManager service 
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
-		//new Location Controller hello
+		//new Location Controller 
 		LocationController lc = new LocationController();
 		
-		//new Listener for location change
+		//new Listener for location detecting
 		LocationListener locationListener = lc.NewListener(tv,tv2,tv3);
 		
 		//set up location update request.
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+		
+		//set geolocation to current location
+		lc.setGeoLocation();
 		
 		
 	}

@@ -22,18 +22,13 @@
          android:id="@+id/CommentList"
          android:layout_width="fill_parent"
          android:layout_height="170dp"
+         android:layout_above="@+id/button3"
          android:layout_alignRight="@+id/button2"
-         android:layout_centerVertical="true"
+         android:layout_below="@+id/comment"
          android:layout_weight="1"
          android:scrollbars="vertical" >
-     </ListView>
 
-     <Spinner
-         android:id="@+id/spinner1"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignLeft="@+id/favorite"
-         android:layout_below="@+id/favorite" />
+     </ListView>
 
      <Button
          android:id="@+id/favorite"

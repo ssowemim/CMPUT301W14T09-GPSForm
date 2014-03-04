@@ -83,7 +83,7 @@ public class TopCommentsActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				comment = new Comment();
-				comment.setCommentText("this is a test top comment");
+				comment.setCommentText("this is a second test top comment");
 				ElasticSearchOperations.postTopComment(comment);
 				dialog.dismiss();
 				

@@ -32,15 +32,16 @@ public class FileSaving {
 		}
 	}
 
-	public static void userInFile(String text, int count, Activity main) {
+	public static void userInFile(String username, String author, Activity main) {
 		user = new User();
-		user.setUserName(text);
+		user.setUserName(username);
+		user.setAuthorName(author);
 		
 		Gson gson = new Gson();
 		String jsonIn = gson.toJson(user);           
 
 		try{
-			FileOutputStream fos = main.openFileOutput(text + ".sav",
+			FileOutputStream fos = main.openFileOutput(username + ".sav",
 					Context.MODE_PRIVATE );
 			fos.write(jsonIn.getBytes());
 			fos.close();

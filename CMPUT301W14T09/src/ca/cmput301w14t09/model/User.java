@@ -6,9 +6,17 @@ import java.io.Serializable;
 
 public class User implements Serializable{
 
-	/**
-	 * 
-	 */
+	
+	private String authorName;
+	
+	public String getAuthorName(){
+		return authorName;
+	}
+	
+	public void setAuthorName(String authorName){
+		this.authorName = authorName;
+	}
+	
 	private static final long serialVersionUID = 1L;
 	/**
 	 * @uml.property  name="profile" readOnly="true"

@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.User;
 
@@ -64,7 +65,8 @@ public class TopCommentsActivity extends Activity {
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle("New Top Comment");
 
-        EditText editText=(EditText)dialog.findViewById(R.id.editText);
+        final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
+        final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
         Button save=(Button)dialog.findViewById(R.id.save);
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
         dialog.show();
@@ -82,8 +84,9 @@ public class TopCommentsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				comment = new Comment();
-				comment.setCommentText("this is a second test top comment");
+				String text1 = commentText.getText().toString();
+				String text2 = authorText.getText().toString();
+				comment = CreateComment.newComment(text2, text1);
 				ElasticSearchOperations.postTopComment(comment);
 				dialog.dismiss();
 				

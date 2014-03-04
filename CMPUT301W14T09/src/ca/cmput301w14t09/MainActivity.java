@@ -64,7 +64,9 @@ public class MainActivity extends Activity {
 	public void newUser(View v){
 		user = new User();
 		user.setUserName(editText.getText().toString());
+		user.setAuthorName(editText.getText().toString());
 		FileSaving.saveInFile(user.getUserName(), this);
+		FileSaving.userInFile(user.getUserName(), user.getAuthorName(), this);
 		topComments(user);
 	}
 	

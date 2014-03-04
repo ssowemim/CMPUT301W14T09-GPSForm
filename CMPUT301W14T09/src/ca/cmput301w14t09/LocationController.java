@@ -60,7 +60,9 @@ public class LocationController {
 				//tv.setText("your location is " +lat+"\n" + lng +"\n" + date.toString());
 				tv2.setText(""+lng);
 				tv3.setText(""+lat);
-				System.out.println("got here");
+				System.out.println("location changed");
+				System.out.println("long: "+lng);
+				System.out.println("lat: "+lat);
 				//set geolocation to current location
 				setGeoLocation();
 				
@@ -90,6 +92,11 @@ public class LocationController {
 			
 			//sets geolocation to new given one
 			setGeoLocation();
+			
+			System.out.println("location updated");
+			System.out.println("long: "+lng);
+			System.out.println("lat: "+lat);
+			
 		}
 		
 }

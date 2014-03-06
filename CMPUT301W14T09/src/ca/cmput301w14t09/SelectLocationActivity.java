@@ -16,7 +16,7 @@ public class SelectLocationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_location);
 		
-		//Get textviews
+		//Get textviews from interface
 		//TextView tv = (TextView) findViewById(R.id.locationtext);
 		final EditText tv2 = (EditText) findViewById(R.id.longtext3);
 		final EditText tv3 = (EditText) findViewById(R.id.lattext3);

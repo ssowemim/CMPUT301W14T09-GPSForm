@@ -3,7 +3,6 @@ package ca.cmput301w14t09;
 import android.app.Activity;
 import android.content.Context;
 import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

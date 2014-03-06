@@ -3,7 +3,6 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 import java.util.Date;
 import model.GeoLocation;
-import view.SelectLocationActivity;
 import android.content.Context;
 import android.location.LocationListener;
 import android.location.LocationManager;

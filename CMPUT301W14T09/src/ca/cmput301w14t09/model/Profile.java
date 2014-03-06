@@ -42,3 +42,4 @@ public class Profile {
 	public Collection<Favorite> getFavorite1() {
 		return favorite1;
 	}
+}

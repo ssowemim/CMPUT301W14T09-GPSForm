@@ -83,50 +83,28 @@ public class GeoLocation {
 	 * @uml.property   name="area"
 	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="geoLocation:model.Area"
 	 */
-	private Collection<Area> area;
+	
 
-	/** 
-	 * Getter of the property <tt>area</tt>
-	 * @return  Returns the area.
-	 * @uml.property  name="area"
-	 */
-	public Collection<Area> getArea() {
-		return area;
-	}
+	
 
-	/** 
-	 * Setter of the property <tt>area</tt>
-	 * @param area  The area to set.
-	 * @uml.property  name="area"
-	 */
-	public void setArea(Collection<Area> area) {
-		this.area = area;
-	}
+	
 
 	/**
 	 * @uml.property   name="comment"
 	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="geoLocation1:model.Comment"
-	 */
-	private Collection<Comment> comment;
+	
 
 	/** 
 	 * Getter of the property <tt>comment</tt>
 	 * @return  Returns the comment.
 	 * @uml.property  name="comment"
 	 */
-	public Collection<Comment> getComment() {
-		return comment;
-	}
-
+	
 	/** 
 	 * Setter of the property <tt>comment</tt>
 	 * @param comment  The comment to set.
 	 * @uml.property  name="comment"
-	 */
-	public void setComment(Collection<Comment> comment) {
-		this.comment = comment;
-	}
-
+	
 		
 		/**
 		 */

@@ -6,12 +6,62 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Location" >
+    tools:context=".SelectLocationActivity" >
 
     <TextView
         android:id="@+id/locationtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Location Text, Go to Emulator Control and in Location Controls click send to display location (TEST)" />
+
+    <EditText
+        android:id="@+id/lattext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/locationtext"
+        android:layout_below="@+id/locationtext"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/longtext3"
+        android:layout_alignRight="@+id/locationtext"
+        android:layout_toRightOf="@+id/lattext3"
+        android:text="Lat" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/longtext3"
+        android:layout_alignLeft="@+id/TextView01"
+        android:layout_alignRight="@+id/TextView01"
+        android:text="Long" />
+
+    <EditText
+        android:id="@+id/longtext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lattext3"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/changebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="81dp"
+        android:layout_toLeftOf="@+id/TextView02"
+        android:text="Change your location" />
 
 </RelativeLayout>

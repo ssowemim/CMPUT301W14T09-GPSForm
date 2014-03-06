@@ -23,13 +23,13 @@
      android:layout_height="wrap_content"
      android:layout_alignLeft="@+id/CounterList"
      android:layout_alignRight="@+id/CounterList"
-     android:layout_below="@+id/editText1"
+     android:layout_below="@+id/longtext"
      android:layout_marginTop="18dp"
      android:text="Continue"
      android:onClick="topComments" />
 
  <EditText
-     android:id="@+id/editText1"
+     android:id="@+id/longtext"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_alignLeft="@+id/CounterList"

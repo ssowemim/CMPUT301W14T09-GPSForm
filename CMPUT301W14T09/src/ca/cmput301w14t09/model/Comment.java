@@ -3,6 +3,8 @@ package ca.cmput301w14t09.model;
 import java.util.Collection;
 import java.util.Date;
 
+
+import ca.cmput301w14t09.GeoLocation;
 import ca.cmput301w14t09.view.EditCommentActivity;
 
 
@@ -54,11 +56,15 @@ public class Comment {
 		return geoLocation;
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> geobranch
 	public void setGeoLocation(GeoLocation geoLocation) {
 		this.geoLocation = geoLocation;
 	}
 
+<<<<<<< HEAD
 	public Area getArea() {
 		return area;
 	}
@@ -68,6 +74,11 @@ public class Comment {
 		this.area = area;
 	}
 
+=======
+	private String authorName;
+
+	
+>>>>>>> geobranch
 	public String getAuthorName() {
 		return authorName;
 	}
@@ -77,6 +88,13 @@ public class Comment {
 		this.authorName = authorName;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	private String commentText;
+
+	
+>>>>>>> geobranch
 	public String getCommentText() {
 		return commentText;
 	}
@@ -86,14 +104,32 @@ public class Comment {
 		this.commentText = commentText;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	private Favorite favorite1;
+
+	
+>>>>>>> geobranch
 	public Favorite getFavorite1() {
 		return favorite1;
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> geobranch
 	public void setFavorite1(Favorite favorite1) {
 		this.favorite1 = favorite1;
 	}
 
+<<<<<<< HEAD
+=======
+	
+	private UnreadMarker unreadMarker;
+
+	
+>>>>>>> geobranch
 	public UnreadMarker getUnreadMarker() {
 		return unreadMarker;
 	}

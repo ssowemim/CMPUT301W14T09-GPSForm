@@ -1,5 +1,7 @@
 package ca.cmput301w14t09.model;
 
+import ca.cmput301w14t09.GeoLocation;
+
 
 
 public class User {

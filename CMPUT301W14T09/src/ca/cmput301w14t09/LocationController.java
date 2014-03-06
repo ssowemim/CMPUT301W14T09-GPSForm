@@ -2,12 +2,12 @@ package ca.cmput301w14t09;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import model.GeoLocation;
 import view.SelectLocationActivity;
 import android.content.Context;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -17,6 +17,7 @@ public class LocationController {
 		private SelectLocationActivity selectLocationActivity;
 		private double lat;
 		private double lng;
+		LocationManager lm = null;
 		
 		public GeoLocation getGeoLocation() {
 			return geo;
@@ -30,6 +31,24 @@ public class LocationController {
 		public ArrayList<String> getLocationNames(){
 			return null;
 		}
+		
+		
+		public void setLocationManager(Context context){
+			
+			// Obtain LocationManager service 
+			@SuppressWarnings("static-access")
+			LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+			
+			
+		}
+		
+		public void requestLocationUpdates(LocationListener locationListener){
+			
+			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+			
+		}
+		
+
 
 		public SelectLocationActivity getSelectLocationActivity() {
 			return selectLocationActivity;

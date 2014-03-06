@@ -11,6 +11,9 @@ import android.widget.EditText;
 
 public class SelectLocationActivity extends Activity {
 	
+	//LocationManager lm = null;
+	Context context = getApplicationContext();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -24,10 +27,14 @@ public class SelectLocationActivity extends Activity {
 		
 		//new Location Controller 
 		final LocationController lc = new LocationController();
+		
+		
+		//get Location Manager setup
+		lc.setLocationManager(context);
 				
 		
 		// Obtain LocationManager service 
-		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		//LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		
 		
 		// Retrieve location updates through LocationListener interface
@@ -64,7 +71,8 @@ public class SelectLocationActivity extends Activity {
 					
 					
 					//set up location update request.
-					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+					//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+					lc.requestLocationUpdates(locationListener);
 							
 				
 					

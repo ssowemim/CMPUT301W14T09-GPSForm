@@ -5,14 +5,10 @@ import java.util.Date;
 
 import model.GeoLocation;
 import view.SelectLocationActivity;
-import android.location.LocationListener;
-import android.os.Bundle;
-import android.text.Editable;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.content.Context;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class LocationController {
@@ -73,7 +69,7 @@ public class LocationController {
 		}
 			
 		
-		public void updatelocation(EditText tv2, EditText tv3){
+		public void updatelocation(Context context, EditText tv2, EditText tv3){
 			//System.out.println("UPdate complete");
 			
 			//lng
@@ -93,10 +89,19 @@ public class LocationController {
 			//sets geolocation to new given one
 			setGeoLocation();
 			
+			String update = "Your location has been updated";
+			// When clicked, show a toast with the TextView text Game, Help, Home
+            Toast.makeText(context, update, Toast.LENGTH_SHORT).show();  
+			
 			System.out.println("location updated");
 			System.out.println("long: "+lng);
 			System.out.println("lat: "+lat);
 			
 		}
+		
+		
+		
+		
+		
 		
 }

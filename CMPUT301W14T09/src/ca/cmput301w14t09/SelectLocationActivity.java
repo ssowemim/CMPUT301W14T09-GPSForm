@@ -21,13 +21,14 @@ public class SelectLocationActivity extends Activity {
 		final EditText tv2 = (EditText) findViewById(R.id.longtext3);
 		final EditText tv3 = (EditText) findViewById(R.id.lattext3);
 		
-		// Obtain LocationManager service 
-		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		
 		
 		//new Location Controller 
 		final LocationController lc = new LocationController();
 				
+		
+		// Obtain LocationManager service 
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		
 		
 		// Retrieve location updates through LocationListener interface
 		final LocationListener locationListener = new LocationListener(){
@@ -74,8 +75,8 @@ public class SelectLocationActivity extends Activity {
 						@Override
 						public void onClick(View v) {
 								
-							
-							lc.updatelocation(tv2, tv3);
+							Context context1 = getApplication();
+							lc.updatelocation(context1,tv2, tv3);
 							
 							 
 						}

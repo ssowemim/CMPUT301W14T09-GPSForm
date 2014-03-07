@@ -19,7 +19,7 @@
         android:onClick="popUp" />
 
      <ListView
-         android:id="@+id/CommentList"
+         android:id="@+id/aCommentList"
          android:layout_width="fill_parent"
          android:layout_height="170dp"
          android:layout_above="@+id/button3"

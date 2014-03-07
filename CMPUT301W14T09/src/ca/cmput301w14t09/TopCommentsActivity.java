@@ -2,7 +2,6 @@ package ca.cmput301w14t09;
 
 
 
-import ElasticSearch.ElasticSearchOperations;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.User;
 

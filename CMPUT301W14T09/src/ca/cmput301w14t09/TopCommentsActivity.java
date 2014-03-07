@@ -22,7 +22,7 @@ public class TopCommentsActivity extends Activity {
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
-	protected ListView commentList;
+	protected ListView aCommentList;
 	Comment comment;
 	
 	
@@ -32,7 +32,7 @@ public class TopCommentsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
 		
-		commentList = (ListView) findViewById(R.id.CommentList);
+		aCommentList = (ListView) findViewById(R.id.aCommentList);
 	}
 
 	@Override
@@ -49,12 +49,19 @@ public class TopCommentsActivity extends Activity {
 	}
 	
 	@Override
-	protected void onStart(){
-		super.onStart();
-		String[] topComments = ElasticSearchOperations.pullTopComments();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.list_view, topComments);
-		commentList.setAdapter(adapter);
+	protected void onResume(){
+		super.onResume();
+		String[] topComments;
+		try {
+			topComments = ElasticSearchOperations.pullTopComments();
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	                R.layout.list_view, topComments);
+			aCommentList.setAdapter(adapter);
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

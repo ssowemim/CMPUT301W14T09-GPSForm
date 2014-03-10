@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
@@ -33,6 +35,27 @@ public class TopCommentsActivity extends Activity {
 		setContentView(R.layout.activity_top_comments);
 		
 		aCommentList = (ListView) findViewById(R.id.aCommentList);
+		
+		 aCommentList.setOnItemClickListener(new OnItemClickListener(){
+
+	            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+	                    long arg3) {
+
+	                String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
+	                
+	                try {
+						comment = ElasticSearchOperations.loadComment(getCommentText);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	                
+	               commentThread(comment);
+
+
+	            }
+
+	        });
 	}
 
 	@Override
@@ -49,8 +72,8 @@ public class TopCommentsActivity extends Activity {
 	}
 	
 	@Override
-	protected void onResume(){
-		super.onResume();
+	protected void onStart(){
+		super.onStart();
 		String[] topComments;
 		try {
 			topComments = ElasticSearchOperations.pullTopComments();
@@ -74,6 +97,7 @@ public class TopCommentsActivity extends Activity {
 
         final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
         final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
+        authorText.setText(user.getAuthorName());
         Button save=(Button)dialog.findViewById(R.id.save);
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
         dialog.show();
@@ -93,7 +117,7 @@ public class TopCommentsActivity extends Activity {
 			public void onClick(View v) {
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
-				comment = CreateComment.newComment(text2, text1);
+				comment = CreateComment.newComment(text2, text1, true);
 				ElasticSearchOperations.postTopComment(comment);
 				dialog.dismiss();
 				
@@ -120,15 +144,17 @@ public class TopCommentsActivity extends Activity {
 					
 				}
 			});
-			
-			
-			
-			
 		}
+		
 		else{
 		Intent intent = new Intent(this, FavoritesActivity.class);
 		startActivity(intent);
 		}
+	}
+	
+	public void commentThread(Comment comment){
+		
+		
 	}
 
 }

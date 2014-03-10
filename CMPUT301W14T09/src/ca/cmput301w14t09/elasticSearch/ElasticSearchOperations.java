@@ -25,6 +25,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class ElasticSearchOperations {
 
+	static Comment comment;
 	
 	public static void postTopComment(final Comment comment){
 		Thread thread = new Thread() {
@@ -34,7 +35,7 @@ public class ElasticSearchOperations {
 
 				HttpClient client = new DefaultHttpClient();
 				Gson gson = new Gson();
-				HttpPost request = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test01/");
+				HttpPost request = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/");
 
 				try{ 
 					String jsonString = gson.toJson(comment);
@@ -74,12 +75,12 @@ public class ElasticSearchOperations {
 				Gson gson = new Gson();
 
 				try{
-					HttpPost searchRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test01/_search?pretty=1");
-					//String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"commentText\",\"query\" : \"testing\"}}}";
+					HttpPost searchRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1");
+					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"topComment\",\"query\" : \"true\"}}}";
 
-				//	StringEntity stringentity = new StringEntity(query);
+					StringEntity stringentity = new StringEntity(query);
 
-				//	searchRequest.setEntity(stringentity);
+					searchRequest.setEntity(stringentity);
 
 					HttpResponse response = client.execute(searchRequest);
 					
@@ -121,6 +122,51 @@ public class ElasticSearchOperations {
 		}
 		System.err.println("JSON:"+json);
 		return json;
+	}
+	
+	public static Comment loadComment(final String commentText) throws InterruptedException{
+		final CountDownLatch latch = new CountDownLatch(1);
+		
+		Thread thread = new Thread() {
+
+			@Override
+			public void run(){
+
+				HttpClient client = new DefaultHttpClient();
+				Gson gson = new Gson();
+
+				try{
+					HttpPost searchRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1");
+					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"commentText\",\"query\" : \"" + commentText +"\"}}}";
+
+					StringEntity stringentity = new StringEntity(query);
+
+					searchRequest.setEntity(stringentity);
+
+					HttpResponse response = client.execute(searchRequest);
+					
+					String json = getEntityContent(response);
+					
+					
+					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Comment>>(){}.getType();
+					ElasticSearchSearchResponse<Comment> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+
+					for (ElasticSearchResponse<Comment> r : esResponse.getHits()) {
+						comment = r.getSource();												
+					}
+					latch.countDown();
+					 //searchRequest.releaseConnection();	
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			}
+		};
+		thread.start();
+		latch.await();
+		
+		return comment;
 	}
 
 }

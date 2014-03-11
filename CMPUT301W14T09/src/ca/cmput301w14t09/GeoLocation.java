@@ -1,13 +1,6 @@
 package ca.cmput301w14t09;
 
 
-import java.util.Collection;
-
-import ca.cmput301w14t09.model.Comment;
-
-
-
-
 public class GeoLocation {
 
 	

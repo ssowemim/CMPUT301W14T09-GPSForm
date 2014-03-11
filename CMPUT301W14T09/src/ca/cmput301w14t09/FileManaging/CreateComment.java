@@ -9,6 +9,8 @@ public class CreateComment {
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);
 		comment.setBoolean(topComment);
+		comment.setPostDate();
+		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString()));
 		return comment;
 	}
 

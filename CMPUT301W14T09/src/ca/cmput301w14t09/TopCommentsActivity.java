@@ -20,57 +20,57 @@ import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.User;
 
 public class TopCommentsActivity extends Activity {
-	
+
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
 	protected ListView aCommentList;
 	Comment comment;
-	
-	
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
-		
+
 		aCommentList = (ListView) findViewById(R.id.aCommentList);
-		
-		 aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
-	            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-	                    long arg3) {
+		aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
-	                String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
-	                
-	                try {
-						comment = ElasticSearchOperations.loadComment(getCommentText);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	                
-	               commentThread(comment);
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+
+				String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
+
+				try {
+					comment = ElasticSearchOperations.loadComment(getCommentText);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				commentThread(comment);
 
 
-	            }
+			}
 
-	        });
+		});
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.top_comments, menu);
-		
+
 		intent = getIntent();
 		user = (User) intent.getSerializableExtra("CURRENT_USER");
-		
+
 		return true;
-		
-		
+
+
 	}
-	
+
 	@Override
 	protected void onStart(){
 		super.onStart();
@@ -78,83 +78,84 @@ public class TopCommentsActivity extends Activity {
 		try {
 			topComments = ElasticSearchOperations.pullTopComments();
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-	                R.layout.list_view, topComments);
+					R.layout.list_view, topComments);
 			aCommentList.setAdapter(adapter);
-			
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void popUp(View v){
-		
+
 		dialog = new Dialog(this);
 
-        dialog.setContentView(R.layout.pop_up_comment);
-        dialog.setTitle("New Top Comment");
+		dialog.setContentView(R.layout.pop_up_comment);
+		dialog.setTitle("New Top Comment");
 
-        final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
-        final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
-        authorText.setText(user.getAuthorName());
-        Button save=(Button)dialog.findViewById(R.id.save);
-        Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
-        dialog.show();
-        
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-			
+		final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
+		final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
+		authorText.setText(user.getAuthorName());
+		Button save=(Button)dialog.findViewById(R.id.save);
+		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
+		dialog.show();
+
+		btnCancel.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
-				
+
 			}
 		});
-        
-        save.setOnClickListener(new View.OnClickListener() {
-			
+
+		save.setOnClickListener(new View.OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
+				user.setAuthorName(text2);
 				comment = CreateComment.newComment(text2, text1, true);
 				ElasticSearchOperations.postTopComment(comment);
 				dialog.dismiss();
-				
+
 			}
 		});
-        
-        
+
+
 	}
-	
+
 	public void viewFavorites(View v){
 		if(user.getUserName().equals("Guest")){
-			
+
 			dialog = new Dialog(this);
 			dialog.setContentView(R.layout.guest_box);
 			dialog.setTitle("ALERT!");
-			
+
 			Button button =(Button)dialog.findViewById(R.id.button1);
 			dialog.show();
 			button.setOnClickListener(new View.OnClickListener() {
-				
+
 				@Override
 				public void onClick(View v) {
 					dialog.dismiss();
-					
+
 				}
 			});
 		}
-		
+
 		else{
-		Intent intent = new Intent(this, FavoritesActivity.class);
-		startActivity(intent);
+			Intent intent = new Intent(this, FavoritesActivity.class);
+			startActivity(intent);
 		}
 	}
-	
+
 	public void commentThread(Comment comment){
-		
-		
+
+
 	}
 
 }

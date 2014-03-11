@@ -3,10 +3,6 @@ package ca.cmput301w14t09.model;
 import java.util.Collection;
 import java.util.Date;
 
-import ca.cmput301w14t09.view.EditCommentActivity;
-
-
-
 
 public class Comment {
 
@@ -15,18 +11,19 @@ public class Comment {
 	private Picture attachment;
 	private Comment parent;
 	private Date postDate;
-	private GeoLocation geoLocation;
-	private Area area;
 	private String authorName;
 	private String commentText;
-	private Favorite favorite1;
 	private UnreadMarker unreadMarker;
 	private Picture picture;
 	private int favoriteCount = 0;
-	private EditCommentActivity editCommentActivity;
 	private Collection<GeoLocation> geoLocation1;
-	
 	private Boolean topComment;
+	private String threadId;
+	
+	public Comment(){
+		super();
+		postDate = new Date();
+	}
 	
 	public Favorite getFavorite() {
 		return favorite;
@@ -60,23 +57,11 @@ public class Comment {
 	public Date getPostDate() {
 		return postDate;
 	}
-
-	public GeoLocation getGeoLocation() {
-		return geoLocation;
-	}
 	
-	public void setGeoLocation(GeoLocation geoLocation) {
-		this.geoLocation = geoLocation;
+	public void setPostDate() {
+		this.postDate = postDate;
 	}
-	
-	public Area getArea() {
-		return area;
-	}
-
-	public void setArea(Area area) {
-		this.area = area;
-	}
-	
+			
 	public String getAuthorName() {
 		return authorName;
 	}
@@ -91,14 +76,6 @@ public class Comment {
 	
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
-	}
-
-	public Favorite getFavorite1() {
-		return favorite1;
-	}
-	
-	public void setFavorite1(Favorite favorite1) {
-		this.favorite1 = favorite1;
 	}
 	
 	public UnreadMarker getUnreadMarker() {
@@ -132,13 +109,12 @@ public class Comment {
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
-		
-	public EditCommentActivity getEditCommentActivity() {
-		return editCommentActivity;
-	}
-	
-	public void setEditCommentActivity(EditCommentActivity editCommentActivity) {
-		this.editCommentActivity = editCommentActivity;
+
+	public String getThreadId() {
+		return threadId;
 	}
 
+	public void setThreadId(String threadId) {
+		this.threadId = threadId;
+	}
 }

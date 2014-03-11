@@ -12,7 +12,7 @@ public class PictureController
 			TopCommentsActivity topCommentsActivity)
 	{
 
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

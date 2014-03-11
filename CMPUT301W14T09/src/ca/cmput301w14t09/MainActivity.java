@@ -38,8 +38,6 @@ public class MainActivity extends Activity {
 				user = new User();
 				user = loadUser(getUser);
 				topComments(user);
-
-
 			}
 
 		});

@@ -19,6 +19,13 @@
      android:layout_height="wrap_content"
      android:ems="10"
      android:hint="comment" />
+
+ <ImageView
+     android:id="@+id/add_pic_image_view"
+     android:layout_width="35dp"
+     android:layout_height="25dp"
+     android:src="@drawable/camera" 
+     android:contentDescription="Camera Description"/>
   
  <LinearLayout
 

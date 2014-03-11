@@ -5,27 +5,42 @@ package ca.cmput301w14t09;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
+import ca.cmput301w14t09.view.PictureAdapter;
 
 public class TopCommentsActivity extends Activity {
 
+	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
+	
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
 	protected ListView aCommentList;
 	Comment comment;
+	
+	ImageView addPicImageView;
+	
+	private Bitmap currentPicture;
+	PictureController picController;
+	PictureAdapter picAdapter;
+	PictureModelList picModel;
 
 
 
@@ -56,7 +71,30 @@ public class TopCommentsActivity extends Activity {
 			}
 
 		});
+		
+		this.picModel = new PictureModelList();
+		this.picAdapter = new PictureAdapter(this, R.layout.pic_post, picModel.getList());
+		this.picController = new PictureController(this.picModel, this);
+		
+		this.picModel.setAdapter(this.picAdapter);
 	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		if(requestCode == OBTAIN_PIC_REQUEST_CODE && resultCode == RESULT_OK){
+			this.currentPicture = (Bitmap)data.getExtras().get("data");
+			this.addPicImageView.setImageBitmap(this.currentPicture);
+		}
+	}
+	
+	
+	public void obtainPicture(View view) {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,6 +135,9 @@ public class TopCommentsActivity extends Activity {
 
 		final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
 		final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
+		
+		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
+		
 		authorText.setText(user.getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
@@ -157,5 +198,8 @@ public class TopCommentsActivity extends Activity {
 
 
 	}
+	
+	
 
+	
 }

@@ -1,4 +1,4 @@
-package ca.cmput301w14t09.model.comment;
+package ca.cmput301w14t09.model;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

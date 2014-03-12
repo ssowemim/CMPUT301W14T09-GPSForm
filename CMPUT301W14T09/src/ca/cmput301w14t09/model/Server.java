@@ -1,4 +1,4 @@
-package ca.cmput301w14t09.model.user;
+package ca.cmput301w14t09.model;
 
 /**
  * Handles server configuration and status.  

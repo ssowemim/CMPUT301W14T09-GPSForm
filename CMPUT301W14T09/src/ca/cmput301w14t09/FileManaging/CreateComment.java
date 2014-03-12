@@ -1,6 +1,7 @@
 package ca.cmput301w14t09.FileManaging;
 
 import ca.cmput301w14t09.model.Comment;
+import java.util.Date;
 
 public class CreateComment {
 	
@@ -8,8 +9,8 @@ public class CreateComment {
 		Comment comment = new Comment();
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);
-		comment.setBoolean(topComment);
-		comment.setPostDate();
+		comment.setTopComment(topComment);
+		comment.setPostDate(new Date());
 		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString()));
 		return comment;
 	}

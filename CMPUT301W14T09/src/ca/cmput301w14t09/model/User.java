@@ -1,130 +1,98 @@
-package ca.cmput301w14t09.model.user;
+package ca.cmput301w14t09.model;
 
 import java.io.Serializable;
 
 import ca.cmput301w14t09.model.GeoLocation;
 
 
-
-public class User implements Serializable{
-
+/**
+ * Stores user information, and a reference to profile.
+ * The user is not the profile, so profile specific information not
+ * stored here.
+ * 
+ * @author mcmorris
+ */
+public class User implements Serializable {
+	private Profile profile;
+	private GeoLocation currentLocation;
+	private String deviceId;
 	
+	private String userName;
 	private String authorName;
 	
-	public String getAuthorName(){
-		return authorName;
-	}
+	private static final long serialVersionUID = 1L;		
 	
-	public void setAuthorName(String authorName){
-		this.authorName = authorName;
+	public User() {
+		
 	}
-	
-	private static final long serialVersionUID = 1L;
-	/**
-	 * @uml.property  name="profile" readOnly="true"
-	 */
-	private Profile profile;
 
 	/**
-	 * Getter of the property <tt>profile</tt>
-	 * @return  Returns the profile.
-	 * @uml.property  name="profile"
+	 * @return the profile
 	 */
 	public Profile getProfile() {
 		return profile;
 	}
 
 	/**
-	 * @uml.property  name="userName"
+	 * @param profile the profile to set
 	 */
-	private String userName;
-
-	/**
-	 * Getter of the property <tt>userName</tt>
-	 * @return  Returns the userName.
-	 * @uml.property  name="userName"
-	 */
-	public String getUserName() {
-		return userName;
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 
 	/**
-	 * Setter of the property <tt>userName</tt>
-	 * @param userName  The userName to set.
-	 * @uml.property  name="userName"
-	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	/**
-	 * @uml.property  name="currentLocation"
-	 */
-	private GeoLocation currentLocation;
-
-	/**
-	 * Getter of the property <tt>currentLocation</tt>
-	 * @return  Returns the currentLocation.
-	 * @uml.property  name="currentLocation"
+	 * @return the currentLocation
 	 */
 	public GeoLocation getCurrentLocation() {
 		return currentLocation;
 	}
 
 	/**
-	 * Setter of the property <tt>currentLocation</tt>
-	 * @param currentLocation  The currentLocation to set.
-	 * @uml.property  name="currentLocation"
+	 * @param currentLocation the currentLocation to set
 	 */
 	public void setCurrentLocation(GeoLocation currentLocation) {
 		this.currentLocation = currentLocation;
 	}
 
 	/**
-	 * @uml.property  name="deviceId"
-	 */
-	private String deviceId;
-
-	/**
-	 * Getter of the property <tt>deviceId</tt>
-	 * @return  Returns the deviceId.
-	 * @uml.property  name="deviceId"
+	 * @return the deviceId
 	 */
 	public String getDeviceId() {
 		return deviceId;
 	}
 
 	/**
-	 * Setter of the property <tt>deviceId</tt>
-	 * @param deviceId  The deviceId to set.
-	 * @uml.property  name="deviceId"
+	 * @param deviceId the deviceId to set
 	 */
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
 
 	/**
-	 * @uml.property   name="profile1"
-	 * @uml.associationEnd   inverse="user:model.Profile"
+	 * @return the userName
 	 */
-	private Profile profile1;
-
-	/** 
-	 * Getter of the property <tt>profile1</tt>
-	 * @return  Returns the profile1.
-	 * @uml.property  name="profile1"
-	 */
-	public Profile getProfile1() {
-		return profile1;
+	public String getUserName() {
+		return userName;
 	}
 
-	/** 
-	 * Setter of the property <tt>profile1</tt>
-	 * @param profile1  The profile1 to set.
-	 * @uml.property  name="profile1"
+	/**
+	 * @param userName the userName to set
 	 */
-	public void setProfile1(Profile profile1) {
-		this.profile1 = profile1;
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	
+	/**
+	 * @return the authorName
+	 */
+	public String getAuthorName() {
+		return authorName;
 	}
 
+	/**
+	 * @param authorName the authorName to set
+	 */
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
 }

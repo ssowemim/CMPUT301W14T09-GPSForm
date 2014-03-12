@@ -35,7 +35,7 @@ public class FileSaving {
 	public static void userInFile(String username, String author, Activity main) {
 		user = new User();
 		user.setUserName(username);
-		user.setAuthorName(author);
+		//user.setAuthorName(author);
 		
 		Gson gson = new Gson();
 		String jsonIn = gson.toJson(user);           

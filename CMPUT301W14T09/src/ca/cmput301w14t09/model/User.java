@@ -1,6 +1,8 @@
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.model.user;
 
 import java.io.Serializable;
+
+import ca.cmput301w14t09.model.GeoLocation;
 
 
 

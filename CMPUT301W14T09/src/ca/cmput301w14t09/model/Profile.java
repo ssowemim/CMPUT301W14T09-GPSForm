@@ -1,6 +1,9 @@
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.model.user;
 
 import java.util.Collection;
+
+import ca.cmput301w14t09.model.comment.Favorite;
+import ca.cmput301w14t09.model.comment.UnreadMarker;
 
 
 

@@ -1,110 +1,144 @@
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.model.comment;
 
-import java.util.Collection;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Date;
 
+import android.app.Activity;
+import android.content.Context;
 
+import com.google.gson.Gson;
 
-
-public class UnreadMarker {
-
-	/**
-	 * @uml.property  name="unread"
-	 */
-	private boolean unread = true;
-
-	/**
-	 * Getter of the property <tt>unread</tt>
-	 * @return  Returns the unread.
-	 * @uml.property  name="unread"
-	 */
-	public boolean isUnread() {
-		return unread;
-	}
-
-	/**
-	 * Setter of the property <tt>unread</tt>
-	 * @param unread  The unread to set.
-	 * @uml.property  name="unread"
-	 */
-	public void setUnread(boolean unread) {
-		this.unread = unread;
-	}
-
-	/**
-	 * @uml.property  name="comment"
-	 */
+/**
+ * UnreadMarker is currently a mildly glorified boolean flag that sets whether a comment has been
+ * read, and generates new markers for new comments with no related UnreadMarker.  This is done
+ * on a per Profile basis.
+ * @author mcmorris
+ */
+public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<UnreadMarker> {
+	private boolean unread;
 	private Comment comment;
-
-	/**
-	 * Getter of the property <tt>comment</tt>
-	 * @return  Returns the comment.
-	 * @uml.property  name="comment"
-	 */
-	public Comment getComment() {
-		return comment;
+	
+	public UnreadMarker() {
+		unread = true;
 	}
-
+	
 	/**
-	 * Setter of the property <tt>comment</tt>
-	 * @param comment  The comment to set.
-	 * @uml.property  name="comment"
+	 * Constructor.
+	 * @param unread - is this comment unread?  T/F
+	 * @param comment - The comment this unread marker marks.
 	 */
-	public void setComment(Comment comment) {
+	public UnreadMarker(boolean unread, Comment comment) {
+		this.unread = unread;
 		this.comment = comment;
 	}
 
 	/**
-	 * @uml.property   name="profile"
-	 * @uml.associationEnd   multiplicity="(0 -1)" inverse="unreadMarker:model.Profile"
+	 * Write this object to cache using GSon.
+	 * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/saveBranch/CMPUT301W14T09/src/ca/cmput301w14t09/FileManaging/FileSaving.java
+	 * @param userName - name of current user (cache is user-based)
+	 * @param main - activity calling this function.
 	 */
-	private Collection<Profile> profile;
+	public void serialize(String userName, Activity main) {
+		Gson gson = new Gson();
+		String jsonIn = gson.toJson(this);           
 
-	/** 
-	 * Getter of the property <tt>profile</tt>
-	 * @return  Returns the profile.
-	 * @uml.property  name="profile"
+		try {
+			FileOutputStream fos = main.openFileOutput(userName + ".sav",
+					Context.MODE_PRIVATE );
+			fos.write(jsonIn.getBytes());
+			fos.close();
+		} catch (FileNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Loads this object, specified by name, from cache with userName.sav
+	 * @param userName - name of current user (cache is user-based)
+	 * @param name - name of the file object itself?
+	 * @param main - activity calling this function.
+	 * @return - the loaded comment.
 	 */
-	public Collection<Profile> getProfile() {
-		return profile;
+	public UnreadMarker load(String userName, String name, Activity main) {
+        Gson gson = new Gson();
+        UnreadMarker unreadMarker = null;
+        
+        try{
+            FileInputStream fis = main.openFileInput(userName + ".sav");
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader buff = new BufferedReader(isr);
+            String jsonOut = buff.readLine();
+            unreadMarker = gson.fromJson(jsonOut, UnreadMarker.class);
+            buff.close();
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        return unreadMarker;
+	}
+	
+	/**
+	 * Compares this UnreadMarker to another UnreadMarker.
+	 * @param otherComment - other comment object to compare to.
+	 * @return - this or otherComment, whichever has earlier date.
+	 */
+	public int compareTo(UnreadMarker otherMarker) {
+		Date compareDate = ((UnreadMarker) otherMarker).comment.getPostDate();
+		return this.comment.getPostDate().compareTo(compareDate);
 	}
 
-	/** 
-	 * Setter of the property <tt>profile</tt>
-	 * @param profile  The profile to set.
-	 * @uml.property  name="profile"
-	 */
-	public void setProfile(Collection<Profile> profile) {
-		this.profile = profile;
+	public boolean isUnread() {
+		return unread;
 	}
+
+
+	public void setUnread(boolean unread) {
+		this.unread = unread;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+
 
 	/**
-	 * @uml.property   name="comment1"
-	 * @uml.associationEnd   aggregation="composite" inverse="unreadMarker:model.Comment"
-	 */
-	private Comment comment1;
-
-	/** 
-	 * Getter of the property <tt>comment1</tt>
-	 * @return  Returns the comment1.
-	 * @uml.property  name="comment1"
-	 */
-	public Comment getComment1() {
-		return comment1;
-	}
-
-	/** 
-	 * Setter of the property <tt>comment1</tt>
-	 * @param comment1  The comment1 to set.
-	 * @uml.property  name="comment1"
-	 */
-	public void setComment1(Comment comment1) {
-		this.comment1 = comment1;
-	}
-
+	 * Go through all comments, check a read flag exists for each one.
+	 * TODO: I'm pretty sure this won't actually work - oldMarkers is made up of UnreadMarkers, so it is logical
+	 * that it won't say it "contains" a Comment.
+	*/
+	public ArrayList<UnreadMarker> generateNewMarkers(ArrayList<UnreadMarker> oldMarkers, ArrayList<Comment> allComments) {
+		ArrayList<UnreadMarker> markers = new ArrayList<UnreadMarker>();
+		boolean isRead = false;
 		
-		/**
-		 */
-		public void generateNewMarkers(){
+		// Compare each comment node, and mark if read only if it is already read in oldComments.
+		for(int index = 0; index < allComments.size(); index++) {
+			isRead = false;
+			
+			if (oldMarkers.contains(allComments.get(index)) == true)
+					isRead = true;
+
+			markers.add(new UnreadMarker(isRead, comment));
 		}
+		
+		return markers;
+	}
 
 }

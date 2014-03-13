@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
@@ -135,6 +137,17 @@ public class TopCommentsActivity extends Activity {
 
 		final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
 		final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
+		final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
+		final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
+		
+		//new Location Controller 
+		final LocationController lc = new LocationController();
+		
+		//get Location Manager setup
+		lc.setLocationManager(dialog.getContext());
+						
+				
+		
 		
 		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		
@@ -142,7 +155,37 @@ public class TopCommentsActivity extends Activity {
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		dialog.show();
+		
+		
+		
+		// Retrieve location updates through LocationListener interface
+		final LocationListener locationListener = new LocationListener(){				
+								
+				public void onProviderDisabled (String provider){
+									
+					}
+								
+				public void onProviderEnabled (String provider){
+									
+									
+					}
+								
+				public void onStatusChanged (String provider, int status, Bundle extras){
+									
+									
+					}
 
+				@Override
+				public void onLocationChanged(android.location.Location location) {
+									
+				    lc.locationchanged(location, tv2, tv3);
+									
+									
+					}
+				};
+		
+		
+		//cancel button
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -152,6 +195,7 @@ public class TopCommentsActivity extends Activity {
 			}
 		});
 
+		//save button
 		save.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -165,6 +209,8 @@ public class TopCommentsActivity extends Activity {
 
 			}
 		});
+		
+		
 
 
 	}

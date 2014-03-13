@@ -45,15 +45,49 @@
              android:text="SAVE" 
              />
 
-          <Button
+         <Button
              android:id="@+id/cancel"
-             android:layout_marginTop="15dp"
-             android:layout_weight="1"
              android:layout_width="fill_parent"
              android:layout_height="wrap_content"
-             android:text="Cancel" 
-             />
+             android:layout_marginTop="15dp"
+             android:layout_weight="1"
+             android:text="Cancel" />
 
          </LinearLayout>
+
+ <TextView
+     android:id="@+id/TextView01"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Lat" />
+
+ <EditText
+     android:id="@+id/lattext3"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="35dp"
+     android:ems="10"
+     android:inputType="numberDecimal" />
+
+ <TextView
+     android:id="@+id/TextView02"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Long" />
+
+ <EditText
+     android:id="@+id/longtext3"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="32dp"
+     android:ems="10"
+     android:inputType="numberDecimal" />
+
+ <Button
+     android:id="@+id/changebutton"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="81dp"
+     android:text="Change your location" />
          
 </LinearLayout>

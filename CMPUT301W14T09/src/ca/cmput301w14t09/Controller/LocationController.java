@@ -64,7 +64,6 @@ public class LocationController {
 		
 		public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
 			
-			// TODO Auto-generated method stub
 			
 			if(location != null){
 				
@@ -83,7 +82,7 @@ public class LocationController {
 				setGeoLocation();
 				
 			}else{
-				//tv.setText("no location information");
+				
 			}
 			
 		}

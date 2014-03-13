@@ -147,9 +147,7 @@ public class TopCommentsActivity extends Activity {
 		//get Location Manager setup
 		lc.setLocationManager(dialog.getContext());
 						
-				
-		
-		
+			
 		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		
 		authorText.setText(user.getAuthorName());
@@ -157,12 +155,12 @@ public class TopCommentsActivity extends Activity {
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		//update location button
 		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
+		
 		dialog.show();
 		
 		
-		
 		// Retrieve location updates through LocationListener interface
-		final LocationListener locationListener = new LocationListener(){				
+		LocationListener locationListener = new LocationListener(){				
 								
 				public void onProviderDisabled (String provider){
 									
@@ -188,8 +186,10 @@ public class TopCommentsActivity extends Activity {
 				};
 				
 				//set up location update request.
-				//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 				//lc.requestLocationUpdates(locationListener);
+				
+			
+				
 						
 			
 				

@@ -4,6 +4,7 @@ package ca.cmput301w14t09;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.LocationListener;
@@ -154,6 +155,8 @@ public class TopCommentsActivity extends Activity {
 		authorText.setText(user.getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
+		//update location button
+		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
 		dialog.show();
 		
 		
@@ -183,6 +186,25 @@ public class TopCommentsActivity extends Activity {
 									
 					}
 				};
+				
+				//set up location update request.
+				//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+				//lc.requestLocationUpdates(locationListener);
+						
+			
+				
+				//update location button
+				btnSimple2.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+							
+						
+						lc.updatelocation(dialog.getContext(),tv2, tv3);
+						
+						 
+					}
+			 });
 		
 		
 		//cancel button

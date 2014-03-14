@@ -31,6 +31,7 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.CommentThread;
+import ca.cmput301w14t09.model.GeoLocation;
 import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
@@ -231,7 +232,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
 				user.setAuthorName(text2);
-				comment = CreateComment.newComment(text2, text1, true);
+				comment = CreateComment.newComment(lc, text2, text1, true);
 				
 				CommentThread newThread = new CommentThread();
 				newThread.addToThread(comment);

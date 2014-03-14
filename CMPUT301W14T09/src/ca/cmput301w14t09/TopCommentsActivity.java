@@ -124,23 +124,19 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		final LocationController lc = new LocationController();
 		
 		//get Location Manager setup
-<<<<<<< HEAD
+
 		lc.setLocationManager(dialog.getContext());
-=======
 		//lc.setLocationManager(dialog.getContext());
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 						
 			
-		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
->>>>>>> 3835d4ccd09229c6d50d04404df54a5db2f8fdae
+	//	addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		
 		authorText.setText(user.getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		//update location button
 		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
-		
-<<<<<<< HEAD
 		
 		// ImageView img = (ImageView) findViewById(R.id.add_pic_image_view);
 		ImageButton img = (ImageButton) dialog.findViewById(R.id.imageButton1);
@@ -192,32 +188,8 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				//set up location update request.
 				//lc.requestLocationUpdates(locationListener);
 		
-=======
 		// Retrieve location updates through LocationListener interface
-				LocationListener locationListener = new LocationListener(){				
-										
-						public void onProviderDisabled (String provider){
-											
-							}
-										
-						public void onProviderEnabled (String provider){
-											
-											
-							}
-										
-						public void onStatusChanged (String provider, int status, Bundle extras){
-											
-											
-							}
-
-						@Override
-						public void onLocationChanged(android.location.Location location) {
-											
-						    lc.locationchanged(location, tv2, tv3);
-											
-											
-							}
-						};
+				
 						
 						//set up location update request.
 						
@@ -228,10 +200,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 					//lc.requestLocationUpdates(locationListener);
 					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 			
-				
-						
-			
->>>>>>> 3835d4ccd09229c6d50d04404df54a5db2f8fdae
 				
 				//update location button
 				btnSimple2.setOnClickListener(new View.OnClickListener() {

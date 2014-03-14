@@ -130,8 +130,9 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 						
 			
 	//	addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
+		//System.out.println(user.getAuthorName());
 		
-		authorText.setText(user.getAuthorName());
+		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		//update location button
@@ -231,7 +232,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 			public void onClick(View v) {
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
-				user.setAuthorName(text2);
+				user.getProfile().setAuthorName(text2);
 				comment = CreateComment.newComment(lc, text2, text1, true);
 				
 				CommentThread newThread = new CommentThread();

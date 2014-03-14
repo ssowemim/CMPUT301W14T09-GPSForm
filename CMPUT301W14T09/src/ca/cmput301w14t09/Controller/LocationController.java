@@ -9,13 +9,13 @@ import android.location.LocationManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import ca.cmput301w14t09.model.GeoLocation;
-import ca.cmput301w14t09.view.SelectLocationActivity;
+
 
 
 public class LocationController {
 
 		private GeoLocation geo = new GeoLocation();
-		private SelectLocationActivity selectLocationActivity;
+		
 		private double lat;
 		private double lng;
 		LocationManager lm = null;
@@ -52,15 +52,6 @@ public class LocationController {
 		
 
 
-		public SelectLocationActivity getSelectLocationActivity() {
-			return selectLocationActivity;
-		}
-
-		
-		public void setSelectLocationActivity(
-				SelectLocationActivity selectLocationActivity) {
-					this.selectLocationActivity = selectLocationActivity;
-				}
 
 		
 		public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){

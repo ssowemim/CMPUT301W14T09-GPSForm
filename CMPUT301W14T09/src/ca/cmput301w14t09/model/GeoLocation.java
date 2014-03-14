@@ -1,13 +1,15 @@
 package ca.cmput301w14t09.model;
 
 public class GeoLocation {
-
-	
 	private double latitude;
 	private double longitude;
 	private String name;
 	
-
+	public GeoLocation() {
+		latitude = 0.0;
+		longitude = 0.0;
+		name = "";
+	}
 	
 	public double getLatitude() {
 		return latitude;

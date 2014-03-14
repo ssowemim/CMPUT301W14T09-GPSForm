@@ -116,6 +116,7 @@ public class LocationController {
 			// When clicked, show a toast with the TextView text Game, Help, Home
             Toast.makeText(context, update, Toast.LENGTH_SHORT).show();  
 			
+            System.out.println("count"+count);
 			System.out.println("location updated");
 			System.out.println("long: "+lng);
 			System.out.println("lat: "+lat);

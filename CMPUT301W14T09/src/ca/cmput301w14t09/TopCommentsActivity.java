@@ -239,7 +239,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				CommentThread newThread = new CommentThread();
 				newThread.addToThread(comment);
 				newThread.setName(comment.getCommentText());
-				newThread.setLastUpdated(new Date());
+				newThread.setLastUpdated(comment.getPostDate());
 				
 				ElasticSearchOperations.postThread(newThread);
 				dialog.dismiss();

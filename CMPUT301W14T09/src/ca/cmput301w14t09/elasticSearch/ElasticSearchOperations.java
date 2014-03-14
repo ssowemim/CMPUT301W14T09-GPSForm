@@ -19,6 +19,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.model.CommentThread;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,25 +30,32 @@ public class ElasticSearchOperations {
 	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/";
 	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1";
 
+	
 	static Comment comment;
 	
-	public static void postTopComment(final Comment comment){
+	/**
+	 * Posts a comment thread to Elasti-Search.
+	 * Tested and verified.
+	 * @param commentThread
+	 */
+	public static void postThread(final CommentThread commentThread){
 		Thread thread = new Thread() {
 
 			@Override
-			public void run(){
-
+			public void run() {
 				HttpClient client = new DefaultHttpClient();
 				Gson gson = new Gson();
 				HttpPost request = new HttpPost(postAddress);
 
-				try{ 
-					String jsonString = gson.toJson(comment);
+				try { 
+					String jsonString = gson.toJson(commentThread);
+					System.out.println("JSON String:" +jsonString);
+					
 					request.setEntity(new StringEntity(jsonString));
 
 					HttpResponse response = client.execute(request);
 					Log.w(serverName, response.getStatusLine().toString());
-
+					
 					response.getStatusLine().toString();
 					HttpEntity entity = response.getEntity();
 
@@ -58,8 +66,7 @@ public class ElasticSearchOperations {
 						output = reader.readLine();
 					}
 				}
-				catch (Exception e){
-
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -67,7 +74,7 @@ public class ElasticSearchOperations {
 		thread.start();
 	}
 
-	public static String[] pullTopComments() throws InterruptedException{
+	public static String[] pullTopComments() throws InterruptedException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		final ArrayList<String> commentList = new ArrayList<String> ();
 		Thread thread = new Thread() {

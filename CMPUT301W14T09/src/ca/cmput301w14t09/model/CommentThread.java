@@ -27,7 +27,7 @@ public class CommentThread implements Comparable<CommentThread> {
 	public void addToThread(Comment comment) {
 		// Set comment thread.
 		this.lastUpdated = comment.getPostDate();
-		comment.setThread(this);
+		//comment.setThread(this);
 		comment.setPostDate(new Date());
 		
 		comments.addLast(comment);

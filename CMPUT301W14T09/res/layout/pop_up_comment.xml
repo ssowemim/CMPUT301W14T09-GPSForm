@@ -19,13 +19,6 @@
      android:layout_height="wrap_content"
      android:ems="10"
      android:hint="comment" />
-
- <ImageView
-     android:id="@+id/add_pic_image_view"
-     android:layout_width="35dp"
-     android:layout_height="25dp"
-     android:src="@drawable/camera" 
-     android:contentDescription="Camera Description"/>
   
  <LinearLayout
 
@@ -44,6 +37,13 @@
              android:layout_height="wrap_content"
              android:text="SAVE" 
              />
+
+         <ImageButton
+             android:id="@+id/imageButton1"
+             android:layout_width="match_parent"
+             android:layout_height="48dp"
+             android:layout_weight="1"
+             android:src="@drawable/camera" />
 
          <Button
              android:id="@+id/cancel"

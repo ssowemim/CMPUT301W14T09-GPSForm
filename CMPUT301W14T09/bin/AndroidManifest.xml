@@ -40,6 +40,10 @@
             android:name="ca.cmput301w14t09.CommentListActivity"
             android:label="@string/title_activity_comment_list" >
         </activity>
+        <activity 
+            android:name="ca.cmput301w14t09.PictureActivity"
+            android:label="title_activity_picture">
+        </activity>
     </application>
 
 </manifest>

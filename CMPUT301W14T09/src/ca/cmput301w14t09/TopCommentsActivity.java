@@ -12,13 +12,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
@@ -28,8 +31,10 @@ import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
-public class TopCommentsActivity extends Activity {
 
+public class TopCommentsActivity extends Activity implements OnClickListener{
+	
+	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	
 	protected Intent intent;
@@ -37,13 +42,7 @@ public class TopCommentsActivity extends Activity {
 	protected Dialog dialog;
 	protected ListView aCommentList;
 	Comment comment;
-	
-	ImageView addPicImageView;
-	
-	private Bitmap currentPicture;
-	PictureController picController;
-	PictureAdapter picAdapter;
-	PictureModelList picModel;
+
 
 
 
@@ -75,29 +74,7 @@ public class TopCommentsActivity extends Activity {
 
 		});
 		
-		this.picModel = new PictureModelList();
-		this.picAdapter = new PictureAdapter(this, R.layout.pic_post, picModel.getList());
-		this.picController = new PictureController(this.picModel, this);
-		
-		this.picModel.setAdapter(this.picAdapter);
 	}
-	
-	
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		if(requestCode == OBTAIN_PIC_REQUEST_CODE && resultCode == RESULT_OK){
-			this.currentPicture = (Bitmap)data.getExtras().get("data");
-			this.addPicImageView.setImageBitmap(this.currentPicture);
-		}
-	}
-	
-	
-	public void obtainPicture(View view) {
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
-	}
-	
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,8 +82,9 @@ public class TopCommentsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.top_comments, menu);
 
 		intent = getIntent();
-		user = (User) intent.getSerializableExtra("CURRENT_USER");
-
+		user = (User) intent.getSerializableExtra("CURRENT_USER");	
+		
+		
 		return true;
 
 
@@ -146,9 +124,6 @@ public class TopCommentsActivity extends Activity {
 		
 		//get Location Manager setup
 		lc.setLocationManager(dialog.getContext());
-						
-			
-		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		
 		authorText.setText(user.getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
@@ -156,8 +131,27 @@ public class TopCommentsActivity extends Activity {
 		//update location button
 		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
 		
-		dialog.show();
 		
+		// ImageView img = (ImageView) findViewById(R.id.add_pic_image_view);
+		ImageButton img = (ImageButton) dialog.findViewById(R.id.imageButton1);
+		img.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+		//		Intent intent = new Intent(TopCommentsActivity.this, PictureActivity.class);
+			//	startActivity(intent);
+				
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+				
+				Toast.makeText(TopCommentsActivity.this, "Image has been changed", Toast.LENGTH_LONG).show();
+			}
+			
+			
+		});  
+		
+		dialog.show();
 		
 		// Retrieve location updates through LocationListener interface
 		LocationListener locationListener = new LocationListener(){				
@@ -187,11 +181,7 @@ public class TopCommentsActivity extends Activity {
 				
 				//set up location update request.
 				//lc.requestLocationUpdates(locationListener);
-				
-			
-				
-						
-			
+		
 				
 				//update location button
 				btnSimple2.setOnClickListener(new View.OnClickListener() {
@@ -231,9 +221,6 @@ public class TopCommentsActivity extends Activity {
 
 			}
 		});
-		
-		
-
 
 	}
 
@@ -266,6 +253,14 @@ public class TopCommentsActivity extends Activity {
 
 
 	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 	
 

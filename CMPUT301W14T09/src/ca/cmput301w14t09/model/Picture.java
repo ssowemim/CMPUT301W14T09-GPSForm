@@ -7,16 +7,23 @@ import android.graphics.Bitmap;
 
 
 public class Picture {
-
-	private static int MAX_SIZE = 100;
+	private Bitmap picture;
+	private String text;
+	private Date timestamp;
 		
-	public Picture(Bitmap pic, String text, Date timestamp) {
-		// TODO Auto-generated constructor stub
+	protected Picture(Bitmap pic) {
+		this.picture = pic;
 	}
-
-	/**
-	 */
-	public boolean validatePictureSize(android.graphics.Bitmap picture) {
-		return false;	
+	
+	public Bitmap getPicture() {
+		return this.picture;
+	}
+	
+	public Date getTimestamp() {
+		return this.timestamp;
+	}
+	
+	public String getText() {
+		return this.text;
 	}
 }

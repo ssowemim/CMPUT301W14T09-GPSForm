@@ -6,11 +6,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+
 import android.graphics.Bitmap;
 import android.widget.ArrayAdapter;
 
 
 public class PictureModelList {
+
 	private List<Picture> list;
 	private ArrayAdapter<Picture> adapter;
 	
@@ -18,9 +20,8 @@ public class PictureModelList {
 		this.list = new ArrayList<Picture>();
 	}
 	
-	
 	public void addPicture(Bitmap pic, String text, Date timestamp) {
-		Picture picPost = new Picture(pic, text, timestamp);
+		Picture picPost = new Picture(pic);
 		this.list.add(picPost);
 		this.adapter.notifyDataSetChanged();
 	}
@@ -29,7 +30,20 @@ public class PictureModelList {
 		this.list.addAll(posts);
 		this.adapter.notifyDataSetChanged();
 	}
+	public void addPicPost(Bitmap pic) {
+		Picture picPost = new Picture(pic);
+		this.list.add(picPost);
+		this.adapter.notifyDataSetChanged();
+
+	}
 	
+	
+	public void addPicPostCollection(Collection<Picture> posts) {
+		this.list.addAll(posts);
+		this.adapter.notifyDataSetChanged();
+	}
+
+
 	public void clear() {
 		this.list.clear();
 		this.adapter.notifyDataSetChanged();
@@ -42,5 +56,5 @@ public class PictureModelList {
 	public void setAdapter(ArrayAdapter<Picture> adapter) {
 		this.adapter = adapter;
 	}
-	
+
 }

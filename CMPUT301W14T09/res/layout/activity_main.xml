@@ -22,8 +22,7 @@
  <Button
      android:id="@+id/button2"
      android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/editText1"
+     android:layout_height="wrap_content" 
      android:layout_alignParentBottom="true"
      android:layout_alignParentRight="true"
      android:layout_marginBottom="14dp"
@@ -44,7 +43,6 @@
      android:id="@+id/UserList"
      android:layout_width="fill_parent"
      android:layout_height="263dp"
-     android:layout_alignLeft="@+id/editText1"
      android:layout_alignParentTop="true"
      android:scrollbars="vertical" >
  </ListView>

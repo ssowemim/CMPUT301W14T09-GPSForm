@@ -19,6 +19,7 @@ public class LocationController {
 		private double lat;
 		private double lng;
 		LocationManager lm = null;
+		int count = 0;
 		
 		public GeoLocation getGeoLocation() {
 			return geo;
@@ -91,6 +92,9 @@ public class LocationController {
 		public void updatelocation(Context context, EditText tv2, EditText tv3){
 			//System.out.println("UPdate complete");
 			
+			count = count + 1;
+			
+			if(count <= 1){
 			//lng
 			String text = tv2.getText().toString();
 			
@@ -112,9 +116,14 @@ public class LocationController {
 			// When clicked, show a toast with the TextView text Game, Help, Home
             Toast.makeText(context, update, Toast.LENGTH_SHORT).show();  
 			
+            System.out.println("count"+count);
 			System.out.println("location updated");
 			System.out.println("long: "+lng);
 			System.out.println("lat: "+lat);
+			}
+			else{
+				System.out.println("you have your location already");
+			}
 			
 		}
 		

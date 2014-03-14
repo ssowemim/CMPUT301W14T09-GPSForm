@@ -88,6 +88,6 @@
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
      android:layout_marginBottom="81dp"
-     android:text="Change your location" />
+     android:text="Update Location" />
          
 </LinearLayout>

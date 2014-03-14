@@ -25,6 +25,10 @@ import com.google.gson.reflect.TypeToken;
 
 public class ElasticSearchOperations {
 
+	private static String serverName = "ElasticSearch";
+	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/";
+	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1";
+
 	static Comment comment;
 	
 	public static void postTopComment(final Comment comment){
@@ -35,14 +39,14 @@ public class ElasticSearchOperations {
 
 				HttpClient client = new DefaultHttpClient();
 				Gson gson = new Gson();
-				HttpPost request = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/");
+				HttpPost request = new HttpPost(postAddress);
 
 				try{ 
 					String jsonString = gson.toJson(comment);
 					request.setEntity(new StringEntity(jsonString));
 
 					HttpResponse response = client.execute(request);
-					Log.w("ElasticSearch", response.getStatusLine().toString());
+					Log.w(serverName, response.getStatusLine().toString());
 
 					response.getStatusLine().toString();
 					HttpEntity entity = response.getEntity();
@@ -50,7 +54,7 @@ public class ElasticSearchOperations {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
 					String output = reader.readLine();
 					while (output != null) {
-						Log.w("ElasticSearch", output);
+						Log.w(serverName, output);
 						output = reader.readLine();
 					}
 				}
@@ -75,7 +79,7 @@ public class ElasticSearchOperations {
 				Gson gson = new Gson();
 
 				try{
-					HttpPost searchRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1");
+					HttpPost searchRequest = new HttpPost(searchAddress);
 					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"topComment\",\"query\" : \"true\"}}}";
 
 					StringEntity stringentity = new StringEntity(query);
@@ -136,7 +140,7 @@ public class ElasticSearchOperations {
 				Gson gson = new Gson();
 
 				try{
-					HttpPost searchRequest = new HttpPost("http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1");
+					HttpPost searchRequest = new HttpPost(searchAddress);
 					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"commentText\",\"query\" : \"" + commentText +"\"}}}";
 
 					StringEntity stringentity = new StringEntity(query);

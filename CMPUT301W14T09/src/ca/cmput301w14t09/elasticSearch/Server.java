@@ -1,4 +1,4 @@
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.elasticSearch;
 
 /**
  * Handles server configuration and status.  
@@ -7,6 +7,7 @@ package ca.cmput301w14t09.model;
  * @author mcmorris
  */
 public class Server {
+	//private ElasticSearchOperations serverOperations;
 	
 	// Most configuration settings are not changeable in the context of our class.
 	private String serverName = "ElasticSearch";

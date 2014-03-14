@@ -2,6 +2,8 @@ package ca.cmput301w14t09;
 
 
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -28,6 +30,7 @@ import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.model.CommentThread;
 import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
@@ -43,8 +46,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 	protected Dialog dialog;
 	protected ListView aCommentList;
 	Comment comment;
-
-
 
 
 	@Override
@@ -234,7 +235,13 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				String text2 = authorText.getText().toString();
 				user.setAuthorName(text2);
 				comment = CreateComment.newComment(text2, text1, true);
-				ElasticSearchOperations.postTopComment(comment);
+				
+				CommentThread newThread = new CommentThread();
+				newThread.addToThread(comment);
+				newThread.setName(comment.getCommentText());
+				newThread.setLastUpdated(new Date());
+				
+				ElasticSearchOperations.postThread(newThread);
 				dialog.dismiss();
 
 			}

@@ -57,8 +57,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 
 		aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
 				String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
 
@@ -67,7 +66,8 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-
+				
+				// Pass in comment object
 				commentThread(comment);
 
 
@@ -255,7 +255,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 			dialog.setContentView(R.layout.guest_box);
 			dialog.setTitle("ALERT!");
 
-			Button button =(Button)dialog.findViewById(R.id.button1);
+			Button button =(Button)dialog.findViewById(R.id.favorite1);
 			dialog.show();
 			button.setOnClickListener(new View.OnClickListener() {
 
@@ -273,8 +273,10 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		}
 	}
 
+	// Sends comment object to new activity
 	public void commentThread(Comment comment){
-
+		Intent intent = new Intent(this, CommentListActivity.class);
+		startActivity(intent);
 
 	}
 

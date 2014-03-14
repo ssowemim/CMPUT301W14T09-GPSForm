@@ -64,7 +64,7 @@ public class LocationController {
 
 		
 		public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
-			count = count + 1;
+			
 			
 			if(location != null){
 				
@@ -83,6 +83,7 @@ public class LocationController {
 				System.out.println("lat: "+lat);
 				//set geolocation to current location
 				setGeoLocation();
+				count = count + 1;
 				}
 				else{
 				}

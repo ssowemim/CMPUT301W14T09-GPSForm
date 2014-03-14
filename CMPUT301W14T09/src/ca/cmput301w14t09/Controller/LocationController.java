@@ -94,7 +94,7 @@ public class LocationController {
 			
 			count = count + 1;
 			
-			if(count < 1){
+			if(count >= 1){
 			//lng
 			String text = tv2.getText().toString();
 			

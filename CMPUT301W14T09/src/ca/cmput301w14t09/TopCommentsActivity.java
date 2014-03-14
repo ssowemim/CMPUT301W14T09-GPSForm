@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
@@ -145,7 +146,8 @@ public class TopCommentsActivity extends Activity {
 		final LocationController lc = new LocationController();
 		
 		//get Location Manager setup
-		lc.setLocationManager(dialog.getContext());
+		//lc.setLocationManager(dialog.getContext());
+		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 						
 			
 		addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
@@ -156,38 +158,40 @@ public class TopCommentsActivity extends Activity {
 		//update location button
 		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
 		
-		dialog.show();
-		
-		
 		// Retrieve location updates through LocationListener interface
-		LocationListener locationListener = new LocationListener(){				
-								
-				public void onProviderDisabled (String provider){
-									
-					}
-								
-				public void onProviderEnabled (String provider){
-									
-									
-					}
-								
-				public void onStatusChanged (String provider, int status, Bundle extras){
-									
-									
-					}
+				LocationListener locationListener = new LocationListener(){				
+										
+						public void onProviderDisabled (String provider){
+											
+							}
+										
+						public void onProviderEnabled (String provider){
+											
+											
+							}
+										
+						public void onStatusChanged (String provider, int status, Bundle extras){
+											
+											
+							}
 
-				@Override
-				public void onLocationChanged(android.location.Location location) {
-									
-				    lc.locationchanged(location, tv2, tv3);
-									
-									
-					}
-				};
-				
-				//set up location update request.
-				//lc.requestLocationUpdates(locationListener);
-				
+						@Override
+						public void onLocationChanged(android.location.Location location) {
+											
+						    lc.locationchanged(location, tv2, tv3);
+											
+											
+							}
+						};
+						
+						//set up location update request.
+						
+		
+						dialog.show();
+		
+		
+					//lc.requestLocationUpdates(locationListener);
+					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 			
 				
 						

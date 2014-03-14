@@ -64,9 +64,11 @@ public class LocationController {
 
 		
 		public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
-			
+			count = count + 1;
 			
 			if(location != null){
+				
+				if(count<=1){
 				
 				lat = location.getLatitude();
 				lng = location.getLongitude();
@@ -81,6 +83,9 @@ public class LocationController {
 				System.out.println("lat: "+lat);
 				//set geolocation to current location
 				setGeoLocation();
+				}
+				else{
+				}
 				
 			}else{
 				
@@ -92,9 +97,7 @@ public class LocationController {
 		public void updatelocation(Context context, EditText tv2, EditText tv3){
 			//System.out.println("UPdate complete");
 			
-			count = count + 1;
 			
-			if(count <= 1){
 			//lng
 			String text = tv2.getText().toString();
 			
@@ -121,9 +124,7 @@ public class LocationController {
 			System.out.println("long: "+lng);
 			System.out.println("lat: "+lat);
 			}
-			else{
-				System.out.println("you have your location already");
-			}
+			
 			
 		}
 		
@@ -132,4 +133,4 @@ public class LocationController {
 		
 		
 		
-}
+

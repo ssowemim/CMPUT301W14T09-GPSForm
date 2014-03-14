@@ -33,6 +33,11 @@ public class Profile implements Serializable {
 		return favorites;
 	}
 
+	
+	public void add(Favorite newFavorite) {
+		favorites.add(newFavorite);
+	}
+	
 	/**
 	 * @param favorites the favorites to set
 	 */

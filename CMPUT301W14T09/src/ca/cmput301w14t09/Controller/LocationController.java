@@ -68,7 +68,7 @@ public class LocationController {
 			
 			if(location != null){
 				
-				if(count<=1){
+				if(count<2){
 				
 				lat = location.getLatitude();
 				lng = location.getLongitude();
@@ -85,11 +85,6 @@ public class LocationController {
 				setGeoLocation();
 				count = count + 1;
 				}
-				else{
-				}
-				
-			}else{
-				
 			}
 			
 		}

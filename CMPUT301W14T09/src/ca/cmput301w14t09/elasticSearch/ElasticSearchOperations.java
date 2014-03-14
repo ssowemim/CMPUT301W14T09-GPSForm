@@ -27,8 +27,8 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations {
 
 	private static String serverName = "ElasticSearch";
-	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/";
-	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1";
+	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test03/";
+	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test03/_search?pretty=1";
 
 	
 	static Comment comment;
@@ -74,37 +74,38 @@ public class ElasticSearchOperations {
 		thread.start();
 	}
 
-	public static String[] pullTopComments() throws InterruptedException {
+	/**
+	 * Returns a list of thread names.  
+	 * Tested and verified.
+	 * @return list of names of Threads.
+	 * @throws InterruptedException
+	 */
+	public static String[] pullThreads() throws InterruptedException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		final ArrayList<String> commentList = new ArrayList<String> ();
 		Thread thread = new Thread() {
 
 			@Override
-			public void run(){
-
+			public void run() {
 				HttpClient client = new DefaultHttpClient();
 				Gson gson = new Gson();
 
-				try{
+				try {
 					HttpPost searchRequest = new HttpPost(searchAddress);
 					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"topComment\",\"query\" : \"true\"}}}";
 
 					StringEntity stringentity = new StringEntity(query);
-
 					searchRequest.setEntity(stringentity);
 
 					HttpResponse response = client.execute(searchRequest);
-					
 					String json = getEntityContent(response);
 					
-					
-					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Comment>>(){}.getType();
-					ElasticSearchSearchResponse<Comment> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<CommentThread>>(){}.getType();
+					ElasticSearchSearchResponse<CommentThread> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
 
-					for (ElasticSearchResponse<Comment> r : esResponse.getHits()) {
-						Comment topComment = r.getSource();
-						commentList.add(topComment.getCommentText());
-						
+					for (ElasticSearchResponse<CommentThread> r : esResponse.getHits()) {
+						CommentThread topComment = r.getSource();
+						commentList.add(topComment.getName());
 					}
 					latch.countDown();
 					 //searchRequest.releaseConnection();	
@@ -135,7 +136,8 @@ public class ElasticSearchOperations {
 		return json;
 	}
 	
-	public static Comment loadComment(final String commentText) throws InterruptedException{
+	
+	public static Comment loadComment(final String commentText) throws InterruptedException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		
 		Thread thread = new Thread() {

@@ -38,7 +38,6 @@ import ca.cmput301w14t09.view.PictureAdapter;
 
 public class TopCommentsActivity extends Activity implements OnClickListener{
 	
-	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	
 	protected Intent intent;
@@ -65,7 +64,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				try {
 					comment = ElasticSearchOperations.loadComment(getCommentText);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -97,13 +95,12 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		super.onStart();
 		String[] topComments;
 		try {
-			topComments = ElasticSearchOperations.pullTopComments();
+			topComments = ElasticSearchOperations.pullThreads();
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 					R.layout.list_view, topComments);
 			aCommentList.setAdapter(adapter);
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -126,8 +123,8 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		
 		//get Location Manager setup
 
-		lc.setLocationManager(dialog.getContext());
 		//lc.setLocationManager(dialog.getContext());
+	
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 						
 			

@@ -1,4 +1,4 @@
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.elasticSearch;
 
 /**
  * Handles server configuration and status.  
@@ -7,11 +7,7 @@ package ca.cmput301w14t09.model;
  * @author mcmorris
  */
 public class Server {
-	
-	// Most configuration settings are not changeable in the context of our class.
-	private String serverName = "ElasticSearch";
-	private String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/";
-	private String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test02/_search?pretty=1";
+	//private ElasticSearchOperations serverOperations;
 	
 	/**
 	 * Can we reach the server from this connection?

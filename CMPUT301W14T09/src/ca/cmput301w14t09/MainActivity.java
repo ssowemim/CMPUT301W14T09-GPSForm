@@ -60,23 +60,20 @@ public class MainActivity extends Activity {
 	}
 
 	public void newUser(View v){
-		user = new User();
-		user.setUserName(editText.getText().toString());
-		user.setAuthorName(editText.getText().toString());
-		FileSaving.saveInFile(user.getUserName(), this);
-		FileSaving.userInFile(user.getUserName(), user.getAuthorName(), this);
+		user = new User(editText.getText().toString());
+		FileSaving.appendUserNameToList(user.getUserName(), this);
+		FileSaving.saveUserFile(user, this);
 		topComments(user);
 	}
 
-	public void topComments(User user){
-		Intent intent = new Intent( this, TopCommentsActivity.class);
+	public void topComments(User user) {
+		Intent intent = new Intent(this, TopCommentsActivity.class);
 		intent.putExtra("CURRENT_USER", user);
 		startActivity(intent);
 	}
 
 	public void guestUser(View v){
-		user = new User();
-		user.setUserName("Guest");
+		user = new User("Guest");
 		topComments(user);
 	}
 

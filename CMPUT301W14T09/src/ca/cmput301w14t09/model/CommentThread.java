@@ -9,12 +9,12 @@ import java.util.LinkedList;
  * relevant data.
  * @author mcmorris
  */
-public class Thread implements Comparable<Thread> {
+public class CommentThread implements Comparable<CommentThread> {
 	private LinkedList<Comment> comments;
 	private Date lastUpdated;
 	private String name;
 
-	public Thread() {
+	public CommentThread() {
 		comments = new LinkedList<Comment>();
 		lastUpdated = new Date();
 		name = "";
@@ -27,7 +27,7 @@ public class Thread implements Comparable<Thread> {
 	public void addToThread(Comment comment) {
 		// Set comment thread.
 		this.lastUpdated = comment.getPostDate();
-		comment.setThread(this);
+		//comment.setThread(this);
 		comment.setPostDate(new Date());
 		
 		comments.addLast(comment);
@@ -36,8 +36,8 @@ public class Thread implements Comparable<Thread> {
 	/**
 	 * Compares this Comment to another Comment.
 	 */
-	public int compareTo(Thread otherThread) {
-		Date compareDate = ((Thread) otherThread).getLastUpdated();
+	public int compareTo(CommentThread otherThread) {
+		Date compareDate = ((CommentThread) otherThread).getLastUpdated();
 		return this.getLastUpdated().compareTo(compareDate);
 	}
 
@@ -49,10 +49,24 @@ public class Thread implements Comparable<Thread> {
 	}
 
 	/**
+	 * @param comments the comments to set
+	 */
+	public void setComments(LinkedList<Comment> comments) {
+		this.comments = comments;
+	}
+
+	/**
 	 * @return the lastUpdated
 	 */
 	public Date getLastUpdated() {
 		return lastUpdated;
+	}
+
+	/**
+	 * @param lastUpdated the lastUpdated to set
+	 */
+	public void setLastUpdated(Date lastUpdated) {
+		this.lastUpdated = lastUpdated;
 	}
 
 	/**
@@ -62,4 +76,10 @@ public class Thread implements Comparable<Thread> {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 }

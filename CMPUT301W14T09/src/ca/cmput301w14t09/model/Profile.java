@@ -1,5 +1,6 @@
 package ca.cmput301w14t09.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import ca.cmput301w14t09.model.Favorite;
@@ -10,15 +11,19 @@ import ca.cmput301w14t09.model.UnreadMarker;
  * Tracks the settings of the associated user.
  * @author mcmorris
  */
-public class Profile {
+public class Profile implements Serializable {
 	private ArrayList<Favorite> favorites;
 	private java.util.ArrayList<UnreadMarker> unreadComments;
-	private User user;
-	
 	private String authorName;
+	private String userName;
+	
+	private static final long serialVersionUID = 2L;
 
-	public Profile() {
-		
+	public Profile(String userName) {
+		this.favorites = new ArrayList<Favorite>();
+		this.unreadComments = new ArrayList<UnreadMarker>();
+		this.authorName = userName;
+		this.userName = userName;
 	}
 
 	/**
@@ -28,6 +33,11 @@ public class Profile {
 		return favorites;
 	}
 
+	
+	public void add(Favorite newFavorite) {
+		favorites.add(newFavorite);
+	}
+	
 	/**
 	 * @param favorites the favorites to set
 	 */
@@ -50,20 +60,6 @@ public class Profile {
 	}
 
 	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	/**
 	 * @return the authorName
 	 */
 	public String getAuthorName() {
@@ -76,6 +72,22 @@ public class Profile {
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
+
+	/**
+	 * @return the userName
+	 */
+	public String getUserName()
+	{
 	
+		return userName;
+	}
 	
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName)
+	{
+	
+		this.userName = userName;
+	}	
 }

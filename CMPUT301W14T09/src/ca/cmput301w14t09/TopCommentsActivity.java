@@ -2,10 +2,14 @@ package ca.cmput301w14t09;
 
 
 
+<<<<<<< HEAD
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+=======
+import java.util.Date;
+>>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -39,13 +43,14 @@ import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.model.CommentThread;
+import ca.cmput301w14t09.model.GeoLocation;
 import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
 
 public class TopCommentsActivity extends Activity{
-	
 	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -65,6 +70,7 @@ public class TopCommentsActivity extends Activity{
 	ImageButton addPicImageButton;
 	ImageView picImagePreview;
 
+<<<<<<< HEAD
 	PictureModelList pictureModel;
 	PictureController pictureController;
 	PictureAdapter pictureAdapter;
@@ -72,6 +78,8 @@ public class TopCommentsActivity extends Activity{
 	EditText authorText;
 	EditText commentText;
 	
+=======
+>>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +90,17 @@ public class TopCommentsActivity extends Activity{
 
 		aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
 				String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
 
 				try {
 					comment = ElasticSearchOperations.loadComment(getCommentText);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				
+				// Pass in comment object
 				commentThread(comment);
 
 
@@ -121,13 +128,12 @@ public class TopCommentsActivity extends Activity{
 		super.onStart();
 		String[] topComments;
 		try {
-			topComments = ElasticSearchOperations.pullTopComments();
+			topComments = ElasticSearchOperations.pullThreads();
 			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 					R.layout.list_view, topComments);
 			aCommentList.setAdapter(adapter);
 
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -151,12 +157,19 @@ public class TopCommentsActivity extends Activity{
 		
 		//get Location Manager setup
 
-		lc.setLocationManager(dialog.getContext());
 		//lc.setLocationManager(dialog.getContext());
+	
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+<<<<<<< HEAD
 						
+=======
+						
+			
+	//	addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
+		//System.out.println(user.getAuthorName());
+>>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
 		
-		authorText.setText(user.getAuthorName());
+		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		//update location button
@@ -254,9 +267,15 @@ public class TopCommentsActivity extends Activity{
 			public void onClick(View v) {
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
-				user.setAuthorName(text2);
-				comment = CreateComment.newComment(text2, text1, true);
-				ElasticSearchOperations.postTopComment(comment);
+				user.getProfile().setAuthorName(text2);
+				comment = CreateComment.newComment(lc, text2, text1, true);
+				
+				CommentThread newThread = new CommentThread();
+				newThread.addToThread(comment);
+				newThread.setName(comment.getCommentText());
+				newThread.setLastUpdated(comment.getPostDate());
+				
+				ElasticSearchOperations.postThread(newThread);
 				dialog.dismiss();
 
 			}
@@ -389,7 +408,7 @@ public class TopCommentsActivity extends Activity{
 			dialog.setContentView(R.layout.guest_box);
 			dialog.setTitle("ALERT!");
 
-			Button button =(Button)dialog.findViewById(R.id.button1);
+			Button button =(Button)dialog.findViewById(R.id.favorite1);
 			dialog.show();
 			button.setOnClickListener(new View.OnClickListener() {
 
@@ -407,7 +426,14 @@ public class TopCommentsActivity extends Activity{
 		}
 	}
 
+	// Sends comment object to new activity
 	public void commentThread(Comment comment){
+<<<<<<< HEAD
+=======
+		Intent intent = new Intent(this, CommentListActivity.class);
+		startActivity(intent);
+
+>>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
 	}
 
 }

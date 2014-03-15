@@ -24,7 +24,7 @@ import ca.cmput301w14t09.model.GeoLocation;
  * @author mcmorris
  */
 public class Comment implements ICacheable<Comment>, Comparable<Comment> {
-	private Thread thread;
+//	private CommentThread thread;
 	private GeoLocation geoLocation;
 	private Picture attachment;
 	private String authorName;
@@ -191,19 +191,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment> {
 		this.postDate = now;
 	}
 
-	/**
-	 * @return the thread
-	 */
-	public Thread getThread() {
-		return thread;
-	}
-
-	/**
-	 * @param thread the thread to set
-	 */
-	public void setThread(Thread thread) {
-		this.thread = thread;
-	}
 
 	/**
 	 * @return the topComment

@@ -13,12 +13,11 @@ import android.app.Activity;
 import ca.cmput301w14t09.model.User;
 
 public class FileLoading {
-
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
 	protected String name;
 
-	public static String[] loadFromFile(Activity main){
+	public static String[] loadFromFile(Activity main) {
 		ArrayList<String> usernames = new ArrayList<String>();
 		try {
 			FileInputStream fis = main.openFileInput(FILENAME);
@@ -30,18 +29,14 @@ public class FileLoading {
 			}
 
 		} catch (FileNotFoundException e) {
-
 			e.printStackTrace();
-			
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		return usernames.toArray(new String[usernames.size()]);
 	}
 	
-	public static User returnUser(String name, Activity main){
-        
+	public static User returnUser(String name, Activity main) {
         Gson gson = new Gson();
 
         try{
@@ -52,15 +47,12 @@ public class FileLoading {
             user = gson.fromJson(jsonOut, User.class);
             buff.close();
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
         } catch (IOException e) {
-
             e.printStackTrace();
         }
+        
         return user;
-
-
     }
 
 }

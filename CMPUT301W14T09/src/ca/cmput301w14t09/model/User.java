@@ -16,14 +16,19 @@ public class User implements Serializable {
 	private Profile profile;
 	private GeoLocation currentLocation;
 	private String deviceId;
-	
 	private String userName;
-	private String authorName;
 	
 	private static final long serialVersionUID = 1L;		
 	
 	public User() {
-		
+		this.userName = "";
+		this.deviceId = "";
+	}
+	
+	public User(String userName) {
+		this.userName = userName;
+		this.profile = new Profile(userName);
+		this.deviceId = "";
 	}
 
 	/**
@@ -80,19 +85,5 @@ public class User implements Serializable {
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	
-	/**
-	 * @return the authorName
-	 */
-	public String getAuthorName() {
-		return authorName;
-	}
-
-	/**
-	 * @param authorName the authorName to set
-	 */
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
 	}
 }

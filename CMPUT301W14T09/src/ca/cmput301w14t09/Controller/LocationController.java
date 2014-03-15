@@ -9,13 +9,13 @@ import android.location.LocationManager;
 import android.widget.EditText;
 import android.widget.Toast;
 import ca.cmput301w14t09.model.GeoLocation;
-import ca.cmput301w14t09.view.SelectLocationActivity;
+
 
 
 public class LocationController {
 
 		private GeoLocation geo = new GeoLocation();
-		private SelectLocationActivity selectLocationActivity;
+		
 		private double lat;
 		private double lng;
 		LocationManager lm = null;
@@ -52,21 +52,14 @@ public class LocationController {
 		
 
 
-		public SelectLocationActivity getSelectLocationActivity() {
-			return selectLocationActivity;
-		}
-
-		
-		public void setSelectLocationActivity(
-				SelectLocationActivity selectLocationActivity) {
-					this.selectLocationActivity = selectLocationActivity;
-				}
 
 		
 		public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
 			
 			
 			if(location != null){
+				
+				if(count<2){
 				
 				lat = location.getLatitude();
 				lng = location.getLongitude();
@@ -81,9 +74,8 @@ public class LocationController {
 				System.out.println("lat: "+lat);
 				//set geolocation to current location
 				setGeoLocation();
-				
-			}else{
-				
+				count = count + 1;
+				}
 			}
 			
 		}
@@ -92,9 +84,7 @@ public class LocationController {
 		public void updatelocation(Context context, EditText tv2, EditText tv3){
 			//System.out.println("UPdate complete");
 			
-			count = count + 1;
 			
-			if(count <= 1){
 			//lng
 			String text = tv2.getText().toString();
 			
@@ -121,9 +111,7 @@ public class LocationController {
 			System.out.println("long: "+lng);
 			System.out.println("lat: "+lat);
 			}
-			else{
-				System.out.println("you have your location already");
-			}
+			
 			
 		}
 		
@@ -132,4 +120,4 @@ public class LocationController {
 		
 		
 		
-}
+

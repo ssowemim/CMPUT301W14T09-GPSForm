@@ -5,14 +5,12 @@ package ca.cmput301w14t09;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import java.util.Date;
-
-
-import android.app.Activity;
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,14 +27,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
 import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
@@ -45,13 +41,13 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.CommentThread;
-import ca.cmput301w14t09.model.GeoLocation;
 import ca.cmput301w14t09.model.PictureModelList;
+import ca.cmput301w14t09.model.ThreadAdapter;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
 
-public class TopCommentsActivity extends Activity {
+public class TopCommentsActivity extends ListActivity {
 	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -89,7 +85,7 @@ public class TopCommentsActivity extends Activity {
 		setContentView(R.layout.activity_top_comments);
 		topActivity = this;
 		
-		aCommentList = (ListView) findViewById(R.id.aCommentList);
+		aCommentList = (ListView) findViewById(android.R.id.list);
 
 		aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
@@ -129,11 +125,11 @@ public class TopCommentsActivity extends Activity {
 	@Override
 	protected void onStart(){
 		super.onStart();
-		String[] topComments;
+		ArrayList<CommentThread> topComments;
 		try {
 			topComments = ElasticSearchOperations.pullThreads();
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-					R.layout.list_view, topComments);
+			ThreadAdapter adapter = new ThreadAdapter(this,
+					R.layout.thread_view, topComments);
 			aCommentList.setAdapter(adapter);
 
 		} catch (InterruptedException e) {
@@ -174,7 +170,7 @@ public class TopCommentsActivity extends Activity {
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 		//update location button
-		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
+		Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
 		
 		picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
 		addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
@@ -238,15 +234,16 @@ public class TopCommentsActivity extends Activity {
 			
 				
 				//update location button
-				btnSimple2.setOnClickListener(new View.OnClickListener() {
+				btnSetLocation.setOnClickListener(new View.OnClickListener() {
 					
 					@Override
-					public void onClick(View v) {
-							
-						
-						lc.updatelocation(dialog.getContext(),tv2, tv3);
-						
-						 
+					public void onClick(View v) { 
+					    String latString;
+					    String lngString;
+					    
+					    lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
+					   // tv2.setText(lc.getGeoLocation().getLatitude()));
+					    
 					}
 			 });
 		

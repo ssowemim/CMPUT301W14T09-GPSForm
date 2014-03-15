@@ -88,15 +88,15 @@ public class CommentListActivity extends Activity implements OnClickListener{
 	@Override
 	protected void onStart(){
 		super.onStart();
-		String[] topComments;
+		/*CommentThread[] topComments;
 		try {
 			topComments = ElasticSearchOperations.pullThreads();
-			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.list_view, topComments);
+			ArrayAdapter<CommentThread> adapter = new ArrayAdapter<CommentThread>(this,R.layout.list_view, topComments);
 			favList.setAdapter(adapter);
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 	}
 	

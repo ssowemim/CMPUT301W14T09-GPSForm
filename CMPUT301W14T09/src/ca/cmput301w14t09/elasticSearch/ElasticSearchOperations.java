@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 
 import org.apache.http.HttpEntity;
@@ -107,6 +108,11 @@ public class ElasticSearchOperations {
 						Comment topComment = r.getSource();
 						commentList.add(topComment);
 					}
+					
+					// Sort by latest dated element.
+					Collections.sort(commentList);
+					Collections.reverse(commentList);
+					
 					latch.countDown();
 					 //searchRequest.releaseConnection();	
 

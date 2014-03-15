@@ -1,46 +1,50 @@
 package ca.cmput301w14t09.model;
 
-public class GeoLocation {
-	private double latitude;
-	private double longitude;
-	private String name;
-	
-	public GeoLocation() {
-		latitude = 0.0;
-		longitude = 0.0;
-		name = "";
-	}
-	
-	public double getLatitude() {
-		return latitude;
-	}
+import java.io.Serializable;
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
+public class GeoLocation implements Serializable {
 
-	public double getLongitude() {
-		return longitude;
-	}
+    private static final long serialVersionUID = 60L;
+    private double latitude;
+    private double longitude;
+    private String name;
 
-	
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-	}
+    public GeoLocation() {
+        latitude = 0.0;
+        longitude = 0.0;
+        name = "";
+    }
 
-	
-	public String getName() {
-		return name;
-	}
+    public double getLatitude() {
+        return latitude;
+    }
 
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 
 
-	public double calculateProximity(GeoLocation targetLocation){
-			return 0;
-	}
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public double calculateProximity(GeoLocation targetLocation){
+        return 0;
+    }
 
 }

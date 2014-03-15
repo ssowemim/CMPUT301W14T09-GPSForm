@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+
+    android:padding="6dip">
+    
+   <TextView
+		android:id="@+id/geoLocation"
+
+		android:layout_width="wrap_content"
+		android:layout_height="26dip"
+
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+
+		android:textStyle="bold"
+		android:singleLine="true"
+		android:ellipsize="marquee"
+   />
+
+   <TextView
+		android:id="@+id/geoLocationData"
+
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true"
+		android:layout_toRightOf="@id/geoLocation"
+
+		android:singleLine="true"
+		android:ellipsize="marquee"
+   />
+
+   <TextView
+	 	android:id="@+id/authorName"
+
+	 	android:layout_width="wrap_content"
+	 	android:layout_height="26dip"
+
+		android:layout_alignParentLeft="true"
+		android:layout_below="@id/geoLocation"
+
+	 	android:textStyle="bold"
+	 	android:gravity="center_vertical"
+   	/>
+
+   <TextView
+		android:id="@+id/authorNameData"
+
+		android:layout_width="fill_parent"
+		android:layout_height="26dip"
+
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/geoLocation"
+		android:layout_toRightOf="@id/authorName"
+
+		android:gravity="center_vertical"
+   />
+   
+     <TextView
+	 	android:id="@+id/postDate"
+
+	 	android:layout_width="wrap_content"
+	 	android:layout_height="26dip"
+
+		android:layout_alignParentLeft="true"
+		android:layout_below="@id/authorName"
+
+	 	android:textStyle="bold"
+	 	android:gravity="center_vertical"
+   	/>
+
+   <TextView
+		android:id="@+id/postDateData"
+
+		android:layout_width="fill_parent"
+		android:layout_height="26dip"
+
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/geoLocation"
+		android:layout_toRightOf="@id/authorName"
+
+		android:gravity="center_vertical"
+   />
+   
+   <!-- FIXME: Picture goes here. -->
+   
+   <TextView
+	 	android:id="@+id/commentName"
+
+	 	android:layout_width="wrap_content"
+	 	android:layout_height="26dip"
+
+		android:layout_alignParentLeft="true"
+		android:layout_below="@id/postDate"
+
+	 	android:textStyle="bold"
+	 	android:gravity="center_vertical"
+   	/>
+
+   <TextView
+		android:id="@+id/commentData"
+
+		android:layout_width="fill_parent"
+		android:layout_height="26dip"
+
+		android:layout_alignParentRight="true"
+		android:layout_below="@id/postDate"
+		android:layout_toRightOf="@id/commentName"
+
+		android:gravity="center_vertical"
+   />
+
+   <Button
+       android:id="@+id/replyBtn"
+       style="?android:attr/buttonStyleSmall"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignBaseline="@+id/geoLocation"
+       android:layout_alignBottom="@+id/geoLocation"
+       android:layout_alignParentRight="true"
+       android:text="Reply" />
+
+   <Button
+       android:id="@+id/favoriteBtn"
+       style="?android:attr/buttonStyleSmall"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentBottom="true"
+       android:layout_alignParentRight="true"
+       android:text="Favorite" />
+   
+</RelativeLayout>

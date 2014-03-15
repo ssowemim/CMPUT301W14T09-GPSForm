@@ -13,11 +13,12 @@ import android.widget.TextView;
 
 // http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
 
-public class ThreadAdapter extends ArrayAdapter<CommentThread>{
 
-    private ArrayList<CommentThread> objects;
+public class ThreadAdapter extends ArrayAdapter<Comment>{
 
-    public ThreadAdapter(Context context, int textViewResourceId, ArrayList<CommentThread> objects) {
+    private ArrayList<Comment> objects;
+
+    public ThreadAdapter(Context context, int textViewResourceId, ArrayList<Comment> objects) {
         super(context, textViewResourceId, objects);
         this.objects = objects;
     }
@@ -34,7 +35,7 @@ public class ThreadAdapter extends ArrayAdapter<CommentThread>{
             v = inflater.inflate(R.layout.thread_view, null);
         }
 
-        CommentThread i = objects.get(position);
+        Comment i = objects.get(position);
 
         if (i != null) {
 
@@ -52,13 +53,13 @@ public class ThreadAdapter extends ArrayAdapter<CommentThread>{
                 tt.setText("Author: ");
             }
             if (ttd != null) {
-                if (i.getComments().getFirst() != null) {
-                    ttd.setText(i.getComments().getFirst().getAuthorName());
+                if (i != null) {
+                    ttd.setText(i.getAuthorName());
                 }
             }
            
             if (mtd != null){
-                mtd.setText(i.getName());
+                mtd.setText(i.getCommentText());
             }
 
 

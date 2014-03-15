@@ -18,7 +18,7 @@
         android:onClick = "saveFavorites" />
 
     <ListView
-        android:id="@+id/commentView"
+        android:id="@+id/android:list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/favorite1"

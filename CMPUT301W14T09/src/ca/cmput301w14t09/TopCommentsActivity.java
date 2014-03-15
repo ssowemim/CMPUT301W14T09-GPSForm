@@ -40,9 +40,11 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.CommentThread;
-import ca.cmput301w14t09.model.PictureModelList;
+import ca.cmput301w14t09.model.CommentAdapter;
 import ca.cmput301w14t09.model.ThreadAdapter;
+
+import ca.cmput301w14t09.model.PictureModelList;
+
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
@@ -91,22 +93,13 @@ public class TopCommentsActivity extends ListActivity {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
-				String getCommentText = (String) (aCommentList.getItemAtPosition(arg2)); 
-
-				try {
-					comment = ElasticSearchOperations.loadComment(getCommentText);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
 				
 				// Pass in comment object
-				commentThread(comment);
-
-
+				commentThread(thread);
 			}
 
 		});
-		
 	}
 
 	@Override
@@ -125,7 +118,7 @@ public class TopCommentsActivity extends ListActivity {
 	@Override
 	protected void onStart(){
 		super.onStart();
-		ArrayList<CommentThread> topComments;
+		ArrayList<Comment> topComments;
 		try {
 			topComments = ElasticSearchOperations.pullThreads();
 			ThreadAdapter adapter = new ThreadAdapter(this,
@@ -270,12 +263,9 @@ public class TopCommentsActivity extends ListActivity {
 				
 				comment = CreateComment.newComment(lc, text2, text1, true);
 				
-				CommentThread newThread = new CommentThread();
-				newThread.addToThread(comment);
-				newThread.setName(comment.getCommentText());
-				newThread.setLastUpdated(comment.getPostDate());
 				
-				ElasticSearchOperations.postThread(newThread);
+				
+				ElasticSearchOperations.postThread(comment);
 				dialog.dismiss();
 
 			}
@@ -427,12 +417,14 @@ public class TopCommentsActivity extends ListActivity {
 	}
 
 	// Sends comment object to new activity
-	public void commentThread(Comment comment){
-
+	public void commentThread(Comment thread) {
+	        
+	        String stringId = new String();
+	        stringId = thread.getThreadId();
+	        
 		Intent intent = new Intent(this, CommentListActivity.class);
+		intent.putExtra("THREAD_ID", stringId);
 		startActivity(intent);
 
-
 	}
-
 }

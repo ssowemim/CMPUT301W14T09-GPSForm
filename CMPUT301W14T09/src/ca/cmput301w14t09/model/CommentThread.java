@@ -13,24 +13,27 @@ public class CommentThread implements Comparable<CommentThread> {
 	private LinkedList<Comment> comments;
 	private Date lastUpdated;
 	private String name;
+	private String threadId;
 
 	public CommentThread() {
 		comments = new LinkedList<Comment>();
 		lastUpdated = new Date();
+		threadId = "NOT SET";
 		name = "";
 	}
 	
 	/**
-	 * 
+	 * Adds comment to CommentThread.  If adding head element, sets thread Id.
 	 * @param comment - comment to attach the thread.
 	 */
-	public void addToThread(Comment comment) {
-		// Set comment thread.
-		this.lastUpdated = comment.getPostDate();
-		//comment.setThread(this);
-		comment.setPostDate(new Date());
-		
-		comments.addLast(comment);
+	public void addToThread(Comment comment) {	    
+	    // If adding head element
+	    if (comments.isEmpty() == true) {
+	        this.threadId = comment.getThreadId();
+	    }
+	    
+	    this.lastUpdated = comment.getPostDate();
+	    comments.addLast(comment);
 	}
 	
 	/**

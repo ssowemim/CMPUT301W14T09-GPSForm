@@ -2,14 +2,14 @@ package ca.cmput301w14t09;
 
 
 
-<<<<<<< HEAD
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-=======
+
 import java.util.Date;
->>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
+
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -41,6 +41,7 @@ import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.CommentThread;
@@ -50,7 +51,7 @@ import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
 
-public class TopCommentsActivity extends Activity{
+public class TopCommentsActivity extends Activity {
 	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -61,6 +62,8 @@ public class TopCommentsActivity extends Activity{
 	//file uri to store image
 	private Uri fileUri;
 	
+	private TopCommentsActivity topActivity;
+	
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
@@ -70,7 +73,7 @@ public class TopCommentsActivity extends Activity{
 	ImageButton addPicImageButton;
 	ImageView picImagePreview;
 
-<<<<<<< HEAD
+
 	PictureModelList pictureModel;
 	PictureController pictureController;
 	PictureAdapter pictureAdapter;
@@ -78,14 +81,14 @@ public class TopCommentsActivity extends Activity{
 	EditText authorText;
 	EditText commentText;
 	
-=======
->>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
-
+		topActivity = this;
+		
 		aCommentList = (ListView) findViewById(R.id.aCommentList);
 
 		aCommentList.setOnItemClickListener(new OnItemClickListener(){
@@ -160,14 +163,12 @@ public class TopCommentsActivity extends Activity{
 		//lc.setLocationManager(dialog.getContext());
 	
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-<<<<<<< HEAD
-						
-=======
+
 						
 			
-	//	addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
+		//addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		//System.out.println(user.getAuthorName());
->>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
+
 		
 		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
@@ -268,6 +269,8 @@ public class TopCommentsActivity extends Activity{
 				String text1 = commentText.getText().toString();
 				String text2 = authorText.getText().toString();
 				user.getProfile().setAuthorName(text2);
+				FileSaving.saveUserFile(user, topActivity);
+				
 				comment = CreateComment.newComment(lc, text2, text1, true);
 				
 				CommentThread newThread = new CommentThread();
@@ -428,12 +431,11 @@ public class TopCommentsActivity extends Activity{
 
 	// Sends comment object to new activity
 	public void commentThread(Comment comment){
-<<<<<<< HEAD
-=======
+
 		Intent intent = new Intent(this, CommentListActivity.class);
 		startActivity(intent);
 
->>>>>>> 8804c123775607e67c4ab8095eafc3aba34df3b7
+
 	}
 
 }

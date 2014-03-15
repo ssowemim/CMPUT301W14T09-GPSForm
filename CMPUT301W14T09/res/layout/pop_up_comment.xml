@@ -38,7 +38,7 @@
             android:id="@+id/takePicture"
             android:layout_width="wrap_content"
             android:layout_height="48dp"
-            android:contentDescription="@string/camera_button_description"
+            android:contentDescription="Camera Button"
             android:src="@drawable/camera" />
 
         <Button
@@ -55,8 +55,8 @@
         android:layout_width="78dp"
         android:layout_height="0dip"
         android:layout_weight="0.88"
-        android:src="@drawable/ic_launcher_imageview" 
-        android:contentDescription="@string/image_view_description"/>
+         
+        android:contentDescription="NewString2"/>
 
     <TextView
         android:id="@+id/TextView01"

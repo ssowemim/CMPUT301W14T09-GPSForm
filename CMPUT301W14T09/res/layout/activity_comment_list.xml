@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/favButton" 
+        android:text="NewString" 
         android:onClick = "saveFavorites" />
 
     <ListView

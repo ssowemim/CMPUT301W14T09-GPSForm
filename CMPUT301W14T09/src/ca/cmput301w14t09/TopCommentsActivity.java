@@ -2,15 +2,25 @@ package ca.cmput301w14t09;
 
 
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
@@ -33,19 +44,34 @@ import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
 
-public class TopCommentsActivity extends Activity implements OnClickListener{
+public class TopCommentsActivity extends Activity{
 	
 	
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
+	public static final int MEDIA_TYPE_IMAGE = 1;
+	
+	//Directory name to store captured images
+	private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
+	
+	//file uri to store image
+	private Uri fileUri;
 	
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
 	protected ListView aCommentList;
 	Comment comment;
+	
+	ImageButton addPicImageButton;
+	ImageView picImagePreview;
 
-
-
+	PictureModelList pictureModel;
+	PictureController pictureController;
+	PictureAdapter pictureAdapter;
+	
+	EditText authorText;
+	EditText commentText;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +111,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		intent = getIntent();
 		user = (User) intent.getSerializableExtra("CURRENT_USER");	
 		
-		
 		return true;
 
 
@@ -107,7 +132,8 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		}
 
 	}
-
+	
+ 
 	public void popUp(View v){
 
 		dialog = new Dialog(this);
@@ -115,8 +141,8 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		dialog.setContentView(R.layout.pop_up_comment);
 		dialog.setTitle("New Top Comment");
 
-		final EditText authorText=(EditText)dialog.findViewById(R.id.authorText);
-		final EditText commentText=(EditText)dialog.findViewById(R.id.commentText);
+		authorText=(EditText)dialog.findViewById(R.id.authorText);
+		commentText=(EditText)dialog.findViewById(R.id.commentText);
 		final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
 		final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
 		
@@ -129,8 +155,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		//lc.setLocationManager(dialog.getContext());
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 						
-			
-	//	addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
 		
 		authorText.setText(user.getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
@@ -138,26 +162,24 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		//update location button
 		Button btnSimple2 = (Button)dialog.findViewById(R.id.changebutton);
 		
-		// ImageView img = (ImageView) findViewById(R.id.add_pic_image_view);
-		ImageButton img = (ImageButton) dialog.findViewById(R.id.imageButton1);
-		img.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-		//		Intent intent = new Intent(TopCommentsActivity.this, PictureActivity.class);
-			//	startActivity(intent);
-				
-				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
-				
-				Toast.makeText(TopCommentsActivity.this, "Image has been changed", Toast.LENGTH_LONG).show();
-			}
-			
-			
-		});  
+		picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
+		addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
 		
 		dialog.show();
+		
+		this.addPicImageButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				captureImage();
+			}
+		
+			
+		});
+		
+		if (!isDeviceSupportCamera()){
+			Toast.makeText(getApplicationContext(),
+								"No Camera Detected.", Toast.LENGTH_LONG).show();
+		}
 		
 		// Retrieve location updates through LocationListener interface
 		LocationListener locationListener = new LocationListener(){				
@@ -188,7 +210,7 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 				//set up location update request.
 				//lc.requestLocationUpdates(locationListener);
 		
-		// Retrieve location updates through LocationListener interface
+				// Retrieve location updates through LocationListener interface
 				
 						
 						//set up location update request.
@@ -241,6 +263,124 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 		});
 
 	}
+	
+	private boolean isDeviceSupportCamera() {
+		if(getApplicationContext().getPackageManager().hasSystemFeature(
+								PackageManager.FEATURE_CAMERA)){
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void captureImage(){
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+		
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+		
+		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+		
+	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState){
+		super.onSaveInstanceState(outState);
+		
+		outState.putParcelable("file_uri",fileUri);
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState){
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		fileUri = savedInstanceState.getParcelable("file_uri");
+	}
+	
+	@Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            // if the result is capturing Image
+            if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+                    if (resultCode == RESULT_OK) {
+                            // successfully captured the image
+                            // display it in image view
+                            previewCapturedImage();
+                    } else if (resultCode == RESULT_CANCELED) {
+                            // user cancelled Image capture
+                            Toast.makeText(getApplicationContext(),
+                                            "User cancelled image capture", Toast.LENGTH_SHORT)
+                                            .show();
+                    } else {
+                            // failed to capture image
+                            Toast.makeText(getApplicationContext(),
+                                            "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                                            .show();
+                    }
+            }
+    }
+	
+	
+	private void previewCapturedImage(){
+		try{
+			picImagePreview.setVisibility(View.VISIBLE);
+			BitmapFactory.Options options = new BitmapFactory.Options();
+			
+			options.inSampleSize = 8;
+			
+			final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+			
+			picImagePreview.setImageBitmap(bitmap);
+			
+		}catch(NullPointerException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * Creating file uri to store image
+	 * @param type
+	 * @return
+	 */
+    public Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+}
+	
+	/**
+	 * returning Image
+	 * @param v
+	 */
+	private static File getOutputMediaFile(int type){
+
+		File mediaStorageDir = new File(
+				Environment
+				.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+				IMAGE_DIRECTORY_NAME);
+
+		// Create the storage directory if it does not exist
+		if (!mediaStorageDir.exists()) {
+			if (!mediaStorageDir.mkdirs()) {
+				Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
+						+ IMAGE_DIRECTORY_NAME + " directory");
+				return null;
+			}
+		}
+
+		// Create a media file name
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+				Locale.getDefault()).format(new Date());
+		File mediaFile;
+		if (type == MEDIA_TYPE_IMAGE) {
+			mediaFile = new File(mediaStorageDir.getPath() + File.separator
+					+ "IMG_" + timeStamp + ".jpg");
+		} else {
+			return null;
+		}
+
+		return mediaFile;
+
+	}
+
 
 	public void viewFavorites(View v){
 		if(user.getUserName().equals("Guest")){
@@ -268,19 +408,6 @@ public class TopCommentsActivity extends Activity implements OnClickListener{
 	}
 
 	public void commentThread(Comment comment){
-
-
 	}
 
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	
-	
-
-	
 }

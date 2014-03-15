@@ -3,91 +3,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
- <EditText
-            android:id="@+id/authorText"
-            android:hint="Author"
+
+    <EditText
+        android:id="@+id/authorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Author" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/commentText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="comment" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:text="SAVE" />
+
+        <ImageButton
+            android:id="@+id/takePicture"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="48dp"
+            android:contentDescription="@string/camera_button_description"
+            android:src="@drawable/camera" />
 
-            <requestFocus />
-        </EditText>
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            android:text="Cancel" />
+    </LinearLayout>
 
- <EditText
-     android:id="@+id/commentText"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:ems="10"
-     android:hint="comment" />
-  
- <LinearLayout
+    <ImageView
+        android:id="@+id/picImagePreview"
+        android:layout_width="78dp"
+        android:layout_height="0dip"
+        android:layout_weight="0.88"
+        android:src="@drawable/ic_launcher_imageview" 
+        android:contentDescription="@string/image_view_description"/>
 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lat" />
 
-                android:layout_marginTop="10dp">
+    <EditText
+        android:id="@+id/lattext3"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="35dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
 
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long" />
 
-         <Button
-             android:id="@+id/save"
-             android:layout_marginTop="15dp"
-             android:layout_weight="1"
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:text="SAVE" 
-             />
+    <EditText
+        android:id="@+id/longtext3"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:inputType="numberDecimal" />
 
-         <ImageButton
-             android:id="@+id/imageButton1"
-             android:layout_width="match_parent"
-             android:layout_height="48dp"
-             android:layout_weight="1"
-             android:src="@drawable/camera" />
+    <Button
+        android:id="@+id/changebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="81dp"
+        android:text="Update Location" />
 
-         <Button
-             android:id="@+id/cancel"
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="15dp"
-             android:layout_weight="1"
-             android:text="Cancel" />
-
-         </LinearLayout>
-
- <TextView
-     android:id="@+id/TextView01"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="Lat" />
-
- <EditText
-     android:id="@+id/lattext3"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginTop="35dp"
-     android:ems="10"
-     android:inputType="numberDecimal" />
-
- <TextView
-     android:id="@+id/TextView02"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:text="Long" />
-
- <EditText
-     android:id="@+id/longtext3"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginTop="32dp"
-     android:ems="10"
-     android:inputType="numberDecimal" />
-
- <Button
-     android:id="@+id/changebutton"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginBottom="81dp"
-     android:text="Update Location" />
-         
 </LinearLayout>

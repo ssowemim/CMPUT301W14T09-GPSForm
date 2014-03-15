@@ -4,7 +4,7 @@ import java.util.Date;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import ca.cmput301w14t09.PictureActivity;
+import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.model.PictureModelList;
 
 
@@ -13,14 +13,14 @@ public class PictureController{
 	public static final int MAX_TEXT_LENGTH = 100;
 	
 	private PictureModelList model;
-	private PictureActivity activity;
+	private TopCommentsActivity activity;
 	
-	public PictureController(PictureModelList model, PictureActivity activity) {
+	public PictureController(PictureModelList model, TopCommentsActivity activity) {
 		this.model = model;
 		this.activity = activity;
 	}
 
-	public void addPicPost(Bitmap pic) {
+	public void addPicPost(Bitmap pic, String author, String Comment) {
 		
 		if (pic.getWidth() > MAX_BITMAP_DIMENSIONS || pic.getHeight() > MAX_BITMAP_DIMENSIONS) {
 			double scalingFactor = pic.getWidth() * 1.0 / MAX_BITMAP_DIMENSIONS;

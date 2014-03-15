@@ -30,7 +30,7 @@ public final class R {
         public static final int TextView02=0x7f080008;
         public static final int UserList=0x7f08000c;
         public static final int aCommentList=0x7f08000e;
-        public static final int action_settings=0x7f080019;
+        public static final int action_settings=0x7f08001a;
         public static final int authorText=0x7f080014;
         public static final int button2=0x7f08000b;
         public static final int cancel=0x7f080018;
@@ -39,6 +39,7 @@ public final class R {
         public static final int commentText=0x7f080015;
         public static final int commentView=0x7f080001;
         public static final int editUsername=0x7f08000a;
+        public static final int favButton=0x7f080019;
         public static final int favorite=0x7f08000f;
         public static final int favorite1=0x7f080002;
         public static final int favorite2=0x7f080000;
@@ -62,6 +63,7 @@ public final class R {
         public static final int list_view=0x7f030006;
         public static final int pic_post=0x7f030007;
         public static final int pop_up_comment=0x7f030008;
+        public static final int pop_up_favorite=0x7f030009;
     }
     public static final class menu {
         public static final int comment_list=0x7f070000;

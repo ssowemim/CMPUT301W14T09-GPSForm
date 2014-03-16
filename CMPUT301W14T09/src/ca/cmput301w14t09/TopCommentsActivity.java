@@ -48,16 +48,26 @@ import ca.cmput301w14t09.model.PictureModelList;
 import ca.cmput301w14t09.model.User;
 import ca.cmput301w14t09.view.PictureAdapter;
 
-
+/**
+ * This class handles all the functions that the pop_up_comment.xml has to offer.
+ * ~ Controlling the longitude & latitude 
+ * ~ Attaching a picture to a comment
+ * 	 Most of the code referring to handling the picture is taken from
+ * 	 http://www.androidhive.info/2013/09/android-working-with-camera-api/
+ * ~ Making a comment with an author
+ * @author ssowemim
+ *
+ */
 public class TopCommentsActivity extends ListActivity {
 	
+	//Activity request codes to take pictures
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	
 	//Directory name to store captured images
 	private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
 	
-	//file uri to store image
+	//File uri to store Images
 	private Uri fileUri;
 	
 	private TopCommentsActivity topActivity;
@@ -170,15 +180,19 @@ public class TopCommentsActivity extends ListActivity {
 		
 		dialog.show();
 		
+		/**
+		 * Capture image button click event
+		 */
 		this.addPicImageButton.setOnClickListener(new OnClickListener() {
+			
 			@Override
 			public void onClick(View v) {
+				// capture picture
 				captureImage();
 			}
-		
-			
 		});
 		
+		// Checks camera availability
 		if (!isDeviceSupportCamera()){
 			Toast.makeText(getApplicationContext(),
 								"No Camera Detected.", Toast.LENGTH_LONG).show();
@@ -272,30 +286,45 @@ public class TopCommentsActivity extends ListActivity {
 		});
 
 	}
-	
+
+	/**
+	 * Checking device hardware if camera is present or not
+	 * @return
+	 */
 	private boolean isDeviceSupportCamera() {
 		if(getApplicationContext().getPackageManager().hasSystemFeature(
 								PackageManager.FEATURE_CAMERA)){
+			//returns true if device has a camera
 			return true;
 		}else {
+			//returns false if device doesn't have a camera
 			return false;
 		}
 	}
 	
+	/**
+	 * Capturing camera image will launch camera app request image capture
+	 * Creates the intent to take a picture, and then starts it
+	 */
 	public void captureImage(){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 		
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 		
+		// starts the image capture intent
 		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
 		
 	}
 	
+	/**
+	 * Storing the file url as it will be null after returning from camera app
+	 */
 	@Override
 	protected void onSaveInstanceState(Bundle outState){
 		super.onSaveInstanceState(outState);
 		
+		// save file url in bundle as it will be null on screen orientation changes
 		outState.putParcelable("file_uri",fileUri);
 	}
 	
@@ -306,6 +335,10 @@ public class TopCommentsActivity extends ListActivity {
 		fileUri = savedInstanceState.getParcelable("file_uri");
 	}
 	
+	
+	/**
+	 * Receiving activity result method will be called after closing the camera
+	 */
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             // if the result is capturing Image
@@ -327,13 +360,18 @@ public class TopCommentsActivity extends ListActivity {
                     }
             }
     }
-	
-	
+
+	/**
+	 * Display the image taken into an ImageView for preview
+	 */
 	private void previewCapturedImage(){
 		try{
 			picImagePreview.setVisibility(View.VISIBLE);
+			
+			//bitmap factory
 			BitmapFactory.Options options = new BitmapFactory.Options();
 			
+			//downsizing image into a smaller size and will throw exception for larger images
 			options.inSampleSize = 8;
 			
 			final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
@@ -345,9 +383,8 @@ public class TopCommentsActivity extends ListActivity {
 		}
 	}
 	
-	
 	/**
-	 * Creating file uri to store image
+	 * Creating the File Uri that will be used to store images
 	 * @param type
 	 * @return
 	 */
@@ -356,11 +393,13 @@ public class TopCommentsActivity extends ListActivity {
 }
 	
 	/**
+	 * Returning Images
 	 * returning Image
 	 * @param v
 	 */
 	private static File getOutputMediaFile(int type){
 
+		//External Sdcard Location
 		File mediaStorageDir = new File(
 				Environment
 				.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
@@ -387,9 +426,7 @@ public class TopCommentsActivity extends ListActivity {
 		}
 
 		return mediaFile;
-
 	}
-
 
 	public void viewFavorites(View v){
 		if(user.getUserName().equals("Guest")){

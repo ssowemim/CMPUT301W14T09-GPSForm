@@ -291,7 +291,7 @@ public class TopCommentsActivity extends ListActivity {
 	 * Checking device hardware if camera is present or not
 	 * @return
 	 */
-	private boolean isDeviceSupportCamera() {
+	public boolean isDeviceSupportCamera() {
 		if(getApplicationContext().getPackageManager().hasSystemFeature(
 								PackageManager.FEATURE_CAMERA)){
 			//returns true if device has a camera

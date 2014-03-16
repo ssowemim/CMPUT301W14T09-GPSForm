@@ -3,6 +3,7 @@ package ca.cmput301w14t09.Controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -33,7 +34,14 @@ public class LocationController {
     public ArrayList<String> getLocationNames(){
         return null;
     }
+    
+    public void setlat(double lat){
+    	this.lat = lat;
+    }
 
+    public void setlng(double lng){
+    	this.lng = lng;
+    }
 
     public void setLocationManager(Context context) {
 
@@ -81,7 +89,8 @@ public class LocationController {
     }
 
 
-    public void updatelocation(Context context, String longitude, String latitude) {      
+    @SuppressLint("NewApi")
+	public void updatelocation(Context context, String longitude, String latitude) {      
         // Fix for passing in blank parameters.
         if(latitude.isEmpty() == true) { 
             lat = 1;

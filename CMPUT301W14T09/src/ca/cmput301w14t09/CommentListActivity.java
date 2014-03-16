@@ -23,7 +23,7 @@ import ca.cmput301w14t09.model.User;
  *This activity shows the top comment that was selected in a 
  *previous activity and displays all the replies to that comment
  */
-public class CommentListActivity extends ListActivity implements OnClickListener{
+public class CommentListActivity extends ListActivity {
 
 	protected ListView favList;
 	protected Dialog dialog;
@@ -78,11 +78,5 @@ public class CommentListActivity extends ListActivity implements OnClickListener
 		onStart();
 	}
 
-	// Needs to be present for clicking 
-	@Override
-	public void onClick(View arg0) {
-
-	}
-
-
+	
 }

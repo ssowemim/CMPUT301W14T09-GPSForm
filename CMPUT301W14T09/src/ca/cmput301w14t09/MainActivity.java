@@ -17,7 +17,7 @@ import ca.cmput301w14t09.model.User;
 /**
  * 
  * @author Conner
- * Main activity of the app.
+ * MainActivity of the app.
  * displays a list of current users on the device
  * and allows you to create a new user or sign
  * in as a guest
@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 		UserList = (ListView) findViewById(R.id.UserList);
 
 		//listener that loads the selected user from the list
-		UserList.setOnItemClickListener(new OnItemClickListener(){
+		UserList.setOnItemClickListener(new OnItemClickListener() {
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 	 * onStart populates the listview with clickable usernames
 	 * that have already been created on the device
 	 */
-	public void onStart(){
+	public void onStart() {
 		super.onStart();
 		String[] listName = FileLoading.loadFromFile(this);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -72,13 +72,14 @@ public class MainActivity extends Activity {
 	}
 
 	/**
-	 * When continue button is pressed this method is run.
+	 * newUser is called when continue button is pressed
+	 * this method is run.
 	 * It grabs the username entered in the text field and
 	 * creates a new user with it. Then starts the next 
 	 * activity with the newly created user
 	 * @param v
 	 */
-	public void newUser(View v){
+	public void newUser(View v) {
 		user = new User(editText.getText().toString());
 		FileSaving.appendUserNameToList(user.getUserName(), this);
 		FileSaving.saveUserFile(user, this);
@@ -97,11 +98,12 @@ public class MainActivity extends Activity {
 	}
 
 	/**
+	 * guestUser is called when the guest button is pressed
 	 * Sets user to guest user and then calls
-	 *  topComments with the guest user
+	 * topComments with the guest user
 	 * @param v
 	 */
-	public void guestUser(View v){
+	public void guestUser(View v) {
 		user = new User("Guest");
 		topComments(user);
 	}
@@ -113,7 +115,7 @@ public class MainActivity extends Activity {
 	 * @param text
 	 * @return
 	 */
-	public User loadUser(String text){
+	public User loadUser(String text) {
 		user = FileLoading.returnUser(text, this);
 		return user;
 	}

@@ -72,7 +72,6 @@
        android:layout_alignRight="@+id/middletextdata"
        android:layout_alignTop="@+id/middletextdata"
        android:layout_marginRight="44dp"
-       
        android:contentDescription="@string/attachment_description"/>
 
 </RelativeLayout>

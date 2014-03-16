@@ -267,11 +267,7 @@ public class TopCommentsActivity extends ListActivity {
 				
 				ElasticSearchOperations.postThread(comment);
 				dialog.dismiss();
-				//finish();
-				//Intent intent = new Intent(getApplicationContext(), TopCommentsActivity.class);
-				//intent.putExtra("CURRENT_USER", user);
-				//startActivity(intent);
-				updateList();
+				
 			}
 		});
 
@@ -455,19 +451,5 @@ public class TopCommentsActivity extends ListActivity {
 
 	}
 	
-	public void updateList(){
-		
-		ArrayList<Comment> topComments;
-		try {
-			topComments = ElasticSearchOperations.pullThreads();
-			ThreadAdapter adapter = new ThreadAdapter(this,
-					R.layout.thread_view, topComments);
-			aCommentList.setAdapter(adapter);
-			adapter.notifyDataSetChanged();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-	}
 	
 }

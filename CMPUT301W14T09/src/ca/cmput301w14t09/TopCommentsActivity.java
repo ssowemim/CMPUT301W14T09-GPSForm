@@ -157,21 +157,16 @@ public class TopCommentsActivity extends ListActivity {
 		//new Location Controller 
 		final LocationController lc = new LocationController();
 		
-		//get Location Manager setup
-
-		//lc.setLocationManager(dialog.getContext());
-	
+		//setup location manager
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-						
-			
-		//addPicImageView = (ImageView)this.findViewById(R.id.add_pic_image_view);
-		//System.out.println(user.getAuthorName());
 
 		
 		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
+		
+		
 		//update location button
 		Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
 		
@@ -223,21 +218,12 @@ public class TopCommentsActivity extends ListActivity {
 									
 					}
 				};
-				
-				//set up location update request.
-				//lc.requestLocationUpdates(locationListener);
-		
-				// Retrieve location updates through LocationListener interface
-				
-						
-						//set up location update request.
-						
-		
-						dialog.show();
 		
 		
-					//lc.requestLocationUpdates(locationListener);
-					lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+				dialog.show();
+	
+				//request location update
+				lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 			
 				
 				//update location button
@@ -249,7 +235,7 @@ public class TopCommentsActivity extends ListActivity {
 					    String lngString;
 					    
 					    lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
-					   // tv2.setText(lc.getGeoLocation().getLatitude()));
+					  
 					    
 					}
 			 });
@@ -281,7 +267,11 @@ public class TopCommentsActivity extends ListActivity {
 				
 				ElasticSearchOperations.postThread(comment);
 				dialog.dismiss();
-
+				//finish();
+				//Intent intent = new Intent(getApplicationContext(), TopCommentsActivity.class);
+				//intent.putExtra("CURRENT_USER", user);
+				//startActivity(intent);
+				updateList();
 			}
 		});
 
@@ -464,4 +454,20 @@ public class TopCommentsActivity extends ListActivity {
 		startActivity(intent);
 
 	}
+	
+	public void updateList(){
+		
+		ArrayList<Comment> topComments;
+		try {
+			topComments = ElasticSearchOperations.pullThreads();
+			ThreadAdapter adapter = new ThreadAdapter(this,
+					R.layout.thread_view, topComments);
+			aCommentList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 }

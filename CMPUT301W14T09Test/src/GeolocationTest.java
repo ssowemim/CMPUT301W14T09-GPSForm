@@ -2,6 +2,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import android.content.Context;
+
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.model.Comment;
@@ -71,6 +73,8 @@ public class GeolocationTest {
 			assertTrue(lat1 == lat21 && lng1 == lng21);
 			
 		}
+		
+		
 		
 		
 		

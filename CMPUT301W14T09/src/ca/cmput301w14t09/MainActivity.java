@@ -14,7 +14,14 @@ import ca.cmput301w14t09.FileManaging.FileLoading;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.model.User;
 
-
+/**
+ * 
+ * @author Conner
+ * Main activity of the app.
+ * displays a list of current users on the device
+ * and allows you to create a new user or sign
+ * in as a guest
+ */
 public class MainActivity extends Activity {
 
 	protected ListView UserList;
@@ -29,6 +36,7 @@ public class MainActivity extends Activity {
 		editText = (EditText) findViewById(R.id.editUsername);
 		UserList = (ListView) findViewById(R.id.UserList);
 
+		//listener that loads the selected user from the list
 		UserList.setOnItemClickListener(new OnItemClickListener(){
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
@@ -50,6 +58,10 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	/**
+	 * onStart populates the listview with clickable usernames
+	 * that have already been created on the device
+	 */
 	public void onStart(){
 		super.onStart();
 		String[] listName = FileLoading.loadFromFile(this);
@@ -59,6 +71,13 @@ public class MainActivity extends Activity {
 
 	}
 
+	/**
+	 * When continue button is pressed this method is run.
+	 * It grabs the username entered in the text field and
+	 * creates a new user with it. Then starts the next 
+	 * activity with the newly created user
+	 * @param v
+	 */
 	public void newUser(View v){
 		user = new User(editText.getText().toString());
 		FileSaving.appendUserNameToList(user.getUserName(), this);
@@ -66,17 +85,34 @@ public class MainActivity extends Activity {
 		topComments(user);
 	}
 
+	/**
+	 * topComments takes in a username selected in the listview
+	 * and starts the next activity with that user
+	 * @param user
+	 */
 	public void topComments(User user) {
 		Intent intent = new Intent(this, TopCommentsActivity.class);
 		intent.putExtra("CURRENT_USER", user);
 		startActivity(intent);
 	}
 
+	/**
+	 * Sets user to guest user and then calls
+	 *  topComments with the guest user
+	 * @param v
+	 */
 	public void guestUser(View v){
 		user = new User("Guest");
 		topComments(user);
 	}
 
+	/**
+	 * loadUser calls FileLoading.returnUser(text, this)
+	 * which gets a user and then returns the user that
+	 * FileLoading.returnUser(text, this) gets
+	 * @param text
+	 * @return
+	 */
 	public User loadUser(String text){
 		user = FileLoading.returnUser(text, this);
 		return user;

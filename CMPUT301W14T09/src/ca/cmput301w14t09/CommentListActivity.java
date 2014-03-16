@@ -20,99 +20,69 @@ import ca.cmput301w14t09.model.User;
  * 
  * @author Conner
  * @editor Chun-Han Lee
- *This activity will need to be implemented when we can generate comments 
- *and add them to the list view on the TopComments Activity
- *
+ *This activity shows the top comment that was selected in a 
+ *previous activity and displays all the replies to that comment
  */
 public class CommentListActivity extends ListActivity implements OnClickListener{
 
-    //final CountDownLatch latch = new CountDownLatch(1);
-    
-    protected ListView favList;
-    protected Dialog dialog;
-    protected User user;
-    protected Intent intent;
-    protected String firstComment;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comment_list);
-        favList = (ListView) findViewById(android.R.id.list);
-/*
-        favList.setOnItemClickListener(new OnItemClickListener(){
+	protected ListView favList;
+	protected Dialog dialog;
+	protected User user;
+	protected Intent intent;
+	protected String firstComment;
 
-           public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_comment_list);
+		favList = (ListView) findViewById(android.R.id.list);
 
-                String getCommentText = (String) (favList.getItemAtPosition(arg2)); 
-                dialog = new Dialog(CommentListActivity.this);
+	}
 
-                dialog.setContentView(R.layout.pop_up_favorite);
-                dialog.setTitle("Favorite Dialog");
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.comment_list, menu);
 
-
-                Button favorites=(Button)dialog.findViewById(R.id.favButton);
+		firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
+		System.out.println(firstComment);
 
 
+		return true;
+	}
 
-                dialog.show();
+	/**
+	 * onStart populates the listview with results from the elasticSearch
+	 *  query found in ElasticSearchOperations.pullOneThread(firstComment)
+	 */
+	@Override
+	protected void onStart() {
+		super.onStart();
 
-                //cancel button
-                favorites.setOnClickListener(new View.OnClickListener() {
+		try {
+			ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
 
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
+			CommentAdapter adapter = new CommentAdapter(this,
+					R.layout.comment_view, comment);
+			favList.setAdapter(adapter);
 
-                    }
-                });
-            }
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-        }); */
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.comment_list, menu);
-                
-        firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
-        System.out.println(firstComment);
-        
-        
-        return true;
-    }
-    
-    // From TopCommentsActivity code 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        
-        try {
-            ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
-                       
-            CommentAdapter adapter = new CommentAdapter(this,
-                    R.layout.comment_view, comment);
-            favList.setAdapter(adapter);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
+	}
 
 
 
-    public void saveFavorites(View v){
-        onStart();
-    }
+	public void saveFavorites(View v) {
+		onStart();
+	}
 
-    // Needs to be present for clicking 
-    @Override
-    public void onClick(View arg0) {
+	// Needs to be present for clicking 
+	@Override
+	public void onClick(View arg0) {
 
-    }
+	}
 
 
 }

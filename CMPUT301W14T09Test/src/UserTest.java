@@ -28,18 +28,5 @@ public class UserTest extends TestCase {
 		
 	}
 	
-	@Test
-	public void testCreateUserWithProfile () {
-		User newUser = new User();
-		newUser.setUserName("Tester");
-		Profile newProfile = new Profile(newUser.getUserName());
-		newUser.setDeviceId("dev1");
-		Profile profile2 = newUser.getProfile();
-		
-		assertTrue(profile2 == newProfile);
-		assertTrue(newUser.getDeviceId() == "dev1");
-		assertTrue(newUser.getUserName() == "Tester");
-		
-	}
 
 }

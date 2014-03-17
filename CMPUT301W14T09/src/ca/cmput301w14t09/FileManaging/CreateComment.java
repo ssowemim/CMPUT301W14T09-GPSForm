@@ -42,6 +42,7 @@ public class CreateComment {
 	 * @param authorname
 	 * @param commentText
 	 * @param topComment
+	 * @param attachment
 	 * @return
 	 */
 	

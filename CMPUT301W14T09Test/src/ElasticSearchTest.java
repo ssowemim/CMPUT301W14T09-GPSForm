@@ -2,6 +2,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import ca.cmput301w14t09.Controller.LocationController;
@@ -10,13 +12,11 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.Model.Comment;
 
 
-public class ElasticSearchTest {
+public class ElasticSearchTest extends TestCase{
 
-	public ElasticSearchTest() {
-	}
 
 	@Test
-	public void Posttest() {
+	public void testPost() {
 
 		ElasticSearchOperations test = new ElasticSearchOperations();
 		ArrayList<Comment> comment2;

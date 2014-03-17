@@ -20,6 +20,7 @@ package ca.cmput301w14t09;
 
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -148,7 +149,7 @@ public class TopCommentsActivity extends ListActivity {
                     R.layout.thread_view, topComments);
             aCommentList.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
+            
 
 
 
@@ -166,7 +167,8 @@ public class TopCommentsActivity extends ListActivity {
      * modified and then pushed to elasticSearch
      * @param v
      */
-    public void popUp(View v) {
+    @SuppressLint("NewApi")
+	public void popUp(View v) {
 
         dialog = new Dialog(this);
 
@@ -290,7 +292,7 @@ public class TopCommentsActivity extends ListActivity {
                     ElasticSearchOperations.postThread(comment);
                     Thread.sleep(1000);
                     adapter.notifyDataSetChanged();
-                    onResume();
+                    recreate();
 
                 } catch (InterruptedException e)
                 {

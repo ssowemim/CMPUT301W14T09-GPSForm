@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertTrue;
+import junit.framework.TestCase;
 
 import org.junit.Test;
 
@@ -8,7 +9,7 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 
-public class GeolocationTest {
+public class GeolocationTest extends TestCase {
 
 	@Test
 	public void GeolocationupdateTest() {
@@ -38,7 +39,7 @@ public class GeolocationTest {
 	}
 
 	@Test
-	public void Geolocationupdatelargeinputtest() {
+	public void testGeolocationupdatelargeinput() {
 
 
 		LocationController lc = new LocationController();
@@ -67,7 +68,7 @@ public class GeolocationTest {
 
 
 	@Test
-	public void Geolocationzeroupdatetest() {
+	public void testGeolocationzeroupdate() {
 
 
 		LocationController lc = new LocationController();
@@ -98,7 +99,7 @@ public class GeolocationTest {
 	}
 
 	@Test
-	public void Geolocationnametest() {
+	public void testGeolocationname() {
 
 		GeoLocation geo213 = new GeoLocation();
 

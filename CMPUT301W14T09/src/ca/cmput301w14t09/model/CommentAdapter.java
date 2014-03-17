@@ -32,7 +32,12 @@ import android.widget.TextView;
 
 // http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
 
-public class CommentAdapter extends ArrayAdapter<Comment>{
+/**
+ * 
+ * @author Conner
+ * CommentAdapter sets up a listview of the object comment
+ */
+public class CommentAdapter extends ArrayAdapter<Comment> {
 
     private ArrayList<Comment> objects;
 
@@ -41,7 +46,10 @@ public class CommentAdapter extends ArrayAdapter<Comment>{
         this.objects = objects;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    /**
+     * getView formats the listview to show the fields of comment
+     */
+    public View getView(int position, View convertView, ViewGroup parent) {
 
         // assign the view we are converting to a local variable
         View v = convertView;

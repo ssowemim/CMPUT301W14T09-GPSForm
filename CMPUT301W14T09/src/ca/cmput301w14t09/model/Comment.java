@@ -63,7 +63,7 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
     }
 
     /**
-     * Write this object to cache using GSon.
+     * serialize writes this object to cache using GSon.
      * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/saveBranch/CMPUT301W14T09/src/ca/cmput301w14t09/FileManaging/FileSaving.java
      * @param userName - name of current user (cache is user-based)
      * @param main - activity calling this function.
@@ -87,7 +87,7 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
     }
 
     /**
-     * Loads this object, specified by name, from cache with userName.sav
+     * load loads this object, specified by name, from cache with userName.sav
      * @param userName - name of current user (cache is user-based)
      * @param name - name of the file object itself?
      * @param main - activity calling this function.
@@ -115,7 +115,7 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
     }
 
     /**
-     * Compares this Comment to another Comment.
+     * compareTo compares this Comment to another Comment.
      * @param otherComment - other comment object to compare to.
      * @return - this or otherComment, whichever has earlier date.
      */

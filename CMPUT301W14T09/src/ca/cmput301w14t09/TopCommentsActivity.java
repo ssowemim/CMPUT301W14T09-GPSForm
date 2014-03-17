@@ -56,13 +56,9 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.CommentAdapter;
-import ca.cmput301w14t09.model.ThreadAdapter;
-
 import ca.cmput301w14t09.model.PictureModelList;
-
+import ca.cmput301w14t09.model.ThreadAdapter;
 import ca.cmput301w14t09.model.User;
-import ca.cmput301w14t09.view.PictureAdapter;
 
 /**
  * TopCommentsActivity handles all the functions that the pop_up_comment.xml has to offer.
@@ -101,7 +97,7 @@ public class TopCommentsActivity extends ListActivity {
 
 	PictureModelList pictureModel;
 	PictureController pictureController;
-	PictureAdapter pictureAdapter;
+	
 
 	EditText authorText;
 	EditText commentText;

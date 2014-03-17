@@ -24,9 +24,25 @@ import ca.cmput301w14t09.model.GeoLocation;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author Conner
+ * CreateComment creates top comments and reply comments
+ * when requested by methods. reply comments has not
+ * been completed yet
+ */
 public class CreateComment {
 	
-	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment){
+	/**
+	 * newComment creates a new top comment and fills out
+	 * the required parameters for a top comments
+	 * @param lc
+	 * @param authorname
+	 * @param commentText
+	 * @param topComment
+	 * @return
+	 */
+	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment) {
 		Comment comment = new Comment();
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);

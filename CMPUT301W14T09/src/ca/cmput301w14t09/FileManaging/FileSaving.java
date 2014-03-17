@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -28,10 +28,22 @@ import ca.cmput301w14t09.model.User;
 
 import com.google.gson.Gson;
 
+/**
+ * 
+ * @author Conner
+ * FileSaving has all saving functions for storing data on the 
+ * current device
+ */
 public class FileSaving {
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
 
+	/**
+	 * appendUserNameToList saves a new username to a list
+	 * of usernames
+	 * @param text
+	 * @param main
+	 */
 	public static void appendUserNameToList(String text, Activity main) {
 		try {
 			FileOutputStream fos = main.openFileOutput(FILENAME,
@@ -48,6 +60,12 @@ public class FileSaving {
 		}
 	}
 
+	/**
+	 * saveUserFile saves all user critical data on
+	 * the current device
+	 * @param user
+	 * @param main
+	 */
 	public static void saveUserFile(User user, Activity main) {
 		Gson gson = new Gson();
 

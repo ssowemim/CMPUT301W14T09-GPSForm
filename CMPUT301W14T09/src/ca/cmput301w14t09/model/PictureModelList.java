@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -28,22 +28,25 @@ import java.util.List;
 import android.graphics.Bitmap;
 import android.widget.ArrayAdapter;
 
-
+/**
+ * PictureModelList holds an array of pictures
+ *
+ */
 public class PictureModelList {
 
 	private List<Picture> list;
 	private ArrayAdapter<Picture> adapter;
-	
+
 	public PictureModelList(){
 		this.list = new ArrayList<Picture>();
 	}
-	
+
 	public void addPicture(Bitmap pic, String text, Date timestamp) {
 		Picture picPost = new Picture(pic);
 		this.list.add(picPost);
 		this.adapter.notifyDataSetChanged();
 	}
-	
+
 	public void addPicureCollection(Collection<Picture> posts){
 		this.list.addAll(posts);
 		this.adapter.notifyDataSetChanged();
@@ -54,8 +57,8 @@ public class PictureModelList {
 		this.adapter.notifyDataSetChanged();
 
 	}
-	
-	
+
+
 	public void addPicPostCollection(Collection<Picture> posts) {
 		this.list.addAll(posts);
 		this.adapter.notifyDataSetChanged();
@@ -66,11 +69,11 @@ public class PictureModelList {
 		this.list.clear();
 		this.adapter.notifyDataSetChanged();
 	}
-	
+
 	public List<Picture> getList() {
 		return Collections.unmodifiableList(this.list);
 	}
-	
+
 	public void setAdapter(ArrayAdapter<Picture> adapter) {
 		this.adapter = adapter;
 	}

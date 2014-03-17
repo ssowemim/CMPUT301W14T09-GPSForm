@@ -67,395 +67,393 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  */
 public class TopCommentsActivity extends ListActivity {
 
-    //Activity request codes to take pictures
-    public static final int OBTAIN_PIC_REQUEST_CODE = 117;
-    public static final int MEDIA_TYPE_IMAGE = 1;
+	//Activity request codes to take pictures
+	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
+	public static final int MEDIA_TYPE_IMAGE = 1;
 
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
+	//Directory name to store captured images
+	private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
 
-    //File uri to store Images
-    private Uri fileUri;
+	//File uri to store Images
+	private Uri fileUri;
 
-    private TopCommentsActivity topActivity;
-    private PictureController pictureController;
+	private TopCommentsActivity topActivity;
+	private PictureController pictureController;
 
-    protected Intent intent;
-    protected User user;
-    protected Dialog dialog;
-    protected ListView aCommentList;
-    Comment comment;
+	protected Intent intent;
+	protected User user;
+	protected Dialog dialog;
+	protected ListView aCommentList;
+	Comment comment;
 
-    ImageButton addPicImageButton;
-    ImageView picImagePreview;
-    Boolean attachment;
+	ImageButton addPicImageButton;
+	ImageView picImagePreview;
+	Boolean attachment;
 
-    PictureModelList pictureModel;
-//    PictureController pictureController;
+	PictureModelList pictureModel;
 
-
-    EditText authorText;
-    EditText commentText;
-    ThreadAdapter adapter;
+	EditText authorText;
+	EditText commentText;
+	ThreadAdapter adapter;
 
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top_comments);
-        topActivity = this;
-        attachment = false;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_top_comments);
+		topActivity = this;
+		attachment = false;
 
-        aCommentList = (ListView) findViewById(android.R.id.list);
+		aCommentList = (ListView) findViewById(android.R.id.list);
 
-        aCommentList.setOnItemClickListener(new OnItemClickListener(){
+		aCommentList.setOnItemClickListener(new OnItemClickListener(){
 
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
 
-                // Pass in comment object
-                commentThread(thread);
-            }
+				// Pass in comment object
+				commentThread(thread);
+			}
 
-        });
-    }
+		});
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.top_comments, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.top_comments, menu);
 
-        intent = getIntent();
-        user = (User) intent.getSerializableExtra("CURRENT_USER");	
+		intent = getIntent();
+		user = (User) intent.getSerializableExtra("CURRENT_USER");	
 
-        return true;
+		return true;
 
-    }
+	}
 
-    /**
-     * onStart popluates the listview with results from
-     * elasticSearch, finding all of the top comments
-     * @param thread
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-        ArrayList<Comment> topComments;
-        try {
-            topComments = ElasticSearchOperations.pullThreads();
-            adapter = new ThreadAdapter(this,
-                    R.layout.thread_view, topComments);
-            aCommentList.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            
+	/**
+	 * onStart popluates the listview with results from
+	 * elasticSearch, finding all of the top comments
+	 * @param thread
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+		ArrayList<Comment> topComments;
+		try {
+			topComments = ElasticSearchOperations.pullThreads();
+			adapter = new ThreadAdapter(this,
+					R.layout.thread_view, topComments);
+			aCommentList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 
 
 
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-    }
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-    /**
-     * popUp is a dialog that is invoked when the new
-     * comment button is pressed.
-     * It allows for most attributes of a comment to be
-     * modified and then pushed to elasticSearch
-     * @param v
-     */
-    @SuppressLint("NewApi")
+	}
+
+	/**
+	 * popUp is a dialog that is invoked when the new
+	 * comment button is pressed.
+	 * It allows for most attributes of a comment to be
+	 * modified and then pushed to elasticSearch
+	 * @param v
+	 */
+	@SuppressLint("NewApi")
 	public void popUp(View v) {
 
-        dialog = new Dialog(this);
+		dialog = new Dialog(this);
 
-        dialog.setContentView(R.layout.pop_up_comment);
-        dialog.setTitle("New Top Comment");
+		dialog.setContentView(R.layout.pop_up_comment);
+		dialog.setTitle("New Top Comment");
 
-        authorText=(EditText)dialog.findViewById(R.id.authorText);
-        commentText=(EditText)dialog.findViewById(R.id.commentText);
-        final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
-        final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
+		authorText=(EditText)dialog.findViewById(R.id.authorText);
+		commentText=(EditText)dialog.findViewById(R.id.commentText);
+		final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
+		final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
 
-        //new Location Controller 
-        final LocationController lc = new LocationController();
-        pictureController = new PictureController();
+		//new Location Controller 
+		final LocationController lc = new LocationController();
+		pictureController = new PictureController();
 
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		//https://github.com/baoliangwang/CurrentLocation
+		//setup location manager
+		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-        authorText.setText(user.getProfile().getAuthorName());
-        Button save=(Button)dialog.findViewById(R.id.save);
-        Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
+		authorText.setText(user.getProfile().getAuthorName());
+		Button save=(Button)dialog.findViewById(R.id.save);
+		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 
-        //update location button
-        Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
+		//update location button
+		Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
 
-        picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
-        addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
+		picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
+		addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
 
-        dialog.show();
+		dialog.show();
 
-        //Capture image button click event		
-        this.addPicImageButton.setOnClickListener(new OnClickListener() {
+		//Capture image button click event		
+		this.addPicImageButton.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // capture picture
-                captureImage();
-                attachment = true;
-            }
-        });
+			@Override
+			public void onClick(View v) {
+				// capture picture
+				captureImage();
+				attachment = true;
+			}
+		});
 
-        // Checks camera availability
-        if (!isDeviceSupportCamera()) {
-            Toast.makeText(getApplicationContext(),
-                    "No Camera Detected.", Toast.LENGTH_LONG).show();
-        }
+		// Checks camera availability
+		if (!isDeviceSupportCamera()) {
+			Toast.makeText(getApplicationContext(),
+					"No Camera Detected.", Toast.LENGTH_LONG).show();
+		}
 
-        // Retrieve location updates through LocationListener interface
-        //https://github.com/baoliangwang/CurrentLocation
-        LocationListener locationListener = new LocationListener() {				
+		// Retrieve location updates through LocationListener interface
+		//https://github.com/baoliangwang/CurrentLocation
+		LocationListener locationListener = new LocationListener() {				
 
-            public void onProviderDisabled (String provider) {
+			public void onProviderDisabled (String provider) {
 
-            }
+			}
 
-            public void onProviderEnabled (String provider) {
+			public void onProviderEnabled (String provider) {
 
 
-            }
+			}
 
-            public void onStatusChanged (String provider, int status, Bundle extras) {
+			public void onStatusChanged (String provider, int status, Bundle extras) {
 
 
-            }
+			}
 
-            @Override
-            public void onLocationChanged(android.location.Location location) {
+			@Override
+			public void onLocationChanged(android.location.Location location) {
 
-                lc.locationchanged(location, tv2, tv3);
+				lc.locationchanged(location, tv2, tv3);
 
 
-            }
-        };
+			}
+		};
 
-        dialog.show();
+		dialog.show();
 
-        //request location update
-        //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+		//request location update
+		//https://github.com/baoliangwang/CurrentLocation
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
 
-        //update location button
-        btnSetLocation.setOnClickListener(new View.OnClickListener() {
+		//update location button
+		btnSetLocation.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) { 
-                String latString;
-                String lngString;
+			@Override
+			public void onClick(View v) { 
+				String latString;
+				String lngString;
 
-                lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
+				lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
 
 
-            }
-        });
+			}
+		});
 
-        //cancel button
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+		//cancel button
+		btnCancel.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-
-            }
-        });
-
-        //save button
-        save.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                String text1 = commentText.getText().toString();
-                String text2 = authorText.getText().toString();
-                user.getProfile().setAuthorName(text2);
-                FileSaving.saveUserFile(user, topActivity);
-
-                comment = CreateComment.newComment(lc, text2, text1, true, attachment);
-
-                try
-                {
-                    ElasticSearchOperations.postThread(comment);
-                    Thread.sleep(1000);
-                    adapter.notifyDataSetChanged();
-                    recreate();
-
-                } catch (InterruptedException e)
-                {
-
-                    e.printStackTrace();
-                }
-
-                dialog.dismiss();
-
-            }
-        });
-
-    }
-
-    public void previewCapturedImage() {
-        try{
-            picImagePreview.setVisibility(View.VISIBLE);
-
-            //bitmap factory
-            BitmapFactory.Options options = new BitmapFactory.Options();
-
-            //downsizing image into a smaller size and will throw exception for larger images
-            options.inSampleSize = 8;
-
-            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
-
-            picImagePreview.setImageBitmap(bitmap);
-            comment.setPicture(bitmap);
-            attachment= false;
-
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-        
-       // return false;
-    }
-    
-    
-    
-    /**
-     * isDeviceSupportCamera does a check to see
-     * if device hardware camera is present or not
-     * @return
-     */
-    public boolean isDeviceSupportCamera() {
-        if(getApplicationContext().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA)){
-            //returns true if device has a camera
-            return true;
-        }else {
-            //returns false if device doesn't have a camera
-            return false;
-        }
-    }
-
-    /**
-     * captureImage will launch camera app request image capture
-     * Creates the intent to take a picture, and then starts it
-     */
-    public void captureImage() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-        // starts the image capture intent
-        startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
-
-    }
-
-    /**
-     * onSaveInstanceState stores the file url as
-     * it will be null after returning from camera app
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // save file url in bundle as it will be null on screen orientation changes
-        outState.putParcelable("file_uri",fileUri);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        fileUri = savedInstanceState.getParcelable("file_uri");
-    }
-
-
-    /**
-     * onActivityResult will Receive the activity result
-     * method and will be called after closing the camera
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // if the result is capturing Image
-        if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                // successfully captured the image
-                // display it in image view
-              previewCapturedImage();
-            } else if (resultCode == RESULT_CANCELED) {
-                // user cancelled Image capture
-                Toast.makeText(getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
-                        .show();
-            } else {
-                // failed to capture image
-                Toast.makeText(getApplicationContext(),
-                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-    }
-
-
-    /**
-     * viewFavorites checks to see if you are guest or not
-     * since guest cannot have favorites.
-     * Then the method starts up the FavoritesListActivity.
-     * This activity has yet to be written
-     * @param v
-     */
-    public void viewFavorites(View v) {
-        if(user.getUserName().equals("Guest")) {
-
-            dialog = new Dialog(this);
-            dialog.setContentView(R.layout.guest_box);
-            dialog.setTitle("ALERT!");
-
-            Button button =(Button)dialog.findViewById(R.id.favorite1);
-            dialog.show();
-            button.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    dialog.dismiss();
-
-                }
-            });
-        }
-
-        else {
-
-        }
-    }
-
-    /**
-     * commentThread takes in thread and then starts a new
-     * activity while passing the contents of thread to the 
-     * activity
-     * @param thread
-     */
-    public void commentThread(Comment thread) {
-
-        String stringId = new String();
-        stringId = thread.getThreadId();
-
-        Intent intent = new Intent(this, CommentListActivity.class);
-        intent.putExtra("THREAD_ID", stringId);
-        startActivity(intent);
-
-    }
+			@Override
+			public void onClick(View v) {
+				dialog.dismiss();
+
+			}
+		});
+
+		//save button
+		save.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String text1 = commentText.getText().toString();
+				String text2 = authorText.getText().toString();
+				user.getProfile().setAuthorName(text2);
+				FileSaving.saveUserFile(user, topActivity);
+
+				comment = CreateComment.newComment(lc, text2, text1, true, attachment);
+
+				try
+				{
+					ElasticSearchOperations.postThread(comment);
+					Thread.sleep(1000);
+					adapter.notifyDataSetChanged();
+					recreate();
+
+				} catch (InterruptedException e)
+				{
+
+					e.printStackTrace();
+				}
+
+				dialog.dismiss();
+
+			}
+		});
+
+	}
+
+	public void previewCapturedImage() {
+		try{
+			picImagePreview.setVisibility(View.VISIBLE);
+
+			//bitmap factory
+			BitmapFactory.Options options = new BitmapFactory.Options();
+
+			//downsizing image into a smaller size and will throw exception for larger images
+			options.inSampleSize = 8;
+
+			final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+
+			picImagePreview.setImageBitmap(bitmap);
+			comment.setPicture(bitmap);
+			attachment= false;
+
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+
+		// return false;
+	}
+
+
+
+	/**
+	 * isDeviceSupportCamera does a check to see
+	 * if device hardware camera is present or not
+	 * @return
+	 */
+	public boolean isDeviceSupportCamera() {
+		if(getApplicationContext().getPackageManager().hasSystemFeature(
+				PackageManager.FEATURE_CAMERA)){
+			//returns true if device has a camera
+			return true;
+		}else {
+			//returns false if device doesn't have a camera
+			return false;
+		}
+	}
+
+	/**
+	 * captureImage will launch camera app request image capture
+	 * Creates the intent to take a picture, and then starts it
+	 */
+	public void captureImage() {
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+
+		// starts the image capture intent
+		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+
+	}
+
+	/**
+	 * onSaveInstanceState stores the file url as
+	 * it will be null after returning from camera app
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		// save file url in bundle as it will be null on screen orientation changes
+		outState.putParcelable("file_uri",fileUri);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+
+		fileUri = savedInstanceState.getParcelable("file_uri");
+	}
+
+
+	/**
+	 * onActivityResult will Receive the activity result
+	 * method and will be called after closing the camera
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// if the result is capturing Image
+		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				// successfully captured the image
+				// display it in image view
+				previewCapturedImage();
+			} else if (resultCode == RESULT_CANCELED) {
+				// user cancelled Image capture
+				Toast.makeText(getApplicationContext(),
+						"User cancelled image capture", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				// failed to capture image
+				Toast.makeText(getApplicationContext(),
+						"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+						.show();
+			}
+		}
+	}
+
+
+	/**
+	 * viewFavorites checks to see if you are guest or not
+	 * since guest cannot have favorites.
+	 * Then the method starts up the FavoritesListActivity.
+	 * This activity has yet to be written
+	 * @param v
+	 */
+	public void viewFavorites(View v) {
+		if(user.getUserName().equals("Guest")) {
+
+			dialog = new Dialog(this);
+			dialog.setContentView(R.layout.guest_box);
+			dialog.setTitle("ALERT!");
+
+			Button button =(Button)dialog.findViewById(R.id.favorite1);
+			dialog.show();
+			button.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+
+				}
+			});
+		}
+
+		else {
+
+		}
+	}
+
+	/**
+	 * commentThread takes in thread and then starts a new
+	 * activity while passing the contents of thread to the 
+	 * activity
+	 * @param thread
+	 */
+	public void commentThread(Comment thread) {
+
+		String stringId = new String();
+		stringId = thread.getThreadId();
+
+		Intent intent = new Intent(this, CommentListActivity.class);
+		intent.putExtra("THREAD_ID", stringId);
+		startActivity(intent);
+
+	}
 
 }

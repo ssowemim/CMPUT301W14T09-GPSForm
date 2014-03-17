@@ -63,7 +63,7 @@ public class ElasticSearchOperations {
 	/**
 	 * postThread posts a top comment to Elasti-Search.
 	 * Tested and verified.
-	 * @param commentThread
+	 * @param ElasticSearchOperations
 	 */
 	public static void postThread(final Comment commentThread){
 		Thread thread = new Thread() {

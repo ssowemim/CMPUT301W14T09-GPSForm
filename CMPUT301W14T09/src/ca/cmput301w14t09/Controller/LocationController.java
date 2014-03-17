@@ -14,6 +14,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
+@param thread
  */
 
 package ca.cmput301w14t09.Controller;
@@ -35,6 +36,7 @@ import ca.cmput301w14t09.model.GeoLocation;
 * manager and take geolocation update requests. It will create a geolocation object using the android GPS location
 * listener.  This controller is also used for updating the location of a user if the user wants to post a comment in a
 * location other then the default location that is used when user chooses to make new comment.
+* @param LocationController
 **/
 
 public class LocationController {
@@ -69,6 +71,7 @@ public class LocationController {
     /**
      * setLocationManager function responsible for setting up 
      *location manager wherever is called and sets in locationcontroller.
+     *@param LocationController
      */
     
     public void setLocationManager(Context context) {
@@ -81,6 +84,7 @@ public class LocationController {
     
     /**
      * Request a location update using the location manager and a location listener from activity
+     * @param LocationController
      */
 
     public void requestLocationUpdates(LocationListener locationListener){
@@ -92,6 +96,7 @@ public class LocationController {
     /**
    	* location changed function responsible for getting location points from GPS location on android activity
    	* and then setting the geolocation in Location controller to the current location of the GPS.
+   	* @param LocationController
     */
     
     public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
@@ -121,6 +126,7 @@ public class LocationController {
     /**
     * updatelocation function responsible for updating the geolocation points in locationcontroller
     * if the user chooses to update the GPS coordinate points that are set default when new comment is initiated.
+    * @param LocationController
     */
 
     @SuppressLint("NewApi")

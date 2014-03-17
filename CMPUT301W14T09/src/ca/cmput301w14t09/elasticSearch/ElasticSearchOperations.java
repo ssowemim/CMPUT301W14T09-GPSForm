@@ -54,8 +54,8 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations {
 
 	private static String serverName = "ElasticSearch";
-	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test05/";
-	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test05/_search?pretty=1";
+	private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test08/";
+	private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test08/_search?pretty=1";
 
 	
 	static Comment comment;

@@ -1,9 +1,7 @@
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
 import org.junit.Test;
-
-import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.model.Comment;
 
 
 public class CommentTest extends TestCase{
@@ -11,26 +9,32 @@ public class CommentTest extends TestCase{
 	@Test
 	public void testAddComment() {
 		
+		Comment newComment = new Comment();
+		newComment.setAuthorName("tester");
+		newComment.setCommentText("testing add comment");
+		newComment.setFavoriteCount(0);
 		
-		LocationController lc = new LocationController();
-		lc.setGeoLocation();
-		assertNotNull(CreateComment.newComment(lc, "tester", "testingcommentcache", true));
+		assertTrue(newComment.getAuthorName() == "tester");
+		assertTrue(newComment.getCommentText() == "testing add comment");
+		assertTrue(newComment.getFavoriteCount() == 0);
+	}
+
+	@Test
+	public void testIfTopComment() {
+		Comment newComment = new Comment();
+		newComment.setAuthorName("tester");
+		newComment.setTopComment(true);
 		
+		assertTrue(newComment.getTopComment());
 	}
 	
 	@Test
-	public void testAddNullComment() {
-		LocationController lc = new LocationController();
-		LocationController lcOne = new LocationController();
+	public void testNotTopComment(){
+		Comment newComment = new Comment();
+		newComment.setAuthorName("tester");
+		newComment.setTopComment(false);
 		
-		assertFalse(CreateComment.newComment(lc, "testerUser", null, true).equals(CreateComment.newComment(lcOne,  "testerUser", "Bobby", true)));
-	}
-	
-	public void testIfTopComment() {
-		LocationController lc = new LocationController();
-		LocationController lcOne = new LocationController();
-		
-		assertFalse(CreateComment.newComment(lc, "testerUser", "testerComment", false).equals(CreateComment.newComment(lcOne, "testerUser", "testerComment", true)));
+		assertFalse(newComment.getTopComment());
 	}
 	
 	

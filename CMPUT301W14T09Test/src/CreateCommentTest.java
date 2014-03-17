@@ -19,8 +19,8 @@ public class CreateCommentTest extends TestCase {
 	public void testCreateCommentFunction () {
 		CreateComment newComment = new CreateComment();
 		LocationController lc = new LocationController();
-		Comment anewComment = newComment.newComment(lc, "Tester", "Testing", false);
-		
+		Comment anewComment = newComment.newComment(lc, "Tester", "Testing", false, false);
+
 		assertNotNull(anewComment);
 	}
 }

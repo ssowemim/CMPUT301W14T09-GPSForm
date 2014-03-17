@@ -10,6 +10,7 @@ import ca.cmput301w14t09.Model.Comment;
  * Tests to see if comments are manipulable 
  *
  */
+
 public class CommentTest extends TestCase{
 
 	@Test

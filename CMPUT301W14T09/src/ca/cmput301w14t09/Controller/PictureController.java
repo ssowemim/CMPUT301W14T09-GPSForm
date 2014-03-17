@@ -7,19 +7,30 @@ import android.graphics.BitmapFactory;
 import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.model.PictureModelList;
 
-
+/**
+ * PictureController deals with all functions that
+ * manipulate the picture to be uploaded to elasticSearch
+ *
+ */
 public class PictureController{
 	public static final int MAX_BITMAP_DIMENSIONS = 50;
 	public static final int MAX_TEXT_LENGTH = 100;
 	
 	private PictureModelList model;
 	private TopCommentsActivity activity;
-	
+		
 	public PictureController(PictureModelList model, TopCommentsActivity activity) {
 		this.model = model;
 		this.activity = activity;
 	}
 
+	/**
+	 * addPicPost takes a picture and formats it properly to be
+	 * stored on elasticSearch
+	 * @param pic
+	 * @param author
+	 * @param Comment
+	 */
 	public void addPicPost(Bitmap pic, String author, String Comment) {
 		
 		if (pic.getWidth() > MAX_BITMAP_DIMENSIONS || pic.getHeight() > MAX_BITMAP_DIMENSIONS) {
@@ -35,6 +46,10 @@ public class PictureController{
 		this.model.addPicPost(pic);
 	}
 	
+	/**
+	 * clearModel empties the space where the
+	 * picture is being stored
+	 */
 	public void clearModel() {
 		this.model.clear();
 	}

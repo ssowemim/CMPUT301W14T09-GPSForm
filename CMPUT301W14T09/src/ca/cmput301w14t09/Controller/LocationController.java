@@ -35,9 +35,6 @@ import android.widget.Toast;
 import ca.cmput301w14t09.model.GeoLocation;
 
 /**
-*
-*
-*
 * @author Cameron Alexander
 *
 *

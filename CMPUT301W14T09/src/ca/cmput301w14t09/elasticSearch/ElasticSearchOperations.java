@@ -1,8 +1,5 @@
 package ca.cmput301w14t09.elasticSearch;
 
-
-// code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchOperations.java
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,6 +22,16 @@ import ca.cmput301w14t09.model.Comment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+//code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchOperations.java
+
+/**
+ * 
+ * @author Conner
+ * ElasticSearchOperations contains all methods that talk to the internet that either 
+ * upload information onto the elasticSearch website or pull information for the same
+ * site
+ *
+ */
 public class ElasticSearchOperations {
 
 	private static String serverName = "ElasticSearch";
@@ -35,7 +42,7 @@ public class ElasticSearchOperations {
 	static Comment comment;
 	
 	/**
-	 * Posts a comment thread to Elasti-Search.
+	 * postThread posts a top comment to Elasti-Search.
 	 * Tested and verified.
 	 * @param commentThread
 	 */
@@ -76,7 +83,7 @@ public class ElasticSearchOperations {
 	}
 
 	/**
-	 * Returns a list of thread names.  
+	 * pullThreads returns the list of top comments.  
 	 * Tested and verified.
 	 * @return list of names of Threads.
 	 * @throws InterruptedException
@@ -128,6 +135,13 @@ public class ElasticSearchOperations {
 		return commentList;
 	}
 	
+	/**
+	 * pullOneThread takes in a thread ID and then
+	 * returns all comments that contain that thread ID
+	 * @param threadId
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public static ArrayList<Comment> pullOneThread(final String threadId) throws InterruptedException {
             final CountDownLatch latch = new CountDownLatch(1);
             final ArrayList<Comment> commentList = new ArrayList<Comment> ();
@@ -172,6 +186,12 @@ public class ElasticSearchOperations {
             return commentList;
     }
 
+	/**
+	 * getEntityContent prints result statements to logcat
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
 	static String getEntityContent(HttpResponse response) throws IOException {
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader((response.getEntity().getContent())));
@@ -186,7 +206,13 @@ public class ElasticSearchOperations {
 		return json;
 	}
 	
-	
+	/**
+	 * loadComment is a test method that we currently aren't using.
+	 * returns results of elasticSearch query
+	 * @param commentText
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public static Comment loadComment(final String commentText) throws InterruptedException {
 		final CountDownLatch latch = new CountDownLatch(1);
 		

@@ -88,7 +88,7 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public void previewCapturedImage(ImageView picImagePreview, Comment comment, Boolean attachment, Uri fileUri) {
+    public Boolean previewCapturedImage(ImageView picImagePreview, Comment comment, Boolean attachment, Uri fileUri) {
         try{
             picImagePreview.setVisibility(View.VISIBLE);
 
@@ -102,11 +102,13 @@ public class PictureController extends Activity{
 
             picImagePreview.setImageBitmap(bitmap);
             comment.setPicture(bitmap);
-            attachment = false;
+          //  attachment= false;
 
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
+        
+        return false;
     }
 
 

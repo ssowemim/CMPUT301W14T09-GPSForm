@@ -31,10 +31,13 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.graphics.Bitmap;
 import android.util.Log;
 import ca.cmput301w14t09.Model.Comment;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
@@ -49,11 +52,12 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations {
 
     private static String serverName = "ElasticSearch";
-    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test69/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test69/_search?pretty=1";
+    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test70/";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test70/_search?pretty=1";
 
-
+    private static Gson GSON = null;
     static Comment comment;
+    
 
     /**
      * postThread posts a top comment to Elasti-Search.
@@ -63,19 +67,23 @@ public class ElasticSearchOperations {
      */
     public static void postThread(final Comment commentThread) throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
+        
+        if (GSON == null)
+            constructGson();
+        
         Thread thread = new Thread() {
 
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                Gson gson = new Gson();
+               // Gson gson = new Gson();
                 HttpPost request = new HttpPost(postAddress);
 
                 try { 
-                    String jsonString = gson.toJson(commentThread);
-                    System.out.println("JSON String:" +jsonString);
+                  //  String jsonString = gson.toJson(commentThread);
+                 //   System.out.println("JSON String:" +jsonString);
 
-                    request.setEntity(new StringEntity(jsonString));
+                    request.setEntity(new StringEntity(GSON.toJson(commentThread)));
 
                     HttpResponse response = client.execute(request);
                     Log.w(serverName, response.getStatusLine().toString());
@@ -98,6 +106,12 @@ public class ElasticSearchOperations {
         };
         thread.start();
         latch.await();
+    }
+    
+    private static void constructGson(){
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Bitmap.class, new BitmapJsonConverter());
+        GSON = builder.create();
     }
 
     /**

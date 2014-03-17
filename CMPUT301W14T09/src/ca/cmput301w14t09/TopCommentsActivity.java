@@ -25,6 +25,8 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -75,7 +77,7 @@ public class TopCommentsActivity extends ListActivity {
     private Uri fileUri;
 
     private TopCommentsActivity topActivity;
-    protected PictureController picController = new PictureController();
+    private PictureController pictureController;
 
     protected Intent intent;
     protected User user;
@@ -85,10 +87,10 @@ public class TopCommentsActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    Boolean attachment = false;
+    Boolean attachment;
 
     PictureModelList pictureModel;
-    PictureController pictureController;
+//    PictureController pictureController;
 
 
     EditText authorText;
@@ -102,6 +104,7 @@ public class TopCommentsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_comments);
         topActivity = this;
+        attachment = false;
 
         aCommentList = (ListView) findViewById(android.R.id.list);
 
@@ -177,6 +180,7 @@ public class TopCommentsActivity extends ListActivity {
 
         //new Location Controller 
         final LocationController lc = new LocationController();
+        pictureController = new PictureController();
 
         //https://github.com/baoliangwang/CurrentLocation
         //setup location manager
@@ -285,6 +289,8 @@ public class TopCommentsActivity extends ListActivity {
                 {
                     ElasticSearchOperations.postThread(comment);
                     Thread.sleep(1000);
+                    adapter.notifyDataSetChanged();
+                    onResume();
 
                 } catch (InterruptedException e)
                 {
@@ -292,17 +298,38 @@ public class TopCommentsActivity extends ListActivity {
                     e.printStackTrace();
                 }
 
-                recreate();
                 dialog.dismiss();
 
             }
         });
 
-
-
-
     }
 
+    public void previewCapturedImage() {
+        try{
+            picImagePreview.setVisibility(View.VISIBLE);
+
+            //bitmap factory
+            BitmapFactory.Options options = new BitmapFactory.Options();
+
+            //downsizing image into a smaller size and will throw exception for larger images
+            options.inSampleSize = 8;
+
+            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+
+            picImagePreview.setImageBitmap(bitmap);
+            comment.setPicture(bitmap);
+            attachment= false;
+
+        } catch(NullPointerException e) {
+            e.printStackTrace();
+        }
+        
+       // return false;
+    }
+    
+    
+    
     /**
      * isDeviceSupportCamera does a check to see
      * if device hardware camera is present or not
@@ -325,7 +352,7 @@ public class TopCommentsActivity extends ListActivity {
      */
     public void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = picController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+        fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
@@ -365,7 +392,7 @@ public class TopCommentsActivity extends ListActivity {
             if (resultCode == RESULT_OK) {
                 // successfully captured the image
                 // display it in image view
-                picController.previewCapturedImage(picImagePreview, comment, attachment, fileUri);
+              previewCapturedImage();
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),

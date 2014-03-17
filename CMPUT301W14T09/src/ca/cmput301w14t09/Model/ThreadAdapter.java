@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -72,6 +73,7 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			TextView ttd = (TextView) v.findViewById(R.id.toptextdata);
 			TextView mt = (TextView) v.findViewById(R.id.middletext);
 			TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
+			ImageView piv = (ImageView)v.findViewById(R.id.attachmentImageView);
 
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -88,7 +90,11 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 				mtd.setText(i.getCommentText());
 			}
 
-
+			if(piv != null){
+			    if (i.getAttachment() != true){
+			        piv.setImageBitmap(i.getPicture());
+			    }
+			}
 		}
 
 		// the view must be returned to our activity

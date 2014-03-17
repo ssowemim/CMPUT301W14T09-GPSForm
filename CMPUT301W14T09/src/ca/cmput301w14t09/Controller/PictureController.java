@@ -27,6 +27,7 @@ import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.model.PictureModelList;
 
 /**
+ * 
  * PictureController deals with all functions that
  * manipulate the picture to be uploaded to elasticSearch
  *

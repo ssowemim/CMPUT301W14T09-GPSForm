@@ -41,6 +41,7 @@ import ca.cmput301w14t09.model.User;
  * @editor Chun-Han Lee
  *This activity shows the top comment that was selected in a 
  *previous activity and displays all the replies to that comment
+ *
  */
 public class CommentListActivity extends ListActivity {
 

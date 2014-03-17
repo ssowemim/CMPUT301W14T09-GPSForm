@@ -69,7 +69,6 @@ import ca.cmput301w14t09.model.User;
  * Most of the code referring to handling the picture is taken from
  * http://www.androidhive.info/2013/09/android-working-with-camera-api/
  * Making a comment with an author.
- * 
  *
  */
 public class TopCommentsActivity extends ListActivity {

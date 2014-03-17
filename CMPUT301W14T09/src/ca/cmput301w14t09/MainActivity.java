@@ -39,6 +39,7 @@ import ca.cmput301w14t09.model.User;
  * displays a list of current users on the device
  * and allows you to create a new user or sign
  * in as a guest
+ * 
  */
 public class MainActivity extends Activity {
 

@@ -139,12 +139,12 @@ public class TopCommentsActivity extends ListActivity {
 
 		return true;
 
-
 	}
 
 	/**
 	 * onStart popluates the listview with results from
 	 * elasticSearch, finding all of the top comments
+	 * @param thread
 	 */
 	@Override
 	protected void onStart() {
@@ -184,15 +184,13 @@ public class TopCommentsActivity extends ListActivity {
 		//new Location Controller 
 		final LocationController lc = new LocationController();
 
+		//https://github.com/baoliangwang/CurrentLocation
 		//setup location manager
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-
 
 		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
 		Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
-
 
 		//update location button
 		Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
@@ -201,7 +199,6 @@ public class TopCommentsActivity extends ListActivity {
 		addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
 
 		dialog.show();
-
 
 		//Capture image button click event		
 		this.addPicImageButton.setOnClickListener(new OnClickListener() {
@@ -220,6 +217,7 @@ public class TopCommentsActivity extends ListActivity {
 		}
 
 		// Retrieve location updates through LocationListener interface
+		//https://github.com/baoliangwang/CurrentLocation
 		LocationListener locationListener = new LocationListener() {				
 
 			public void onProviderDisabled (String provider) {
@@ -245,10 +243,10 @@ public class TopCommentsActivity extends ListActivity {
 			}
 		};
 
-
 		dialog.show();
 
 		//request location update
+		//https://github.com/baoliangwang/CurrentLocation
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
 
@@ -265,7 +263,6 @@ public class TopCommentsActivity extends ListActivity {
 
 			}
 		});
-
 
 		//cancel button
 		btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -288,11 +285,10 @@ public class TopCommentsActivity extends ListActivity {
 				FileSaving.saveUserFile(user, topActivity);
 
 				comment = CreateComment.newComment(lc, text2, text1, true);
-
-
-
+				
 				ElasticSearchOperations.postThread(comment);
 				dialog.dismiss();
+				RefreshList();
 
 			}
 		});
@@ -472,8 +468,6 @@ public class TopCommentsActivity extends ListActivity {
 
 		else {
 
-			//Intent intent = new Intent(this, FavoritesActivity.class);
-			//startActivity(intent);
 		}
 	}
 
@@ -492,6 +486,27 @@ public class TopCommentsActivity extends ListActivity {
 		intent.putExtra("THREAD_ID", stringId);
 		startActivity(intent);
 
+	}
+	
+	
+	/**
+	 * Refresh list refreshes the list of topcomments 
+	 * @param thread
+	 */
+	public void RefreshList(){
+		ArrayList<Comment> topComments;
+		try {
+			topComments = ElasticSearchOperations.pullThreads();
+			ThreadAdapter adapter = new ThreadAdapter(this,
+					R.layout.thread_view, topComments);
+			aCommentList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 

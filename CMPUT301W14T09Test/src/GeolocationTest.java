@@ -2,8 +2,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import android.content.Context;
-
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.model.Comment;
@@ -24,8 +22,7 @@ public class GeolocationTest {
 		lc.setlat(lat);
 		lc.setlng(lng);
 		lc.setGeoLocation();
-		
-		
+
 		boolean topComment = true;
 		String authorname = "";
 		String commentText = "";
@@ -35,16 +32,13 @@ public class GeolocationTest {
 		comment.setGeoLocation(lc.getGeoLocation());
 		
 		GeoLocation geo2 = comment.getGeoLocation();
-		
-		double lat2 = geo2.getLatitude();
-		double lng2 = geo2.getLongitude();
 
-		assertTrue(lat == lat2 && lng == lng2);
+		assertTrue(geo2.getLatitude()== 32.003 && geo2.getLongitude()==-123.233);
 		
 	}
 		
 		@Test
-		public void Geolocationinputtest() {
+		public void Geolocationupdatelargeinputtest() {
 			
 			
 			LocationController lc = new LocationController();
@@ -66,15 +60,53 @@ public class GeolocationTest {
 			comment1.setGeoLocation(lc.getGeoLocation());
 			
 			GeoLocation geo21 = comment1.getGeoLocation();
-			
-			double lat21 = geo21.getLatitude();
-			double lng21 = geo21.getLongitude();
 
-			assertTrue(lat1 == lat21 && lng1 == lng21);
+			assertTrue(geo21.getLatitude() == 321111111111111111111111.000000 && geo21.getLongitude() == -11111111111111111111123.00000001 );
 			
 		}
 		
+	
+		@Test
+		public void Geolocationzeroupdatetest() {
+			
+			
+			LocationController lc = new LocationController();
+			
+			 double lat2 = 0;
+			 double lng2 = 0;
+			
+			lc.setlat(lat2);
+			lc.setlng(lng2);
+			lc.setGeoLocation();
+			
+			
+			boolean topComment1 = true;
+			String authorname1 = "";
+			String commentText1 = "";
+			
+			Comment comment2 = CreateComment.newComment(lc, authorname1, commentText1, topComment1);
+			
+			comment2.setGeoLocation(lc.getGeoLocation());
+			
+			GeoLocation geo212 = comment2.getGeoLocation();
+			
+			Double lat33 = geo212.getLatitude();
+			Double lng33 = geo212.getLongitude();
+			
+			assertTrue(lat33 == 0 && lng33 == 0);
+			
+		}
 		
+		@Test
+		public void Geolocationnametest() {
+			
+			GeoLocation geo213 = new GeoLocation();
+			
+			geo213.setName("mylocation");
+			
+			assertTrue(geo213.getName()== "mylocation");	
+			
+		}
 		
 		
 		

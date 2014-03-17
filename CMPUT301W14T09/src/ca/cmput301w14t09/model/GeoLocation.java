@@ -33,6 +33,10 @@ public class GeoLocation implements Serializable {
     private double longitude;
     private String name;
 
+    /**
+     * initiate the Geolocation object with set lat lng as 0 and name as ""
+     *
+     */
     public GeoLocation() {
         latitude = 0.0;
         longitude = 0.0;
@@ -66,7 +70,11 @@ public class GeoLocation implements Serializable {
         this.name = name;
     }
 
-
+    /**
+     * This function will be used in further iterations to calculate proximity to a
+     * target location
+     * 
+     */
     public double calculateProximity(GeoLocation targetLocation){
         return 0;
     }

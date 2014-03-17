@@ -28,6 +28,8 @@ import java.io.Serializable;
 import java.util.Date;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+
 import com.google.gson.Gson;
 
 /**
@@ -44,7 +46,8 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 
 	private static final long serialVersionUID = 3L;
 	private GeoLocation geoLocation;
-	private Picture attachment;
+	private Bitmap picture;
+	private Boolean attachment;
 	private String authorName;
 	private String commentText;
 	private Date postDate;
@@ -55,7 +58,8 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 	public Comment() {
 		super();
 		geoLocation = null;
-		attachment = null;
+		picture = null;
+		attachment = false;
 		authorName = "";
 		commentText = "";
 		favoriteCount = 0;
@@ -146,7 +150,7 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 	 * @return the attachment
 	 */
 
-	public Picture getAttachment() {
+	public Boolean getAttachment() {
 		return attachment;
 	}
 
@@ -154,10 +158,17 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 	 * @param attachment the attachment to set
 	 */
 
-	public void setAttachment(Picture attachment) {
+	public void setAttachment(Boolean attachment) {
 		this.attachment = attachment;
 	}
 
+	public Bitmap getPicture(){
+		return picture;
+	}
+	
+	public void setPicture(Bitmap picture){
+		this.picture = picture;
+	}
 	/**
 	 * @return the authorName
 	 */

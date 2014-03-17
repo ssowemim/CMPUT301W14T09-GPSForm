@@ -33,10 +33,12 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 /**
+ * 
+ * @author mcmorris
  * UnreadMarker is currently a mildly glorified boolean flag that sets whether a comment has been
  * read, and generates new markers for new comments with no related UnreadMarker.  This is done
  * on a per Profile basis.
- * @author mcmorris
+ * 
  */
 public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<UnreadMarker> {
 	private boolean unread;

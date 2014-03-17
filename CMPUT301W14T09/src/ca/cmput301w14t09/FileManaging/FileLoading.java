@@ -35,6 +35,7 @@ import ca.cmput301w14t09.model.User;
  * @author Conner
  * FileLoading loads data stored on the device when 
  * requested by a method
+ * 
  */
 public class FileLoading {
 	private static final String FILENAME = "Username.sav";

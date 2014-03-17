@@ -34,11 +34,13 @@ import com.google.gson.Gson;
 
 
 /**
+ * 
+ * @author mcmorris
  * Comment is an instance of any posted comment.  Support for node navigation is provided by Thread.
  * Implements
  * ICacheable<Comment> - Serialization and Load support from file.
  * Comparable<Comment> - Allows for sorting on Comments
- * @author mcmorris
+ * 
  */
 public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serializable {
 

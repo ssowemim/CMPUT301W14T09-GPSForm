@@ -26,8 +26,10 @@ import ca.cmput301w14t09.model.UnreadMarker;
 
 
 /**
- * Profile tracks the settings of the associated user.
+ * 
  * @author mcmorris
+ * Profile tracks the settings of the associated user.
+ * 
  */
 public class Profile implements Serializable {
 	private ArrayList<Favorite> favorites;

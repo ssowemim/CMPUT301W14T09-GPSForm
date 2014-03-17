@@ -19,10 +19,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.elasticSearch;
 
 /**
+ * 
+ * @author mcmorris
  * Server handles server configuration and status.  
  * Serves as intermediary between Cache and ElasticSearch.
  * Design structure consideration to allow for the existence of multiple servers in a scaled project.
- * @author mcmorris
+ *
  */
 public class Server {
 	//private ElasticSearchOperations serverOperations;

@@ -36,6 +36,7 @@ import android.widget.TextView;
  * 
  * @author Conner
  * CommentAdapter sets up a listview of the object comment
+ * 
  */
 public class CommentAdapter extends ArrayAdapter<Comment> {
 

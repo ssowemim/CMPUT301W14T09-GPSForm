@@ -30,6 +30,7 @@ import java.util.Date;
  * CreateComment creates top comments and reply comments
  * when requested by methods. reply comments has not
  * been completed yet
+ * 
  */
 public class CreateComment {
 	

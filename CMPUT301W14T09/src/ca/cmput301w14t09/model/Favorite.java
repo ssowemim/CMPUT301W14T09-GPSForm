@@ -33,9 +33,11 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 /**
+ * 
+ * @author mcmorris
  * Favorites marks the member variable Comment as favorited.  Favorites can have their own favorite names.
  * Primarily included for flexible design going forward.
- * @author mcmorris
+ * 
  */
 public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	private String name;

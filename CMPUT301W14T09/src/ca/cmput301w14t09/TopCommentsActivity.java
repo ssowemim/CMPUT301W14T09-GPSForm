@@ -61,6 +61,8 @@ import ca.cmput301w14t09.model.ThreadAdapter;
 import ca.cmput301w14t09.model.User;
 
 /**
+ * 
+ * @author ssowemim, Conner
  * TopCommentsActivity handles all the functions that the pop_up_comment.xml has to offer.
  * Controlling the longitude & latitude. 
  * Attaching a picture to a comment.
@@ -68,7 +70,6 @@ import ca.cmput301w14t09.model.User;
  * http://www.androidhive.info/2013/09/android-working-with-camera-api/
  * Making a comment with an author.
  * 
- * @author ssowemim, Conner
  *
  */
 public class TopCommentsActivity extends ListActivity {

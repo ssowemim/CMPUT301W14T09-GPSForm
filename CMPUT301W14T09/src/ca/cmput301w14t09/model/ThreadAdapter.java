@@ -36,6 +36,7 @@ import android.widget.TextView;
  * @author Conner
  * ThreadAdapter sets up a listview of the object comment
  * in a different format from CommentAdapter
+ * 
  */
 public class ThreadAdapter extends ArrayAdapter<Comment>{
 

@@ -25,11 +25,12 @@ import ca.cmput301w14t09.model.GeoLocation;
 
 
 /**
+ * 
+ * @author mcmorris
  * User stores user information, and a reference to profile.
  * The user is not the profile, so profile specific information not
  * stored here.
  * 
- * @author mcmorris
  */
 public class User implements Serializable {
 	private Profile profile;

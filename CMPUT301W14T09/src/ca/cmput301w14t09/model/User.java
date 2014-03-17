@@ -16,10 +16,11 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.cmput301w14t09.model;
+package ca.cmput301w14t09.Model;
 
 import java.io.Serializable;
-import ca.cmput301w14t09.model.GeoLocation;
+
+import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
  * 

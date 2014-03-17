@@ -30,7 +30,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import ca.cmput301w14t09.FileManaging.FileLoading;
 import ca.cmput301w14t09.FileManaging.FileSaving;
-import ca.cmput301w14t09.model.User;
+import ca.cmput301w14t09.Model.User;
 
 /**
  * 

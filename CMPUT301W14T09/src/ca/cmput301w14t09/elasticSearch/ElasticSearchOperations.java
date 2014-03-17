@@ -32,7 +32,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import android.util.Log;
-import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.Model.Comment;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

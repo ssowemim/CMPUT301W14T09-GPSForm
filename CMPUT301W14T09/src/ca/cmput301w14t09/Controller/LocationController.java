@@ -27,7 +27,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.widget.EditText;
 import android.widget.Toast;
-import ca.cmput301w14t09.model.GeoLocation;
+import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
  * 

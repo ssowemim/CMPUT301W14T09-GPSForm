@@ -19,8 +19,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.FileManaging;
 
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.GeoLocation;
+import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.GeoLocation;
+
 import java.util.Date;
 
 /**

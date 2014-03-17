@@ -1,7 +1,8 @@
 import static org.junit.Assert.*;
 import junit.framework.TestCase;
 import org.junit.Test;
-import ca.cmput301w14t09.model.Comment;
+
+import ca.cmput301w14t09.Model.Comment;
 
 /**
  * 

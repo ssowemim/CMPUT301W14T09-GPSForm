@@ -23,7 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import android.app.Activity;
 import android.content.Context;
-import ca.cmput301w14t09.model.User;
+import ca.cmput301w14t09.Model.User;
+
 import com.google.gson.Gson;
 
 /**

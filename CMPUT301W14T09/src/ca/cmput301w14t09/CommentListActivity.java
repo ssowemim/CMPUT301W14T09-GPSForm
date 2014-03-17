@@ -27,10 +27,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
+import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.CommentAdapter;
+import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
-import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.CommentAdapter;
-import ca.cmput301w14t09.model.User;
 
 /**
  * 

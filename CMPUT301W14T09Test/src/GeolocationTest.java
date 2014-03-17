@@ -4,8 +4,8 @@ import org.junit.Test;
 
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
-import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.GeoLocation;
+import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.GeoLocation;
 
 
 public class GeolocationTest {

@@ -52,11 +52,11 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
+import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.PictureModelList;
+import ca.cmput301w14t09.Model.ThreadAdapter;
+import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
-import ca.cmput301w14t09.model.Comment;
-import ca.cmput301w14t09.model.PictureModelList;
-import ca.cmput301w14t09.model.ThreadAdapter;
-import ca.cmput301w14t09.model.User;
 
 /**
  * 

@@ -500,6 +500,7 @@ public class TopCommentsActivity extends ListActivity {
 			ThreadAdapter adapter = new ThreadAdapter(this,
 					R.layout.thread_view, topComments);
 			aCommentList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -7,7 +7,7 @@ import org.junit.Test;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
-import ca.cmput301w14t09.model.Comment;
+import ca.cmput301w14t09.Model.Comment;
 
 
 public class ElasticSearchTest {
@@ -52,14 +52,7 @@ public class ElasticSearchTest {
 			e.printStackTrace();
 		}
 		
-		assertTrue(Threadid == "65");
-		
-		
+		assertTrue(Threadid == "65"); 
 	}
-
-	
-
-	
-	
 
 }

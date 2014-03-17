@@ -1,10 +1,5 @@
 /**
  
-
-
-Copyright 2014 Cameron Alexander
-<Contact: cpalexan@ualberta.ca>
-
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -36,8 +31,10 @@ import ca.cmput301w14t09.model.GeoLocation;
 
 /**
 * @author Cameron Alexander
-*
-*
+* This class is reponsible for getting geolocation when it is requested. It can setup a location
+* manager and take geolocation update requests. It will create a geolocation object using the android GPS location
+* listener.  This controller is also used for updating the location of a user if the user wants to post a comment in a
+* location other then the default location that is used when user chooses to make new comment.
 **/
 
 public class LocationController {
@@ -69,6 +66,11 @@ public class LocationController {
     	this.lng = lng;
     }
 
+    /**
+     * setLocationManager function responsible for setting up 
+     *location manager wherever is called and sets in locationcontroller.
+     */
+    
     public void setLocationManager(Context context) {
 
         // Obtain LocationManager service 
@@ -76,6 +78,10 @@ public class LocationController {
         LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
 
     }
+    
+    /**
+     * Request a location update using the location manager and a location listener from activity
+     */
 
     public void requestLocationUpdates(LocationListener locationListener){
 
@@ -83,6 +89,11 @@ public class LocationController {
 
     }
 
+    /**
+   	* location changed function responsible for getting location points from GPS location on android activity
+   	* and then setting the geolocation in Location controller to the current location of the GPS.
+    */
+    
     public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
         if(location != null){
         	
@@ -107,6 +118,10 @@ public class LocationController {
 
     }
 
+    /**
+    * updatelocation function responsible for updating the geolocation points in locationcontroller
+    * if the user chooses to update the GPS coordinate points that are set default when new comment is initiated.
+    */
 
     @SuppressLint("NewApi")
 	public void updatelocation(Context context, String longitude, String latitude) {  

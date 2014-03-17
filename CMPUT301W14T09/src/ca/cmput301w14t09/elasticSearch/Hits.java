@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -20,17 +20,21 @@ package ca.cmput301w14t09.elasticSearch;
 
 import java.util.Collection;
 
-//code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/Hits.java
+/**
+ * 
+ * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/Hits.java
+ * @param <T>
+ */
 
 public class Hits<T> {
 
-	 int total;
-	    double max_score;
-	    Collection<ElasticSearchResponse<T>> hits;
-	    public Collection<ElasticSearchResponse<T>> getHits() {
-	        return hits;
-	    }
-	    public String toString() {
-	        return (super.toString()+","+total+","+max_score+","+hits);
-	    }
+	int total;
+	double max_score;
+	Collection<ElasticSearchResponse<T>> hits;
+	public Collection<ElasticSearchResponse<T>> getHits() {
+		return hits;
+	}
+	public String toString() {
+		return (super.toString()+","+total+","+max_score+","+hits);
+	}
 }

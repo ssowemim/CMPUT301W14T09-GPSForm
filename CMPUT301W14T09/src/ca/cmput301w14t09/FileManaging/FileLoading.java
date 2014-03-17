@@ -24,9 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import com.google.gson.Gson;
-
 import android.app.Activity;
 import ca.cmput301w14t09.model.User;
 
@@ -37,7 +35,9 @@ import ca.cmput301w14t09.model.User;
  * requested by a method
  * 
  */
+
 public class FileLoading {
+
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
 	protected String name;
@@ -48,6 +48,7 @@ public class FileLoading {
 	 * @param main
 	 * @return
 	 */
+
 	public static String[] loadFromFile(Activity main) {
 		ArrayList<String> usernames = new ArrayList<String>();
 		try {
@@ -74,6 +75,7 @@ public class FileLoading {
 	 * @param main
 	 * @return
 	 */
+
 	public static User returnUser(String name, Activity main) {
 		Gson gson = new Gson();
 

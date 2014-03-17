@@ -21,7 +21,6 @@ package ca.cmput301w14t09.Controller;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.location.LocationListener;

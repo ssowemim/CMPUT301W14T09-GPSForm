@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -26,16 +26,16 @@ package ca.cmput301w14t09.elasticSearch;
  * Design structure consideration to allow for the existence of multiple servers in a scaled project.
  *
  */
+
 public class Server {
-	//private ElasticSearchOperations serverOperations;
-	
+
 	/**
 	 * isServerReachable can reach the server from this connection
 	 * @return true if server can be reached.
 	 */
+	
 	public boolean isServerReachable() {
-		// TODO: Check ping against server to see if it is online.
 		return true;
 	}
-	
+
 }

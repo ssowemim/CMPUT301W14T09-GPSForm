@@ -16,10 +16,13 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package ca.cmput301w14t09.elasticSearch;
 
-//code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchResponse.java
+/**
+ * 
+ * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchResponse.java
+ * @param <T>
+ */
 
 public class ElasticSearchResponse<T> {
 	

@@ -21,11 +21,9 @@ package ca.cmput301w14t09.FileManaging;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import android.app.Activity;
 import android.content.Context;
 import ca.cmput301w14t09.model.User;
-
 import com.google.gson.Gson;
 
 /**
@@ -35,6 +33,7 @@ import com.google.gson.Gson;
  * current device
  * 
  */
+
 public class FileSaving {
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
@@ -45,6 +44,7 @@ public class FileSaving {
 	 * @param text
 	 * @param main
 	 */
+
 	public static void appendUserNameToList(String text, Activity main) {
 		try {
 			FileOutputStream fos = main.openFileOutput(FILENAME,
@@ -67,6 +67,7 @@ public class FileSaving {
 	 * @param user
 	 * @param main
 	 */
+
 	public static void saveUserFile(User user, Activity main) {
 		Gson gson = new Gson();
 

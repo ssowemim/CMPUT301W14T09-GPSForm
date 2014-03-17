@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@ package ca.cmput301w14t09.FileManaging;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.model.Comment;
 import ca.cmput301w14t09.model.GeoLocation;
-
 import java.util.Date;
 
 /**
@@ -32,8 +31,9 @@ import java.util.Date;
  * been completed yet
  * 
  */
+
 public class CreateComment {
-	
+
 	/**
 	 * newComment creates a new top comment and fills out
 	 * the required parameters for a top comments
@@ -43,14 +43,15 @@ public class CreateComment {
 	 * @param topComment
 	 * @return
 	 */
+	
 	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment) {
 		Comment comment = new Comment();
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);
-		
+
 		GeoLocation geo = lc.getGeoLocation();
 		comment.setGeoLocation(geo);
-		
+
 		comment.setTopComment(topComment);
 		comment.setPostDate(new Date());
 		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString()));

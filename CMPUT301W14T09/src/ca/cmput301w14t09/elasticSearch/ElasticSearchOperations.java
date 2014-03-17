@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package ca.cmput301w14t09.elasticSearch;
 
 import java.io.BufferedReader;
@@ -26,22 +25,16 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-
 import android.util.Log;
 import ca.cmput301w14t09.model.Comment;
-
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-//code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchOperations.java
 
 /**
  * 
@@ -49,6 +42,7 @@ import com.google.gson.reflect.TypeToken;
  * ElasticSearchOperations contains all methods that talk to the internet that either 
  * upload information onto the elasticSearch website or pull information for the same
  * site
+ * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchOperations.java
  *
  */
 public class ElasticSearchOperations {

@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -30,11 +30,23 @@ import com.google.gson.Gson;
 import android.app.Activity;
 import ca.cmput301w14t09.model.User;
 
+/**
+ * 
+ * @author Conner
+ * FileLoading loads data stored on the device when 
+ * requested by a method
+ */
 public class FileLoading {
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
 	protected String name;
 
+	/**
+	 * loadFromFile loads in a list of usernames
+	 * from the device
+	 * @param main
+	 * @return
+	 */
 	public static String[] loadFromFile(Activity main) {
 		ArrayList<String> usernames = new ArrayList<String>();
 		try {
@@ -53,24 +65,31 @@ public class FileLoading {
 		}
 		return usernames.toArray(new String[usernames.size()]);
 	}
-	
-	public static User returnUser(String name, Activity main) {
-        Gson gson = new Gson();
 
-        try{
-            FileInputStream fis = main.openFileInput(name + ".sav");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader buff = new BufferedReader(isr);
-            String jsonOut = buff.readLine();
-            user = gson.fromJson(jsonOut, User.class);
-            buff.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return user;
-    }
+	/**
+	 * returnUser loads a specific user and 
+	 * user data from the device
+	 * @param name
+	 * @param main
+	 * @return
+	 */
+	public static User returnUser(String name, Activity main) {
+		Gson gson = new Gson();
+
+		try{
+			FileInputStream fis = main.openFileInput(name + ".sav");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buff = new BufferedReader(isr);
+			String jsonOut = buff.readLine();
+			user = gson.fromJson(jsonOut, User.class);
+			buff.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return user;
+	}
 
 }

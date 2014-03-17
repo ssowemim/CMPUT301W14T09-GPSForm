@@ -16,7 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package ca.cmput301w14t09.FileManaging;
 
 import java.io.ByteArrayOutputStream;
@@ -34,6 +33,11 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+/**
+ * 
+ * JsonBitmapConverter takes a bitmap and converts it into json
+ *
+ */
 public class JsonBitmapConverter implements JsonDeserializer<Bitmap>,
 									JsonSerializer<Bitmap> {
 
@@ -41,6 +45,9 @@ public class JsonBitmapConverter implements JsonDeserializer<Bitmap>,
 
 	}
 
+	/**
+	 * serialize turns a bitmap into a Json primivite type
+	 */
 	@Override
 	public JsonElement serialize(Bitmap src, Type typeOfSrc,
 			JsonSerializationContext context) {
@@ -51,6 +58,9 @@ public class JsonBitmapConverter implements JsonDeserializer<Bitmap>,
 		return new JsonPrimitive(base64Encoded);
 	}
 
+	/**
+	 * deserialize turns a Json primitive into a bitmap
+	 */
 	@Override
 	public Bitmap deserialize(JsonElement src, Type typeOfSrc,
 			JsonDeserializationContext context) throws JsonParseException {

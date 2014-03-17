@@ -26,7 +26,7 @@ import ca.cmput301w14t09.model.UnreadMarker;
 
 
 /**
- * Tracks the settings of the associated user.
+ * Profile tracks the settings of the associated user.
  * @author mcmorris
  */
 public class Profile implements Serializable {

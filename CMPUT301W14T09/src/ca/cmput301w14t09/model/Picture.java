@@ -22,8 +22,12 @@ import java.util.Date;
 
 import android.graphics.Bitmap;
 
-
-
+/**
+ * 
+ * Picture is an object that holds the information for 
+ * a picture of a comment
+ *
+ */
 public class Picture {
 	private Bitmap picture;
 	private String text;

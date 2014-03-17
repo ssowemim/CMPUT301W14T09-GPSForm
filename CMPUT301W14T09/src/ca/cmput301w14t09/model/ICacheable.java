@@ -21,7 +21,7 @@ package ca.cmput301w14t09.model;
 import android.app.Activity;
 
 /**
- * Extend this interface to create a class that can be written/read to disk.
+ * ICacheable<T> extend the interface to create a class that can be written/read to disk.
  * @author mcmorris
  * @param <T> - object to serialize and load from file.
  */

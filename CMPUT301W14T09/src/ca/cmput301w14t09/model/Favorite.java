@@ -33,7 +33,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 
 /**
- * Marks the member variable Comment as favorited.  Favorites can have their own favorite names.
+ * Favorites marks the member variable Comment as favorited.  Favorites can have their own favorite names.
  * Primarily included for flexible design going forward.
  * @author mcmorris
  */
@@ -42,7 +42,7 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	private Comment comment;
 
 	/**
-	 * Write this object to cache using GSon.
+	 * serialize writes this object to cache using GSon.
 	 * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/saveBranch/CMPUT301W14T09/src/ca/cmput301w14t09/FileManaging/FileSaving.java
 	 * @param userName - name of current user (cache is user-based)
 	 * @param main - activity calling this function.
@@ -66,7 +66,7 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	}
 	
 	/**
-	 * Loads this object, specified by name, from cache with userName.sav
+	 * load loads this object, specified by name, from cache with userName.sav
 	 * @param userName - name of current user (cache is user-based)
 	 * @param name - name of the file object itself?
 	 * @param main - activity calling this function.
@@ -94,7 +94,7 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	}
 	
 	/**
-	 * Compares this Favorite to another Favorite.
+	 * compareTo compares this Favorite to another Favorite.
 	 * @param otherFavorite - other Favorite object to compare to.
 	 * @return - this or otherFavorite, whichever has earlier date.
 	 */

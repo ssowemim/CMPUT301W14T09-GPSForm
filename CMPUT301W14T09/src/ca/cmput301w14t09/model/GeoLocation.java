@@ -20,6 +20,12 @@ package ca.cmput301w14t09.model;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * GeoLocation is an object that holds the
+ * latitude and longitude of a comment
+ *
+ */
 public class GeoLocation implements Serializable {
 
     private static final long serialVersionUID = 60L;

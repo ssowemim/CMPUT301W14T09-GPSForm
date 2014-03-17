@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -31,60 +31,68 @@ import android.widget.TextView;
 
 // http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
 
-
+/**
+ * 
+ * @author Conner
+ * ThreadAdapter sets up a listview of the object comment
+ * in a different format from CommentAdapter
+ */
 public class ThreadAdapter extends ArrayAdapter<Comment>{
 
-    private ArrayList<Comment> objects;
+	private ArrayList<Comment> objects;
 
-    public ThreadAdapter(Context context, int textViewResourceId, ArrayList<Comment> objects) {
-        super(context, textViewResourceId, objects);
-        this.objects = objects;
-    }
+	public ThreadAdapter(Context context, int textViewResourceId, ArrayList<Comment> objects) {
+		super(context, textViewResourceId, objects);
+		this.objects = objects;
+	}
 
-    public View getView(int position, View convertView, ViewGroup parent){
+	/**
+	 * getView formats the listview to show the fields of comment
+	 */
+	public View getView(int position, View convertView, ViewGroup parent){
 
-        // assign the view we are converting to a local variable
-        View v = convertView;
+		// assign the view we are converting to a local variable
+		View v = convertView;
 
-        // first check to see if the view is null. if so, we have to inflate it.
-        // to inflate it basically means to render, or show, the view.
-        if (v == null) {
-            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.thread_view, null);
-        }
+		// first check to see if the view is null. if so, we have to inflate it.
+		// to inflate it basically means to render, or show, the view.
+		if (v == null) {
+			LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			v = inflater.inflate(R.layout.thread_view, null);
+		}
 
-        Comment i = objects.get(position);
+		Comment i = objects.get(position);
 
-        if (i != null) {
+		if (i != null) {
 
-            // This is how you obtain a reference to the TextViews.
-            // These TextViews are created in the XML files we defined.
+			// This is how you obtain a reference to the TextViews.
+			// These TextViews are created in the XML files we defined.
 
-            TextView tt = (TextView) v.findViewById(R.id.toptext);
-            TextView ttd = (TextView) v.findViewById(R.id.toptextdata);
-            TextView mt = (TextView) v.findViewById(R.id.middletext);
-            TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
+			TextView tt = (TextView) v.findViewById(R.id.toptext);
+			TextView ttd = (TextView) v.findViewById(R.id.toptextdata);
+			TextView mt = (TextView) v.findViewById(R.id.middletext);
+			TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
 
-            // check to see if each individual textview is null.
-            // if not, assign some text!
-            if (tt != null){
-                tt.setText("Author: ");
-            }
-            if (ttd != null) {
-                if (i != null) {
-                    ttd.setText(i.getAuthorName());
-                }
-            }
-           
-            if (mtd != null){
-                mtd.setText(i.getCommentText());
-            }
+			// check to see if each individual textview is null.
+			// if not, assign some text!
+			if (tt != null){
+				tt.setText("Author: ");
+			}
+			if (ttd != null) {
+				if (i != null) {
+					ttd.setText(i.getAuthorName());
+				}
+			}
+
+			if (mtd != null){
+				mtd.setText(i.getCommentText());
+			}
 
 
-        }
+		}
 
-        // the view must be returned to our activity
-        return v;
+		// the view must be returned to our activity
+		return v;
 
-    }
+	}
 }

@@ -25,7 +25,7 @@ import ca.cmput301w14t09.model.GeoLocation;
 
 
 /**
- * Stores user information, and a reference to profile.
+ * User stores user information, and a reference to profile.
  * The user is not the profile, so profile specific information not
  * stored here.
  * 

@@ -75,7 +75,7 @@ public class FileSaving {
 		try {
 			String jsonIn = gson.toJson(user);
 			FileOutputStream fos = main.openFileOutput(user.getUserName() + ".sav",
-					Context.MODE_APPEND );
+					Context.MODE_PRIVATE );
 			fos.write(jsonIn.getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {

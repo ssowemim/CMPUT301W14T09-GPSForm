@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -26,10 +26,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
-
 import com.google.gson.Gson;
 
 /**
@@ -40,19 +38,21 @@ import com.google.gson.Gson;
  * on a per Profile basis.
  * 
  */
+
 public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<UnreadMarker> {
 	private boolean unread;
 	private Comment comment;
-	
+
 	public UnreadMarker() {
 		unread = true;
 	}
-	
+
 	/**
 	 * Constructor.
 	 * @param unread - is this comment unread?  T/F
 	 * @param comment - The comment this unread marker marks.
 	 */
+
 	public UnreadMarker(boolean unread, Comment comment) {
 		this.unread = unread;
 		this.comment = comment;
@@ -64,6 +64,7 @@ public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<Unread
 	 * @param userName - name of current user (cache is user-based)
 	 * @param main - activity calling this function.
 	 */
+
 	public void serialize(String userName, Activity main) {
 		Gson gson = new Gson();
 		String jsonIn = gson.toJson(this);           
@@ -81,7 +82,7 @@ public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<Unread
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * load loads this object, specified by name, from cache with userName.sav
 	 * @param userName - name of current user (cache is user-based)
@@ -89,32 +90,34 @@ public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<Unread
 	 * @param main - activity calling this function.
 	 * @return - the loaded comment.
 	 */
+
 	public UnreadMarker load(String userName, String name, Activity main) {
-        Gson gson = new Gson();
-        UnreadMarker unreadMarker = null;
-        
-        try{
-            FileInputStream fis = main.openFileInput(userName + ".sav");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader buff = new BufferedReader(isr);
-            String jsonOut = buff.readLine();
-            unreadMarker = gson.fromJson(jsonOut, UnreadMarker.class);
-            buff.close();
-        } catch (FileNotFoundException e) {
+		Gson gson = new Gson();
+		UnreadMarker unreadMarker = null;
 
-            e.printStackTrace();
-        } catch (IOException e) {
+		try{
+			FileInputStream fis = main.openFileInput(userName + ".sav");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buff = new BufferedReader(isr);
+			String jsonOut = buff.readLine();
+			unreadMarker = gson.fromJson(jsonOut, UnreadMarker.class);
+			buff.close();
+		} catch (FileNotFoundException e) {
 
-            e.printStackTrace();
-        }
-        return unreadMarker;
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return unreadMarker;
 	}
-	
+
 	/**
 	 * compareTo compares this UnreadMarker to another UnreadMarker.
 	 * @param otherComment - other comment object to compare to.
 	 * @return - this or otherComment, whichever has earlier date.
 	 */
+
 	public int compareTo(UnreadMarker otherMarker) {
 		Date compareDate = ((UnreadMarker) otherMarker).comment.getPostDate();
 		return this.comment.getPostDate().compareTo(compareDate);
@@ -143,21 +146,22 @@ public class UnreadMarker implements ICacheable<UnreadMarker>, Comparable<Unread
 	 * generateNewMarkers goes through all comments, check a read flag exists for each one.
 	 * TODO: I'm pretty sure this won't actually work - oldMarkers is made up of UnreadMarkers, so it is logical
 	 * that it won't say it "contains" a Comment.
-	*/
+	 */
+
 	public ArrayList<UnreadMarker> generateNewMarkers(ArrayList<UnreadMarker> oldMarkers, ArrayList<Comment> allComments) {
 		ArrayList<UnreadMarker> markers = new ArrayList<UnreadMarker>();
 		boolean isRead = false;
-		
+
 		// Compare each comment node, and mark if read only if it is already read in oldComments.
 		for(int index = 0; index < allComments.size(); index++) {
 			isRead = false;
-			
+
 			if (oldMarkers.contains(allComments.get(index)) == true)
-					isRead = true;
+				isRead = true;
 
 			markers.add(new UnreadMarker(isRead, comment));
 		}
-		
+
 		return markers;
 	}
 

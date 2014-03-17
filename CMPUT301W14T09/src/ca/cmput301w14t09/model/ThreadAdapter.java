@@ -19,9 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.model;
 
 import java.util.ArrayList;
-
 import ca.cmput301w14t09.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,15 +27,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-// http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
-
 /**
  * 
  * @author Conner
  * ThreadAdapter sets up a listview of the object comment
  * in a different format from CommentAdapter
+ * http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
  * 
  */
+
 public class ThreadAdapter extends ArrayAdapter<Comment>{
 
 	private ArrayList<Comment> objects;
@@ -50,6 +48,7 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 	/**
 	 * getView formats the listview to show the fields of comment
 	 */
+	
 	public View getView(int position, View convertView, ViewGroup parent){
 
 		// assign the view we are converting to a local variable

@@ -1,6 +1,5 @@
-
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -20,9 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.model;
 
 import java.io.Serializable;
-
 import ca.cmput301w14t09.model.GeoLocation;
-
 
 /**
  * 
@@ -32,19 +29,20 @@ import ca.cmput301w14t09.model.GeoLocation;
  * stored here.
  * 
  */
+
 public class User implements Serializable {
+
 	private Profile profile;
 	private GeoLocation currentLocation;
 	private String deviceId;
 	private String userName;
-	
 	private static final long serialVersionUID = 1L;		
-	
+
 	public User() {
 		this.userName = "";
 		this.deviceId = "";
 	}
-	
+
 	public User(String userName) {
 		this.userName = userName;
 		this.profile = new Profile(userName);
@@ -54,6 +52,7 @@ public class User implements Serializable {
 	/**
 	 * @return the profile
 	 */
+
 	public Profile getProfile() {
 		return profile;
 	}
@@ -61,6 +60,7 @@ public class User implements Serializable {
 	/**
 	 * @param profile the profile to set
 	 */
+
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
@@ -68,6 +68,7 @@ public class User implements Serializable {
 	/**
 	 * @return the currentLocation
 	 */
+
 	public GeoLocation getCurrentLocation() {
 		return currentLocation;
 	}
@@ -75,6 +76,7 @@ public class User implements Serializable {
 	/**
 	 * @param currentLocation the currentLocation to set
 	 */
+
 	public void setCurrentLocation(GeoLocation currentLocation) {
 		this.currentLocation = currentLocation;
 	}
@@ -82,6 +84,7 @@ public class User implements Serializable {
 	/**
 	 * @return the deviceId
 	 */
+
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -89,6 +92,7 @@ public class User implements Serializable {
 	/**
 	 * @param deviceId the deviceId to set
 	 */
+
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
@@ -96,6 +100,7 @@ public class User implements Serializable {
 	/**
 	 * @return the userName
 	 */
+
 	public String getUserName() {
 		return userName;
 	}
@@ -103,6 +108,7 @@ public class User implements Serializable {
 	/**
 	 * @param userName the userName to set
 	 */
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}

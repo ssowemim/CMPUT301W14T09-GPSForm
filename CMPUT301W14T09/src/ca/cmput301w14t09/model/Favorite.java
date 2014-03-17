@@ -1,6 +1,5 @@
-
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -26,10 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
-
 import android.app.Activity;
 import android.content.Context;
-
 import com.google.gson.Gson;
 
 /**
@@ -39,6 +36,7 @@ import com.google.gson.Gson;
  * Primarily included for flexible design going forward.
  * 
  */
+
 public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	private String name;
 	private Comment comment;
@@ -49,6 +47,7 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	 * @param userName - name of current user (cache is user-based)
 	 * @param main - activity calling this function.
 	 */
+
 	public void serialize(String userName, Activity main) {
 		Gson gson = new Gson();
 		String jsonIn = gson.toJson(this);           
@@ -66,7 +65,7 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * load loads this object, specified by name, from cache with userName.sav
 	 * @param userName - name of current user (cache is user-based)
@@ -74,37 +73,39 @@ public class Favorite implements ICacheable<Favorite>, Comparable<Favorite> {
 	 * @param main - activity calling this function.
 	 * @return - the loaded comment.
 	 */
+
 	public Favorite load(String userName, String name, Activity main) {
-        Gson gson = new Gson();
-        Favorite favorite = null;
-        
-        try{
-            FileInputStream fis = main.openFileInput(userName + ".sav");
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader buff = new BufferedReader(isr);
-            String jsonOut = buff.readLine();
-            favorite = gson.fromJson(jsonOut, Favorite.class);
-            buff.close();
-        } catch (FileNotFoundException e) {
+		Gson gson = new Gson();
+		Favorite favorite = null;
 
-            e.printStackTrace();
-        } catch (IOException e) {
+		try{
+			FileInputStream fis = main.openFileInput(userName + ".sav");
+			InputStreamReader isr = new InputStreamReader(fis);
+			BufferedReader buff = new BufferedReader(isr);
+			String jsonOut = buff.readLine();
+			favorite = gson.fromJson(jsonOut, Favorite.class);
+			buff.close();
+		} catch (FileNotFoundException e) {
 
-            e.printStackTrace();
-        }
-        return favorite;
+			e.printStackTrace();
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		return favorite;
 	}
-	
+
 	/**
 	 * compareTo compares this Favorite to another Favorite.
 	 * @param otherFavorite - other Favorite object to compare to.
 	 * @return - this or otherFavorite, whichever has earlier date.
 	 */
+
 	public int compareTo(Favorite otherFavorite) {
 		Date compareDate = ((Favorite) otherFavorite).comment.getPostDate();
 		return this.comment.getPostDate().compareTo(compareDate);
 	}
-	
+
 	public Comment getComment() {
 		return comment;
 	}

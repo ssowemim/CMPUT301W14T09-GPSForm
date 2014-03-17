@@ -23,8 +23,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-
 import android.graphics.Bitmap;
 import android.widget.ArrayAdapter;
 
@@ -32,6 +30,7 @@ import android.widget.ArrayAdapter;
  * PictureModelList holds an array of pictures
  *
  */
+
 public class PictureModelList {
 
 	private List<Picture> list;

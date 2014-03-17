@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@ import android.app.Activity;
  * @param <T> - object to serialize and load from file.
  * 
  */
+
 public interface ICacheable<T> {	
 	void serialize(String userName, Activity main);
 	T load(String userName, String name, Activity main);

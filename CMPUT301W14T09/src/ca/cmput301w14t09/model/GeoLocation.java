@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -26,57 +26,60 @@ import java.io.Serializable;
  * latitude and longitude of a comment
  *
  */
+
 public class GeoLocation implements Serializable {
 
-    private static final long serialVersionUID = 60L;
-    private double latitude;
-    private double longitude;
-    private String name;
+	private static final long serialVersionUID = 60L;
+	private double latitude;
+	private double longitude;
+	private String name;
 
-    /**
-     * initiate the Geolocation object with set lat lng as 0 and name as ""
-     *
-     */
-    public GeoLocation() {
-        latitude = 0.0;
-        longitude = 0.0;
-        name = "";
-    }
+	/**
+	 * initiate the Geolocation object with set lat lng as 0 and name as ""
+	 *
+	 */
 
-    public double getLatitude() {
-        return latitude;
-    }
+	public GeoLocation() {
+		latitude = 0.0;
+		longitude = 0.0;
+		name = "";
+	}
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+	public double getLatitude() {
+		return latitude;
+	}
 
-    public double getLongitude() {
-        return longitude;
-    }
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
+	public double getLongitude() {
+		return longitude;
+	}
 
 
-    public String getName() {
-        return name;
-    }
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
 
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * This function will be used in further iterations to calculate proximity to a
-     * target location
-     * 
-     */
-    public double calculateProximity(GeoLocation targetLocation){
-        return 0;
-    }
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * This function will be used in further iterations to calculate proximity to a
+	 * target location
+	 * 
+	 */
+
+	public double calculateProximity(GeoLocation targetLocation){
+		return 0;
+	}
 
 }

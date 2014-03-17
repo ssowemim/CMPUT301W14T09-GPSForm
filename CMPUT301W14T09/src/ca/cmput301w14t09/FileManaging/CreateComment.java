@@ -45,11 +45,11 @@ public class CreateComment {
 	 * @return
 	 */
 	
-	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment) {
+	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, Boolean attachment) {
 		Comment comment = new Comment();
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);
-
+		comment.setAttachment(attachment);
 		GeoLocation geo = lc.getGeoLocation();
 		comment.setGeoLocation(geo);
 

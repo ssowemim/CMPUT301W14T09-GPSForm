@@ -18,25 +18,18 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,6 +75,7 @@ public class TopCommentsActivity extends ListActivity {
     private Uri fileUri;
 
     private TopCommentsActivity topActivity;
+    protected PictureController picController = new PictureController();
 
     protected Intent intent;
     protected User user;
@@ -91,7 +85,7 @@ public class TopCommentsActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-
+    Boolean attachment = false;
 
     PictureModelList pictureModel;
     PictureController pictureController;
@@ -142,14 +136,19 @@ public class TopCommentsActivity extends ListActivity {
      * @param thread
      */
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         ArrayList<Comment> topComments;
         try {
             topComments = ElasticSearchOperations.pullThreads();
             adapter = new ThreadAdapter(this,
                     R.layout.thread_view, topComments);
             aCommentList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+
+
+
+
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -202,6 +201,7 @@ public class TopCommentsActivity extends ListActivity {
             public void onClick(View v) {
                 // capture picture
                 captureImage();
+                attachment = true;
             }
         });
 
@@ -279,23 +279,27 @@ public class TopCommentsActivity extends ListActivity {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, topActivity);
 
-                comment = CreateComment.newComment(lc, text2, text1, true);
+                comment = CreateComment.newComment(lc, text2, text1, true, attachment);
 
                 try
                 {
                     ElasticSearchOperations.postThread(comment);
+                    Thread.sleep(1000);
+
                 } catch (InterruptedException e)
                 {
-                    
+
                     e.printStackTrace();
                 }
-                
-                onStart();
-                aCommentList.invalidateViews();
+
+                recreate();
                 dialog.dismiss();
 
             }
         });
+
+
+
 
     }
 
@@ -321,7 +325,7 @@ public class TopCommentsActivity extends ListActivity {
      */
     public void captureImage() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+        fileUri = picController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
@@ -361,7 +365,7 @@ public class TopCommentsActivity extends ListActivity {
             if (resultCode == RESULT_OK) {
                 // successfully captured the image
                 // display it in image view
-                previewCapturedImage();
+                picController.previewCapturedImage(picImagePreview, comment, attachment, fileUri);
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
                 Toast.makeText(getApplicationContext(),
@@ -376,73 +380,6 @@ public class TopCommentsActivity extends ListActivity {
         }
     }
 
-    /**
-     * previewCaputuredImage displays the image
-     * taken into an ImageView for preview
-     */
-    private void previewCapturedImage() {
-        try{
-            picImagePreview.setVisibility(View.VISIBLE);
-
-            //bitmap factory
-            BitmapFactory.Options options = new BitmapFactory.Options();
-
-            //downsizing image into a smaller size and will throw exception for larger images
-            options.inSampleSize = 8;
-
-            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
-
-            picImagePreview.setImageBitmap(bitmap);
-
-        } catch(NullPointerException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * getOutputMediaFileUri Creates the File Uri
-     * that will be used to store images
-     * @param type
-     * @return
-     */
-    public Uri getOutputMediaFileUri(int type) {
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
-
-    /**
-     * getOutputMediaFile Returns the image
-     * @param v
-     */
-    private static File getOutputMediaFile(int type) {
-
-        //External Sdcard Location
-        File mediaStorageDir = new File(
-                Environment
-                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                IMAGE_DIRECTORY_NAME);
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d(IMAGE_DIRECTORY_NAME, "Oops! Failed create "
-                        + IMAGE_DIRECTORY_NAME + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
-    }
 
     /**
      * viewFavorites checks to see if you are guest or not
@@ -491,9 +428,5 @@ public class TopCommentsActivity extends ListActivity {
         startActivity(intent);
 
     }
-
-
-
-
 
 }

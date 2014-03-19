@@ -78,7 +78,8 @@ public class TopCommentsActivity extends ListActivity {
 	private Uri fileUri;
 
 	private TopCommentsActivity topActivity;
-	private PictureController pictureController;
+	
+	PictureController pictureController;
 
 	protected Intent intent;
 	protected User user;
@@ -88,7 +89,7 @@ public class TopCommentsActivity extends ListActivity {
 
 	ImageButton addPicImageButton;
 	ImageView picImagePreview;
-	Boolean attachment;
+	Bitmap picture = null;
 
 	PictureModelList pictureModel;
 
@@ -96,14 +97,12 @@ public class TopCommentsActivity extends ListActivity {
 	EditText commentText;
 	ThreadAdapter adapter;
 
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_top_comments);
 		topActivity = this;
-		attachment = false;
+	//	attachment = false;
 
 		aCommentList = (ListView) findViewById(android.R.id.list);
 
@@ -140,21 +139,17 @@ public class TopCommentsActivity extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		ArrayList<Comment> topComments;
-		try {
-			topComments = ElasticSearchOperations.pullThreads();
+		ArrayList<Comment> topComments = null;
+			try {
+				topComments = ElasticSearchOperations.pullThreads();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			adapter = new ThreadAdapter(this,
 					R.layout.thread_view, topComments);
 			aCommentList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
-
-
-
-
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 
 	}
 
@@ -180,7 +175,7 @@ public class TopCommentsActivity extends ListActivity {
 
 		//new Location Controller 
 		final LocationController lc = new LocationController();
-		pictureController = new PictureController();
+		this.pictureController = new PictureController(this);
 
 		//https://github.com/baoliangwang/CurrentLocation
 		//setup location manager
@@ -205,7 +200,7 @@ public class TopCommentsActivity extends ListActivity {
 			public void onClick(View v) {
 				// capture picture
 				captureImage();
-				attachment = true;
+			//	attachment = true;
 			}
 		});
 
@@ -283,7 +278,9 @@ public class TopCommentsActivity extends ListActivity {
 				user.getProfile().setAuthorName(text2);
 				FileSaving.saveUserFile(user, topActivity);
 
-				comment = CreateComment.newComment(lc, text2, text1, true, attachment);
+			//	picture = comment.getPicture();
+				picture = pictureController.finalizePicture(picture);
+				comment = CreateComment.newComment(lc, text2, text1, true, picture);
 
 				try
 				{
@@ -305,30 +302,10 @@ public class TopCommentsActivity extends ListActivity {
 
 	}
 
-	public void previewCapturedImage() {
-		try{
-			picImagePreview.setVisibility(View.VISIBLE);
-
-			//bitmap factory
-			BitmapFactory.Options options = new BitmapFactory.Options();
-
-			//downsizing image into a smaller size and will throw exception for larger images
-			options.inSampleSize = 8;
-
-			final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
-
-			picImagePreview.setImageBitmap(bitmap);
-			comment.setPicture(bitmap);
-			attachment= false;
-
-		} catch(NullPointerException e) {
-			e.printStackTrace();
-		}
-
-		// return false;
+	
+	public void saveComment(){
+		
 	}
-
-
 
 	/**
 	 * isDeviceSupportCamera does a check to see
@@ -380,19 +357,20 @@ public class TopCommentsActivity extends ListActivity {
 		fileUri = savedInstanceState.getParcelable("file_uri");
 	}
 
-
 	/**
 	 * onActivityResult will Receive the activity result
-	 * method and will be called after closing the camera
+	 * method and will be called after closing the camera, this method 
+	 * is always called when camera is closed.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
 		// if the result is capturing Image
 		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
 				// successfully captured the image
 				// display it in image view
-				previewCapturedImage();
+				picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
 			} else if (resultCode == RESULT_CANCELED) {
 				// user cancelled Image capture
 				Toast.makeText(getApplicationContext(),
@@ -406,7 +384,6 @@ public class TopCommentsActivity extends ListActivity {
 			}
 		}
 	}
-
 
 	/**
 	 * viewFavorites checks to see if you are guest or not

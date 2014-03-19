@@ -91,9 +91,7 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			}
 
 			if(piv != null){
-			    if (i.getAttachment() != true){
 			        piv.setImageBitmap(i.getPicture());
-			    }
 			}
 		}
 

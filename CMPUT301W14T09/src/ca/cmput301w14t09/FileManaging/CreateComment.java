@@ -18,7 +18,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.FileManaging;
 
+import android.graphics.Bitmap;
 import ca.cmput301w14t09.Controller.LocationController;
+import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
@@ -43,14 +45,20 @@ public class CreateComment {
 	 * @param commentText
 	 * @param topComment
 	 * @param attachment
+	 * @param picture
 	 * @return
 	 */
 	
-	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, Boolean attachment) {
+	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, Bitmap picture) {
 		Comment comment = new Comment();
+	//	PictureController pictureController = new PictureController();
+		
 		comment.setAuthorName(authorname);
 		comment.setCommentText(commentText);
-		comment.setAttachment(attachment);
+		
+		
+		comment.setPicture(picture);
+		
 		GeoLocation geo = lc.getGeoLocation();
 		comment.setGeoLocation(geo);
 
@@ -59,5 +67,7 @@ public class CreateComment {
 		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString()));
 		return comment;
 	}
+	
+	
 
 }

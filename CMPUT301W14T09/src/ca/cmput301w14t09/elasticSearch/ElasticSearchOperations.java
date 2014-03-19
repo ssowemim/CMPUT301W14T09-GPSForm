@@ -52,8 +52,8 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations {
 
     private static String serverName = "ElasticSearch";
-    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test77/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test77/_search?pretty=1";
+    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/_search?pretty=1";
 
     private static Gson GSON = null;
     static Comment comment;
@@ -76,7 +76,6 @@ public class ElasticSearchOperations {
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-               // Gson gson = new Gson();
                 HttpPost request = new HttpPost(postAddress);
 
                 try { 
@@ -110,7 +109,7 @@ public class ElasticSearchOperations {
     
     private static void constructGson(){
         GsonBuilder builder = new GsonBuilder();
-        builder.registerTypeAdapter(Bitmap.class, new BitmapJsonConverter());
+        builder.registerTypeAdapter(Bitmap.class, new JsonBitmapConverter());
         GSON = builder.create();
     }
 
@@ -123,12 +122,16 @@ public class ElasticSearchOperations {
     public static ArrayList<Comment> pullThreads() throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         final ArrayList<Comment> commentList = new ArrayList<Comment> ();
+
+        if (GSON == null)
+            constructGson();
+        
         Thread thread = new Thread() {
 
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                Gson gson = new Gson();
+             //   Gson gson = new Gson();
 
                 try {
                     HttpPost searchRequest = new HttpPost(searchAddress);
@@ -141,7 +144,7 @@ public class ElasticSearchOperations {
                     String json = getEntityContent(response);
 
                     Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Comment>>(){}.getType();
-                    ElasticSearchSearchResponse<Comment> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+                    ElasticSearchSearchResponse<Comment> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
 
                     for (ElasticSearchResponse<Comment> r : esResponse.getHits()) {
                         Comment topComment = r.getSource();
@@ -165,6 +168,7 @@ public class ElasticSearchOperations {
         latch.await();
 
         return commentList;
+      //  return (ArrayList<Comment>) Collections.unmodifiableList(commentList);
     }
 
     /**

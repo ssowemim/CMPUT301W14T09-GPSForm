@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-package ca.cmput301w14t09.FileManaging;
+package ca.cmput301w14t09.elasticSearch;
 
 import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
@@ -30,6 +30,12 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+
+/**
+ * Provides custom base64 serialization / deserialization for Bitmaps.
+ * Algorithm taken from: http://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
+ * @author zjullion
+ */
 
 /**
  * 

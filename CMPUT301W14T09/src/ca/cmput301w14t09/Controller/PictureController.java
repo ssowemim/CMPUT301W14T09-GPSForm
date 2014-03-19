@@ -30,11 +30,23 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import ca.cmput301w14t09.R;
+import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Model.Comment;
 
 public class PictureController extends Activity{
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
+    
+    public static final int MAX_BITMAP_DIMENSIONS = 50;
+    
+    private TopCommentsActivity activity;
+  //  private Comment model;
+    
+    public PictureController(TopCommentsActivity activity){
+    	this.activity = activity;
+    //	this.model = model;
+    } 
 
     //Directory name to store captured images
     private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
@@ -88,7 +100,7 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public Boolean previewCapturedImage(ImageView picImagePreview, Comment comment, Boolean attachment, Uri fileUri) {
+    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview, Comment comment) {
         try{
             picImagePreview.setVisibility(View.VISIBLE);
 
@@ -98,19 +110,44 @@ public class PictureController extends Activity{
             //downsizing image into a smaller size and will throw exception for larger images
             options.inSampleSize = 8;
 
-            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
-
+             final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+             
             picImagePreview.setImageBitmap(bitmap);
-            comment.setPicture(bitmap);
+            picture = bitmap;
+          //  comment.setPicture(bitmap);
           //  attachment= false;
+          //  return bitmap;
 
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
+		//return picture;
         
-        return false;
+        return picture;
     }
 
+    public Bitmap finalizePicture(Bitmap picture){
+    	if (picture == null){
+    		picture = BitmapFactory.decodeResource(this.activity.getResources(), R.drawable.no_img);
+    	}
+    	
+    	if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
+    		double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
+    		
+    		if(picture.getHeight() > picture.getWidth())
+    			scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
+    		
+    		int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
+    		int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
+    		
+    		 picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
+    		
+    		
+    		//this.model();
+    	
+    	}
+    	return picture;
+    }
 
 
 }

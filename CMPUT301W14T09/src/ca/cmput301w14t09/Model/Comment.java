@@ -47,7 +47,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 	private static final long serialVersionUID = 3L;
 	private GeoLocation geoLocation;
 	private Bitmap picture;
-	private Boolean attachment;
 	private String authorName;
 	private String commentText;
 	private Date postDate;
@@ -59,7 +58,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 		super();
 		geoLocation = null;
 		picture = null;
-		attachment = false;
 		authorName = "";
 		commentText = "";
 		favoriteCount = 0;
@@ -144,22 +142,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 
 	public void setGeoLocation(GeoLocation geoLocation) {
 		this.geoLocation = geoLocation;
-	}
-
-	/**
-	 * @return the attachment
-	 */
-
-	public Boolean getAttachment() {
-		return attachment;
-	}
-
-	/**
-	 * @param attachment the attachment to set
-	 */
-
-	public void setAttachment(Boolean attachment) {
-		this.attachment = attachment;
 	}
 
 	public Bitmap getPicture(){

@@ -53,14 +53,14 @@ public class ElasticSearchOperations {
 
     private static String serverName = "ElasticSearch";
     private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/_search?pretty=1";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/_search?pretty=1&size=100";
 
     private static Gson GSON = null;
     static Comment comment;
     
 
     /**
-     * postThread posts a top comment to Elasti-Search.
+     * postThread posts a top comment to Elastic-Search.
      * Tested and verified.
      * @param ElasticSearchOperations
      * @throws InterruptedException 
@@ -192,7 +192,7 @@ public class ElasticSearchOperations {
 
                 try {
                     HttpPost searchRequest = new HttpPost(searchAddress);
-                    String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"author\",\"query\" : \"fi\"}}}";
+                    String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"threadId\", \"query\" : \"" + threadId + "\"}}}";
 
                     StringEntity stringentity = new StringEntity(query);
                     searchRequest.setEntity(stringentity);

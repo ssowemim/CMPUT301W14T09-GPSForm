@@ -44,6 +44,8 @@ public class UnreadMarker implements Serializable, Comparable<UnreadMarker> {
 	private boolean unread;
 	private Comment comment;
 
+	private static final long serialVersionUID = 13L;
+	
 	public UnreadMarker() {
 		unread = true;
 	}

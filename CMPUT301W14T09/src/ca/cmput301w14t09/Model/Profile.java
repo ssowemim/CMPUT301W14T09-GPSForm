@@ -21,7 +21,7 @@ package ca.cmput301w14t09.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import ca.cmput301w14t09.Model.Favorite;
+
 import ca.cmput301w14t09.Model.UnreadMarker;
 
 /**
@@ -33,14 +33,14 @@ import ca.cmput301w14t09.Model.UnreadMarker;
 
 public class Profile implements Serializable {
 
-	private ArrayList<Favorite> favorites;
+	private ArrayList<Comment> favorites;
 	private java.util.ArrayList<UnreadMarker> unreadComments;
 	private String authorName;
 	private String userName;
 	private static final long serialVersionUID = 2L;
 
 	public Profile(String userName) {
-		this.favorites = new ArrayList<Favorite>();
+		this.favorites = new ArrayList<Comment>();
 		this.unreadComments = new ArrayList<UnreadMarker>();
 		this.authorName = userName;
 		this.userName = userName;
@@ -50,12 +50,12 @@ public class Profile implements Serializable {
 	 * @return the favorites
 	 */
 
-	public ArrayList<Favorite> getFavorites() {
+	public ArrayList<Comment> getFavorites() {
 		return favorites;
 	}
 
 
-	public void add(Favorite newFavorite) {
+	public void add(Comment newFavorite) {
 		favorites.add(newFavorite);
 	}
 
@@ -63,7 +63,7 @@ public class Profile implements Serializable {
 	 * @param favorites the favorites to set
 	 */
 
-	public void setFavorites(ArrayList<Favorite> favorites) {
+	public void setFavorites(ArrayList<Comment> favorites) {
 		this.favorites = favorites;
 	}
 

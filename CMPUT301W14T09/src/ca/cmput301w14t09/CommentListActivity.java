@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -62,8 +62,8 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  *
  */
 public class CommentListActivity extends ListActivity {
-    
-  //Activity request codes to take pictures
+
+    //Activity request codes to take pictures
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
 
@@ -73,7 +73,7 @@ public class CommentListActivity extends ListActivity {
     //File uri to store Images
     private Uri fileUri;
 
-    
+
     PictureController pictureController;
 
     protected Intent intent;
@@ -92,244 +92,246 @@ public class CommentListActivity extends ListActivity {
     EditText authorText;
     EditText commentText;
 
-	protected ListView favList;
-	protected String firstComment;
-	protected CommentListActivity commentActivity;
-	 
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_comment_list);
-		favList = (ListView) findViewById(android.R.id.list);
-		
-		favList.setOnItemClickListener(new OnItemClickListener(){
-
-                    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-
-                            Comment thread = (Comment)(favList.getItemAtPosition(arg2)); 
-
-                            // Save comment to favorites list
-                            
-                    }
-
-            });
-					
-		commentActivity = this;
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.comment_list, menu);
-
-	        intent = getIntent();
-	        user = (User) intent.getSerializableExtra("CURRENT_USER");
-		firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
-		System.out.println(firstComment);
-		onStart();
+    protected ListView favList;
+    protected String firstComment;
+    protected CommentListActivity commentActivity;
 
 
-		return true;
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_comment_list);
+        favList = (ListView) findViewById(android.R.id.list);
 
-	/**
-	 * onStart populates the listview with results from the elasticSearch
-	 *  query found in ElasticSearchOperations.pullOneThread(firstComment)
-	 */
-	@Override
-	protected void onStart() {
-		super.onStart();
+        favList.setOnItemClickListener(new OnItemClickListener(){
 
-		try {
-			ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
-			adapter = new CommentAdapter(this,
-					R.layout.comment_view, comment);
-			favList.setAdapter(adapter);
+                Comment thread = (Comment)(favList.getItemAtPosition(arg2)); 
 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+                user.profile.add(thread);
 
-	}
+                FileSaving.saveUserFile(user, commentActivity);
 
+            }
 
-	//@SuppressLint("NewApi")
-	public void replyComment(View v) {
-	    
+        });
 
-	                dialog = new Dialog(this);
+        commentActivity = this;
+    }
 
-	                dialog.setContentView(R.layout.pop_up_comment);
-	                dialog.setTitle("New Top Comment");
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.comment_list, menu);
 
-	                authorText=(EditText)dialog.findViewById(R.id.authorText);
-	                commentText=(EditText)dialog.findViewById(R.id.commentText);
-	                final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
-	                final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
-
-	                //new Location Controller 
-	                final LocationController lc = new LocationController();
-	                this.pictureController = new PictureController();
-
-	                //https://github.com/baoliangwang/CurrentLocation
-	                //setup location manager
-	                LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-	                authorText.setText(user.getProfile().getAuthorName());
-	                Button save=(Button)dialog.findViewById(R.id.save);
-	                Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
-
-	                //update location button
-	                Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
-
-	                picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
-	                addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
-
-	                dialog.show();
-
-	                //Capture image button click event              
-	                this.addPicImageButton.setOnClickListener(new OnClickListener() {
-
-	                        @Override
-	                        public void onClick(View v) {
-	                                // capture picture
-	                                captureImage();
-	                        //      attachment = true;
-	                        }
-	                });
-
-	                // Checks camera availability
-	                if (!isDeviceSupportCamera()) {
-	                        Toast.makeText(getApplicationContext(),
-	                                        "No Camera Detected.", Toast.LENGTH_LONG).show();
-	                }
-
-	                // Retrieve location updates through LocationListener interface
-	                //https://github.com/baoliangwang/CurrentLocation
-	                LocationListener locationListener = new LocationListener() {                            
-
-	                        public void onProviderDisabled (String provider) {
-
-	                        }
-
-	                        public void onProviderEnabled (String provider) {
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("CURRENT_USER");
+        firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
+        System.out.println(firstComment);
+        onStart();
 
 
-	                        }
+        return true;
+    }
 
-	                        public void onStatusChanged (String provider, int status, Bundle extras) {
+    /**
+     * onStart populates the listview with results from the elasticSearch
+     *  query found in ElasticSearchOperations.pullOneThread(firstComment)
+     */
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        try {
+            ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
 
-	                        }
+            adapter = new CommentAdapter(this,
+                    R.layout.comment_view, comment);
+            favList.setAdapter(adapter);
 
-	                        @Override
-	                        public void onLocationChanged(android.location.Location location) {
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-	                                lc.locationchanged(location, tv2, tv3);
-
-
-	                        }
-	                };
-
-	                dialog.show();
-	                
-	              //request location update
-	                //https://github.com/baoliangwang/CurrentLocation
-	                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
-
-	                //update location button
-	                btnSetLocation.setOnClickListener(new View.OnClickListener() {
-
-	                        @Override
-	                        public void onClick(View v) { 
-	                                String latString;
-	                                String lngString;
-
-	                                lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
+    }
 
 
-	                        }
-	                });
+    //@SuppressLint("NewApi")
+    public void replyComment(View v) {
 
-	                //cancel button
-	                btnCancel.setOnClickListener(new View.OnClickListener() {
 
-	                        @Override
-	                        public void onClick(View v) {
-	                                dialog.dismiss();
+        dialog = new Dialog(this);
 
-	                        }
-	                });
+        dialog.setContentView(R.layout.pop_up_comment);
+        dialog.setTitle("New Top Comment");
 
-	                //save button
-	                save.setOnClickListener(new View.OnClickListener() {
+        authorText=(EditText)dialog.findViewById(R.id.authorText);
+        commentText=(EditText)dialog.findViewById(R.id.commentText);
+        final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
+        final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
 
-	                        @Override
-	                        public void onClick(View v) {
-	                                String text1 = commentText.getText().toString();
-	                                String text2 = authorText.getText().toString();
-	                                user.getProfile().setAuthorName(text2);
-	                                FileSaving.saveUserFile(user, commentActivity );
+        //new Location Controller 
+        final LocationController lc = new LocationController();
+        this.pictureController = new PictureController();
 
-	                        //      picture = comment.getPicture();
-	                                picture = pictureController.finalizePicture(picture, commentActivity);
-	                                comment = CreateComment.newReplyComment(lc, text2, text1, false, picture, firstComment);
+        //https://github.com/baoliangwang/CurrentLocation
+        //setup location manager
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
-	                                try
-	                                {
-	                                        ElasticSearchOperations.postThread(comment);
-	                                        Thread.sleep(1000);
-	                                        adapter.notifyDataSetChanged();
-	                                        recreate();
+        authorText.setText(user.getProfile().getAuthorName());
+        Button save=(Button)dialog.findViewById(R.id.save);
+        Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 
-	                                } catch (InterruptedException e)
-	                                {
+        //update location button
+        Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
 
-	                                        e.printStackTrace();
-	                                }
+        picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
+        addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
 
-	                                dialog.dismiss();
+        dialog.show();
 
-	                        }
-	                });
-	    onStart();
-		
-	}
-	
+        //Capture image button click event              
+        this.addPicImageButton.setOnClickListener(new OnClickListener() {
 
-        /**
-         * isDeviceSupportCamera does a check to see
-         * if device hardware camera is present or not
-         * @return
-         */
-        public boolean isDeviceSupportCamera() {
-                if(getApplicationContext().getPackageManager().hasSystemFeature(
-                                PackageManager.FEATURE_CAMERA)){
-                        //returns true if device has a camera
-                        return true;
-                }else {
-                        //returns false if device doesn't have a camera
-                        return false;
+            @Override
+            public void onClick(View v) {
+                // capture picture
+                captureImage();
+                //      attachment = true;
+            }
+        });
+
+        // Checks camera availability
+        if (!isDeviceSupportCamera()) {
+            Toast.makeText(getApplicationContext(),
+                    "No Camera Detected.", Toast.LENGTH_LONG).show();
+        }
+
+        // Retrieve location updates through LocationListener interface
+        //https://github.com/baoliangwang/CurrentLocation
+        LocationListener locationListener = new LocationListener() {                            
+
+            public void onProviderDisabled (String provider) {
+
+            }
+
+            public void onProviderEnabled (String provider) {
+
+
+            }
+
+            public void onStatusChanged (String provider, int status, Bundle extras) {
+
+
+            }
+
+            @Override
+            public void onLocationChanged(android.location.Location location) {
+
+                lc.locationchanged(location, tv2, tv3);
+
+
+            }
+        };
+
+        dialog.show();
+
+        //request location update
+        //https://github.com/baoliangwang/CurrentLocation
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+
+
+        //update location button
+        btnSetLocation.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) { 
+                String latString;
+                String lngString;
+
+                lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
+
+
+            }
+        });
+
+        //cancel button
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+
+        //save button
+        save.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                String text1 = commentText.getText().toString();
+                String text2 = authorText.getText().toString();
+                user.getProfile().setAuthorName(text2);
+                FileSaving.saveUserFile(user, commentActivity );
+
+                //      picture = comment.getPicture();
+                picture = pictureController.finalizePicture(picture, commentActivity);
+                comment = CreateComment.newReplyComment(lc, text2, text1, false, picture, firstComment);
+
+                try
+                {
+                    ElasticSearchOperations.postThread(comment);
+                    Thread.sleep(1000);
+                    adapter.notifyDataSetChanged();
+                    recreate();
+
+                } catch (InterruptedException e)
+                {
+
+                    e.printStackTrace();
                 }
+
+                dialog.dismiss();
+
+            }
+        });
+        onStart();
+
+    }
+
+
+    /**
+     * isDeviceSupportCamera does a check to see
+     * if device hardware camera is present or not
+     * @return
+     */
+    public boolean isDeviceSupportCamera() {
+        if(getApplicationContext().getPackageManager().hasSystemFeature(
+                PackageManager.FEATURE_CAMERA)){
+            //returns true if device has a camera
+            return true;
+        }else {
+            //returns false if device doesn't have a camera
+            return false;
         }
+    }
 
-        /**
-         * captureImage will launch camera app request image capture
-         * Creates the intent to take a picture, and then starts it
-         */
-        public void captureImage() {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+    /**
+     * captureImage will launch camera app request image capture
+     * Creates the intent to take a picture, and then starts it
+     */
+    public void captureImage() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
-                // starts the image capture intent
-                startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+        // starts the image capture intent
+        startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
 
-        }
+    }
 
-	
+
 }

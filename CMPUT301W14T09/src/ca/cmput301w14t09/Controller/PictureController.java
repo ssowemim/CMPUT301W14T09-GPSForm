@@ -15,6 +15,9 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+
+//http://stackoverflow.com/questions/5871482/serializing-and-de-serializing-android-graphics-bitmap-in-java
+
 package ca.cmput301w14t09.Controller;
 
 import java.io.File;

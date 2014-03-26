@@ -76,9 +76,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			TextView postDateData = (TextView) v.findViewById(R.id.postDateData);
 			TextView commentName = (TextView) v.findViewById(R.id.commentName);
 			TextView commentData = (TextView) v.findViewById(R.id.commentData);
-			Button replyBtn = (Button) v.findViewById(R.id.replyBtn);
-			Button favoriteBtn = (Button) v.findViewById(R.id.favoriteBtn);
-
+			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
 			if (geoLocation != null) {

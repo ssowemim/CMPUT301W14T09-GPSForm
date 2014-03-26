@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -49,6 +48,7 @@ import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
@@ -95,7 +95,9 @@ public class TopCommentsActivity extends ListActivity {
 
 	EditText authorText;
 	EditText commentText;
-	ThreadAdapter adapter;
+	ThreadAdapter adapter1;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -146,13 +148,13 @@ public class TopCommentsActivity extends ListActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			adapter = new ThreadAdapter(this,
+			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view, topComments);
-			aCommentList.setAdapter(adapter);
-			adapter.notifyDataSetChanged();
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
 
 	}
-
+			
 	/**
 	 * popUp is a dialog that is invoked when the new
 	 * comment button is pressed.
@@ -175,7 +177,7 @@ public class TopCommentsActivity extends ListActivity {
 
 		//new Location Controller 
 		final LocationController lc = new LocationController();
-		this.pictureController = new PictureController(this);
+		this.pictureController = new PictureController();
 
 		//https://github.com/baoliangwang/CurrentLocation
 		//setup location manager
@@ -238,7 +240,7 @@ public class TopCommentsActivity extends ListActivity {
 		};
 
 		dialog.show();
-
+////////
 		//request location update
 		//https://github.com/baoliangwang/CurrentLocation
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
@@ -279,14 +281,14 @@ public class TopCommentsActivity extends ListActivity {
 				FileSaving.saveUserFile(user, topActivity);
 
 			//	picture = comment.getPicture();
-				picture = pictureController.finalizePicture(picture);
+				picture = pictureController.finalizePicture(picture, topActivity);
 				comment = CreateComment.newComment(lc, text2, text1, true, picture);
 
 				try
 				{
 					ElasticSearchOperations.postThread(comment);
 					Thread.sleep(1000);
-					adapter.notifyDataSetChanged();
+					adapter1.notifyDataSetChanged();
 					recreate();
 
 				} catch (InterruptedException e)
@@ -423,14 +425,13 @@ public class TopCommentsActivity extends ListActivity {
 	 * @param thread
 	 */
 	public void commentThread(Comment thread) {
-
 		String stringId = new String();
 		stringId = thread.getThreadId();
 
 		Intent intent = new Intent(this, CommentListActivity.class);
 		intent.putExtra("THREAD_ID", stringId);
+	        intent.putExtra("CURRENT_USER", user);                
 		startActivity(intent);
-
 	}
 
 }

@@ -52,8 +52,8 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations {
 
     private static String serverName = "ElasticSearch";
-    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test79/_search?pretty=1&size=100";
+    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test88/";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test88/_search?pretty=1&size=100";
 
     private static Gson GSON = null;
     static Comment comment;
@@ -193,6 +193,7 @@ public class ElasticSearchOperations {
                 try {
                     HttpPost searchRequest = new HttpPost(searchAddress);
                     String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"threadId\", \"query\" : \"" + threadId + "\"}}}";
+                    
 
                     StringEntity stringentity = new StringEntity(query);
                     searchRequest.setEntity(stringentity);
@@ -201,12 +202,17 @@ public class ElasticSearchOperations {
                     String json = getEntityContent(response);
 
                     Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Comment>>(){}.getType();
-                    ElasticSearchSearchResponse<Comment> esResponse = gson.fromJson(json, elasticSearchSearchResponseType);
+                    ElasticSearchSearchResponse<Comment> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
 
                     for (ElasticSearchResponse<Comment> r : esResponse.getHits()) {
                         Comment topComment = r.getSource();
                         commentList.add(topComment);
                     }
+                    
+                    // Sort by latest dated element.
+                    Collections.sort(commentList);
+                    
+                    
                     latch.countDown();
                     //searchRequest.releaseConnection();   
 

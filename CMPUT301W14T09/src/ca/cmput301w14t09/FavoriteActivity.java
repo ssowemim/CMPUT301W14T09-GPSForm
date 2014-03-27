@@ -79,10 +79,10 @@ public class FavoriteActivity extends ListActivity
      * elasticSearch, finding all of the top comments
      * @param thread
      */
- 
+
     public void setList() {
 
-            ArrayList<Comment> comments = user.getProfile().getFavorites();
+        ArrayList<Comment> comments = user.getProfile().getFavorites();
         adapter1 = new ThreadAdapter(this,
                 R.layout.thread_view, comments);
         favList.setAdapter(adapter1);

@@ -37,6 +37,7 @@ import android.widget.ImageView;
 import ca.cmput301w14t09.CommentListActivity;
 import ca.cmput301w14t09.R;
 import ca.cmput301w14t09.TopCommentsActivity;
+import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 
 public class PictureController extends Activity{
@@ -103,51 +104,46 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview, Comment comment) {
-        try{
+    public SerializableBitmap previewCapturedImage(Uri fileUri, SerializableBitmap picture, ImageView picImagePreview, Comment comment) {
+        try {
             picImagePreview.setVisibility(View.VISIBLE);
 
             //bitmap factory
             BitmapFactory.Options options = new BitmapFactory.Options();
 
-            //downsizing image into a smaller size and will throw exception for larger images
+            //downsizing image into a smaller size will throw exception for larger images
             options.inSampleSize = 8;
 
-             final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
+            final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
              
             picImagePreview.setImageBitmap(bitmap);
-            picture = bitmap;
-          //  comment.setPicture(bitmap);
-          //  attachment= false;
-          //  return bitmap;
+            picture.bitmap = bitmap;
 
         } catch(NullPointerException e) {
             e.printStackTrace();
         }
-		//return picture;
         
         return picture;
     }
 
-    public Bitmap finalizePicture(Bitmap picture, ListActivity activity) {
+    public SerializableBitmap finalizePicture(SerializableBitmap picture, ListActivity activity) {
     	if (picture == null) {
-    		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
+    	        picture = new SerializableBitmap();
+    		picture.bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
     	}
     	
-    	if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
-    		double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
+    	if(picture.bitmap.getWidth() > MAX_BITMAP_DIMENSIONS || picture.bitmap.getHeight() > MAX_BITMAP_DIMENSIONS){
+    		double scalingFactor = picture.bitmap.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
     		
-    		if(picture.getHeight() > picture.getWidth())
-    			scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
+    		if(picture.bitmap.getHeight() > picture.bitmap.getWidth())
+    			scalingFactor = picture.bitmap.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
     		
-    		int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
-    		int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
+    		int newWidth = (int)Math.round(picture.bitmap.getWidth()/scalingFactor);
+    		int newHeight = (int)Math.round(picture.bitmap.getHeight()/scalingFactor);
     		
-    		 picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
-    		
+    		 picture.bitmap = Bitmap.createScaledBitmap(picture.bitmap, newWidth, newHeight, false);
     		
     		//this.model();
-    	
     	}
     	return picture;
     }

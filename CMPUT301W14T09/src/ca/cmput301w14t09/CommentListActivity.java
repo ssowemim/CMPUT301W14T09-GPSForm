@@ -47,6 +47,7 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
+import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.PictureModelList;
@@ -85,7 +86,7 @@ public class CommentListActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    Bitmap picture = null;
+    SerializableBitmap picture = null;
 
     PictureModelList pictureModel;
 
@@ -276,7 +277,6 @@ public class CommentListActivity extends ListActivity {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, commentActivity );
 
-                //      picture = comment.getPicture();
                 picture = pictureController.finalizePicture(picture, commentActivity);
                 comment = CreateComment.newReplyComment(lc, text2, text1, false, picture, firstComment);
 

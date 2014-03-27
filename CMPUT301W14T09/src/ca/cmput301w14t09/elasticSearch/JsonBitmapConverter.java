@@ -59,7 +59,7 @@ JsonSerializer<Bitmap> {
 			JsonSerializationContext context) {
 
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		src.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+		src.compress(Bitmap.CompressFormat.JPEG, 80, stream);		
 		String base64Encoded = Base64.encodeToString(stream.toByteArray(), Base64.NO_WRAP);
 		return new JsonPrimitive(base64Encoded);
 	}

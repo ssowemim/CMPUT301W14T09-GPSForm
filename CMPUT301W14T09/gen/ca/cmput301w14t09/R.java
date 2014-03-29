@@ -59,6 +59,7 @@ public final class R {
         public static final int postDateData=0x7f08000c;
         public static final int replyComment=0x7f080000;
         public static final int save=0x7f080018;
+        public static final int sortLocation=0x7f080024;
         public static final int takePicture=0x7f080019;
         public static final int textView1=0x7f08000f;
         public static final int toptext=0x7f08001e;

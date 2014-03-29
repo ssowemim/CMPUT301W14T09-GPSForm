@@ -173,8 +173,6 @@ public class TopCommentsActivity extends ListActivity {
 
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
-        final EditText tv2 = (EditText)dialog.findViewById(R.id.longtext3);
-        final EditText tv3 = (EditText)dialog.findViewById(R.id.lattext3);
 
         //new Location Controller 
         final LocationController lc = new LocationController();

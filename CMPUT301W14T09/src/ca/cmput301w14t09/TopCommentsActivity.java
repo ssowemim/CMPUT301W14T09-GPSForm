@@ -234,7 +234,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void onLocationChanged(android.location.Location location) {
 
-                lc.locationchanged(location, tv2, tv3);
+                lc.locationchanged(location);
 
 
             }
@@ -252,10 +252,8 @@ public class TopCommentsActivity extends ListActivity {
 
             @Override
             public void onClick(View v) { 
-                String latString;
-                String lngString;
 
-                lc.updatelocation(dialog.getContext(), tv2.getText().toString(), tv3.getText().toString());
+                lc.updatelocation();
 
 
             }

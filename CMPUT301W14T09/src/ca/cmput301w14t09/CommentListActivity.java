@@ -241,12 +241,12 @@ public class CommentListActivity extends ListActivity {
 		commentText=(EditText)dialog.findViewById(R.id.commentText);
 
 		//new Location Controller 
-		final LocationController lc = new LocationController();
+		//final LocationController lc = new LocationController();
 		this.pictureController = new PictureController();
 
 		//https://github.com/baoliangwang/CurrentLocation
 		//setup location manager
-		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		//LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
 		authorText.setText(user.getProfile().getAuthorName());
 		Button save=(Button)dialog.findViewById(R.id.save);
@@ -276,7 +276,7 @@ public class CommentListActivity extends ListActivity {
 			Toast.makeText(getApplicationContext(),
 					"No Camera Detected.", Toast.LENGTH_LONG).show();
 		}
-
+/*
 		// Retrieve location updates through LocationListener interface
 		//https://github.com/baoliangwang/CurrentLocation
 		LocationListener locationListener = new LocationListener() {                            
@@ -303,14 +303,14 @@ public class CommentListActivity extends ListActivity {
 
 			}
 		};
-
+*/
 		dialog.show();
-
+/*
 		//request location update
 		//https://github.com/baoliangwang/CurrentLocation
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
-
+*/
 		//update location button
 		btnSetLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -346,7 +346,7 @@ public class CommentListActivity extends ListActivity {
 				FileSaving.saveUserFile(user, commentActivity );
 
 				picture = pictureController.finalizePicture(picture, commentActivity);
-				comment = CreateComment.newReplyComment(lc, text2, text1, false, picture, firstComment);
+				comment = CreateComment.newReplyComment(lc1, text2, text1, false, picture, firstComment);
 
 				try
 				{

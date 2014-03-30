@@ -86,7 +86,11 @@ public class SortingController {
 			GeoLocation geo1 = tComment.getGeoLocation();
 			double tlon = geo1.getLongitude();
 			double tlat = geo1.getLatitude();
-			comRank = Math.abs(Math.abs(tlon) - Math.abs(lon)) + Math.abs(Math.abs(tlat)-Math.abs(lat));
+			double a = Math.abs(Math.abs(tlon) - Math.abs(lon));
+			double b = Math.abs(Math.abs(tlat)-Math.abs(lat));
+			comRank =  a + b;
+			System.out.println(Math.abs(tlon));
+			System.out.println(Math.abs(lon));
 			System.out.println(comRank);
 			System.out.println(tComment.getAuthorName());
 			myHashMap.put(tComment, comRank);

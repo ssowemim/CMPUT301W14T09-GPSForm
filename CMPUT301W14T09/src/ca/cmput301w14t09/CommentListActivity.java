@@ -193,6 +193,14 @@ public class CommentListActivity extends ListActivity {
 				e.printStackTrace();
 			}
 			return true;
+		case R.id.sortPicture:
+			SortingController sorting1 = new SortingController();
+			ArrayList<Comment> commentList = sorting1.sortPictures(firstComment);
+			adapter = new CommentAdapter(this,R.layout.comment_view, commentList);
+			favList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
+			return true;
+			
 		default:
 			return super.onOptionsItemSelected(item);
 		}

@@ -192,11 +192,19 @@ public class TopCommentsActivity extends ListActivity {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			adapter1 = new ThreadAdapter(this,
-					R.layout.thread_view, topComments);
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, topComments);
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();
 			return true;
+		
+		case R.id.sortPicture:
+			SortingController sorting1 = new SortingController();
+			ArrayList<Comment> commentList = sorting1.sortPictures(null);
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
+			
 		default:
 			return super.onOptionsItemSelected(item);
 		}

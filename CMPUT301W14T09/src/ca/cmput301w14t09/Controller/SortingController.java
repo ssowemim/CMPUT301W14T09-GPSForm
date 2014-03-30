@@ -61,7 +61,83 @@ public class SortingController {
 		
 		return newList;
 	}
+	
+	/**
+	 * 
+	 * Sorting Comments which have pictures attached to them
+	 * @author chunhan, ssowemim
+	 * @param comment
+	 * @return
+	 * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/PictureBranch/CMPUT301W14T09/src/ca/cmput301w14t09/TopCommentsActivity.java
+	 *
+	 */
+	public ArrayList<Comment> sortPictures(String comment){
+		ArrayList<Comment> commentList = null;
+		if (comment == null){
+			commentList = sortPicTopComments();
+		}else{
+			commentList = sortPicReplies(comment);
+		}
+		return commentList;
+	}
+	
+	/**
+	 * 
+	 * Sort Pictures in top comments view
+	 * @author chunhan, ssowemim
+	 * @return
+	 * 
+	 */
+	private ArrayList<Comment> sortPicTopComments(){
 
+		ArrayList<Comment> commentList = null;
+		try {
+			commentList = ElasticSearchOperations.pullThreads();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		commentList = compareAttachment(commentList);
+		return commentList;
+	}
+
+	/**
+	 * 
+	 * Sort Pictures in the replies view
+	 * @author chunhan, ssowemim
+	 * @param comment
+	 * @return
+	 * 
+	 */
+	private ArrayList<Comment> sortPicReplies(String comment){
+		ArrayList<Comment> commentList = null;
+		try {
+			commentList = ElasticSearchOperations.pullOneThread(comment);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		commentList = compareAttachment(commentList);
+		return commentList;
+	}
+	
+	/**
+	 * 
+	 * Method to compare if comment has attachment or not 
+	 * @author ssowemim
+	 * @param list
+	 * @return
+	 * 
+	 */
+	private ArrayList<Comment> compareAttachment(ArrayList<Comment> list){
+		Collections.sort(list, new Comparator<Comment>() {
+			  public int compare(Comment o1, Comment o2) {
+			      if ( o1.getHasPicture() == null || o2.getHasPicture() == null)
+			        return 0;
+			      return o1.getHasPicture().compareTo(o2.getHasPicture());
+			  }
+			}); 
+		Collections.reverse(list);
+		return list;
+	}
 	/**
 	 * 
 	 * Calculates the ranking for each of the maps to the provided
@@ -71,7 +147,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortTopComments(GeoLocation geo){
+	private ArrayList<Comment> sortTopComments(GeoLocation geo){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();
@@ -114,7 +190,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortComments(GeoLocation geo, String comment){
+	private ArrayList<Comment> sortComments(GeoLocation geo, String comment){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();

@@ -3,6 +3,8 @@ package ca.cmput301w14t09;
 import java.util.List;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.os.AsyncTask;
@@ -60,7 +62,8 @@ public class ChooseLocationActivity extends MapActivity {
       addPoiOverlay();
      
       
-     
+      Bundle bundle = getIntent().getExtras();
+      geo = (GeoLocation) bundle.getSerializable("SomeUniqueKey");
       
     }
 
@@ -160,6 +163,19 @@ public class ChooseLocationActivity extends MapActivity {
             @Override
             public void onClick(View v) {
                 geocode();
+            }
+        });
+        
+        Button button2 = (Button) findViewById(R.id.mq_geocode_btn2);
+        
+        button2.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+            	
+            	//onBackPressed();
+            	finish();
+               
             }
         });
         
@@ -290,6 +306,19 @@ public class ChooseLocationActivity extends MapActivity {
         }
 
     }
+    
+    /*
+    public void onBackPressed()
+    {
+        // Update _workorder object
+        Intent intent = getIntent();
+        intent.putExtra("SomeUniqueKey", geo);
+        setResult(Activity.RESULT_OK, intent);
+        super.onBackPressed();
+       
+    }
+    
+    */
   
    
   }

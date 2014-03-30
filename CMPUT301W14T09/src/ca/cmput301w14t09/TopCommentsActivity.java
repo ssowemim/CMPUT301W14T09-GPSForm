@@ -21,6 +21,7 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -50,6 +51,7 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
+import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
@@ -97,6 +99,7 @@ public class TopCommentsActivity extends ListActivity {
     EditText authorText;
     EditText commentText;
     ThreadAdapter adapter1;
+    GeoLocation geo = new GeoLocation();
 
 
 
@@ -251,8 +254,9 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void onClick(View v) { 
 
-                lc.updatelocation();
-
+            	Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);
+            	intent.putExtra("SomeUniqueKey", geo);
+            	startActivityForResult(intent, 122);
 
             }
         });
@@ -362,10 +366,27 @@ public class TopCommentsActivity extends ListActivity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+   
+    	//if (requestCode == 122 && resultCode == Activity.RESULT_OK){
+    	// if (resultCode == RESULT_OK){
+    			//succesfully get updated geolocation
+             	//geo = (GeoLocation) intent.getSerializableExtra("SomeUniqueKey");
+             //	System.out.println("GEO TOP: LAT"+ geo.getLatitude());
+             //	System.out.println("GEO TOP: LNG"+geo.getLongitude());
+    			 
+    			 
+    		// }
+    //	}
+    	
+  
+    
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+        	
             if (resultCode == RESULT_OK) {
+            	
+            	
                 // successfully captured the image
                 // display it in image view
                 picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
@@ -374,7 +395,9 @@ public class TopCommentsActivity extends ListActivity {
                 Toast.makeText(getApplicationContext(),
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
-            } else {
+            } 
+            
+            else {
                 // failed to capture image
                 Toast.makeText(getApplicationContext(),
                         "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
@@ -432,5 +455,7 @@ public class TopCommentsActivity extends ListActivity {
         intent.putExtra("CURRENT_USER", user);                
         startActivity(intent);
     }
+    
+   
 
 }

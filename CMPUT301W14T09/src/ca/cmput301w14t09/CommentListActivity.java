@@ -248,8 +248,8 @@ public class CommentListActivity extends ListActivity {
             public void onClick(View v) { 
            
 
-                lc.updatelocation();
-
+            	Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);
+            	startActivity(intent);
 
             }
         });

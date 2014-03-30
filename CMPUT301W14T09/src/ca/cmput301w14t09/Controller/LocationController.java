@@ -20,13 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.Controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.widget.EditText;
-import android.widget.Toast;
+import ca.cmput301w14t09.ChooseLocationActivity;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
@@ -44,6 +44,7 @@ public class LocationController {
 
     private GeoLocation geo = new GeoLocation();
     LocationManager lm = null;
+    Intent intent = null;
     
 
     public GeoLocation getGeoLocation() {
@@ -87,7 +88,7 @@ public class LocationController {
     */
     
     public void locationchanged(android.location.Location location){
-        if(location != null && geo.getLatitude() != 0 && geo.getLongitude()!= 0){
+        if(location != null && geo.getLatitude() == 0 && geo.getLongitude()== 0){
         	
                 geo.setLatitude(location.getLatitude());
                 geo.setLongitude(location.getLongitude()); 
@@ -95,17 +96,6 @@ public class LocationController {
             }
         }
 
-    /**
-    * updatelocation function responsible for updating the geolocation points in locationcontroller
-    * if the user chooses to update the GPS coordinate points that are set default when new comment is initiated.
-    * @param LocationController
-    */
-
-    @SuppressLint("NewApi")
-	public void updatelocation() {  
-    	
-     
-
-    }
+    
 }
 

@@ -102,7 +102,8 @@ public class TopCommentsActivity extends ListActivity {
     EditText commentText;
     ThreadAdapter adapter1;
     GeoLocation geo = new GeoLocation();
-
+  //new Location Controller 
+    final LocationController lc1 = new LocationController();
 
 
     @Override
@@ -125,6 +126,33 @@ public class TopCommentsActivity extends ListActivity {
             }
 
         });
+		
+        
+        //https://github.com/baoliangwang/CurrentLocation
+        //setup location manager
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        // Retrieve location updates through LocationListener interface
+        //https://github.com/baoliangwang/CurrentLocation
+        LocationListener locationListener = new LocationListener() {				
+
+            public void onProviderDisabled (String provider) {
+            }
+
+            public void onProviderEnabled (String provider) {
+            }
+
+            public void onStatusChanged (String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onLocationChanged(android.location.Location location) {
+                lc1.locationchanged(location);
+            }
+        };
+        //request location update
+        //https://github.com/baoliangwang/CurrentLocation
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
     }
 
     @Override
@@ -149,9 +177,9 @@ public class TopCommentsActivity extends ListActivity {
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
 		switch (item.getItemId()){
-			case R.id.sortLocation:
+			case R.id.sortLocation:			
 				SortingController sorting = new SortingController();
-				ArrayList<Comment> sortedList = sorting.sortCommentsByLocation();
+				ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1);
 				System.out.println(sortedList.get(0).getCommentText());
 				adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
 				aCommentList.setAdapter(adapter1);
@@ -203,12 +231,12 @@ public class TopCommentsActivity extends ListActivity {
         commentText=(EditText)dialog.findViewById(R.id.commentText);
 
         //new Location Controller 
-        final LocationController lc = new LocationController();
+        //final LocationController lc = new LocationController();
         this.pictureController = new PictureController();
 
         //https://github.com/baoliangwang/CurrentLocation
         //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         authorText.setText(user.getProfile().getAuthorName());
         Button save=(Button)dialog.findViewById(R.id.save);
@@ -241,36 +269,36 @@ public class TopCommentsActivity extends ListActivity {
 
         // Retrieve location updates through LocationListener interface
         //https://github.com/baoliangwang/CurrentLocation
-        LocationListener locationListener = new LocationListener() {				
+       // LocationListener locationListener = new LocationListener() {				
 
-            public void onProviderDisabled (String provider) {
+         //   public void onProviderDisabled (String provider) {
 
-            }
+          //  }
 
-            public void onProviderEnabled (String provider) {
-
-
-            }
-
-            public void onStatusChanged (String provider, int status, Bundle extras) {
+          //  public void onProviderEnabled (String provider) {
 
 
-            }
+          //  }
 
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-
-                lc.locationchanged(location);
+           // public void onStatusChanged (String provider, int status, Bundle extras) {
 
 
-            }
-        };
+           // }
+
+           // @Override
+           // public void onLocationChanged(android.location.Location location) {
+
+            //    lc.locationchanged(location);
+
+
+            //}
+        //};
 
         dialog.show();
         ////////
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        //lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
 
         //update location button
@@ -307,7 +335,7 @@ public class TopCommentsActivity extends ListActivity {
                 FileSaving.saveUserFile(user, topActivity);
 
                 picture = pictureController.finalizePicture(picture, topActivity);
-                comment = CreateComment.newComment(lc, text2, text1, true, picture);
+                comment = CreateComment.newComment(lc1, text2, text1, true, picture);
 
                 try
                 {

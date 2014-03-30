@@ -27,7 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
+
 
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
@@ -51,8 +51,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortCommentsByLocation(){
-		LocationController lc = new LocationController();
+	public ArrayList<Comment> sortCommentsByLocation(LocationController lc){
 		ArrayList<Comment> newList = null;
 		newList = sortComments(lc.getGeoLocation());
 		return newList;
@@ -89,8 +88,8 @@ public class SortingController {
 			double a = Math.abs(Math.abs(tlon) - Math.abs(lon));
 			double b = Math.abs(Math.abs(tlat)-Math.abs(lat));
 			comRank =  a + b;
-			System.out.println(Math.abs(tlon));
-			System.out.println(Math.abs(lon));
+			System.out.println(lat);
+			System.out.println(lon);
 			System.out.println(comRank);
 			System.out.println(tComment.getAuthorName());
 			myHashMap.put(tComment, comRank);

@@ -179,10 +179,19 @@ public class CommentListActivity extends ListActivity {
 		switch (item.getItemId()){
 		case R.id.sortLocation:			
 			SortingController sorting = new SortingController();
-			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1);
+			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, firstComment);
 			adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
 			favList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
+			return true;
+		case R.id.sortDate:
+			try {
+				ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
+				adapter = new CommentAdapter(this,R.layout.comment_view, comment);
+				favList.setAdapter(adapter);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

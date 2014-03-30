@@ -28,7 +28,7 @@ public final class R {
     }
     public static final class id {
         public static final int UserList=0x7f080004;
-        public static final int action_settings=0x7f080025;
+        public static final int action_settings=0x7f080026;
         public static final int attachmentImageView=0x7f080023;
         public static final int authorName=0x7f080009;
         public static final int authorNameData=0x7f08000a;
@@ -60,6 +60,7 @@ public final class R {
         public static final int postDateData=0x7f08000c;
         public static final int replyComment=0x7f080000;
         public static final int save=0x7f080019;
+        public static final int sortDate=0x7f080025;
         public static final int sortLocation=0x7f080024;
         public static final int takePicture=0x7f08001a;
         public static final int textView1=0x7f08000f;

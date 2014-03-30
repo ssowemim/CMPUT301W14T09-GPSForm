@@ -179,8 +179,21 @@ public class TopCommentsActivity extends ListActivity {
 		switch (item.getItemId()){
 		case R.id.sortLocation:			
 			SortingController sorting = new SortingController();
-			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1);
+			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, null);
 			adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
+			
+		case R.id.sortDate:
+			ArrayList<Comment> topComments = null;
+			try {
+				topComments = ElasticSearchOperations.pullThreads();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			adapter1 = new ThreadAdapter(this,
+					R.layout.thread_view, topComments);
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();
 			return true;
@@ -201,7 +214,6 @@ public class TopCommentsActivity extends ListActivity {
 		try {
 			topComments = ElasticSearchOperations.pullThreads();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		adapter1 = new ThreadAdapter(this,

@@ -51,22 +51,27 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortCommentsByLocation(LocationController lc){
+	public ArrayList<Comment> sortCommentsByLocation(LocationController lc, String comment){
 		ArrayList<Comment> newList = null;
-		newList = sortComments(lc.getGeoLocation());
+		if (comment == null){
+			newList = sortTopComments(lc.getGeoLocation());
+		} else{
+			newList = sortComments(lc.getGeoLocation(), comment);
+		}
+		
 		return newList;
 	}
 
 	/**
 	 * 
 	 * Calculates the ranking for each of the maps to the provided
-	 * geolocation and places them into a map with key as comment and value
+	 * geolocation and places them into a map with key as top comments and value
 	 * as the distance of the comment
 	 * @param geo
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortComments(GeoLocation geo){
+	public ArrayList<Comment> sortTopComments(GeoLocation geo){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();
@@ -97,10 +102,51 @@ public class SortingController {
 			Comment comm = (Comment) entry.getKey();
 			sortedComments.add(comm);
 		}
-
 		return sortedComments;
 	}
 
+	/**
+	 * 
+	 * Calculates the ranking for each of the maps to the provided
+	 * geolocation and places them into a map with key as comment replies and value
+	 * as the distance of the comment
+	 * @param geo
+	 * @return
+	 * 
+	 */
+	public ArrayList<Comment> sortComments(GeoLocation geo, String comment){
+		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
+		double comRank = 0;
+		double lon = geo.getLongitude();
+		double lat = geo.getLatitude();
+		ArrayList<Comment> topComments = null;
+		ArrayList<Comment> sortedComments = new ArrayList<Comment>();
+
+		try {
+			topComments = ElasticSearchOperations.pullOneThread(comment);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		for (int i=0; i< topComments.size(); i++){
+			Comment tComment = topComments.get(i);
+			GeoLocation geo1 = tComment.getGeoLocation();
+			double tlon = geo1.getLongitude();
+			double tlat = geo1.getLatitude();
+			double a = Math.abs(Math.abs(tlon) - Math.abs(lon));
+			double b = Math.abs(Math.abs(tlat)-Math.abs(lat));
+			comRank =  a + b;
+			myHashMap.put(tComment, comRank);
+		}
+
+		//http://www.mkyong.com/java/how-to-sort-a-map-in-java/
+		Map<Comment, Double> sortedMap = sortByComparator(myHashMap);
+		for (Map.Entry entry : sortedMap.entrySet()){
+			Comment comm = (Comment) entry.getKey();
+			sortedComments.add(comm);
+		}
+		return sortedComments;
+	}
 	/**
 	 * 
 	 * Sorts the unsorted map of comments ranked by distance
@@ -109,7 +155,6 @@ public class SortingController {
 	 * http://www.mkyong.com/java/how-to-sort-a-map-in-java/
 	 * 
 	 */
-
 	private static <E> Map sortByComparator(Map unsorted){
 
 		List list = new LinkedList(unsorted.entrySet());

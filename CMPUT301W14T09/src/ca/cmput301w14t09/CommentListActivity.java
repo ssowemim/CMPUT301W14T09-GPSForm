@@ -180,7 +180,6 @@ public class CommentListActivity extends ListActivity {
 		case R.id.sortLocation:			
 			SortingController sorting = new SortingController();
 			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1);
-			System.out.println(sortedList.get(0).getCommentText());
 			adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
 			favList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();

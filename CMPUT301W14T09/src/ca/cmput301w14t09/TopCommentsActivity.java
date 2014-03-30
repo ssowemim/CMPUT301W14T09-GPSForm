@@ -180,7 +180,6 @@ public class TopCommentsActivity extends ListActivity {
 		case R.id.sortLocation:			
 			SortingController sorting = new SortingController();
 			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1);
-			System.out.println(sortedList.get(0).getCommentText());
 			adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();

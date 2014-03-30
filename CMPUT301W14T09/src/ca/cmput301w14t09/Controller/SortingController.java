@@ -88,10 +88,6 @@ public class SortingController {
 			double a = Math.abs(Math.abs(tlon) - Math.abs(lon));
 			double b = Math.abs(Math.abs(tlat)-Math.abs(lat));
 			comRank =  a + b;
-			System.out.println(lat);
-			System.out.println(lon);
-			System.out.println(comRank);
-			System.out.println(tComment.getAuthorName());
 			myHashMap.put(tComment, comRank);
 		}
 
@@ -100,8 +96,6 @@ public class SortingController {
 		for (Map.Entry entry : sortedMap.entrySet()){
 			Comment comm = (Comment) entry.getKey();
 			sortedComments.add(comm);
-			System.out.println(comm.getAuthorName());
-			System.out.println(comm.getCommentText());
 		}
 
 		return sortedComments;

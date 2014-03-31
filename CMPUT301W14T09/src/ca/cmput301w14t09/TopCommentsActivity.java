@@ -448,16 +448,16 @@ public class TopCommentsActivity extends ListActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-		//if (requestCode == 122 && resultCode == Activity.RESULT_OK){
-		// if (resultCode == RESULT_OK){
-		//succesfully get updated geolocation
-		//geo = (GeoLocation) intent.getSerializableExtra("SomeUniqueKey");
-		//	System.out.println("GEO TOP: LAT"+ geo.getLatitude());
-		//	System.out.println("GEO TOP: LNG"+geo.getLongitude());
+		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
+		
+		    //succesfully get updated geolocation
+			geo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT"+ geo.getLatitude());
+		    System.out.println("GEO TOP: LNG"+geo.getLongitude());
 
 
-		// }
-		//	}
+		 
+   }
 
 
 

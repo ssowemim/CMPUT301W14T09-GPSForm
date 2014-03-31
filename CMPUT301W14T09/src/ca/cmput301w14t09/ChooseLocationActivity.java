@@ -173,7 +173,7 @@ public class ChooseLocationActivity extends MapActivity {
             @Override
             public void onClick(View v) {
             	
-            	//onBackPressed();
+            	onBackPressed();
             	finish();
                
             }
@@ -307,7 +307,7 @@ public class ChooseLocationActivity extends MapActivity {
 
     }
     
-    /*
+    
     public void onBackPressed()
     {
         // Update _workorder object
@@ -318,7 +318,7 @@ public class ChooseLocationActivity extends MapActivity {
        
     }
     
-    */
+    
   
    
   }

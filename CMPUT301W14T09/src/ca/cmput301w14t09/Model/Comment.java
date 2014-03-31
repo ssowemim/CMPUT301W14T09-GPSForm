@@ -55,7 +55,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 	private int favoriteCount;
 	private Boolean topComment;
 	private String threadId;
-	private Boolean hasPicture;
 
 	public Comment() {
 		super();
@@ -64,7 +63,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 		authorName = "";
 		commentText = "";
 		favoriteCount = 0;
-		hasPicture= null;
 	}
 
 	/**
@@ -250,20 +248,6 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 
 	public void setThreadId(String threadId) {
 		this.threadId = threadId;
-	}
-	
-	/**
-	 * @param attachment
-	 */
-	public void setHasPicture(Boolean attachment){
-		this.hasPicture = attachment;
-	}
-	
-	/**
-	 * @return
-	 */
-	public Boolean getHasPicture(){
-		return hasPicture;
 	}
 
 }

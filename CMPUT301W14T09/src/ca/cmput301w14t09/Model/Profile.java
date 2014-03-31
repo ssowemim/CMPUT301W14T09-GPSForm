@@ -33,87 +33,104 @@ import ca.cmput301w14t09.Model.UnreadMarker;
 
 public class Profile implements Serializable {
 
-	private ArrayList<Comment> favorites;
-	private java.util.ArrayList<UnreadMarker> unreadComments;
-	private String authorName;
-	private String userName;
-	private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = 2L;
 
-	public Profile(String userName) {
-		this.favorites = new ArrayList<Comment>();
-		this.unreadComments = new ArrayList<UnreadMarker>();
-		this.authorName = userName;
-		this.userName = userName;
-	}
-
-	/**
-	 * @return the favorites
-	 */
-
-	public ArrayList<Comment> getFavorites() {
-		return favorites;
-	}
+    private ArrayList<Comment> favorites;
+    private java.util.ArrayList<UnreadMarker> unreadComments;
+    private String authorName;
+    private String userName;
+    private Cache cache;
 
 
-	public void add(Comment newFavorite) {
-		favorites.add(newFavorite);
-	}
+    public Profile(String userName) {
+        this.favorites = new ArrayList<Comment>();
+        this.unreadComments = new ArrayList<UnreadMarker>();
+        this.authorName = userName;
+        this.userName = userName;
+    }
 
-	/**
-	 * @param favorites the favorites to set
-	 */
+    /**
+     * @return the favorites
+     */
 
-	public void setFavorites(ArrayList<Comment> favorites) {
-		this.favorites = favorites;
-	}
+    public ArrayList<Comment> getFavorites() {
+        return favorites;
+    }
 
-	/**
-	 * @return the unreadComments
-	 */
 
-	public java.util.ArrayList<UnreadMarker> getUnreadComments() {
-		return unreadComments;
-	}
+    public void add(Comment newFavorite) {
+        favorites.add(newFavorite);
+    }
 
-	/**
-	 * @param unreadComments the unreadComments to set
-	 */
+    /**
+     * @param favorites the favorites to set
+     */
 
-	public void setUnreadComments(java.util.ArrayList<UnreadMarker> unreadComments) {
-		this.unreadComments = unreadComments;
-	}
+    public void setFavorites(ArrayList<Comment> favorites) {
+        this.favorites = favorites;
+    }
 
-	/**
-	 * @return the authorName
-	 */
+    /**
+     * @return the unreadComments
+     */
 
-	public String getAuthorName() {
-		return authorName;
-	}
+    public java.util.ArrayList<UnreadMarker> getUnreadComments() {
+        return unreadComments;
+    }
 
-	/**
-	 * @param authorName the authorName to set
-	 */
+    /**
+     * @param unreadComments the unreadComments to set
+     */
 
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
-	}
+    public void setUnreadComments(java.util.ArrayList<UnreadMarker> unreadComments) {
+        this.unreadComments = unreadComments;
+    }
 
-	/**
-	 * @return the userName
-	 */
+    /**
+     * @return the authorName
+     */
 
-	public String getUserName()
-	{
-		return userName;
-	}
+    public String getAuthorName() {
+        return authorName;
+    }
 
-	/**
-	 * @param userName the userName to set
-	 */
+    /**
+     * @param authorName the authorName to set
+     */
 
-	public void setUserName(String userName)
-	{
-		this.userName = userName;
-	}	
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    /**
+     * @return the userName
+     */
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
+    }
+
+    
+    public Cache getCache()
+    {
+    
+        return cache;
+    }
+
+    
+    public void setCache(Cache cache)
+    {
+    
+        this.cache = cache;
+    }	
 }

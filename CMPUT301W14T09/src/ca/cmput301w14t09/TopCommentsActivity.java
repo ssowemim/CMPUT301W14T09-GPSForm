@@ -421,7 +421,8 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+		
+		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
 		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
 		
 		    //succesfully get updated geolocation

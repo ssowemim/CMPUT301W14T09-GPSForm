@@ -305,7 +305,7 @@ public class ChooseLocationActivity extends MapActivity {
 
     }
     
-    
+    //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
     public void onBackPressed()
     {
         // Update _workorder object

@@ -58,6 +58,7 @@ import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
+import ca.cmput301w14t09.elasticSearch.Server;
 
 /**
  * 
@@ -101,7 +102,11 @@ public class TopCommentsActivity extends ListActivity {
 	EditText authorText;
 	EditText commentText;
 	ThreadAdapter adapter1;
-	GeoLocation geo = new GeoLocation();
+	
+	//selected geolocation object used for when person selects geolocation fom
+	GeoLocation selectedgeo = new GeoLocation();
+	
+	
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
 
@@ -295,39 +300,9 @@ public class TopCommentsActivity extends ListActivity {
 					"No Camera Detected.", Toast.LENGTH_LONG).show();
 		}
 
-		// Retrieve location updates through LocationListener interface
-		//https://github.com/baoliangwang/CurrentLocation
-		// LocationListener locationListener = new LocationListener() {				
-
-		//   public void onProviderDisabled (String provider) {
-
-		//  }
-
-		//  public void onProviderEnabled (String provider) {
-
-
-		//  }
-
-		// public void onStatusChanged (String provider, int status, Bundle extras) {
-
-
-		// }
-
-		// @Override
-		// public void onLocationChanged(android.location.Location location) {
-
-		//    lc.locationchanged(location);
-
-
-		//}
-		//};
+		
 
 		dialog.show();
-		////////
-		//request location update
-		//https://github.com/baoliangwang/CurrentLocation
-		//lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
 
 		//update location button
 		btnSetLocation.setOnClickListener(new View.OnClickListener() {
@@ -336,7 +311,6 @@ public class TopCommentsActivity extends ListActivity {
 			public void onClick(View v) { 
 
 				Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);
-				intent.putExtra("SomeUniqueKey", geo);
 				startActivityForResult(intent, 122);
 
 			}
@@ -451,9 +425,9 @@ public class TopCommentsActivity extends ListActivity {
 		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
 		
 		    //succesfully get updated geolocation
-			geo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-			System.out.println("GEO TOP: LAT"+ geo.getLatitude());
-		    System.out.println("GEO TOP: LNG"+geo.getLongitude());
+			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
+		    System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
 
 
 		 

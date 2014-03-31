@@ -130,9 +130,9 @@ public class SortingController {
 	private ArrayList<Comment> compareAttachment(ArrayList<Comment> list){
 		Collections.sort(list, new Comparator<Comment>() {
 			  public int compare(Comment o1, Comment o2) {
-			      if ( o1.getHasPicture() == null || o2.getHasPicture() == null)
+			      //if ( o1.getHasPicture() == null || o2.getHasPicture() == null)
 			        return 0;
-			      return o1.getHasPicture().compareTo(o2.getHasPicture());
+			     // return o1.getHasPicture().compareTo(o2.getHasPicture());
 			  }
 			}); 
 		Collections.reverse(list);

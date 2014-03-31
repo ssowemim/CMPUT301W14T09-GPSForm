@@ -61,9 +61,7 @@ public class ChooseLocationActivity extends MapActivity {
       setupOverlays();
       addPoiOverlay();
      
-      
-      Bundle bundle = getIntent().getExtras();
-      geo = (GeoLocation) bundle.getSerializable("SomeUniqueKey");
+    
       
     }
 

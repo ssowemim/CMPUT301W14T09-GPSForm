@@ -39,12 +39,13 @@ public class Profile implements Serializable {
     private java.util.ArrayList<UnreadMarker> unreadComments;
     private String authorName;
     private String userName;
-    private Cache cache;
+    public Cache cache;
 
 
     public Profile(String userName) {
         this.favorites = new ArrayList<Comment>();
         this.unreadComments = new ArrayList<UnreadMarker>();
+        this.cache = new Cache();
         this.authorName = userName;
         this.userName = userName;
     }

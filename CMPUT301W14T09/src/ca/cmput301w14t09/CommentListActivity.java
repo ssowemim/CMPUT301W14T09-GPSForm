@@ -63,6 +63,7 @@ import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
+import ca.cmput301w14t09.elasticSearch.Server;
 
 /**
  * 
@@ -187,7 +188,7 @@ public class CommentListActivity extends ListActivity {
         user = (User) intent.getSerializableExtra("CURRENT_USER");
         firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
         System.out.println(firstComment);
-        onStart();
+        populateListView();
 
 
         return true;
@@ -242,17 +243,29 @@ public class CommentListActivity extends ListActivity {
     protected void onStart() {
         super.onStart();
 
+
+    }
+
+    private void populateListView() {
+        ArrayList<Comment> commentThread = null;
+
         try {
-            ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
-
-            adapter = new CommentAdapter(this,
-                    R.layout.comment_view, comment);
-            favList.setAdapter(adapter);
-
+            commentThread = ElasticSearchOperations.pullOneThread(firstComment);
+            user.profile.cache.add(commentThread);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+
+
+        adapter = new CommentAdapter(this,
+                R.layout.comment_view,
+                user.profile.cache.getSubComments(firstComment));
+
+        favList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        //      adapter = new CommentAdapter(this,
+        //      R.layout.comment_view, comment);
     }
 
 

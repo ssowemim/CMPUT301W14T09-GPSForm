@@ -58,6 +58,7 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
+import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
@@ -113,6 +114,11 @@ public class CommentListActivity extends ListActivity {
 	protected ListView favList;
 	protected String firstComment;
 	protected CommentListActivity commentActivity;
+	
+	//selected geolocation object used for when person selects geolocation fom
+	GeoLocation selectedgeo = new GeoLocation();
+	GeoLocation selectedgeosort = new GeoLocation();
+
 
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
@@ -294,41 +300,9 @@ public class CommentListActivity extends ListActivity {
 		}
 
 
-/*
-		// Retrieve location updates through LocationListener interface
-		//https://github.com/baoliangwang/CurrentLocation
-		LocationListener locationListener = new LocationListener() {                            
 
-			public void onProviderDisabled (String provider) {
-
-			}
-
-			public void onProviderEnabled (String provider) {
-
-
-			}
-
-			public void onStatusChanged (String provider, int status, Bundle extras) {
-
-
-			}
-
-			@Override
-			public void onLocationChanged(android.location.Location location) {
-
-				lc.locationchanged(location);
-
-
-			}
-		};
-*/
 		dialog.show();
-/*
-		//request location update
-		//https://github.com/baoliangwang/CurrentLocation
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
-*/
 
 		//update location button
 		btnSetLocation.setOnClickListener(new View.OnClickListener() {
@@ -338,8 +312,7 @@ public class CommentListActivity extends ListActivity {
 
 
 				Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);
-				startActivity(intent);
-
+				startActivityForResult(intent, 122);
 			}
 		});
 
@@ -365,8 +338,16 @@ public class CommentListActivity extends ListActivity {
 				FileSaving.saveUserFile(user, commentActivity );
 
 				picture = pictureController.finalizePicture(picture, commentActivity);
+				
+				//check locations to see which one to use
+				lc1.checklocations(selectedgeo);
+				System.out.println("Sel LAT:"+selectedgeo.getLatitude());
+				
 				comment = CreateComment.newReplyComment(lc1, text2, text1, false, picture, firstComment);
-
+				
+				//reset selected locaton for comments
+				lc1.resetselectedlocation(selectedgeo);
+				
 				try
 				{
 					ElasticSearchOperations.postThread(comment);
@@ -403,6 +384,55 @@ public class CommentListActivity extends ListActivity {
 			//returns false if device doesn't have a camera
 			return false;
 		}
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
+
+			//succesfully get updated geolocation
+			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
+			System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
+			Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+		}
+
+		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+		if (requestCode == 123 && resultCode == Activity.RESULT_OK){
+
+			//succesfully get updated geolocation
+			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
+			System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
+			Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show();
+		}
+
+		// if the result is capturing Image
+		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+
+			if (resultCode == RESULT_OK) {
+
+
+				// successfully captured the image
+				// display it in image view
+				picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
+			} else if (resultCode == RESULT_CANCELED) {
+				// user cancelled Image capture
+				Toast.makeText(getApplicationContext(),
+						"User cancelled image capture", Toast.LENGTH_SHORT)
+						.show();
+			} 
+
+			else {
+				// failed to capture image
+				Toast.makeText(getApplicationContext(),
+						"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+						.show();
+			}
+		}
+	
 	}
 
 	/**

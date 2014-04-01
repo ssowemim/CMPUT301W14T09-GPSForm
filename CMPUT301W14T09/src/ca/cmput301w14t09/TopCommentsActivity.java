@@ -160,6 +160,8 @@ public class TopCommentsActivity extends ListActivity {
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        lm.removeUpdates(locationListener);
+        
     }
 
     @Override

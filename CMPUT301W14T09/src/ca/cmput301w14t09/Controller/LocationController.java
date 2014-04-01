@@ -88,7 +88,7 @@ public class LocationController {
     */
     
     public void locationchanged(android.location.Location location){
-        if(location != null && geo.getLatitude() == 0 && geo.getLongitude()== 0){
+        if(location != null){
         	
                 geo.setLatitude(location.getLatitude());
                 geo.setLongitude(location.getLongitude()); 

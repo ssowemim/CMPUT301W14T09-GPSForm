@@ -33,7 +33,7 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 public class User implements Serializable {
 
-	private Profile profile;
+	public Profile profile;
 	private GeoLocation currentLocation;
 	private String deviceId;
 	private String userName;

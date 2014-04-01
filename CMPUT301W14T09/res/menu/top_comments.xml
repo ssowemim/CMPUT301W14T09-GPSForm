@@ -1,9 +1,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/sortLocation"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="ActionSetting"/>
+        android:title="Sort by Location"/>
+    <item
+        android:id="@+id/sortDate"
+        android:orderInCategory="200"
+        android:showAsAction="never"
+        android:title="Sort by Date"/>
+    <item
+        android:id="@+id/sortPicture"
+        android:orderInCategory="300"
+        android:showAsAction="never"
+        android:title="Sort by Picture"/>
+    <item
+        android:id="@+id/selectDiffLocation"
+        android:orderInCategory="400"
+        android:showAsAction="always"
+        android:title="Change Your Location"/>
+    <item
+        android:id="@+id/sortByDiffLocation"
+        android:orderInCategory="500"
+        android:showAsAction="never"
+        android:title="Sort by Selected Location"/>
 
 </menu>

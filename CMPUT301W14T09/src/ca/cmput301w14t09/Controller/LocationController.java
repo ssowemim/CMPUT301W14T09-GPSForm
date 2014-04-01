@@ -20,13 +20,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.Controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.widget.EditText;
-import android.widget.Toast;
+import ca.cmput301w14t09.ChooseLocationActivity;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
@@ -43,32 +43,19 @@ import ca.cmput301w14t09.Model.GeoLocation;
 public class LocationController {
 
     private GeoLocation geo = new GeoLocation();
-    private double lat;
-    private double lng;
     LocationManager lm = null;
-    int count = 0;
+    Intent intent = null;
+    
 
     public GeoLocation getGeoLocation() {
         return geo;
     }
 
-    public void setGeoLocation() {
-        geo.setLatitude(lat);
-        geo.setLongitude(lng);
-    }
-
+ 
     public ArrayList<String> getLocationNames(){
         return null;
     }
     
-    public void setlat(double lat){
-    	this.lat = lat;
-    }
-
-    public void setlng(double lng){
-    	this.lng = lng;
-    }
-
     /**
      * setLocationManager function responsible for setting up 
      *location manager wherever is called and sets in locationcontroller.
@@ -100,64 +87,15 @@ public class LocationController {
    	* @param LocationController
     */
     
-    public void locationchanged(android.location.Location location, EditText tv2, EditText tv3){
-        if(location != null){
+    public void locationchanged(android.location.Location location){
+        if(location != null && geo.getLatitude() == 0 && geo.getLongitude()== 0){
         	
-            if(count<2){
-            	
-                lat = location.getLatitude();
-                lng = location.getLongitude();
-
-                Date date = new Date(location.getTime());
-                
-                //set GUI textviews
-                tv2.setText(""+lng);
-                tv3.setText(""+lat);
-                
-                //set geolocation to current location
-                setGeoLocation();
-                
-                //count to stop from retreiving location
-                count = count + 1;
+                geo.setLatitude(location.getLatitude());
+                geo.setLongitude(location.getLongitude()); 
+              
             }
         }
 
-    }
-
-    /**
-    * updatelocation function responsible for updating the geolocation points in locationcontroller
-    * if the user chooses to update the GPS coordinate points that are set default when new comment is initiated.
-    * @param LocationController
-    */
-
-    @SuppressLint("NewApi")
-	public void updatelocation(Context context, String longitude, String latitude) {  
-    	
-        // Fix for passing in blank parameters.
-        if(latitude.isEmpty() == true) { 
-            lat = 1;
-        }
-        
-        else {
-            lat = Double.parseDouble(latitude);
-        }
-        
-        if(longitude.isEmpty() == true) {
-            lng = 1;
-        }
-        else {
-            lng = Double.parseDouble(longitude);
-        }
-        
-        //sets geolocation to new given one
-        setGeoLocation();
-
-        //toast message displayed on successful update
-        String update ="Your location has been updated";
-        
-        // When clicked, show a toast with the TextView text Game, Help, Home
-        Toast.makeText(context, update, Toast.LENGTH_SHORT).show();  
-
-    }
+    
 }
 

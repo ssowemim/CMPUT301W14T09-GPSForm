@@ -112,24 +112,5 @@
 
 		android:gravity="center_vertical"
    />
-
-   <Button
-       android:id="@+id/replyBtn"
-       style="?android:attr/buttonStyleSmall"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignBaseline="@+id/geoLocation"
-       android:layout_alignBottom="@+id/geoLocation"
-       android:layout_alignParentRight="true"
-       android:text="Reply" />
-
-   <Button
-       android:id="@+id/favoriteBtn"
-       style="?android:attr/buttonStyleSmall"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
-       android:layout_alignParentRight="true"
-       android:text="Favorite" />
    
 </RelativeLayout>

@@ -7,13 +7,11 @@
     <string name="title_activity_top_comments">TopCommentsActivity</string>
     <string name="title_activity_favorites">FavoritesActivity</string>
     <string name="title_activity_comment_list">CommentListActivity</string>
-
     <string name="camera_button_description">Camera Button to take pictures</string>
     <string name="image_view_description">A privew of the taken picture will appear here</string>
     <string name="attachment_description">Attachment pic is shown if comment has attachment</string>
-
     <string name="Favorite">favButton</string>
     <string name="favButton">Favorite</string>
-
+    <string name="title_activity_favorite">FavoriteActivity</string>
 
 </resources>

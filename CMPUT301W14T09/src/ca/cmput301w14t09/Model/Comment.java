@@ -30,6 +30,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import ca.cmput301w14t09.FileManaging.SerializableBitmap;
+
 import com.google.gson.Gson;
 
 /**
@@ -46,7 +48,7 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 
 	private static final long serialVersionUID = 3L;
 	private GeoLocation geoLocation;
-	private Bitmap picture;
+	private SerializableBitmap picture;
 	private String authorName;
 	private String commentText;
 	private Date postDate;
@@ -144,11 +146,11 @@ public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serial
 		this.geoLocation = geoLocation;
 	}
 
-	public Bitmap getPicture(){
+	public SerializableBitmap getPicture(){
 		return picture;
 	}
 	
-	public void setPicture(Bitmap picture){
+	public void setPicture(SerializableBitmap picture){
 		this.picture = picture;
 	}
 	/**

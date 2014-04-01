@@ -49,24 +49,34 @@ public class CreateComment {
 	 * @return
 	 */
 	
-	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, Bitmap picture) {
+	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
 		Comment comment = new Comment();
-	//	PictureController pictureController = new PictureController();
-		
-		comment.setAuthorName(authorname);
-		comment.setCommentText(commentText);
-		
-		
-		comment.setPicture(picture);
-		
-		GeoLocation geo = lc.getGeoLocation();
-		comment.setGeoLocation(geo);
-
-		comment.setTopComment(topComment);
-		comment.setPostDate(new Date());
-		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString()));
+		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
+		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString().substring(0, 12)));
 		return comment;
 	}
+	
+	public static Comment newReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId) {
+	                Comment comment = new Comment();
+	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
+	                comment.setThreadId(threadId);
+	                return comment;
+	}
+	
+	private static Comment instantiateComment(Comment comment, LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
+            comment.setAuthorName(authorname);
+            comment.setCommentText(commentText);            
+            
+            comment.setPicture(picture);
+            
+            GeoLocation geo = lc.getGeoLocation();
+            comment.setGeoLocation(geo);
+
+            comment.setTopComment(topComment);
+            comment.setPostDate(new Date());
+            return comment;
+	}
+	
 	
 	
 

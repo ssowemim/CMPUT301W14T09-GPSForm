@@ -43,8 +43,10 @@
      android:id="@+id/UserList"
      android:layout_width="fill_parent"
      android:layout_height="263dp"
+     android:layout_above="@+id/editUsername"
      android:layout_alignParentTop="true"
      android:scrollbars="vertical" >
+
  </ListView>
 
 </RelativeLayout>

@@ -21,6 +21,7 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -48,6 +49,7 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Controller.SortingController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.FileManaging.FileLoading;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
@@ -61,9 +63,12 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  * 
  * @author Conner
  * @editor ChunHan
- *This activity shows the top comment that was selected in a 
- *previous activity and displays all the replies to that comment
+ * This activity shows the top comment that was selected in a 
+ * previous activity and displays all the replies to that comment
  *
+ * Need to send the user back as a Activity result so the favorite
+ * saves to the user profile are sent back as well and favorites
+ * are shown immediately
  */
 public class CommentListActivity extends ListActivity {
 
@@ -99,7 +104,7 @@ public class CommentListActivity extends ListActivity {
 	protected ListView favList;
 	protected String firstComment;
 	protected CommentListActivity commentActivity;
-	
+
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
 
@@ -119,6 +124,7 @@ public class CommentListActivity extends ListActivity {
 				user.profile.add(thread);
 
 				FileSaving.saveUserFile(user, commentActivity);
+				//user = FileLoading.returnUser(user.getUserName(), commentActivity);
 
 			}
 
@@ -166,7 +172,7 @@ public class CommentListActivity extends ListActivity {
 
 		return true;
 	}
-	
+
 	/**
 	 * 
 	 * @author Chunhan
@@ -200,7 +206,7 @@ public class CommentListActivity extends ListActivity {
 			favList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
 			return true;
-			
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -276,7 +282,7 @@ public class CommentListActivity extends ListActivity {
 			Toast.makeText(getApplicationContext(),
 					"No Camera Detected.", Toast.LENGTH_LONG).show();
 		}
-/*
+		/*
 		// Retrieve location updates through LocationListener interface
 		//https://github.com/baoliangwang/CurrentLocation
 		LocationListener locationListener = new LocationListener() {                            
@@ -303,14 +309,14 @@ public class CommentListActivity extends ListActivity {
 
 			}
 		};
-*/
+		 */
 		dialog.show();
-/*
+		/*
 		//request location update
 		//https://github.com/baoliangwang/CurrentLocation
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
-*/
+		 */
 		//update location button
 		btnSetLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -401,5 +407,13 @@ public class CommentListActivity extends ListActivity {
 
 	}
 
+	public void onBackPressed()
+	{
+		Intent intent = getIntent();
+		intent.putExtra("CURERNT_USER", user);
+		setResult(Activity.RESULT_OK, intent);
+		super.onBackPressed();
+
+	}
 
 }

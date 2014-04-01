@@ -2,12 +2,10 @@ package ca.cmput301w14t09;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.EditText;
@@ -19,7 +17,6 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
-import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 public class FavoriteActivity extends ListActivity
 {

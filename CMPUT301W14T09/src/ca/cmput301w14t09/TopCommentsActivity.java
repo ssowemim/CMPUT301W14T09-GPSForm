@@ -27,7 +27,6 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -52,7 +51,6 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
-import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
@@ -76,6 +74,7 @@ public class TopCommentsActivity extends ListActivity {
 	//Activity request codes to take pictures
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
+	public static final int FAVORITE_LIST = 42;
 
 	//Directory name to store captured images
 	private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
@@ -167,7 +166,10 @@ public class TopCommentsActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.top_comments, menu);
 
 		intent = getIntent();
-		user = (User) intent.getSerializableExtra("CURRENT_USER");	
+		user = (User) intent.getSerializableExtra("CURRENT_USER");
+		
+		
+		
 
 		return true;
 
@@ -303,7 +305,7 @@ public class TopCommentsActivity extends ListActivity {
 			public void onClick(View v) {
 				// capture picture
 				captureImage();
-				//	attachment = true;
+				//attachment = true;
 			}
 		});
 
@@ -429,8 +431,10 @@ public class TopCommentsActivity extends ListActivity {
 
 	/**
 	 * onActivityResult will Receive the activity result
-	 * method and will be called after closing the camera, this method 
-	 * is always called when camera is closed.
+	 * method and will be called after closing the camera,
+	 * the geolocation, or the commentList. this method 
+	 * is always called when camera is closed, geolocation
+	 * is finished, or commentList is finished.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -477,6 +481,10 @@ public class TopCommentsActivity extends ListActivity {
 						"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
 						.show();
 			}
+		}
+		
+		if (requestCode == FAVORITE_LIST && resultCode == Activity.RESULT_OK) {
+			user = (User) data.getSerializableExtra("CURRENT_USER");
 		}
 	}
 
@@ -527,9 +535,8 @@ public class TopCommentsActivity extends ListActivity {
 		Intent intent = new Intent(this, CommentListActivity.class);
 		intent.putExtra("THREAD_ID", stringId);
 		intent.putExtra("CURRENT_USER", user);                
-		startActivity(intent);
+		startActivityForResult(intent, FAVORITE_LIST);
 	}
-
-
-
+	
+	
 }

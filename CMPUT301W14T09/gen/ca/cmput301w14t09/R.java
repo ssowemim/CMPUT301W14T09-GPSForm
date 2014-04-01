@@ -60,6 +60,8 @@ public final class R {
         public static final int postDateData=0x7f08000c;
         public static final int replyComment=0x7f080000;
         public static final int save=0x7f080019;
+        public static final int selectDiffLocation=0x7f080028;
+        public static final int sortByDiffLocation=0x7f080029;
         public static final int sortDate=0x7f080025;
         public static final int sortLocation=0x7f080024;
         public static final int sortPicture=0x7f080026;

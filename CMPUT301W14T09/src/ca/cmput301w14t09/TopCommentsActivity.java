@@ -27,6 +27,10 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+<<<<<<< HEAD
+=======
+import android.graphics.Bitmap;
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -51,6 +55,10 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
+<<<<<<< HEAD
+=======
+import ca.cmput301w14t09.Model.CommentAdapter;
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
@@ -305,7 +313,11 @@ public class TopCommentsActivity extends ListActivity {
 			public void onClick(View v) {
 				// capture picture
 				captureImage();
+<<<<<<< HEAD
 				//attachment = true;
+=======
+				//	attachment = true;
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 			}
 		});
 
@@ -535,8 +547,18 @@ public class TopCommentsActivity extends ListActivity {
 		Intent intent = new Intent(this, CommentListActivity.class);
 		intent.putExtra("THREAD_ID", stringId);
 		intent.putExtra("CURRENT_USER", user);                
+<<<<<<< HEAD
 		startActivityForResult(intent, FAVORITE_LIST);
+=======
+		startActivity(intent);
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 	}
+<<<<<<< HEAD
 	
 	
+=======
+
+
+
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 }

@@ -2,6 +2,7 @@ package ca.cmput301w14t09;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -17,6 +18,26 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
+=======
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ListActivity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
+import ca.cmput301w14t09.Controller.PictureController;
+import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.PictureModelList;
+import ca.cmput301w14t09.Model.ThreadAdapter;
+import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
+>>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 
 public class FavoriteActivity extends ListActivity
 {

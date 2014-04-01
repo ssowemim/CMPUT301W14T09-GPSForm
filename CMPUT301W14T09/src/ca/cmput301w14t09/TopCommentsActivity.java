@@ -361,7 +361,15 @@ public class TopCommentsActivity extends ListActivity {
 				FileSaving.saveUserFile(user, topActivity);
 
 				picture = pictureController.finalizePicture(picture, topActivity);
+				
+				//check locations to see which one to use
+				lc1.checklocations(selectedgeo);
+				System.out.println("Sel LAT:"+selectedgeo.getLatitude());
+				
 				comment = CreateComment.newComment(lc1, text2, text1, true, picture);
+				
+				//reset selected locaton for comments
+				lc1.resetselectedlocation(selectedgeo);
 
 				try
 				{

@@ -92,9 +92,29 @@ public class LocationController {
         	
                 geo.setLatitude(location.getLatitude());
                 geo.setLongitude(location.getLongitude()); 
+                System.out.println("geoset"+geo.getLatitude());
               
             }
         }
+    
+    public void checklocations(GeoLocation selectedgeo){
+    	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
+    		geo = selectedgeo;
+    	}
+    	else{
+    		return;
+    	}
+    	
+    }
+    
+    public void resetselectedlocation(GeoLocation selectedgeo){
+    	
+    	double latitude = 0.0;
+		double longitude = 0.0;
+		selectedgeo.setLatitude(latitude);
+		selectedgeo.setLongitude(longitude);
+    	
+    }
 
     
 }

@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -72,8 +71,6 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			TextView geoLocationData = (TextView) v.findViewById(R.id.geoLocationData);
 			TextView authorName = (TextView) v.findViewById(R.id.authorName);
 			TextView authorNameData = (TextView) v.findViewById(R.id.authorNameData);
-			TextView postDate = (TextView) v.findViewById(R.id.postDate);
-			TextView postDateData = (TextView) v.findViewById(R.id.postDateData);
 			TextView commentName = (TextView) v.findViewById(R.id.commentName);
 			TextView commentData = (TextView) v.findViewById(R.id.commentData);
 			
@@ -95,25 +92,14 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 					authorNameData.setText(i.getAuthorName());
 				}
 			}
-			if (postDate != null) {
-				postDate.setText("Post Date: ");
-			}
-			if (postDateData != null) {
-				if (i.getPostDate() != null) {
-					postDateData.setText(i.getPostDate().toString());
-				}
-			}
 			if (commentName != null) {
 				commentName.setText("");
 			}
 			if (commentData != null) {
 				if (i.getCommentText() != null) {
-					postDateData.setText(i.getCommentText());
+				    commentData.setText(i.getCommentText());
 				}
 			}
-
-			// FIXME: Need to create delegates for buttons here.
-
 		}
 
 		// the view must be returned to our activity

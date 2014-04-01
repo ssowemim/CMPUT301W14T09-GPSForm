@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-
+    android:layout_height="400dp"
+	android:minHeight="?android:attr/listPreferredItemHeight"
     android:padding="6dip">
     
    <TextView
@@ -60,7 +60,7 @@
    />
    
      <TextView
-	 	android:id="@+id/postDate"
+	 	android:id="@+id/commentName"
 
 	 	android:layout_width="wrap_content"
 	 	android:layout_height="26dip"
@@ -73,44 +73,18 @@
    	/>
 
    <TextView
-		android:id="@+id/postDateData"
-
-		android:layout_width="fill_parent"
-		android:layout_height="26dip"
-
-		android:layout_alignParentRight="true"
-		android:layout_below="@id/geoLocation"
-		android:layout_toRightOf="@id/authorName"
-
-		android:gravity="center_vertical"
-   />
-   
-   <!-- FIXME: Picture goes here. -->
-   
-   <TextView
-	 	android:id="@+id/commentName"
-
-	 	android:layout_width="wrap_content"
-	 	android:layout_height="26dip"
-
-		android:layout_alignParentLeft="true"
-		android:layout_below="@id/postDate"
-
-	 	android:textStyle="bold"
-	 	android:gravity="center_vertical"
-   	/>
-
-   <TextView
 		android:id="@+id/commentData"
 
 		android:layout_width="fill_parent"
 		android:layout_height="26dip"
 
 		android:layout_alignParentRight="true"
-		android:layout_below="@id/postDate"
+		android:layout_below="@id/authorName"
 		android:layout_toRightOf="@id/commentName"
 
 		android:gravity="center_vertical"
    />
    
+   <!-- FIXME: Picture goes here. -->
+      
 </RelativeLayout>

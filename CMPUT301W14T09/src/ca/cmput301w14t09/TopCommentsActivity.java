@@ -28,8 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-import android.graphics.Bitmap;
-
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -54,8 +52,6 @@ import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
-
-import ca.cmput301w14t09.Model.CommentAdapter;
 
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;

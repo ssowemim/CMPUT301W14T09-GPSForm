@@ -18,13 +18,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.FileManaging;
 
-import android.graphics.Bitmap;
+import java.util.Date;
+
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
-
-import java.util.Date;
 
 /**
  * 
@@ -52,7 +50,9 @@ public class CreateComment {
 	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
 		Comment comment = new Comment();
 		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
-		comment.setThreadId((comment.getAuthorName() + " " + comment.getPostDate().toString().substring(0, 12)));
+		String date = new String();
+		date = removeDateColon(comment.getPostDate().toString());
+		comment.setThreadId((comment.getAuthorName() + " " + date));
 		return comment;
 	}
 	
@@ -75,6 +75,13 @@ public class CreateComment {
             comment.setTopComment(topComment);
             comment.setPostDate(new Date());
             return comment;
+	}
+	
+	private static String removeDateColon(String date) {
+	    System.out.println(date);
+	    date = date.replaceAll(":", "");
+	    System.out.println(date);
+	    return date;
 	}
 	
 	

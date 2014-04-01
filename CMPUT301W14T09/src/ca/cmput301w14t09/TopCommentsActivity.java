@@ -510,21 +510,8 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	public void viewFavorites(View v) {
 		if(user.getUserName().equals("Guest")) {
-
-			dialog = new Dialog(this);
-			dialog.setContentView(R.layout.guest_box);
-			dialog.setTitle("ALERT!");
-
-			Button button =(Button)dialog.findViewById(R.id.favorite1);
-			dialog.show();
-			button.setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					dialog.dismiss();
-
-				}
-			});
+		    Toast.makeText(getApplicationContext(),
+                            "Guest Can Not Have Favourites", Toast.LENGTH_LONG).show();
 		}
 
 		else {

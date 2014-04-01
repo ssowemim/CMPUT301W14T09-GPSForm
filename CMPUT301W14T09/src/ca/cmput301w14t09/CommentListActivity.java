@@ -21,10 +21,9 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
-<<<<<<< HEAD
+
 import android.app.Activity;
-=======
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -52,10 +51,9 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Controller.SortingController;
 import ca.cmput301w14t09.FileManaging.CreateComment;
-<<<<<<< HEAD
+
 import ca.cmput301w14t09.FileManaging.FileLoading;
-=======
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
@@ -115,11 +113,7 @@ public class CommentListActivity extends ListActivity {
 	protected ListView favList;
 	protected String firstComment;
 	protected CommentListActivity commentActivity;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
 
@@ -139,10 +133,6 @@ public class CommentListActivity extends ListActivity {
 				user.profile.add(thread);
 
 				FileSaving.saveUserFile(user, commentActivity);
-<<<<<<< HEAD
-				//user = FileLoading.returnUser(user.getUserName(), commentActivity);
-=======
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
 
 			}
 
@@ -190,44 +180,8 @@ public class CommentListActivity extends ListActivity {
 
 		return true;
 	}
-<<<<<<< HEAD
 
-	/**
-	 * 
-	 * @author Chunhan
-	 * Allows for selection of sorting on the action bar
-	 * https://developer.android.com/training/basics/actionbar/adding-buttons.html
-	 * 
-	 */
-	@Override 
-	public boolean onOptionsItemSelected(MenuItem item){
-		switch (item.getItemId()){
-		case R.id.sortLocation:			
-			SortingController sorting = new SortingController();
-			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, firstComment);
-			adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
-			favList.setAdapter(adapter);
-			adapter.notifyDataSetChanged();
-			return true;
-		case R.id.sortDate:
-			try {
-				ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
-				adapter = new CommentAdapter(this,R.layout.comment_view, comment);
-				favList.setAdapter(adapter);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return true;
-		case R.id.sortPicture:
-			SortingController sorting1 = new SortingController();
-			ArrayList<Comment> commentList = sorting1.sortPictures(firstComment);
-			adapter = new CommentAdapter(this,R.layout.comment_view, commentList);
-			favList.setAdapter(adapter);
-			adapter.notifyDataSetChanged();
-			return true;
 
-=======
-	
 	/**
 	 * 
 	 * @author Chunhan
@@ -262,7 +216,7 @@ public class CommentListActivity extends ListActivity {
 			adapter.notifyDataSetChanged();
 			return true;
 			
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -338,43 +292,8 @@ public class CommentListActivity extends ListActivity {
 			Toast.makeText(getApplicationContext(),
 					"No Camera Detected.", Toast.LENGTH_LONG).show();
 		}
-<<<<<<< HEAD
-		/*
-		// Retrieve location updates through LocationListener interface
-		//https://github.com/baoliangwang/CurrentLocation
-		LocationListener locationListener = new LocationListener() {                            
-
-			public void onProviderDisabled (String provider) {
-
-			}
-
-			public void onProviderEnabled (String provider) {
 
 
-			}
-
-			public void onStatusChanged (String provider, int status, Bundle extras) {
-
-
-			}
-
-			@Override
-			public void onLocationChanged(android.location.Location location) {
-
-				lc.locationchanged(location);
-
-
-			}
-		};
-		 */
-		dialog.show();
-		/*
-		//request location update
-		//https://github.com/baoliangwang/CurrentLocation
-		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
-		 */
-=======
 /*
 		// Retrieve location updates through LocationListener interface
 		//https://github.com/baoliangwang/CurrentLocation
@@ -410,7 +329,7 @@ public class CommentListActivity extends ListActivity {
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
 */
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+
 		//update location button
 		btnSetLocation.setOnClickListener(new View.OnClickListener() {
 
@@ -501,7 +420,7 @@ public class CommentListActivity extends ListActivity {
 
 	}
 
-<<<<<<< HEAD
+
 	public void onBackPressed()
 	{
 		Intent intent = getIntent();
@@ -510,7 +429,6 @@ public class CommentListActivity extends ListActivity {
 		super.onBackPressed();
 
 	}
-=======
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+
 
 }

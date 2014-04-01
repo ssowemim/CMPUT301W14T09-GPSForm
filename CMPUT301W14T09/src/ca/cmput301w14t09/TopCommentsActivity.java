@@ -102,11 +102,12 @@ public class TopCommentsActivity extends ListActivity {
 	EditText authorText;
 	EditText commentText;
 	ThreadAdapter adapter1;
-	
+
 	//selected geolocation object used for when person selects geolocation fom
 	GeoLocation selectedgeo = new GeoLocation();
-	
-	
+	GeoLocation selectedgeosort = new GeoLocation();
+
+
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
 
@@ -189,7 +190,7 @@ public class TopCommentsActivity extends ListActivity {
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();
 			return true;
-			
+
 		case R.id.sortDate:
 			ArrayList<Comment> topComments = null;
 			try {
@@ -201,7 +202,7 @@ public class TopCommentsActivity extends ListActivity {
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();
 			return true;
-		
+
 		case R.id.sortPicture:
 			SortingController sorting1 = new SortingController();
 			ArrayList<Comment> commentList = sorting1.sortPictures(null);
@@ -209,7 +210,19 @@ public class TopCommentsActivity extends ListActivity {
 			aCommentList.setAdapter(adapter1);
 			adapter1.notifyDataSetChanged();
 			return true;
+
+		case R.id.selectDiffLocation:
+			Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
+			startActivityForResult(intentdiff, 123);
+			return true;
 			
+		case R.id.sortByDiffLocation:
+			SortingController sorting2 = new SortingController();
+			ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -223,24 +236,24 @@ public class TopCommentsActivity extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-        ArrayList<Comment> topComments = null;
+		ArrayList<Comment> topComments = null;
 
-        if(Server.getInstance().isServerReachable(this)) {
+		if(Server.getInstance().isServerReachable(this)) {
 
-            try {
-                topComments = ElasticSearchOperations.pullThreads();
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+			try {
+				topComments = ElasticSearchOperations.pullThreads();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-        }
-        
-        
-        adapter1 = new ThreadAdapter(this,
-                R.layout.thread_view, topComments);
-        aCommentList.setAdapter(adapter1);
-        adapter1.notifyDataSetChanged();
+		}
+
+
+		adapter1 = new ThreadAdapter(this,
+				R.layout.thread_view, topComments);
+		aCommentList.setAdapter(adapter1);
+		adapter1.notifyDataSetChanged();
 
 
 	}
@@ -300,7 +313,7 @@ public class TopCommentsActivity extends ListActivity {
 					"No Camera Detected.", Toast.LENGTH_LONG).show();
 		}
 
-		
+
 
 		dialog.show();
 
@@ -421,21 +434,26 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		
+
 		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
 		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
-		
-		    //succesfully get updated geolocation
+
+			//succesfully get updated geolocation
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
 			System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
-		    System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
+			System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
+			Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+		}
 
+		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+		if (requestCode == 123 && resultCode == Activity.RESULT_OK){
 
-		 
-   }
-
-
-
+			//succesfully get updated geolocation
+			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
+			System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
+			Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show();
+		}
 
 		// if the result is capturing Image
 		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {

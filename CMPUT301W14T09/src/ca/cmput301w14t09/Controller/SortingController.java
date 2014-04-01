@@ -147,7 +147,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	private ArrayList<Comment> sortTopComments(GeoLocation geo){
+	public ArrayList<Comment> sortTopComments(GeoLocation geo){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();
@@ -190,7 +190,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	private ArrayList<Comment> sortComments(GeoLocation geo, String comment){
+	public ArrayList<Comment> sortComments(GeoLocation geo, String comment){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();

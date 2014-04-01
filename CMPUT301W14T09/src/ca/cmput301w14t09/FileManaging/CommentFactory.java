@@ -27,13 +27,12 @@ import ca.cmput301w14t09.Model.GeoLocation;
 /**
  * 
  * @author Conner
- * CreateComment creates top comments and reply comments
+ * CommentFactory creates top comments and reply comments
  * when requested by methods. reply comments has not
  * been completed yet
  * 
  */
-
-public class CreateComment {
+public class CommentFactory {
 
 	/**
 	 * newComment creates a new top comment and fills out
@@ -47,7 +46,7 @@ public class CreateComment {
 	 * @return
 	 */
 	
-	public static Comment newComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
+	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
 		Comment comment = new Comment();
 		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
 		String date = new String();
@@ -56,7 +55,7 @@ public class CreateComment {
 		return comment;
 	}
 	
-	public static Comment newReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId) {
+	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId) {
 	                Comment comment = new Comment();
 	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
 	                comment.setThreadId(threadId);
@@ -84,7 +83,4 @@ public class CreateComment {
 	    return date;
 	}
 	
-	
-	
-
 }

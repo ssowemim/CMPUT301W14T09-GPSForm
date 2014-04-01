@@ -48,7 +48,7 @@ import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Controller.SortingController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
@@ -362,7 +362,7 @@ public class TopCommentsActivity extends ListActivity {
 				lc1.checklocations(selectedgeo);
 				System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 				
-				comment = CreateComment.newComment(lc1, text2, text1, true, picture);
+				comment = CommentFactory.buildComment(lc1, text2, text1, true, picture);
 				
 				//reset selected locaton for comments
 				lc1.resetselectedlocation(selectedgeo);

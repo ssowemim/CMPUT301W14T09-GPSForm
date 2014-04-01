@@ -50,7 +50,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Controller.SortingController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.FileManaging.CommentFactory;
 
 import ca.cmput301w14t09.FileManaging.FileLoading;
 
@@ -349,7 +349,7 @@ public class CommentListActivity extends ListActivity {
                 lc1.checklocations(selectedgeo);
                 System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
-                comment = CreateComment.newReplyComment(lc1, text2, text1, false, picture, firstComment);
+                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, picture, firstComment);
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);

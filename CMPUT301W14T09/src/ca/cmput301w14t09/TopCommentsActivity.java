@@ -27,6 +27,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -78,9 +79,6 @@ public class TopCommentsActivity extends ListActivity {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int FAVORITE_LIST = 42;
 
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
-
     //File uri to store Images
     private Uri fileUri;
 
@@ -96,7 +94,7 @@ public class TopCommentsActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    SerializableBitmap picture = null;
+    Bitmap picture = null;
 
     PictureModelList pictureModel;
 
@@ -365,9 +363,10 @@ public class TopCommentsActivity extends ListActivity {
 
                 //check locations to see which one to use
                 lc1.checklocations(selectedgeo);
-                System.out.println("Sel LAT:"+selectedgeo.getLatitude());
+              //  System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
-                comment = CommentFactory.buildComment(lc1, text2, text1, true, picture);
+        		SerializableBitmap serializePic = new SerializableBitmap(picture);
+                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic);
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);
@@ -376,7 +375,7 @@ public class TopCommentsActivity extends ListActivity {
                 try
                 {
                     ElasticSearchOperations.postThread(comment);
-                    Thread.sleep(1000);
+                   Thread.sleep(1000);
                     adapter1.notifyDataSetChanged();
                     recreate();
 

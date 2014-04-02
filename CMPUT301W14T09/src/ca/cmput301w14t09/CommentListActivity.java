@@ -87,12 +87,8 @@ public class CommentListActivity extends ListActivity {
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
 
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
-
     //File uri to store Images
     private Uri fileUri;
-
 
     PictureController pictureController;
 
@@ -105,7 +101,7 @@ public class CommentListActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    SerializableBitmap picture = null;
+    Bitmap picture = null;
 
     PictureModelList pictureModel;
 
@@ -356,13 +352,15 @@ public class CommentListActivity extends ListActivity {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, commentActivity );
 
+                
                 picture = pictureController.finalizePicture(picture, commentActivity);
 
                 //check locations to see which one to use
                 lc1.checklocations(selectedgeo);
                 System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
-                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, picture, firstComment);
+                SerializableBitmap serializePic = new SerializableBitmap(picture);
+                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment);
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);

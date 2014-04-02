@@ -104,7 +104,7 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public SerializableBitmap previewCapturedImage(Uri fileUri, SerializableBitmap picture, ImageView picImagePreview, Comment comment) {
+    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview, Comment comment) {
         try {
             picImagePreview.setVisibility(View.VISIBLE);
 
@@ -117,7 +117,7 @@ public class PictureController extends Activity{
             final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
              
             picImagePreview.setImageBitmap(bitmap);
-            picture.bitmap = bitmap;
+            picture = bitmap;
 
         } catch(NullPointerException e) {
             e.printStackTrace();
@@ -126,22 +126,22 @@ public class PictureController extends Activity{
         return picture;
     }
 
-    public SerializableBitmap finalizePicture(SerializableBitmap picture, ListActivity activity) {
+    public Bitmap finalizePicture(Bitmap picture, ListActivity activity) {
     	if (picture == null) {
-    	        picture = new SerializableBitmap();
-    		picture.bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
+    	      //  picture = new SerializableBitmap();
+    		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
     	}
     	
-    	if(picture.bitmap.getWidth() > MAX_BITMAP_DIMENSIONS || picture.bitmap.getHeight() > MAX_BITMAP_DIMENSIONS){
-    		double scalingFactor = picture.bitmap.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
+    	if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
+    		double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
     		
-    		if(picture.bitmap.getHeight() > picture.bitmap.getWidth())
-    			scalingFactor = picture.bitmap.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
+    		if(picture.getHeight() > picture.getWidth())
+    			scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
     		
-    		int newWidth = (int)Math.round(picture.bitmap.getWidth()/scalingFactor);
-    		int newHeight = (int)Math.round(picture.bitmap.getHeight()/scalingFactor);
+    		int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
+    		int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
     		
-    		 picture.bitmap = Bitmap.createScaledBitmap(picture.bitmap, newWidth, newHeight, false);
+    		 picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
     		
     		//this.model();
     	}

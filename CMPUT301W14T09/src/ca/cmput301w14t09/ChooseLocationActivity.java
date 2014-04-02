@@ -29,6 +29,9 @@ import com.mapquest.android.maps.MyLocationOverlay;
 import com.mapquest.android.maps.Overlay;
 import com.mapquest.android.maps.OverlayItem;
 
+
+//http://developer.mapquest.com/web/products/featured/android-maps-api/documentation
+//downloaded Android Maps API & Samples which included the library I used and all the bits and peices for this class
 public class ChooseLocationActivity extends MapActivity {
     protected MapView map;
     private MyLocationOverlay myLocationOverlay;
@@ -59,8 +62,10 @@ public class ChooseLocationActivity extends MapActivity {
       //setup 
       setupViews();
       setupOverlays();
-      addPoiOverlay();
-     
+      //addPoiOverlay();
+      
+      
+      Toast.makeText(getApplicationContext(),"Click on map to Set your location.", Toast.LENGTH_LONG).show();
     
       
     }
@@ -164,18 +169,7 @@ public class ChooseLocationActivity extends MapActivity {
             }
         });
         
-        Button button2 = (Button) findViewById(R.id.mq_geocode_btn2);
         
-        button2.setOnClickListener(new OnClickListener() {
-            
-            @Override
-            public void onClick(View v) {
-            	
-            	onBackPressed();
-            	finish();
-               
-            }
-        });
         
         EditText mqGeocodeInput = (EditText) findViewById(R.id.mq_geocode_input);
         mqGeocodeInput.setOnKeyListener(new OnKeyListener() {

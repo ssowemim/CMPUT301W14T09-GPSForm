@@ -345,6 +345,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                lc1.resetselectedlocation(selectedgeo);
 
             }
         });
@@ -370,7 +371,8 @@ public class TopCommentsActivity extends ListActivity {
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);
-                System.out.println("Reset selected location back to default:"+selectedgeo.getLatitude());
+                System.out.println("Reset selected location back to default" +
+                		":"+selectedgeo.getLatitude());
 
                 try
                 {

@@ -272,7 +272,7 @@ public class CommentListActivity extends ListActivity {
         dialog = new Dialog(this);
 
         dialog.setContentView(R.layout.pop_up_comment);
-        dialog.setTitle("New Top Comment");
+        dialog.setTitle("Replies to comments");
 
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
@@ -428,10 +428,7 @@ public class CommentListActivity extends ListActivity {
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
-
             if (resultCode == RESULT_OK) {
-
-
                 // successfully captured the image
                 // display it in image view
                 picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);

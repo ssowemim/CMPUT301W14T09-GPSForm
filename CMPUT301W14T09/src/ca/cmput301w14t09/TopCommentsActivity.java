@@ -377,9 +377,9 @@ public class TopCommentsActivity extends ListActivity {
                 try
                 {
                     ElasticSearchOperations.postThread(comment);
-                   Thread.sleep(1000);
+             //      Thread.sleep(1000);
                     adapter1.notifyDataSetChanged();
-                    recreate();
+           //         recreate();
 
                 } catch (InterruptedException e)
                 {

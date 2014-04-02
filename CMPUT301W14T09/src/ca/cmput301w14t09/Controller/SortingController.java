@@ -54,9 +54,9 @@ public class SortingController {
 	public ArrayList<Comment> sortCommentsByLocation(LocationController lc, String comment){
 		ArrayList<Comment> newList = null;
 		if (comment == null){
-			newList = sortTopComments(lc.getGeoLocation());
+			newList = sortTopComments(lc.getGeodefault());
 		} else{
-			newList = sortComments(lc.getGeoLocation(), comment);
+			newList = sortComments(lc.getGeodefault(), comment);
 		}
 		
 		return newList;

@@ -160,7 +160,6 @@ public class TopCommentsActivity extends ListActivity {
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-        lm.removeUpdates(locationListener);
         
     }
 
@@ -372,6 +371,7 @@ public class TopCommentsActivity extends ListActivity {
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);
+                System.out.println("Reset selected location back to default:"+selectedgeo.getLatitude());
 
                 try
                 {

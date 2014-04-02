@@ -21,12 +21,10 @@ package ca.cmput301w14t09.Controller;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import ca.cmput301w14t09.ChooseLocationActivity;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
@@ -43,6 +41,8 @@ import ca.cmput301w14t09.Model.GeoLocation;
 public class LocationController {
 
     private GeoLocation geo = new GeoLocation();
+    GeoLocation geodefault = new GeoLocation();
+    GeoLocation selcommentlocation = new GeoLocation();
     LocationManager lm = null;
     Intent intent = null;
     
@@ -90,9 +90,10 @@ public class LocationController {
     public void locationchanged(android.location.Location location){
         if(location != null){
         	
-                geo.setLatitude(location.getLatitude());
-                geo.setLongitude(location.getLongitude()); 
-                System.out.println("geoset"+geo.getLatitude());
+                geodefault.setLatitude(location.getLatitude());
+                geodefault.setLongitude(location.getLongitude()); 
+                System.out.println("geodefaultset"+geodefault.getLatitude());
+                System.out.println("geodefaultset"+geodefault.getLongitude());
               
             }
         }
@@ -100,9 +101,11 @@ public class LocationController {
     public void checklocations(GeoLocation selectedgeo){
     	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
     		geo = selectedgeo;
+    		 System.out.println("used selected geo"+geo.getLatitude());
     	}
     	else{
-    		return;
+    		geo = geodefault;
+    		 System.out.println("used default geo"+geo.getLatitude());
     	}
     	
     }
@@ -115,6 +118,28 @@ public class LocationController {
 		selectedgeo.setLongitude(longitude);
     	
     }
+
+
+	
+	/**
+	 * @return the geodefault
+	 */
+	public GeoLocation getGeodefault()
+	{
+	
+		return geodefault;
+	}
+
+
+	
+	/**
+	 * @param geodefault the geodefault to set
+	 */
+	public void setGeodefault(GeoLocation geodefault)
+	{
+	
+		this.geodefault = geodefault;
+	}
 
     
 }

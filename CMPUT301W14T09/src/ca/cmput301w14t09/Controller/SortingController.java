@@ -36,7 +36,7 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  * @author Chunhan
  * Controller handling the logic behind sorting the comments for proximity.
  * Compatible with sorting from default location or changed locations. 
- * 
+ * Also sorts comments based of if there is a picture attached to that comment
  *
  */
 

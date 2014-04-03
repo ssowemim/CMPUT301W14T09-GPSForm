@@ -16,14 +16,8 @@
         android:showAsAction="never"
         android:title="Sort by Picture"/>
     <item
-        android:id="@+id/selectDiffLocation"
-        android:orderInCategory="400"
-        android:showAsAction="always"
-        android:title="Change Your Location"
-        android:icon="@drawable/ic_change_location"/>
-    <item
         android:id="@+id/sortByDiffLocation"
-        android:orderInCategory="500"
+        android:orderInCategory="400"
         android:showAsAction="never"
         android:title="Sort by Selected Location"/>
 

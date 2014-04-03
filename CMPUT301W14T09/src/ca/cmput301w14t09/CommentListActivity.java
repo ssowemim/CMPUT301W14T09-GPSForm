@@ -69,13 +69,10 @@ import ca.cmput301w14t09.elasticSearch.Server;
  * 
  * @author Conner
  * @editor ChunHan
-<<<<<<< HEAD
  * This activity shows the top comment that was selected in a 
  * previous activity and displays all the replies to that comment
-=======
- *This activity shows the top comment that was selected in a 
- *previous activity and displays all the replies to that comment
->>>>>>> branch 'master' of https://github.com/Mrbilec/CMPUT301W14T09-GPSForm.git
+ * This activity shows the top comment that was selected in a 
+ * previous activity and displays all the replies to that comment
  *
  * Need to send the user back as a Activity result so the favorite
  * saves to the user profile are sent back as well and favorites
@@ -362,7 +359,7 @@ public class CommentListActivity extends ListActivity {
                 comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment);
 
                 //reset selected locaton for comments
-                lc1.resetselectedlocation(selectedgeo);
+
 
                 try
                 {
@@ -376,7 +373,7 @@ public class CommentListActivity extends ListActivity {
 
                     e.printStackTrace();
                 }
-
+                lc1.resetselectedlocation(selectedgeo);
                 dialog.dismiss();
 
             }

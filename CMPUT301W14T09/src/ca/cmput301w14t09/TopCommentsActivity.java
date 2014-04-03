@@ -213,17 +213,9 @@ public class TopCommentsActivity extends ListActivity {
                 adapter1.notifyDataSetChanged();
                 return true;
 
-            case R.id.selectDiffLocation:
+            case R.id.sortByDiffLocation:
                 Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
                 startActivityForResult(intentdiff, 123);
-                return true;
-
-            case R.id.sortByDiffLocation:
-                SortingController sorting2 = new SortingController();
-                ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -369,9 +361,7 @@ public class TopCommentsActivity extends ListActivity {
                 comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic);
 
                 //reset selected locaton for comments
-                lc1.resetselectedlocation(selectedgeo);
-                System.out.println("Reset selected location back to default" +
-                		":"+selectedgeo.getLatitude());
+
 
                 try
                 {
@@ -386,6 +376,9 @@ public class TopCommentsActivity extends ListActivity {
                     e.printStackTrace();
                 }
 
+                lc1.resetselectedlocation(selectedgeo);
+                System.out.println("Reset selected location back to default" +
+                		":"+selectedgeo.getLatitude());
                 dialog.dismiss();
 
             }
@@ -475,7 +468,12 @@ public class TopCommentsActivity extends ListActivity {
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
             System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
-            Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show();
+            SortingController sorting2 = new SortingController();
+            ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
+            adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
+            aCommentList.setAdapter(adapter1);
+            adapter1.notifyDataSetChanged();
+            Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
         }
 
         // if the result is capturing Image

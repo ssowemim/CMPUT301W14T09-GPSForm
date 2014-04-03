@@ -336,7 +336,7 @@ public class CommentListActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
+                lc1.resetselectedlocation(selectedgeo);
             }
         });
 

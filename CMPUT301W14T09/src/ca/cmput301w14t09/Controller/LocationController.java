@@ -51,36 +51,6 @@ public class LocationController {
         return geo;
     }
 
- 
-    public ArrayList<String> getLocationNames(){
-        return null;
-    }
-    
-    /**
-     * setLocationManager function responsible for setting up 
-     *location manager wherever is called and sets in locationcontroller.
-     *@param LocationController
-     */
-    
-    public void setLocationManager(Context context) {
-
-        // Obtain LocationManager service 
-        @SuppressWarnings("static-access")
-        LocationManager lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
-
-    }
-    
-    /**
-     * Request a location update using the location manager and a location listener from activity
-     * @param LocationController
-     */
-
-    public void requestLocationUpdates(LocationListener locationListener){
-
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
-    }
-
     /**
    	* location changed function responsible for getting location points from GPS location on android activity
    	* and then setting the geolocation in Location controller to the current location of the GPS.

@@ -250,11 +250,11 @@ public class CommentListActivity extends ListActivity {
         }
 
 
-
+        FileSaving.saveUserFile(user, this);
         adapter = new CommentAdapter(this,
                 R.layout.comment_view,
                 user.profile.cache.getSubComments(firstComment));
-                //user.profile.cache.getSubComments(firstComment));
+        //user.profile.cache.getSubComments(firstComment));
 
         favList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -349,7 +349,7 @@ public class CommentListActivity extends ListActivity {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, commentActivity );
 
-                
+
                 picture = pictureController.finalizePicture(picture, commentActivity);
 
                 //check locations to see which one to use
@@ -382,6 +382,9 @@ public class CommentListActivity extends ListActivity {
         onStart();
 
     }
+
+
+
 
 
     /**

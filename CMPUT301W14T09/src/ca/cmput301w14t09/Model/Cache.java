@@ -13,7 +13,7 @@ public class Cache implements Serializable {
 
     private static final long serialVersionUID = 3735065364081988008L;
     private static final int MAX_LENGTH = 200;
-    private ArrayList<Comment> comments;
+    public ArrayList<Comment> comments;
 
     public Cache() {
         comments = new ArrayList<Comment>(MAX_LENGTH);

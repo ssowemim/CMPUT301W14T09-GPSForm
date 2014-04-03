@@ -21,6 +21,9 @@ public class ThreadAdapterTest extends ActivityInstrumentationTestCase2<TopComme
 		
 	}
 	
+	/**
+	 * Cameron Alexander
+	 */
 	public void testThreadAdapter(){
 		ArrayList<Comment> comments = new ArrayList<Comment>(200);
 		GeoLocation geo = new GeoLocation();

@@ -54,6 +54,10 @@
             android:name="ca.cmput301w14t09.FavoriteActivity"
             android:label="@string/title_activity_favorite" >
         </activity>
+        <activity
+            android:name="ca.cmput301w14t09.ChooseLocationActivity"
+             >
+        </activity>
     </application>
 
 </manifest>

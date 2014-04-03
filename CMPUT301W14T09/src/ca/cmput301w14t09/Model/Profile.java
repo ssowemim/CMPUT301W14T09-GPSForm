@@ -124,14 +124,12 @@ public class Profile implements Serializable {
     
     public Cache getCache()
     {
-    
         return cache;
     }
 
     
     public void setCache(Cache cache)
     {
-    
         this.cache = cache;
     }	
 }

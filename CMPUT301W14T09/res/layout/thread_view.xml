@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
 
-    android:padding="6dip">
+    android:padding="6dip"
+    android:descendantFocusability="blocksDescendants">
     <!-- Item Name -->
    <TextView
 		android:id="@+id/toptext"
@@ -88,7 +89,6 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_below="@+id/toptext"
-       android:layout_marginRight="17dp"
        android:layout_toLeftOf="@+id/buttonProfile"
        android:contentDescription="@string/attachment_description"
        android:src="@drawable/attachment_pic" />

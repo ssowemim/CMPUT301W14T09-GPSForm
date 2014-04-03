@@ -121,7 +121,6 @@ public class TopCommentsActivity extends ListActivity {
         aCommentList = (ListView) findViewById(android.R.id.list);
 
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
-
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
                 Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 

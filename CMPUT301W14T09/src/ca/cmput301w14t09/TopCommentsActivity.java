@@ -20,7 +20,6 @@ package ca.cmput301w14t09;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.CountDownLatch;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -31,6 +30,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +38,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import ca.cmput301w14t09.PopUpComment.PopUpUser;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.SortingController;
 import ca.cmput301w14t09.FileManaging.FileSaving;
@@ -68,353 +67,344 @@ import com.mapquest.android.maps.MyLocationOverlay;
  *
  */
 public class TopCommentsActivity extends ListActivity {
-
-    public static final int OBTAIN_PIC_REQUEST_CODE = 117;
-    public static final int FAVORITE_LIST = 42;
-    //private TopCommentsActivity topActivity;
-
-    protected Intent intent;
-    protected User user;
-    protected Dialog dialog;
-    protected ListView aCommentList;
-    protected Uri fileUri;
-    
-    PopUpComment popUpComment = new PopUpComment(this);
-
-    PictureModelList pictureModel;
-
-    ThreadAdapter adapter1;
-
-    //selected geolocation object used for when person selects geolocation fom
-    GeoLocation selectedgeo = new GeoLocation();
-    GeoLocation selectedgeosort = new GeoLocation();
-
-
-    final LocationController lc1 = new LocationController();
-
-    //map stuff
-    protected MapView map;
-    private MyLocationOverlay myLocationOverlay;
-    AnnotationView annotation;
-    GeoPoint currentLocation;
-    int id = 0;
-    Geocoder code = null;
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top_comments);
-        //topActivity = this;
-        //	attachment = false;
-
-        aCommentList = (ListView) findViewById(android.R.id.list);
-
-        aCommentList.setOnItemClickListener(new OnItemClickListener(){
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
-
-                // Pass in comment object
-                commentThread(thread);
-            }
-
-        });
-
-        //mapstuff
-        setupMapView();
-        setupMyLocation();
-        // setupViews();
-        // setupOverlays();
-
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        // Retrieve location updates through LocationListener interface
-        //https://github.com/baoliangwang/CurrentLocation
-        LocationListener locationListener = new LocationListener() {				
-
-            public void onProviderDisabled (String provider) {
-            }
-
-            public void onProviderEnabled (String provider) {
-            }
-
-            public void onStatusChanged (String provider, int status, Bundle extras) {
-            }
-
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location);
-            }
-        };
-        //request location update
-        //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.top_comments, menu);
-
-        intent = getIntent();
-        user = (User) intent.getSerializableExtra("CURRENT_USER");
-        populateListView();
-
-
-
-        return true;
-
-    }
-
-    /**
-     * 
-     * @author Chunhan
-     * Allows for selection of sorting on the action bar
-     * https://developer.android.com/training/basics/actionbar/adding-buttons.html
-     * 
-     */
-    @Override 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.sortLocation:			
-                SortingController sorting = new SortingController();
-                ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, null);
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
-                return true;
-
-            case R.id.sortDate:
-                ArrayList<Comment> topComments = null;
-                try {
-                    topComments = ElasticSearchOperations.pullThreads();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, topComments);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
-                return true;
-
-            case R.id.sortPicture:
-                SortingController sorting1 = new SortingController();
-                ArrayList<Comment> commentList = sorting1.sortPictures(null);
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
-                return true;
-
-            case R.id.sortByDiffLocation:
-                Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
-                startActivityForResult(intentdiff, 123);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * onResume popluates the listview with results from
-     * elasticSearch, finding all of the top comments
-     * @param thread
-     */
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    public void popUp(View v) throws InterruptedException {
-        popUpComment.popUp(v, this, fileUri, lc1, selectedgeo, user);
-        
-        
-        populateListView();
-        adapter1.notifyDataSetChanged();
-        //populateListView();
-        
-    }
-
-    private void populateListView() {
-        ArrayList<Comment> topComments = null;
-
-        if(Server.getInstance().isServerReachable(this)) {
-            try {
-                topComments = ElasticSearchOperations.pullThreads();
-                user.profile.cache.add(topComments);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-
-
-        Collections.sort(user.profile.cache.comments);
-        Collections.reverse(user.profile.cache.comments);
-        FileSaving.saveUserFile(user, this);
-        adapter1 = new ThreadAdapter(this,
-                R.layout.thread_view,
-                user.profile.cache.getTopComments(true));
-        //user.profile.cache.getTopComments(true));
-
-        aCommentList.setAdapter(adapter1);
-        adapter1.notifyDataSetChanged();
-    }
-
-    /**
-     * viewFavorites checks to see if you are guest or not
-     * since guest cannot have favorites.
-     * Then the method starts up the FavoritesListActivity.
-     * This activity has yet to be written
-     * @param v
-     */
-    public void viewFavorites(View v) {
-        if(user.getUserName().equals("Guest")) {
-            Toast.makeText(getApplicationContext(),
-                    "Guest Can Not Have Favourites", Toast.LENGTH_LONG).show();
-        }
-
-        else {
-            Intent intent = new Intent(this, FavoriteActivity.class);
-            intent.putExtra("CURRENT_USER", user);   
-            startActivity(intent);
-
-        }
-    }
-
-    /**
-     * commentThread takes in thread and then starts a new
-     * activity while passing the contents of thread to the 
-     * activity
-     * @param thread
-     */
-    public void commentThread(Comment thread) {
-        String stringId = new String();
-        stringId = thread.getThreadId();
-
-        Intent intent = new Intent(this, CommentListActivity.class);
-        intent.putExtra("THREAD_ID", stringId);
-        intent.putExtra("CURRENT_USER", user);                
-
-        startActivityForResult(intent, FAVORITE_LIST);
-
-    }
-
-    //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
-    public void onBackPressed()
-    {
-
-        finish();
-
-    }
-
-    // set your map and enable default zoom controls 
-    protected void setupMapView() {
-        this.map = (MapView) findViewById(R.id.map);
-        map.setBuiltInZoomControls(true);
-
-    }
-
-    // set up a MyLocationOverlay and execute the runnable once we have a location fix 
-    private void setupMyLocation() {
-        this.myLocationOverlay = new MyLocationOverlay(this, map);
-        myLocationOverlay.enableMyLocation();
-        myLocationOverlay.runOnFirstFix(new Runnable() {
-            @Override
-            public void run() {
-
-                currentLocation = myLocationOverlay.getMyLocation();
-                map.getController().animateTo(currentLocation);
-                map.getController().setZoom(14);
-                map.getOverlays().add(myLocationOverlay);
-                myLocationOverlay.setFollowing(true);
-            }
-        });
-    }
-
-    /**
-     * onSaveInstanceState stores the file url as
-     * it will be null after returning from camera app
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // save file url in bundle as it will be null on screen orientation changes
-        outState.putParcelable("file_uri",fileUri);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        fileUri = savedInstanceState.getParcelable("file_uri");
-    }
-
-
-    /**
-     * onActivityResult will Receive the activity result
-     * method and will be called after closing the camera,
-     * the geolocation, or the commentList. this method 
-     * is always called when camera is closed, geolocation
-     * is finished, or commentList is finished.
-     */
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO: Needs to be modified to take results from PopupComment.
-
-        if (requestCode == FAVORITE_LIST && resultCode == Activity.RESULT_OK) {
-            user = (User) data.getSerializableExtra("CURRENT_USER");
-        }
-
-        //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
-        if (requestCode == 123 && resultCode == Activity.RESULT_OK){
-
-            //succesfully get updated geolocation
-            selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-            System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
-            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
-            SortingController sorting2 = new SortingController();
-            ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
-            adapter1 = new ThreadAdapter(this, R.layout.thread_view, sortedList1);
-            aCommentList.setAdapter(adapter1);
-            adapter1.notifyDataSetChanged();
-            Toast.makeText(this.getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
-        }
-
-        if (requestCode == 122 && resultCode == Activity.RESULT_OK){
-
-            //succesfully get updated geolocation
-            selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-            System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
-            System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
-            Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
-        }
-
-        // if the result is capturing Image
-        if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
-
-            if (resultCode == RESULT_OK) {
-                popUpComment.pictureResult(fileUri);
-
-            } else if (resultCode == RESULT_CANCELED) {
-                // user cancelled Image capture
-                Toast.makeText(this.getApplicationContext(),
-                        "User cancelled image capture", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        } else {
-            // failed to capture image
-            Toast.makeText(this.getApplicationContext(),
-                    "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
-                    .show();
-        }
-    }
+	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
+	public static final int FAVORITE_LIST = 42;
+
+	protected Intent intent;
+	protected User user;
+	protected Dialog dialog;
+	protected ListView aCommentList;
+	protected Uri fileUri;
+
+	protected PopUpComment popUpComment = new PopUpComment(this);
+
+	PictureModelList pictureModel;
+
+	protected ThreadAdapter adapter1;
+
+	//selected geolocation object used for when person selects geolocation fom
+	GeoLocation selectedgeo = new GeoLocation();
+	GeoLocation selectedgeosort = new GeoLocation();
+
+
+	final LocationController lc1 = new LocationController();
+
+	//map stuff
+	protected MapView map;
+	private MyLocationOverlay myLocationOverlay;
+	AnnotationView annotation;
+	GeoPoint currentLocation;
+	int id = 0;
+	Geocoder code = null;
+
+	private Handler  updateHandler;
+	private Runnable updateFunction;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_top_comments);
+		//topActivity = this;
+		//	attachment = false;
+
+		aCommentList = (ListView) findViewById(android.R.id.list);
+
+		aCommentList.setOnItemClickListener(new OnItemClickListener(){
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
+
+				// Pass in comment object
+				commentThread(thread);
+			}
+
+		});
+
+		//mapstuff
+		setupMapView();
+		setupMyLocation();
+		// setupViews();
+		// setupOverlays();
+
+		//https://github.com/baoliangwang/CurrentLocation
+		//setup location manager
+		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+		// Retrieve location updates through LocationListener interface
+		//https://github.com/baoliangwang/CurrentLocation
+		LocationListener locationListener = new LocationListener() {
+			public void onProviderDisabled (String provider) {
+			}
+
+			public void onProviderEnabled (String provider) {
+			}
+
+			public void onStatusChanged (String provider, int status, Bundle extras) {
+			}
+
+			@Override
+			public void onLocationChanged(android.location.Location location) {
+				lc1.locationchanged(location);
+			}
+		};
+		
+		//request location update
+		//https://github.com/baoliangwang/CurrentLocation
+		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+
+		// Handler polling
+		updateHandler = new Handler();
+		updateFunction = new Runnable() {
+			@Override
+			public void run() {
+				populateListView();
+			}
+		};
+
+		Thread update = new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						updateHandler.post(updateFunction);
+						sleep(2000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+
+		update.start();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.top_comments, menu);
+
+		intent = getIntent();
+		user = (User) intent.getSerializableExtra("CURRENT_USER");
+		return true;
+	}
+
+	/**
+	 * 
+	 * @author Chunhan
+	 * Allows for selection of sorting on the action bar
+	 * https://developer.android.com/training/basics/actionbar/adding-buttons.html
+	 * 
+	 */
+	@Override 
+	public boolean onOptionsItemSelected(MenuItem item){
+		switch (item.getItemId()) {
+		case R.id.sortLocation:			
+			SortingController sorting = new SortingController();
+			ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, null);
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
+
+		case R.id.sortDate:
+			ArrayList<Comment> topComments = null;
+			try {
+				topComments = ElasticSearchOperations.pullThreads();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, topComments);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
+
+		case R.id.sortPicture:
+			SortingController sorting1 = new SortingController();
+			ArrayList<Comment> commentList = sorting1.sortPictures(null);
+			adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			return true;
+
+		case R.id.sortByDiffLocation:
+			Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
+			startActivityForResult(intentdiff, 123);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	/**
+	 * onResume popluates the listview with results from
+	 * elasticSearch, finding all of the top comments
+	 * @param thread
+	 */
+	@Override
+	public void onResume() {
+		super.onResume();
+	}
+
+	public void popUp(View v) throws InterruptedException {
+		popUpComment.popUp(v, this, fileUri, lc1, selectedgeo, user, "New Top Comment");
+	}
+
+	public void populateListView() {
+		ArrayList<Comment> topComments = null;
+
+		if(user != null) {
+			if(Server.getInstance().isServerReachable(this)) {
+				try {
+					topComments = ElasticSearchOperations.pullThreads();
+					user.profile.cache.add(topComments);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+
+			Collections.sort(user.profile.cache.comments);
+			Collections.reverse(user.profile.cache.comments);
+			FileSaving.saveUserFile(user, this);
+			adapter1 = new ThreadAdapter(this,
+					R.layout.thread_view,
+					user.profile.cache.getTopComments(true));
+
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+		}
+	}
+
+	/**
+	 * viewFavorites checks to see if you are guest or not
+	 * since guest cannot have favorites.
+	 * Then the method starts up the FavoritesListActivity.
+	 * This activity has yet to be written
+	 * @param v
+	 */
+	public void viewFavorites(View v) {
+		if(user.getUserName().equals("Guest")) {
+			Toast.makeText(getApplicationContext(),
+			"Guest Can Not Have Favourites", Toast.LENGTH_LONG).show();
+		}
+		else {
+			Intent intent = new Intent(this, FavoriteActivity.class);
+			intent.putExtra("CURRENT_USER", user);   
+			startActivity(intent);
+		}
+	}
+
+	/**
+	 * commentThread takes in thread and then starts a new
+	 * activity while passing the contents of thread to the 
+	 * activity
+	 * @param thread
+	 */
+	public void commentThread(Comment thread) {
+		String stringId = new String();
+		stringId = thread.getThreadId();
+
+		Intent intent = new Intent(this, CommentListActivity.class);
+		intent.putExtra("THREAD_ID", stringId);
+		intent.putExtra("CURRENT_USER", user);                
+
+		startActivityForResult(intent, FAVORITE_LIST);
+	}
+
+	//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+	public void onBackPressed() {
+		finish();
+	}
+
+	// set your map and enable default zoom controls 
+	protected void setupMapView() {
+		this.map = (MapView) findViewById(R.id.map);
+		map.setBuiltInZoomControls(true);
+	}
+
+	// set up a MyLocationOverlay and execute the runnable once we have a location fix 
+	private void setupMyLocation() {
+		this.myLocationOverlay = new MyLocationOverlay(this, map);
+		myLocationOverlay.enableMyLocation();
+		myLocationOverlay.runOnFirstFix(new Runnable() {
+			@Override
+			public void run() {
+				currentLocation = myLocationOverlay.getMyLocation();
+				map.getController().animateTo(currentLocation);
+				map.getController().setZoom(14);
+				map.getOverlays().add(myLocationOverlay);
+				myLocationOverlay.setFollowing(true);
+			}
+		});
+	}
+
+	/**
+	 * onSaveInstanceState stores the file url as
+	 * it will be null after returning from camera app
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		// save file url in bundle as it will be null on screen orientation changes
+		outState.putParcelable("file_uri",fileUri);
+	}
+
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		fileUri = savedInstanceState.getParcelable("file_uri");
+	}
+
+	/**
+	 * onActivityResult will Receive the activity result
+	 * method and will be called after closing the camera,
+	 * the geolocation, or the commentList. this method 
+	 * is always called when camera is closed, geolocation
+	 * is finished, or commentList is finished.
+	 */
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == FAVORITE_LIST && resultCode == Activity.RESULT_OK) {
+			user = (User) data.getSerializableExtra("CURRENT_USER");
+		}
+
+		//http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+		if (requestCode == 123 && resultCode == Activity.RESULT_OK) {
+			//successfully get updated geolocation
+			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
+			System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
+			SortingController sorting2 = new SortingController();
+			ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
+			adapter1 = new ThreadAdapter(this, R.layout.thread_view, sortedList1);
+			aCommentList.setAdapter(adapter1);
+			adapter1.notifyDataSetChanged();
+			Toast.makeText(this.getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
+		}
+		if (requestCode == 122 && resultCode == Activity.RESULT_OK) {
+			//successfully get updated geolocation
+			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+			System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
+			System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
+			Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+		}
+
+		// if the result is capturing Image
+		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+			if (resultCode == RESULT_OK) {
+				popUpComment.pictureResult(fileUri);
+
+			} else if (resultCode == RESULT_CANCELED) {
+				// user cancelled Image capture
+				Toast.makeText(this.getApplicationContext(),
+						"User cancelled image capture", Toast.LENGTH_SHORT)
+						.show();
+			}
+		} else {
+			// failed to capture image
+			Toast.makeText(this.getApplicationContext(),
+					"Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+					.show();
+		}
+	}
 
 }
 

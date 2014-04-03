@@ -26,28 +26,14 @@ import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 
-public class PopUpComment extends PopUp {
-    // Constant fields
-    public static final int OBTAIN_PIC_REQUEST_CODE = 117;
-    public static final int MEDIA_TYPE_IMAGE = 1;
-
-    protected PictureController pictureController;
-    protected ImageButton addPicImageButton;
-    protected ImageView picImagePreview;
-    protected EditText authorText;
-    protected EditText commentText;
-    protected Bitmap picture = null;
-    protected Comment comment;
-
-    public PopUpComment(Activity caller) {
+public class PopUpReply extends PopUpComment {
+    public PopUpReply(Activity caller) {
         super(caller);
-        pictureController = new PictureController();
-        picture = null;
     }
 
     //@SuppressLint("NewApi")
-    public void popUp(View v, final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, String windowName) {
-        dialog = new Dialog(caller);
+    public void popUp(View v, final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
+    	dialog = new Dialog(caller);
 
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle(windowName);
@@ -125,8 +111,8 @@ public class PopUpComment extends PopUp {
                 lc1.checklocations(selectedgeo);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
-                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic);
-
+                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment);
+                
                 //reset selected location for comments
 
                 try {
@@ -143,41 +129,5 @@ public class PopUpComment extends PopUp {
             }
         });
 
-    }
-
-    /**
-     * captureImage will launch camera app request image capture
-     * Creates the intent to take a picture, and then starts it
-     */
-    public void captureImage(Uri fileUri) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-
-        // starts the image capture intent
-        caller.startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
-    }
-
-    /**
-     * isDeviceSupportCamera does a check to see
-     * if device hardware camera is present or not
-     * @return
-     */
-    public boolean isDeviceSupportCamera() {
-        if(caller.getApplicationContext().getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_CAMERA)){
-            //returns true if device has a camera
-            return true;
-        } else {
-            //returns false if device doesn't have a camera
-            return false;
-        }
-    }
-
-    public void pictureResult(Uri fileUri) {
-        // successfully captured the image
-        // display it in image view
-        picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
     }
 }

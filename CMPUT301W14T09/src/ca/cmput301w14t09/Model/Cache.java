@@ -41,6 +41,8 @@ public class Cache implements Serializable {
      * of which is parsed using add(single comment).
      * @param comments
      */
+    
+    
     public void add(ArrayList<Comment> newComments) {
         if (newComments == null) return;
 
@@ -48,6 +50,7 @@ public class Cache implements Serializable {
             add(newComments.get(index));
         }
     }
+    
 
     /**
      * In the event comment list size is exceeded, replace tail comment with newly cached comment.
@@ -72,7 +75,9 @@ public class Cache implements Serializable {
 
         if(comments.size() > 0) {
             for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
-                if(comment.equals(comments.get(index))) {
+               // if(comment.equals(comments.get(index))) {
+                 if(comment.getPostDate().equals(comments.get(index).getPostDate()) 
+                         && comment.getCommentText().equals(comments.get(index).getCommentText())){   
                     found = true;
                     break;
                 }
@@ -106,7 +111,7 @@ public class Cache implements Serializable {
         ArrayList<Comment> commonThreadComments = new ArrayList<Comment>();
 
         for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
-            if(comments.get(index).getThreadId() == threadId) {
+            if(comments.get(index).getThreadId().equals(threadId)) {
                 commonThreadComments.add(comments.get(index));
             }
         }

@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -167,7 +168,7 @@ public class TopCommentsActivity extends ListActivity {
 
         intent = getIntent();
         user = (User) intent.getSerializableExtra("CURRENT_USER");
-        populateListview();
+        populateListView();
 
 
 
@@ -241,7 +242,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     
-    private void populateListview() {
+    private void populateListView() {
         ArrayList<Comment> topComments = null;
 
         if(Server.getInstance().isServerReachable(this)) {
@@ -255,10 +256,11 @@ public class TopCommentsActivity extends ListActivity {
         }
 
         
-
+        Collections.sort(topComments);
+        Collections.reverse(topComments);
         adapter1 = new ThreadAdapter(this,
                 R.layout.thread_view,
-                topComments);
+                user.profile.cache.getTopComments(true));
                 //user.profile.cache.getTopComments(true));
         
         aCommentList.setAdapter(adapter1);
@@ -377,9 +379,11 @@ public class TopCommentsActivity extends ListActivity {
                 try
                 {
                     ElasticSearchOperations.postThread(comment);
-             //      Thread.sleep(1000);
+                    Thread.sleep(1000);
+                    populateListView();
                     adapter1.notifyDataSetChanged();
-           //         recreate();
+                    
+                    
 
                 } catch (InterruptedException e)
                 {

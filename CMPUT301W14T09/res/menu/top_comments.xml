@@ -19,7 +19,8 @@
         android:id="@+id/selectDiffLocation"
         android:orderInCategory="400"
         android:showAsAction="always"
-        android:title="Change Your Location"/>
+        android:title="Change Your Location"
+        android:icon="@drawable/ic_change_location"/>
     <item
         android:id="@+id/sortByDiffLocation"
         android:orderInCategory="500"

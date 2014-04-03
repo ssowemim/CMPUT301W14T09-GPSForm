@@ -1,5 +1,3 @@
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
@@ -7,14 +5,13 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
-import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 
 public class ElasticSearchTest extends TestCase{
 
-
+/*
 	@Test
 	public void testPost() {
 
@@ -60,4 +57,5 @@ public class ElasticSearchTest extends TestCase{
 		assertTrue(Threadid == "65"); 
 	}
 
+*/
 }

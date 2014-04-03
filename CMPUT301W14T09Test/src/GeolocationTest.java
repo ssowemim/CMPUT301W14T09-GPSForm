@@ -1,16 +1,14 @@
-import static org.junit.Assert.assertTrue;
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 
 public class GeolocationTest extends TestCase {
-
+/*
 	@Test
 	public void GeolocationupdateTest() {
 
@@ -108,7 +106,7 @@ public class GeolocationTest extends TestCase {
 		assertTrue(geo213.getName()== "mylocation");	
 
 	}
-
+*/
 
 
 }

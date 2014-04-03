@@ -66,15 +66,27 @@ public class LocationControllerTests
 			locationcontroller.checklocations(selectedgeo);
 			
 			//since the selected location is 0.0 default location should be used which right now is equal to geo2
-			assertTrue(locationcontroller.getGeo() == geo2);
-			
-		    
-		
-		
-		
-		
+			assertTrue(locationcontroller.getGeo() == geo2);	
 		
 	}
+	
+	@Test
+	public void testResetSelectedLocation(){
+		
+		LocationController locationcontroller = new LocationController();
+		
+		
+		GeoLocation selectedgeo = new GeoLocation();
+		selectedgeo.setLatitude(9.345);
+		selectedgeo.setLongitude(10.234);
+		
+		locationcontroller.resetselectedlocation(selectedgeo);
+		
+		assertTrue(selectedgeo.getLatitude() == 0);
+		assertTrue(selectedgeo.getLongitude() == 0);
+		
+	}
+
 	
 	
 

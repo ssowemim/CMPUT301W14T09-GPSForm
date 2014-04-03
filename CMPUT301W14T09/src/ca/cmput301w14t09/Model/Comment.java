@@ -43,7 +43,7 @@ import com.google.gson.Gson;
  * 
  */
 
-public class Comment implements ICacheable<Comment>, Comparable<Comment>, Serializable {
+public class Comment implements Comparable<Comment>, Serializable {
 
 	private static final long serialVersionUID = 3L;
 	private GeoLocation geoLocation;

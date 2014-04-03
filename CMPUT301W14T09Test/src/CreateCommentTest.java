@@ -1,5 +1,5 @@
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.FileManaging.CreateComment;
+import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.Model.Comment;
 import junit.framework.TestCase;
 
@@ -17,9 +17,9 @@ public class CreateCommentTest extends TestCase {
 	}
 
 	public void testCreateCommentFunction () {
-		CreateComment newComment = new CreateComment();
+		CommentFactory newComment = new CommentFactory();
 		LocationController lc = new LocationController();
-		Comment anewComment = newComment.newComment(lc, "Tester", "Testing", false, false);
+		Comment anewComment = newComment.buildComment(lc, "Tester", "Testing", false, null);
 
 		assertNotNull(anewComment);
 	}

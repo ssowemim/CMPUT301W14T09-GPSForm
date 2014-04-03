@@ -52,8 +52,8 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations extends Server{
 
     private static String serverName = "ElasticSearch";
-    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test89/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test89/_search?pretty=1&size=100";
+    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test121/";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test121/_search?pretty=1&size=100";
 
     private static Gson GSON = null;
     static Comment comment;
@@ -190,12 +190,16 @@ public class ElasticSearchOperations extends Server{
     public static ArrayList<Comment> pullOneThread(final String threadId) throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         final ArrayList<Comment> commentList = new ArrayList<Comment> ();
+        
+        if (GSON == null)
+            constructGson();
+        
         Thread thread = new Thread() {
 
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                Gson gson = new Gson();
+             //   Gson gson = new Gson();
 
                 System.out.println("I am searching for: " + threadId);
 

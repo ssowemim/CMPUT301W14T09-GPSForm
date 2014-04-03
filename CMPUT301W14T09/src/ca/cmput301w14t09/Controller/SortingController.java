@@ -26,8 +26,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
 
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
@@ -54,9 +52,9 @@ public class SortingController {
 	public ArrayList<Comment> sortCommentsByLocation(LocationController lc, String comment){
 		ArrayList<Comment> newList = null;
 		if (comment == null){
-			newList = sortTopComments(lc.getGeoLocation());
+			newList = sortTopComments(lc.getGeodefault());
 		} else{
-			newList = sortComments(lc.getGeoLocation(), comment);
+			newList = sortComments(lc.getGeodefault(), comment);
 		}
 		
 		return newList;

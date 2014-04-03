@@ -27,6 +27,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -78,9 +79,6 @@ public class TopCommentsActivity extends ListActivity {
     public static final int MEDIA_TYPE_IMAGE = 1;
     public static final int FAVORITE_LIST = 42;
 
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
-
     //File uri to store Images
     private Uri fileUri;
 
@@ -96,7 +94,7 @@ public class TopCommentsActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    SerializableBitmap picture = null;
+    Bitmap picture = null;
 
     PictureModelList pictureModel;
 
@@ -123,7 +121,6 @@ public class TopCommentsActivity extends ListActivity {
         aCommentList = (ListView) findViewById(android.R.id.list);
 
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
-
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
                 Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
@@ -160,6 +157,7 @@ public class TopCommentsActivity extends ListActivity {
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        
     }
 
     @Override
@@ -298,7 +296,7 @@ public class TopCommentsActivity extends ListActivity {
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 
         //update location button
-        Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
+        ImageButton btnSetLocation = (ImageButton)dialog.findViewById(R.id.changebutton);
 
         picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
         addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
@@ -347,6 +345,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                lc1.resetselectedlocation(selectedgeo);
 
             }
         });
@@ -365,19 +364,22 @@ public class TopCommentsActivity extends ListActivity {
 
                 //check locations to see which one to use
                 lc1.checklocations(selectedgeo);
-                System.out.println("Sel LAT:"+selectedgeo.getLatitude());
+              //  System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
-                comment = CommentFactory.buildComment(lc1, text2, text1, true, picture);
+        		SerializableBitmap serializePic = new SerializableBitmap(picture);
+                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic);
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);
+                System.out.println("Reset selected location back to default" +
+                		":"+selectedgeo.getLatitude());
 
                 try
                 {
                     ElasticSearchOperations.postThread(comment);
-                    Thread.sleep(1000);
+             //      Thread.sleep(1000);
                     adapter1.notifyDataSetChanged();
-                    recreate();
+           //         recreate();
 
                 } catch (InterruptedException e)
                 {
@@ -543,6 +545,14 @@ public class TopCommentsActivity extends ListActivity {
 
         startActivityForResult(intent, FAVORITE_LIST);
 
+    }
+    
+    //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+    public void onBackPressed()
+    {
+    	
+        finish();
+       
     }
 
 }

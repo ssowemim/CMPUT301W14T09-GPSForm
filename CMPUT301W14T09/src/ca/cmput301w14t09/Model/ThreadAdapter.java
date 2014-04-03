@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -74,6 +75,8 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			TextView mt = (TextView) v.findViewById(R.id.middletext);
 			TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
 			ImageView piv = (ImageView)v.findViewById(R.id.attachmentImageView);
+			ImageButton profileButton = (ImageButton)v.findViewById(R.id.buttonProfile);
+			ImageButton pictureButton = (ImageButton)v.findViewById(R.id.buttonPicture);
 
 			// check to see if each individual textview is null.
 			// if not, assign some text!

@@ -25,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -73,6 +74,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			TextView authorNameData = (TextView) v.findViewById(R.id.authorNameData);
 			TextView commentName = (TextView) v.findViewById(R.id.commentName);
 			TextView commentData = (TextView) v.findViewById(R.id.commentData);
+			ImageView piv = (ImageView)v.findViewById(R.id.replyImagePreview);
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -99,6 +101,10 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 				if (i.getCommentText() != null) {
 				    commentData.setText(i.getCommentText());
 				}
+			}
+			
+			if (piv != null){
+				piv.setImageBitmap(i.getPicture().bitmap);
 			}
 		}
 

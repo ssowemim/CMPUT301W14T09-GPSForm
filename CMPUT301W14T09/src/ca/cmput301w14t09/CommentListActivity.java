@@ -87,12 +87,8 @@ public class CommentListActivity extends ListActivity {
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
 
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
-
     //File uri to store Images
     private Uri fileUri;
-
 
     PictureController pictureController;
 
@@ -105,7 +101,7 @@ public class CommentListActivity extends ListActivity {
 
     ImageButton addPicImageButton;
     ImageView picImagePreview;
-    SerializableBitmap picture = null;
+    Bitmap picture = null;
 
     PictureModelList pictureModel;
 
@@ -273,11 +269,10 @@ public class CommentListActivity extends ListActivity {
     //@SuppressLint("NewApi")
     public void replyComment(View v) {
 
-
         dialog = new Dialog(this);
 
         dialog.setContentView(R.layout.pop_up_comment);
-        dialog.setTitle("New Top Comment");
+        dialog.setTitle("Replies to comments");
 
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
@@ -295,7 +290,7 @@ public class CommentListActivity extends ListActivity {
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 
         //update location button
-        Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
+        ImageButton btnSetLocation = (ImageButton)dialog.findViewById(R.id.changebutton);
 
         picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
         addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);
@@ -342,7 +337,7 @@ public class CommentListActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
+                lc1.resetselectedlocation(selectedgeo);
             }
         });
 
@@ -357,13 +352,15 @@ public class CommentListActivity extends ListActivity {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, commentActivity );
 
+                
                 picture = pictureController.finalizePicture(picture, commentActivity);
 
                 //check locations to see which one to use
                 lc1.checklocations(selectedgeo);
                 System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
-                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, picture, firstComment);
+                SerializableBitmap serializePic = new SerializableBitmap(picture);
+                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment);
 
                 //reset selected locaton for comments
                 lc1.resetselectedlocation(selectedgeo);
@@ -431,10 +428,7 @@ public class CommentListActivity extends ListActivity {
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
-
             if (resultCode == RESULT_OK) {
-
-
                 // successfully captured the image
                 // display it in image view
                 picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
@@ -477,6 +471,7 @@ public class CommentListActivity extends ListActivity {
         intent.putExtra("CURERNT_USER", user);
         setResult(Activity.RESULT_OK, intent);
         super.onBackPressed();
+        finish();
 
     }
 

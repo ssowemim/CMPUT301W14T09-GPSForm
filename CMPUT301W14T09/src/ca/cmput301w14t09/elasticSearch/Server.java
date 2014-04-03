@@ -23,7 +23,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * 
+ *  
  * @author mcmorris
  * Server handles server configuration and status.  
  * Serves as intermediary between Cache and ElasticSearch.

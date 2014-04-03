@@ -7,6 +7,11 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 
+/**
+ *Author: Cameron Alexander 
+ * 
+ **/
+
 
 public class LocationControllerTests
 {

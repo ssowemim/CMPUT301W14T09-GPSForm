@@ -5,7 +5,11 @@ import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.Model.Comment;
 import junit.framework.TestCase;
 
-
+/**
+ * 
+ * @author chunhan
+ * Testing CommentFactory
+ */
 public class CommentFactoryTest extends TestCase {
 
 	public CommentFactoryTest(String name) {

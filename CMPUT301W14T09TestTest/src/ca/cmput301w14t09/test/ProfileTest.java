@@ -15,8 +15,6 @@ public class ProfileTest extends TestCase {
 
 	public void testProfile(){
 		Profile newprofile = new Profile("Tester");
-		
-		
-		
+		assertNotNull(newprofile);
 	}
 }

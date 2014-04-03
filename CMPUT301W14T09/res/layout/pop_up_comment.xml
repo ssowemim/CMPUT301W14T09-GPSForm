@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal" >
 
@@ -34,13 +34,6 @@
             android:layout_weight="1"
             android:text="SAVE" />
 
-        <ImageButton
-            android:id="@+id/takePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:contentDescription="Camera Button"
-            android:src="@drawable/camera" />
-
         <Button
             android:id="@+id/cancel"
             android:layout_width="fill_parent"
@@ -49,20 +42,35 @@
             android:layout_weight="1"
             android:text="Cancel" />
     </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:layout_weight="0.31"
+        android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/picImagePreview"
-        android:layout_width="78dp"
-        android:layout_height="0dip"
-        android:layout_weight="0.88"
-         
-        android:contentDescription="NewString2"/>
+        <ImageView
+            android:id="@+id/picImagePreview"
+            android:layout_width="146dp"
+            android:layout_height="60dp"
+            android:layout_weight="0.56"
+            android:contentDescription="NewString2" />
+        
+    <ImageButton
+        android:id="@+id/takePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:contentDescription="Camera Button"
+        android:src="@drawable/camera" />
 
-    <Button
+    <ImageButton
         android:id="@+id/changebutton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginBottom="81dp"
+        android:src="@drawable/ic_location"
         android:text="Update Location" />
+    
+    </LinearLayout>
 
 </LinearLayout>

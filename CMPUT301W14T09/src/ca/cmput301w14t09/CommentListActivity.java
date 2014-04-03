@@ -268,7 +268,6 @@ public class CommentListActivity extends ListActivity {
     //@SuppressLint("NewApi")
     public void replyComment(View v) {
 
-
         dialog = new Dialog(this);
 
         dialog.setContentView(R.layout.pop_up_comment);
@@ -290,7 +289,7 @@ public class CommentListActivity extends ListActivity {
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
 
         //update location button
-        Button btnSetLocation = (Button)dialog.findViewById(R.id.changebutton);
+        ImageButton btnSetLocation = (ImageButton)dialog.findViewById(R.id.changebutton);
 
         picImagePreview = (ImageView)dialog.findViewById(R.id.picImagePreview);  
         addPicImageButton = (ImageButton) dialog.findViewById(R.id.takePicture);

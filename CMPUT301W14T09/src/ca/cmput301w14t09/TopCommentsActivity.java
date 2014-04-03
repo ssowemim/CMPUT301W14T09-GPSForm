@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -53,13 +52,18 @@ import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
-
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
+
+import com.mapquest.android.Geocoder;
+import com.mapquest.android.maps.AnnotationView;
+import com.mapquest.android.maps.GeoPoint;
+import com.mapquest.android.maps.MapView;
+import com.mapquest.android.maps.MyLocationOverlay;
 
 /**
  * 
@@ -109,6 +113,16 @@ public class TopCommentsActivity extends ListActivity {
 
     //new Location Controller 
     final LocationController lc1 = new LocationController();
+    
+    //map stuff
+    protected MapView map;
+    private MyLocationOverlay myLocationOverlay;
+    AnnotationView annotation;
+    GeoPoint currentLocation;
+    int id = 0;
+    Geocoder code = null;
+    
+    
 
 
     @Override
@@ -130,6 +144,12 @@ public class TopCommentsActivity extends ListActivity {
             }
 
         });
+        
+        //mapstuff
+        setupMapView();
+        setupMyLocation();
+       // setupViews();
+       // setupOverlays();
 
 
         //https://github.com/baoliangwang/CurrentLocation
@@ -552,6 +572,30 @@ public class TopCommentsActivity extends ListActivity {
     	
         finish();
        
+    }
+    
+    // set your map and enable default zoom controls 
+    protected void setupMapView() {
+      this.map = (MapView) findViewById(R.id.map);
+      map.setBuiltInZoomControls(true);
+   		
+    }
+
+    // set up a MyLocationOverlay and execute the runnable once we have a location fix 
+    private void setupMyLocation() {
+      this.myLocationOverlay = new MyLocationOverlay(this, map);
+      myLocationOverlay.enableMyLocation();
+      myLocationOverlay.runOnFirstFix(new Runnable() {
+        @Override
+        public void run() {
+        	
+          currentLocation = myLocationOverlay.getMyLocation();
+          map.getController().animateTo(currentLocation);
+          map.getController().setZoom(14);
+          map.getOverlays().add(myLocationOverlay);
+          myLocationOverlay.setFollowing(true);
+        }
+      });
     }
 
 }

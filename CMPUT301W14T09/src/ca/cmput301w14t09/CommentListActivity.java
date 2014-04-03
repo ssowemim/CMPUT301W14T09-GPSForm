@@ -471,6 +471,7 @@ public class CommentListActivity extends ListActivity {
         intent.putExtra("CURERNT_USER", user);
         setResult(Activity.RESULT_OK, intent);
         super.onBackPressed();
+        finish();
 
     }
 

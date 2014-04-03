@@ -546,5 +546,12 @@ public class TopCommentsActivity extends ListActivity {
         startActivityForResult(intent, FAVORITE_LIST);
 
     }
+    
+    //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+    public void onBackPressed()
+    {
+        finish();
+       
+    }
 
 }

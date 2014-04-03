@@ -24,12 +24,18 @@ public final class R {
         public static final int attachment_pic=0x7f020000;
         public static final int camera=0x7f020001;
         public static final int ic_change_location=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int ic_location=0x7f020004;
-        public static final int ic_no_profile=0x7f020005;
-        public static final int ic_picture=0x7f020006;
-        public static final int ic_profile=0x7f020007;
-        public static final int no_img=0x7f020008;
+        public static final int ic_date=0x7f020003;
+        public static final int ic_deflocation=0x7f020004;
+        public static final int ic_difflocation=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int ic_location=0x7f020007;
+        public static final int ic_no_profile=0x7f020008;
+        public static final int ic_options=0x7f020009;
+        public static final int ic_picture=0x7f02000a;
+        public static final int ic_profile=0x7f02000b;
+        public static final int ic_sortbytext=0x7f02000c;
+        public static final int ic_sortpicture=0x7f02000d;
+        public static final int no_img=0x7f02000e;
     }
     public static final class id {
         public static final int UserList=0x7f080004;
@@ -129,12 +135,12 @@ public final class R {
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     
- API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f060001;
+        public static final int MyActionButtonOverflow=0x7f060002;
     }
 }

@@ -24,7 +24,8 @@ public final class R {
         public static final int attachment_pic=0x7f020000;
         public static final int camera=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int no_img=0x7f020003;
+        public static final int ic_location=0x7f020003;
+        public static final int no_img=0x7f020004;
     }
     public static final class id {
         public static final int UserList=0x7f080004;
@@ -34,7 +35,7 @@ public final class R {
         public static final int authorNameData=0x7f08000a;
         public static final int authorText=0x7f080015;
         public static final int button2=0x7f080003;
-        public static final int cancel=0x7f080019;
+        public static final int cancel=0x7f080018;
         public static final int changebutton=0x7f08001b;
         public static final int comment=0x7f080005;
         public static final int commentData=0x7f08000c;
@@ -51,7 +52,7 @@ public final class R {
         public static final int middletextdata=0x7f080020;
         public static final int mq_geocode_btn=0x7f080011;
         public static final int mq_geocode_input=0x7f080010;
-        public static final int picImagePreview=0x7f08001a;
+        public static final int picImagePreview=0x7f080019;
         public static final int pic_image_view=0x7f080012;
         public static final int pic_text=0x7f080013;
         public static final int pic_timestamp=0x7f080014;
@@ -63,7 +64,7 @@ public final class R {
         public static final int sortDate=0x7f080023;
         public static final int sortLocation=0x7f080022;
         public static final int sortPicture=0x7f080024;
-        public static final int takePicture=0x7f080018;
+        public static final int takePicture=0x7f08001a;
         public static final int textView1=0x7f08000e;
         public static final int toptext=0x7f08001d;
         public static final int toptextdata=0x7f08001e;

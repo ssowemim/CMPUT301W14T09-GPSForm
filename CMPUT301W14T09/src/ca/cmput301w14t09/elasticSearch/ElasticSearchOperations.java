@@ -190,12 +190,16 @@ public class ElasticSearchOperations extends Server{
     public static ArrayList<Comment> pullOneThread(final String threadId) throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         final ArrayList<Comment> commentList = new ArrayList<Comment> ();
+        
+        if (GSON == null)
+            constructGson();
+        
         Thread thread = new Thread() {
 
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                Gson gson = new Gson();
+             //   Gson gson = new Gson();
 
                 System.out.println("I am searching for: " + threadId);
 

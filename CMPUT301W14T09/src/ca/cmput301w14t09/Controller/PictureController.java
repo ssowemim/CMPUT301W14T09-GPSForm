@@ -45,9 +45,7 @@ public class PictureController extends Activity{
     public static final int MEDIA_TYPE_IMAGE = 1;
     
     public static final int MAX_BITMAP_DIMENSIONS = 80;
-    
-  //  private Comment model;
-    
+
     public PictureController() {
     	
     }

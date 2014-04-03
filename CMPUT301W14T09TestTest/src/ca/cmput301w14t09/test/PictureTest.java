@@ -1,31 +1,28 @@
 package ca.cmput301w14t09.test;
 
 
+import android.graphics.Bitmap;
+import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
 
 
 
 import ca.cmput301w14t09.TopCommentsActivity;
+import ca.cmput301w14t09.Controller.PictureController;
+import ca.cmput301w14t09.Model.Picture;
 
 
-public class PictureTest extends TestCase{
+public class PictureTest extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
 
 
-	public void setUp() throws Exception {
+	public PictureTest() {
+		super(TopCommentsActivity.class);
 	}
 
-
-	public void testDeviceCompatible() {
-		//Checks if device is compatible with taking pictures
-		TopCommentsActivity pictureActivity = new TopCommentsActivity();
-		//assertTrue(pictureActivity.isDeviceSupportCamera());
-	}
-	
-
-	public void testSavePictures() {
-		TopCommentsActivity pictureActivity = new TopCommentsActivity();
-		
-		//assertFalse(pictureActivity.getOutputMediaFileUri(1).equals(null));
+	public void testFinalizePicture(){
+		PictureController pc = new PictureController();
+		Bitmap bp = pc.finalizePicture(null, getActivity());
+		assertNull(bp);
 	}
 
 }

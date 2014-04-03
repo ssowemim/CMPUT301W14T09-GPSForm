@@ -254,6 +254,7 @@ public class CommentListActivity extends ListActivity {
         adapter = new CommentAdapter(this,
                 R.layout.comment_view,
                 user.profile.cache.getSubComments(firstComment));
+                //user.profile.cache.getSubComments(firstComment));
 
         favList.setAdapter(adapter);
         adapter.notifyDataSetChanged();

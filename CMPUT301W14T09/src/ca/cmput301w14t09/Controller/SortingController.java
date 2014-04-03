@@ -33,7 +33,7 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 /**
  * 
- * @author Chunhan
+ * @author chunhan
  * Controller handling the logic behind sorting the comments for proximity.
  * Compatible with sorting from default location or changed locations. 
  * Also sorts comments based of if there is a picture attached to that comment
@@ -44,6 +44,7 @@ public class SortingController {
 
 	/**
 	 * 
+	 * @author chunhan
 	 * Calls the sort commands of the geo locations and 
 	 * returns a list of comments ordered by proximity
 	 * @return
@@ -188,7 +189,7 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	public ArrayList<Comment> sortComments(GeoLocation geo, String comment){
+	private ArrayList<Comment> sortComments(GeoLocation geo, String comment){
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();

@@ -36,8 +36,8 @@ public class LocationControllerTests
 		
 	}
 	
-	@Test
-	public void 
+	//@Test
+	//public void 
 	
 	
 

@@ -19,11 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.Controller;
 
-import java.util.ArrayList;
-
-import android.content.Context;
 import android.content.Intent;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import ca.cmput301w14t09.Model.GeoLocation;
 
@@ -42,7 +38,7 @@ public class LocationController {
 
     private GeoLocation geo = new GeoLocation();
     GeoLocation geodefault = new GeoLocation();
-    GeoLocation selcommentlocation = new GeoLocation();
+    //GeoLocation selcommentlocation = new GeoLocation();
     LocationManager lm = null;
     Intent intent = null;
     
@@ -50,6 +46,8 @@ public class LocationController {
     public GeoLocation getGeoLocation() {
         return geo;
     }
+    
+  
 
     /**
    	* location changed function responsible for getting location points from GPS location on android activity
@@ -109,6 +107,27 @@ public class LocationController {
 	{
 	
 		this.geodefault = geodefault;
+	}
+
+
+	
+	/**
+	 * @return the geo
+	 */
+	public GeoLocation getGeo()
+	{
+	
+		return geo;
+	}
+
+	
+	/**
+	 * @param geo the geo to set
+	 */
+	public void setGeo(GeoLocation geo)
+	{
+	
+		this.geo = geo;
 	}
 
     

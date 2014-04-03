@@ -259,8 +259,9 @@ public class TopCommentsActivity extends ListActivity {
         
 
         adapter1 = new ThreadAdapter(this,
-                R.layout.thread_view, 
-                user.profile.cache.getTopComments(true));
+                R.layout.thread_view,
+                topComments);
+                //user.profile.cache.getTopComments(true));
         
         aCommentList.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();

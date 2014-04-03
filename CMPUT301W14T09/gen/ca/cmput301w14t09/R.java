@@ -26,16 +26,21 @@ public final class R {
         public static final int ic_change_location=0x7f020002;
         public static final int ic_launcher=0x7f020003;
         public static final int ic_location=0x7f020004;
-        public static final int no_img=0x7f020005;
+        public static final int ic_no_profile=0x7f020005;
+        public static final int ic_picture=0x7f020006;
+        public static final int ic_profile=0x7f020007;
+        public static final int no_img=0x7f020008;
     }
     public static final class id {
         public static final int UserList=0x7f080004;
-        public static final int action_settings=0x7f080025;
-        public static final int attachmentImageView=0x7f080021;
+        public static final int action_settings=0x7f080027;
+        public static final int attachmentImageView=0x7f080023;
         public static final int authorName=0x7f080009;
         public static final int authorNameData=0x7f08000a;
         public static final int authorText=0x7f080015;
         public static final int button2=0x7f080003;
+        public static final int buttonPicture=0x7f080022;
+        public static final int buttonProfile=0x7f080021;
         public static final int cancel=0x7f080018;
         public static final int changebutton=0x7f08001b;
         public static final int comment=0x7f080005;
@@ -60,11 +65,11 @@ public final class R {
         public static final int replyComment=0x7f080000;
         public static final int replyImagePreview=0x7f08000d;
         public static final int save=0x7f080017;
-        public static final int selectDiffLocation=0x7f080026;
-        public static final int sortByDiffLocation=0x7f080027;
-        public static final int sortDate=0x7f080023;
-        public static final int sortLocation=0x7f080022;
-        public static final int sortPicture=0x7f080024;
+        public static final int selectDiffLocation=0x7f080028;
+        public static final int sortByDiffLocation=0x7f080029;
+        public static final int sortDate=0x7f080025;
+        public static final int sortLocation=0x7f080024;
+        public static final int sortPicture=0x7f080026;
         public static final int takePicture=0x7f08001a;
         public static final int textView1=0x7f08000e;
         public static final int toptext=0x7f08001d;

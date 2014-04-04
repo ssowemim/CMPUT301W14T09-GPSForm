@@ -77,6 +77,7 @@ public class CommentListActivity extends ListActivity {
 
 
     protected PopUpReply popUpReply = new PopUpReply(this);
+    protected PopUpSelect popUpSelect = new PopUpSelect(this);
 
 
 
@@ -125,26 +126,15 @@ public class CommentListActivity extends ListActivity {
         favList.setOnItemClickListener(new OnItemClickListener(){
 
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-                /*
-				if(user.getUserName().equals("Guest")) {
-					Toast.makeText(getApplicationContext(),
-							"Guest Can Not Add Favourites", Toast.LENGTH_LONG).show();
-				} else {
-					Comment thread = (Comment)(favList.getItemAtPosition(arg2)); 
 
-
-
-					user.profile.add(thread);
-
-
-
-					FileSaving.saveUserFile(user, commentActivity);
-					Toast.makeText(getApplicationContext(),
-							"Comment Added To Favourites.", Toast.LENGTH_LONG).show();
-				}
-                 */
-
+                Comment thread = (Comment)(favList.getItemAtPosition(arg2)); 
+                optionsDialog(thread);
+                //Toast.makeText(getApplicationContext(),
+                //        "Comment Added To Favourites.", Toast.LENGTH_LONG).show();
             }
+
+
+
         });
 
 
@@ -255,15 +245,15 @@ public class CommentListActivity extends ListActivity {
                 favList.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 return true;
-                
+
             default:
                 return super.onOptionsItemSelected(item);
-           
+
         }
     }
 
     public void popUp(View v) throws InterruptedException {
-        popUpReply.popUp(v, this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
+        popUpReply.popUp(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
     }
 
 
@@ -377,6 +367,11 @@ public class CommentListActivity extends ListActivity {
         setResult(Activity.RESULT_OK, intent);
         super.onBackPressed();
         finish();
+    }
+    
+    public void optionsDialog(Comment thread) {
+        popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
+        
     }
 
 }

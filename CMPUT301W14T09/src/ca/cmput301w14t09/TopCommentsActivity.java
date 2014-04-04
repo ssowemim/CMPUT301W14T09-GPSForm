@@ -282,6 +282,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     public void popUp(View v) throws InterruptedException {
+    	setupMyLocation();
         popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
     }
 

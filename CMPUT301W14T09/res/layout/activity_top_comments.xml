@@ -18,17 +18,6 @@
         android:text="Comment"
         android:onClick="popUp" />
 
-     <ListView
-         android:id="@+id/android:list"
-         android:layout_width="fill_parent"
-         android:layout_height="375dp"
-         android:layout_alignRight="@+id/button2"
-         android:layout_below="@+id/comment"
-         android:layout_weight="1"
-         android:scrollbars="vertical" >
-
-     </ListView>
-
      <Button
          android:id="@+id/favorite"
          android:layout_width="140dp"
@@ -43,10 +32,21 @@
          xmlns:android="http://schemas.android.com/apk/res/android"
          android:id="@+id/map"
          android:layout_width="fill_parent"
-         android:layout_height="380dp"
+         android:layout_height="150dp"
          android:layout_alignParentBottom="true"
+         android:layout_alignRight="@+id/comment"
          android:apiKey="YOUR_APPKEY_HERE" >
-</com.mapquest.android.maps.MapView>
-     
+     </com.mapquest.android.maps.MapView>
+
+     <ListView
+         android:id="@+id/android:list"
+         android:layout_width="fill_parent"
+         android:layout_height="375dp"
+         android:layout_above="@+id/map"
+         android:layout_alignLeft="@+id/map"
+         android:layout_below="@+id/comment"
+         android:scrollbars="vertical" >
+
+     </ListView>
 
 </RelativeLayout>

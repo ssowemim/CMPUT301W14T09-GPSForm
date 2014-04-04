@@ -22,13 +22,25 @@ public class CommentFactoryTest extends TestCase {
 
 	public void testBuildComment(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, null);
+		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, true);
 		assertNotNull(comment);
+		assertTrue(comment.getAuthorName().contains("Tester"));
+		assertTrue(comment.getCommentText().contains("testing"));
+		assertTrue(comment.getTopComment().equals(true));
+		//assertNotNull(comment.getPicture());
+		assertTrue(comment.getHasPicture().equals(true));
+
 	}
 	
 	public void testBuildReplies(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", null);
+		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", true);
 		assertNotNull(comment);
+		assertTrue(comment.getAuthorName().contains("Tester"));
+		assertTrue(comment.getCommentText().contains("testing"));
+		assertTrue(comment.getTopComment().equals(true));
+		//assertNotNull(comment.getPicture());
+		assertTrue(comment.getThreadId().equals("Tester testing"));
+		assertTrue(comment.getHasPicture().equals(true));
 	}
 }

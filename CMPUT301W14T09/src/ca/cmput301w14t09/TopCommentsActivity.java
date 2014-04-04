@@ -278,7 +278,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     public void popUp(View v) throws InterruptedException {
-        popUpComment.popUp(v, this, fileUri, lc1, selectedgeo, user, "New Top Comment");
+        popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
     }
 
     public void populateListView() {
@@ -512,6 +512,18 @@ public class TopCommentsActivity extends ListActivity {
         dialog.show();
 
 
+    }
+    
+    public GeoLocation getSelectedGeolocation(){
+    	return selectedgeo;
+    }
+    
+    public void resetSelectedLocation(){
+    	double latitude = 0.0;
+		double longitude = 0.0;
+		selectedgeo.setLatitude(latitude);
+		selectedgeo.setLongitude(longitude);
+    	
     }
 
 }

@@ -92,7 +92,7 @@ public class PopUpReply extends PopUpComment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                lc1.resetselectedlocation(selectedgeo);
+                
             }
         });
 
@@ -131,4 +131,5 @@ public class PopUpReply extends PopUpComment {
         });
 
     }
+    
 }

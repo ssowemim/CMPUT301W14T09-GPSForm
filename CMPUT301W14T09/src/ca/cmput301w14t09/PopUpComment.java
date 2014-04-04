@@ -38,6 +38,7 @@ public class PopUpComment extends PopUp {
     protected EditText commentText;
     protected Bitmap picture = null;
     protected Comment comment;
+    protected TopCommentsActivity topCommentActivity;
 
     public PopUpComment(Activity caller) {
         super(caller);
@@ -46,8 +47,9 @@ public class PopUpComment extends PopUp {
     }
 
     //@SuppressLint("NewApi")
-    public void popUp(View v, final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, String windowName) {
-        dialog = new Dialog(caller);
+    public void popUp(View v, final Activity caller, final Uri fileUri, final LocationController lc1, final User user, String windowName) {
+      topCommentActivity = (TopCommentsActivity) caller;
+    	dialog = new Dialog(caller);
 
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle(windowName);
@@ -55,6 +57,7 @@ public class PopUpComment extends PopUp {
 
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
+
 
         //new Location Controller 
         //final LocationController lc = new LocationController();
@@ -96,7 +99,7 @@ public class PopUpComment extends PopUp {
         btnSetLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { 
-                Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);
+                Intent intent = new Intent(dialog.getContext(), ChooseLocationActivity.class);              
                 caller.startActivityForResult(intent, 122);
             }
         });
@@ -106,7 +109,7 @@ public class PopUpComment extends PopUp {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                lc1.resetselectedlocation(selectedgeo);
+                topCommentActivity.resetSelectedLocation();
             }
         });
 
@@ -118,7 +121,16 @@ public class PopUpComment extends PopUp {
                 String text2 = authorText.getText().toString();
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, caller);
-
+                
+                //selected location
+                final GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
+                final GeoLocation geodefault = lc1.getGeodefault();
+                
+                Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+               
+                
+               // selectedgeo = topCommentActivity.getSelectedGeolocation();
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 Boolean hasPicture = pictureController.getHasPicture();
                 //check locations to see which one to use
@@ -135,9 +147,11 @@ public class PopUpComment extends PopUp {
                     e.printStackTrace();
                 }
 
-                lc1.resetselectedlocation(selectedgeo);
-                System.out.println("Reset selected location back to default" +
-                        ":"+selectedgeo.getLatitude());
+                //reset selectedgeo after save made
+                //lc1.resetselectedlocation(selectedgeo);
+                topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+               
                 
                 dialog.dismiss();
             }

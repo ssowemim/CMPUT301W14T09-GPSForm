@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ImageButton
+        android:id="@+id/imButtonProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/buttonReplies"
+        android:src="@drawable/icon_profile" />
+
+    <Button
+        android:id="@+id/buttonReplies"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="View Replies" />
+
+    <ImageButton
+        android:id="@+id/imButtonAttachment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imButtonProfile"
+        android:layout_toLeftOf="@+id/imButtonProfile"
+        android:src="@drawable/attachment_pic" />
+
+</RelativeLayout>

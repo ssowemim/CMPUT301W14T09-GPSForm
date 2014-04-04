@@ -4,13 +4,13 @@ import junit.framework.TestCase;
 
 
 import ca.cmput301w14t09.Controller.LocationController;
+import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 
 public class GeolocationTest extends TestCase {
-/*
-	@Test
+
 	public void GeolocationupdateTest() {
 
 
@@ -18,16 +18,16 @@ public class GeolocationTest extends TestCase {
 
 		double lat = 32.003;
 		double lng = -123.233;
-
-		lc.setlat(lat);
-		lc.setlng(lng);
-		lc.setGeoLocation();
+		GeoLocation geo = new GeoLocation();
+		geo.setLatitude(lat);
+		geo.setLongitude(lng);
+		lc.setGeo(geo);
 
 		boolean topComment = true;
 		String authorname = "";
 		String commentText = "";
 
-		Comment comment = CreateComment.newComment(lc, authorname, commentText, topComment, false);
+		Comment comment = CommentFactory.buildComment(lc, authorname, commentText, topComment, null, false);
 
 		comment.setGeoLocation(lc.getGeoLocation());
 
@@ -37,7 +37,7 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-	@Test
+
 	public void testGeolocationupdatelargeinput() {
 
 
@@ -45,17 +45,17 @@ public class GeolocationTest extends TestCase {
 
 		double lat1 = 321111111111111111111111.000000;
 		double lng1 = -11111111111111111111123.00000001;
-
-		lc.setlat(lat1);
-		lc.setlng(lng1);
-		lc.setGeoLocation();
+		GeoLocation geo = new GeoLocation();
+		geo.setLatitude(lat1);
+		geo.setLongitude(lng1);
+		lc.setGeo(geo);
 
 
 		boolean topComment1 = true;
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment1 = CreateComment.newComment(lc, authorname1, commentText1, topComment1, false);
+		Comment comment1 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
 
 		comment1.setGeoLocation(lc.getGeoLocation());
 
@@ -66,7 +66,6 @@ public class GeolocationTest extends TestCase {
 	}
 
 
-	@Test
 	public void testGeolocationzeroupdate() {
 
 
@@ -74,17 +73,18 @@ public class GeolocationTest extends TestCase {
 
 		double lat2 = 0;
 		double lng2 = 0;
+		GeoLocation geo = new GeoLocation();
+		geo.setLatitude(lat2);
+		geo.setLongitude(lng2);
+		lc.setGeo(geo);
 
-		lc.setlat(lat2);
-		lc.setlng(lng2);
-		lc.setGeoLocation();
 
 
 		boolean topComment1 = true;
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment2 = CreateComment.newComment(lc, authorname1, commentText1, topComment1, false );
+		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
 
 		comment2.setGeoLocation(lc.getGeoLocation());
 
@@ -97,7 +97,6 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-	@Test
 	public void testGeolocationname() {
 
 		GeoLocation geo213 = new GeoLocation();
@@ -107,7 +106,6 @@ public class GeolocationTest extends TestCase {
 		assertTrue(geo213.getName()== "mylocation");	
 
 	}
-*/
 
 
 }

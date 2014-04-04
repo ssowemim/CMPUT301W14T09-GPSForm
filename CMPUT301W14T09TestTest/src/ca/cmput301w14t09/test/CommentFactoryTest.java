@@ -22,13 +22,13 @@ public class CommentFactoryTest extends TestCase {
 
 	public void testBuildComment(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null);
+		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, null);
 		assertNotNull(comment);
 	}
 	
 	public void testBuildReplies(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing");
+		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", null);
 		assertNotNull(comment);
 	}
 }

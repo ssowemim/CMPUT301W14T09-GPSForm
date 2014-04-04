@@ -101,7 +101,8 @@ public class TopCommentsActivity extends ListActivity {
     ImageButton addPicImageButton;
     ImageView picImagePreview;
     Bitmap picture = null;
-
+    Boolean hasPicture;
+    
     PictureModelList pictureModel;
 
     EditText authorText;
@@ -388,7 +389,8 @@ public class TopCommentsActivity extends ListActivity {
               //  System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
         		SerializableBitmap serializePic = new SerializableBitmap(picture);
-                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic);
+        		hasPicture = pictureController.getHasPicture();
+                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture);
 
                 //reset selected locaton for comments
 

@@ -54,6 +54,7 @@ public class Comment implements Comparable<Comment>, Serializable {
 	private int favoriteCount;
 	private Boolean topComment;
 	private String threadId;
+	private Boolean hasPicture;
 
 	public Comment() {
 		super();
@@ -248,5 +249,12 @@ public class Comment implements Comparable<Comment>, Serializable {
 	public void setThreadId(String threadId) {
 		this.threadId = threadId;
 	}
+	
+	public void setHasPicture(Boolean hasPicture){
+		this.hasPicture=hasPicture;
+	}
 
+	public Boolean getHasPicture(){
+		return this.hasPicture;
+	}
 }

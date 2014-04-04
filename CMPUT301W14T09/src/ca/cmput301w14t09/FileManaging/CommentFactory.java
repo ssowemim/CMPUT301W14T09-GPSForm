@@ -46,23 +46,23 @@ public class CommentFactory {
 	 * @return
 	 */
 	
-	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
+	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture) {
 		Comment comment = new Comment();
-		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
+		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
 		String date = new String();
 		date = removeDateColon(comment.getPostDate().toString());
 		comment.setThreadId((comment.getAuthorName() + " " + date));
 		return comment;
 	}
 	
-	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId) {
+	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId, Boolean hasPicture) {
 	                Comment comment = new Comment();
-	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture);
+	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
 	                comment.setThreadId(threadId);
 	                return comment;
 	}
 	
-	private static Comment instantiateComment(Comment comment, LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture) {
+	private static Comment instantiateComment(Comment comment, LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture) {
             comment.setAuthorName(authorname);
             comment.setCommentText(commentText);            
             
@@ -73,6 +73,7 @@ public class CommentFactory {
 
             comment.setTopComment(topComment);
             comment.setPostDate(new Date());
+            comment.setHasPicture(hasPicture);
             return comment;
 	}
 	

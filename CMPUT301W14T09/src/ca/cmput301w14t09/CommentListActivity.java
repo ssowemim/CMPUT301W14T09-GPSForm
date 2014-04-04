@@ -357,13 +357,14 @@ public class CommentListActivity extends ListActivity {
 
 
 				picture = pictureController.finalizePicture(picture, commentActivity);
+				Boolean hasPicture = pictureController.getHasPicture();
 
 				//check locations to see which one to use
 				lc1.checklocations(selectedgeo);
 				System.out.println("Sel LAT:"+selectedgeo.getLatitude());
 
 				SerializableBitmap serializePic = new SerializableBitmap(picture);
-				comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment);
+				comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture);
 
 				//reset selected locaton for comments
 

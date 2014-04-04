@@ -45,6 +45,8 @@ public class PictureController extends Activity{
     public static final int MEDIA_TYPE_IMAGE = 1;
     
     public static final int MAX_BITMAP_DIMENSIONS = 80;
+    
+    public boolean hasPicture;
 
     public PictureController() {
     	
@@ -129,7 +131,10 @@ public class PictureController extends Activity{
     	      //  picture = new SerializableBitmap();
     		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
     		picture = Bitmap.createScaledBitmap(picture, 1, 1, false);
+    		hasPicture = false;
     	}
+    	else
+    		hasPicture = true;
     	
     	if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
     		double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
@@ -146,6 +151,10 @@ public class PictureController extends Activity{
     	}
     	return picture;
     }
+
+	public Boolean getHasPicture() {
+		return hasPicture;
+	}
 
 
 }

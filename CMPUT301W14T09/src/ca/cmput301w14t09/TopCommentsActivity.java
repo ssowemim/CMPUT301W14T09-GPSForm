@@ -139,9 +139,7 @@ public class TopCommentsActivity extends ListActivity {
             //  }
 
         });
-
-
-
+        
         //mapstuff
         setupMapView();
         setupMyLocation();

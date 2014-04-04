@@ -33,7 +33,7 @@ public class CacheTest extends TestCase {
 	    String text2 = "cameron";
 	    String text1 = "this is a comment";
 	    
-	    Comment comment = CommentFactory.buildComment(lc1, text2, text1, true, null, null);
+	    Comment comment = CommentFactory.buildComment(lc1, text2, text1, true, null, null, null);
 	    
 	    cache.add(comment);
 	    

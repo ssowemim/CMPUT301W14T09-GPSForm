@@ -27,7 +27,7 @@ public class GeolocationTest extends TestCase {
 		String authorname = "";
 		String commentText = "";
 
-		Comment comment = CommentFactory.buildComment(lc, authorname, commentText, topComment, null, false);
+		Comment comment = CommentFactory.buildComment(lc, authorname, commentText, topComment, null, false, null);
 
 		comment.setGeoLocation(lc.getGeoLocation());
 
@@ -55,7 +55,7 @@ public class GeolocationTest extends TestCase {
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment1 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
+		Comment comment1 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false, null);
 
 		comment1.setGeoLocation(lc.getGeoLocation());
 
@@ -84,7 +84,7 @@ public class GeolocationTest extends TestCase {
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
+		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false, null);
 
 		comment2.setGeoLocation(lc.getGeoLocation());
 

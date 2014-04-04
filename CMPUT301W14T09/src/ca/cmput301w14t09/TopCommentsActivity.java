@@ -234,6 +234,7 @@ public class TopCommentsActivity extends ListActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
                 ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
                 adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
                 aCommentList.setAdapter(adapter1);
@@ -259,8 +260,6 @@ public class TopCommentsActivity extends ListActivity {
                 aCommentList.setAdapter(adapter1);
                 adapter1.notifyDataSetChanged();
                 return true;
-
-
 
             case R.id.sortByDiffLocation:
                 Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);

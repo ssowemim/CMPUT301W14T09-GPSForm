@@ -69,7 +69,7 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 
 		LocationController locationcontroller = new LocationController();
 		locationcontroller.setGeo(geo);
-		locationcontroller.setGeodefault(geo2);
+		locationcontroller.setGeodefault(geo2.getLatitude(), geo2.getLongitude());
 
 		locationcontroller.checklocations(selectedgeo);
 

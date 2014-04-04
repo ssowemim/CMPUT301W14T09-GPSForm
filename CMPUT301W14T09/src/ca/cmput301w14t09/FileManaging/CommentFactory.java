@@ -48,19 +48,21 @@ public class CommentFactory {
 	 * @return
 	 */
 	
-	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture) {
+	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture, String userName) {
 		Comment comment = new Comment();
 		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
 		String date = new String();
 		date = removeDateColon(comment.getPostDate().toString());
 		comment.setThreadId((comment.getAuthorName() + " " + date));
+		comment.setUserName(userName);
 		return comment;
 	}
 	
-	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId, Boolean hasPicture) {
+	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId, Boolean hasPicture, String userName) {
 	                Comment comment = new Comment();
 	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
 	                comment.setThreadId(threadId);
+	                comment.setUserName(userName);
 	                return comment;
 	}
 	

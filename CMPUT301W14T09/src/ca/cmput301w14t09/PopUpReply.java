@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,11 +13,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
-import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
-import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
@@ -32,7 +27,7 @@ public class PopUpReply extends PopUpComment {
     }
 
     //@SuppressLint("NewApi")
-    public void popUp(View v, final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
+    public void popUp(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
     	dialog = new Dialog(caller);
 
         dialog.setContentView(R.layout.pop_up_comment);
@@ -92,7 +87,7 @@ public class PopUpReply extends PopUpComment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                lc1.resetselectedlocation(selectedgeo);
+                
             }
         });
 
@@ -112,7 +107,7 @@ public class PopUpReply extends PopUpComment {
                 lc1.checklocations(selectedgeo);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
-                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture);
+                comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture, user.getUserName());
                 
                 //reset selected location for comments
 
@@ -131,4 +126,5 @@ public class PopUpReply extends PopUpComment {
         });
 
     }
+    
 }

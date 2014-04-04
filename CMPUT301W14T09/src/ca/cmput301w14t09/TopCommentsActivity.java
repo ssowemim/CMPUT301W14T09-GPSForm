@@ -110,6 +110,7 @@ public class TopCommentsActivity extends ListActivity {
     GeoPoint currentLocation;
     int id = 0;
     Geocoder code = null;
+    Context context = null;
 
     private Handler  updateHandler;
     private Runnable updateFunction;
@@ -119,6 +120,7 @@ public class TopCommentsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_comments);
+        context = getApplicationContext();
         //topActivity = this;
         //	attachment = false;
 
@@ -149,10 +151,11 @@ public class TopCommentsActivity extends ListActivity {
 
         //https://github.com/baoliangwang/CurrentLocation
         //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+       // LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         // Retrieve location updates through LocationListener interface
         //https://github.com/baoliangwang/CurrentLocation
+        /*
         LocationListener locationListener = new LocationListener() {
             public void onProviderDisabled (String provider) {
             }
@@ -165,13 +168,15 @@ public class TopCommentsActivity extends ListActivity {
 
             @Override
             public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location);
+                lc1.locationchanged(location, getApplicationContext());
             }
         };
 
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        
+        */
 
         // Handler polling
         updateHandler = new Handler();
@@ -279,7 +284,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     public void popUp(View v) throws InterruptedException {
-        popUpComment.popUp(v, this, fileUri, lc1, selectedgeo, user, "New Top Comment");
+        popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
     }
 
     public void populateListView() {
@@ -362,6 +367,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void run() {
                 currentLocation = myLocationOverlay.getMyLocation();
+                lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
                 map.getController().animateTo(currentLocation);
                 map.getController().setZoom(14);
                 map.getOverlays().add(myLocationOverlay);
@@ -520,6 +526,18 @@ public class TopCommentsActivity extends ListActivity {
         dialog.show();
 
 
+    }
+    
+    public GeoLocation getSelectedGeolocation(){
+    	return selectedgeo;
+    }
+    
+    public void resetSelectedLocation(){
+    	double latitude = 0.0;
+		double longitude = 0.0;
+		selectedgeo.setLatitude(latitude);
+		selectedgeo.setLongitude(longitude);
+    	
     }
 
 }

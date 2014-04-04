@@ -19,8 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.Controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.widget.Toast;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
@@ -55,13 +57,15 @@ public class LocationController {
    	* @param LocationController
     */
     
-    public void locationchanged(android.location.Location location){
+    public void locationchanged(android.location.Location location, Context context){
         if(location != null){
         	
                 geodefault.setLatitude(location.getLatitude());
                 geodefault.setLongitude(location.getLongitude()); 
                 System.out.println("geodefaultset"+geodefault.getLatitude());
                 System.out.println("geodefaultset"+geodefault.getLongitude());
+                Toast.makeText(context,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+               
               
             }
         }
@@ -103,10 +107,12 @@ public class LocationController {
 	/**
 	 * @param geodefault the geodefault to set
 	 */
-	public void setGeodefault(GeoLocation geodefault)
+	public void setGeodefault(double lat, double lng)
 	{
-	
-		this.geodefault = geodefault;
+		geodefault.setLatitude(lat);
+		geodefault.setLongitude(lng);
+		//Toast.makeText(context,"Mapquest updates default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+		
 	}
 
 

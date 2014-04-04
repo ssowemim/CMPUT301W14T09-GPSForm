@@ -251,10 +251,10 @@ public class Comment implements Comparable<Comment>, Serializable {
 	}
 	
 	public void setHasPicture(Boolean hasPicture){
-		this.hasPicture=hasPicture;
+		this.hasPicture = hasPicture;
 	}
 
 	public Boolean getHasPicture(){
-		return this.hasPicture;
+		return hasPicture;
 	}
 }

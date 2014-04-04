@@ -35,6 +35,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -645,17 +646,16 @@ public class TopCommentsActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				final Dialog dialog = new Dialog(TopCommentsActivity.this);
-				dialog.setTitle("Attachment");
-				dialog.setContentView(R.layout.dialog_attachment);
-		    	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-				dialog.show();
+				final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
+				dialog1.setTitle("Attachment");
+				dialog1.setContentView(R.layout.dialog_attachment);
+		    	dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+				dialog1.show();
 				
-				ImageView imageView = (ImageView)dialog.findViewById(R.id.imageViewAttachment);
+				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				Bitmap attachment = thread.getPicture().bitmap;
 				attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-				
 				imageView.setImageBitmap(attachment);
 				dialog.dismiss();
 			}
@@ -666,6 +666,11 @@ public class TopCommentsActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				Intent intent = new Intent(v.getContext(), UserProfileActivity.class);
+				intent.putExtra("CURRENT_USER", user);
+				
+				startActivity(intent);
+				dialog.dismiss();
 				
 			}
 		});

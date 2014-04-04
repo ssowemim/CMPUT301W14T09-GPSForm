@@ -40,10 +40,12 @@ public final class R {
         public static final int no_img=0x7f020010;
     }
     public static final class id {
+        public static final int Edit=0x7f08002b;
         public static final int Favourite=0x7f080028;
+        public static final int Reply=0x7f08002c;
         public static final int UserList=0x7f080004;
-        public static final int action_settings=0x7f080033;
-        public static final int attachmentImageView=0x7f08002f;
+        public static final int action_settings=0x7f080035;
+        public static final int attachmentImageView=0x7f080031;
         public static final int authorName=0x7f080012;
         public static final int authorNameData=0x7f080013;
         public static final int authorText=0x7f080021;
@@ -71,8 +73,8 @@ public final class R {
         public static final int imageViewAttachment=0x7f080017;
         public static final int imageViewUserProfile=0x7f08000c;
         public static final int map=0x7f080007;
-        public static final int middletext=0x7f08002d;
-        public static final int middletextdata=0x7f08002e;
+        public static final int middletext=0x7f08002f;
+        public static final int middletextdata=0x7f080030;
         public static final int mq_geocode_btn=0x7f08001d;
         public static final int mq_geocode_input=0x7f08001c;
         public static final int picImagePreview=0x7f080025;
@@ -83,16 +85,16 @@ public final class R {
         public static final int replyComment=0x7f080000;
         public static final int replyImagePreview=0x7f080016;
         public static final int save=0x7f080023;
-        public static final int sortByDiffLocation=0x7f080034;
-        public static final int sortDate=0x7f080031;
-        public static final int sortLocation=0x7f080030;
-        public static final int sortPicture=0x7f080032;
+        public static final int sortByDiffLocation=0x7f080036;
+        public static final int sortDate=0x7f080033;
+        public static final int sortLocation=0x7f080032;
+        public static final int sortPicture=0x7f080034;
         public static final int spinnerSex=0x7f08000a;
         public static final int takePicture=0x7f080026;
         public static final int textView1=0x7f08001b;
         public static final int textViewUsername=0x7f080008;
-        public static final int toptext=0x7f08002b;
-        public static final int toptextdata=0x7f08002c;
+        public static final int toptext=0x7f08002d;
+        public static final int toptextdata=0x7f08002e;
     }
     public static final class layout {
         public static final int activity_comment_list=0x7f030000;
@@ -109,7 +111,8 @@ public final class R {
         public static final int pic_post=0x7f03000b;
         public static final int pop_up_comment=0x7f03000c;
         public static final int pop_up_favorite=0x7f03000d;
-        public static final int thread_view=0x7f03000e;
+        public static final int pop_up_select=0x7f03000e;
+        public static final int thread_view=0x7f03000f;
     }
     public static final class menu {
         public static final int comment_list=0x7f070000;

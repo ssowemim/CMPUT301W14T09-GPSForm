@@ -655,15 +655,25 @@ public class TopCommentsActivity extends ListActivity {
 				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				Bitmap attachment = thread.getPicture().bitmap;
-				attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-				imageView.setImageBitmap(attachment);
-				dialog.dismiss();
+
+				if (thread.getHasPicture()){
+					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
+					imageView.setImageBitmap(attachment);
+					dialog.dismiss();
+				}
+				else
+				{
+					dialog.dismiss();
+					dialog1.dismiss();
+					Toast.makeText(getApplicationContext(),"Not Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+					
+				}
 			}
-		});
-    	
+    	});
+
     	dialogProfileButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
+
+    		@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(v.getContext(), UserProfileActivity.class);

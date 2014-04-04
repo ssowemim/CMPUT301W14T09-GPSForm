@@ -89,7 +89,7 @@ public class CommentListActivity extends ListActivity {
 
 	//File uri to store Images
 	private Uri fileUri;
-	
+
 	//selected geolocation object used for when person selects geolocation from
 	GeoLocation selectedgeo = new GeoLocation();
 	GeoLocation selectedgeosort = new GeoLocation();
@@ -164,7 +164,7 @@ public class CommentListActivity extends ListActivity {
 				while(true) {
 					try {
 						updateHandler.post(updateFunction);
-						sleep(2000);
+						sleep(3000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -191,7 +191,7 @@ public class CommentListActivity extends ListActivity {
 	public void popUp(View v) throws InterruptedException {
 		popUpReply.popUp(v, this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
 	}
-	
+
 	/**
 	 * 
 	 * @author Chunhan
@@ -210,13 +210,15 @@ public class CommentListActivity extends ListActivity {
 			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.sortDate:
+			ArrayList<Comment> comment = null;
 			try {
-				ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
-				adapter = new CommentAdapter(this,R.layout.comment_view, comment);
-				favList.setAdapter(adapter);
+				comment = ElasticSearchOperations.pullOneThread(firstComment);				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			adapter = new CommentAdapter(this,R.layout.comment_view, comment);
+			favList.setAdapter(adapter);
+			adapter.notifyDataSetChanged();
 			return true;
 		case R.id.sortPicture:
 			SortingController sorting1 = new SortingController();
@@ -225,7 +227,7 @@ public class CommentListActivity extends ListActivity {
 			favList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
 			return true;
-			
+
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -240,7 +242,7 @@ public class CommentListActivity extends ListActivity {
 		super.onStart();
 	}
 
-	private void populateListView() {
+	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
 
 		if(user != null) {
@@ -254,13 +256,13 @@ public class CommentListActivity extends ListActivity {
 			}
 
 			Collections.sort(user.profile.cache.comments);
-			Collections.reverse(user.profile.cache.comments);
+			
 			FileSaving.saveUserFile(user, this);
 			adapter = new CommentAdapter(this,
 					R.layout.comment_view,
 					user.profile.cache.getSubComments(firstComment));
 
-			aCommentList.setAdapter(adapter);
+			favList.setAdapter(adapter);
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -322,7 +324,7 @@ public class CommentListActivity extends ListActivity {
 		super.onRestoreInstanceState(savedInstanceState);
 		fileUri = savedInstanceState.getParcelable("file_uri");
 	}
-	
+
 	public void onBackPressed() {
 		Intent intent = getIntent();
 		intent.putExtra("CURRENT_USER", user);

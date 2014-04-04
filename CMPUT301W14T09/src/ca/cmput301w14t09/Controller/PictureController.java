@@ -34,10 +34,7 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import ca.cmput301w14t09.CommentListActivity;
 import ca.cmput301w14t09.R;
-import ca.cmput301w14t09.TopCommentsActivity;
-import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 
 public class PictureController extends Activity{

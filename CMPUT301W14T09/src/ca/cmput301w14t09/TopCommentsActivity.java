@@ -21,6 +21,7 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -166,7 +167,7 @@ public class TopCommentsActivity extends ListActivity {
 				while(true) {
 					try {
 						updateHandler.post(updateFunction);
-						sleep(2000);
+						sleep(3000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}

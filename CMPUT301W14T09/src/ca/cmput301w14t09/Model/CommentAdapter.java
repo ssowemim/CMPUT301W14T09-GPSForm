@@ -19,7 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.Model;
 
 import java.util.ArrayList;
-import ca.cmput301w14t09.R;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import ca.cmput301w14t09.R;
 
 /**
  * 

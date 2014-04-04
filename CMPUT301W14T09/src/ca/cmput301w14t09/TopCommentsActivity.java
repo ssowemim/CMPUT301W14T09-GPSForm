@@ -165,7 +165,7 @@ public class TopCommentsActivity extends ListActivity {
 
             @Override
             public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location);
+                lc1.locationchanged(location, getApplicationContext());
             }
         };
 

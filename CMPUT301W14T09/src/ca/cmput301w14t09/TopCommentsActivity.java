@@ -110,6 +110,7 @@ public class TopCommentsActivity extends ListActivity {
     GeoPoint currentLocation;
     int id = 0;
     Geocoder code = null;
+    Context context = null;
 
     private Handler  updateHandler;
     private Runnable updateFunction;
@@ -119,6 +120,7 @@ public class TopCommentsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_comments);
+        context = getApplicationContext();
         //topActivity = this;
         //	attachment = false;
 
@@ -149,10 +151,11 @@ public class TopCommentsActivity extends ListActivity {
 
         //https://github.com/baoliangwang/CurrentLocation
         //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+       // LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 
         // Retrieve location updates through LocationListener interface
         //https://github.com/baoliangwang/CurrentLocation
+        /*
         LocationListener locationListener = new LocationListener() {
             public void onProviderDisabled (String provider) {
             }
@@ -172,6 +175,8 @@ public class TopCommentsActivity extends ListActivity {
         //request location update
         //https://github.com/baoliangwang/CurrentLocation
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
+        
+        */
 
         // Handler polling
         updateHandler = new Handler();
@@ -361,6 +366,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void run() {
                 currentLocation = myLocationOverlay.getMyLocation();
+                lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
                 map.getController().animateTo(currentLocation);
                 map.getController().setZoom(14);
                 map.getOverlays().add(myLocationOverlay);

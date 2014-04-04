@@ -107,10 +107,12 @@ public class LocationController {
 	/**
 	 * @param geodefault the geodefault to set
 	 */
-	public void setGeodefault(GeoLocation geodefault)
+	public void setGeodefault(double lat, double lng)
 	{
-	
-		this.geodefault = geodefault;
+		geodefault.setLatitude(lat);
+		geodefault.setLongitude(lng);
+		//Toast.makeText(context,"Mapquest updates default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+		
 	}
 
 

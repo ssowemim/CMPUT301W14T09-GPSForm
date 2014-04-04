@@ -137,7 +137,7 @@ public class PopUpComment extends PopUp {
                 lc1.checklocations(selectedgeo);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
-                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture);
+                comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture, user.getUserName());
 
                 //reset selected location for comments
 

@@ -30,6 +30,6 @@ public class UnreadMarkerTest extends TestCase {
 		comment1.setPostDate(new Date());
 		UnreadMarker unread = new UnreadMarker(true, comment);
 		UnreadMarker unread1 = new UnreadMarker(true, comment1);
-		unread.compareTo(unread1);
+		assertNotNull(unread.compareTo(unread1));
 	}
 }

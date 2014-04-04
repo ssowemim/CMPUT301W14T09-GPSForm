@@ -4,7 +4,10 @@ package ca.cmput301w14t09.test;
 import junit.framework.TestCase;
 
 
+import android.content.Context;
 import android.location.Location;
+import android.test.ActivityInstrumentationTestCase2;
+import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Model.GeoLocation;
 
@@ -15,7 +18,14 @@ import ca.cmput301w14t09.Model.GeoLocation;
  **/
 
 
-public class LocationControllerTests extends TestCase{
+public class LocationControllerTests extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
+
+
+	public LocationControllerTests() {
+		super(TopCommentsActivity.class);
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 	public void testGetGeolocation()
@@ -34,10 +44,11 @@ public class LocationControllerTests extends TestCase{
 
 		LocationController locationcontroller = new LocationController();
 		Location location = new Location("dummyprovider");
+		Context context = this.getActivity().getApplication();
 		location.setLatitude(-53.2345);
 		location.setLongitude(103.44566);
 		assertTrue(location.getLatitude() == -53.2345);
-		locationcontroller.locationchanged(location);
+		locationcontroller.locationchanged(location, context);
 
 		assertTrue(locationcontroller.getGeodefault().getLatitude() == -53.2345);
 

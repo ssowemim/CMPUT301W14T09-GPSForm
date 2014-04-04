@@ -663,6 +663,7 @@ public class TopCommentsActivity extends ListActivity {
 				}
 				else
 				{
+					
 					dialog.dismiss();
 					dialog1.dismiss();
 					Toast.makeText(getApplicationContext(),"Not Attachment picture with Comment.", Toast.LENGTH_LONG).show();

@@ -19,10 +19,6 @@ public class PictureTest extends ActivityInstrumentationTestCase2<TopCommentsAct
 		super(TopCommentsActivity.class);
 	}
 
-
-	public void setUp() throws Exception {
-	}
-	
 	public void testFinalizePicture(){
 		PictureController pc = new PictureController();
 		Bitmap bp = pc.finalizePicture(null, getActivity());

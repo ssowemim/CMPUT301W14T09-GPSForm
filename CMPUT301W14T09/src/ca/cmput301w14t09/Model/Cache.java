@@ -18,6 +18,10 @@ public class Cache implements Serializable {
     public Cache() {
         comments = new ArrayList<Comment>(MAX_LENGTH);
     }
+    
+    public ArrayList<Comment> getCache(){
+    	return comments;
+    }
 
     /**
      * Add a comment to the cache.

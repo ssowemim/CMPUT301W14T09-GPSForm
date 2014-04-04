@@ -66,30 +66,12 @@
    	<!-- Description Tag -->
    <!-- This is the actual description -->
 
-   <ImageButton
-       android:id="@+id/buttonProfile"
-       android:layout_width="wrap_content"
-       android:layout_height="20dp"
-       android:layout_above="@+id/buttonPicture"
-       android:layout_alignRight="@+id/toptextdata"
-       android:background="@android:color/transparent"
-       android:src="@drawable/ic_no_profile" />
-
-   <ImageButton
-       android:id="@+id/buttonPicture"
-       android:layout_width="wrap_content"
-       android:layout_height="20dp"
-       android:layout_alignBottom="@+id/middletextdata"
-       android:layout_alignRight="@+id/middletextdata"
-       android:background="@android:color/transparent"
-       android:src="@drawable/ic_picture" />
-
    <ImageView
        android:id="@+id/attachmentImageView"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:layout_alignRight="@+id/toptextdata"
        android:layout_below="@+id/toptext"
-       android:layout_toLeftOf="@+id/buttonProfile"
        android:contentDescription="@string/attachment_description"
        android:src="@drawable/attachment_pic" />
 

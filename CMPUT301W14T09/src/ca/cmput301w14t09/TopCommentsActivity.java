@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -37,6 +38,8 @@ import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -140,10 +143,11 @@ public class TopCommentsActivity extends ListActivity {
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
+            	customOptionsDialog(arg2);
+          //      Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
 
                 // Pass in comment object
-                commentThread(thread);
+            //    commentThread(thread);
             }
 
         });
@@ -615,4 +619,52 @@ public class TopCommentsActivity extends ListActivity {
       });
     }
 
+    private void customOptionsDialog(final int arg2){
+    	final Dialog dialog = new Dialog(TopCommentsActivity.this);
+    	dialog.setTitle("");
+    	dialog.setContentView(R.layout.dialog_options);
+    	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+    	
+    	Window window = dialog.getWindow();
+    	WindowManager.LayoutParams wlp = window.getAttributes();
+    	
+    	window.setAttributes(wlp);
+    	dialog.show();
+    	
+    	Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
+    	ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
+    	ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
+    	
+    	dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+				commentThread(thread);
+				dialog.dismiss();
+			}
+		});
+    	
+    	dialogAttachButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Dialog dialog = new Dialog(TopCommentsActivity.this);
+				dialog.setTitle("Attachment");
+				dialog.show();
+			}
+		});
+    	
+    	dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	
+    }
 }

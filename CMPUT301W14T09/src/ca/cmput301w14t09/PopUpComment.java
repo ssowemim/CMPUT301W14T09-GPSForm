@@ -38,6 +38,7 @@ public class PopUpComment extends PopUp {
     protected EditText commentText;
     protected Bitmap picture = null;
     protected Comment comment;
+    protected Uri getFileUri;
 
     public PopUpComment(Activity caller) {
         super(caller);
@@ -152,6 +153,7 @@ public class PopUpComment extends PopUp {
     public void captureImage(Uri fileUri) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         fileUri = pictureController.getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+        getFileUri = fileUri;
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
@@ -179,5 +181,9 @@ public class PopUpComment extends PopUp {
         // successfully captured the image
         // display it in image view
         picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
+    }
+    
+    public Uri getFleUri(){
+    	return getFileUri;
     }
 }

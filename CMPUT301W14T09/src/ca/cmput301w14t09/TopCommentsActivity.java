@@ -144,10 +144,6 @@ public class TopCommentsActivity extends ListActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
 
             	customOptionsDialog(arg2);
-          //      Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
-
-                // Pass in comment object
-            //    commentThread(thread);
             }
 
         });
@@ -155,8 +151,6 @@ public class TopCommentsActivity extends ListActivity {
         //mapstuff
         setupMapView();
         setupMyLocation();
-       // setupViews();
-       // setupOverlays();
 
 
         //https://github.com/baoliangwang/CurrentLocation
@@ -653,7 +647,17 @@ public class TopCommentsActivity extends ListActivity {
 				// TODO Auto-generated method stub
 				final Dialog dialog = new Dialog(TopCommentsActivity.this);
 				dialog.setTitle("Attachment");
+				dialog.setContentView(R.layout.dialog_attachment);
+		    	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 				dialog.show();
+				
+				ImageView imageView = (ImageView)dialog.findViewById(R.id.imageViewAttachment);
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+				Bitmap attachment = thread.getPicture().bitmap;
+				attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
+				
+				imageView.setImageBitmap(attachment);
+				dialog.dismiss();
 			}
 		});
     	

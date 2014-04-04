@@ -107,7 +107,7 @@ public class CommentListActivity extends ListActivity {
 
 		favList.setOnItemClickListener(new OnItemClickListener(){
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-
+				/*
 				if(user.getUserName().equals("Guest")) {
 					Toast.makeText(getApplicationContext(),
 							"Guest Can Not Add Favourites", Toast.LENGTH_LONG).show();
@@ -120,6 +120,8 @@ public class CommentListActivity extends ListActivity {
 					Toast.makeText(getApplicationContext(),
 							"Comment Added To Favourites.", Toast.LENGTH_LONG).show();
 				}
+				*/
+				
 			}
 		});
 
@@ -255,7 +257,7 @@ public class CommentListActivity extends ListActivity {
 				}
 			}
 
-			Collections.sort(user.profile.cache.comments);
+			
 			
 			FileSaving.saveUserFile(user, this);
 			adapter = new CommentAdapter(this,

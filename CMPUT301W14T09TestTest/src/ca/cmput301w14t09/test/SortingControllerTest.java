@@ -31,7 +31,7 @@ public class SortingControllerTest extends TestCase {
 		for (int i = 0; i< 4; i++){
 			geo.setLatitude(i);
 			lc.setGeo(geo);
-			comment = CommentFactory.buildComment(lc, "test"+i, "testing"+i, true, null);
+			comment = CommentFactory.buildComment(lc, "test"+i, "testing"+i, true, null, null);
 			commList.add(comment);
 		}
 		geo.setLatitude(54.0);

@@ -670,7 +670,7 @@ public class TopCommentsActivity extends ListActivity {
 				intent.putExtra("CURRENT_USER", user);
 				
 				startActivity(intent);
-				dialog.dismiss();
+				dialog.dismiss(); 
 				
 			}
 		});

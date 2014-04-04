@@ -56,7 +56,10 @@
         </activity>
         <activity
             android:name="ca.cmput301w14t09.ChooseLocationActivity"
-             >
+            >
+        </activity>
+        <activity android:name="ca.cmput301w14t09.UserProfileActivity"
+            >
         </activity>
     </application>
 

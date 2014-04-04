@@ -60,8 +60,8 @@ public class LocationController {
         	
                 geodefault.setLatitude(location.getLatitude());
                 geodefault.setLongitude(location.getLongitude()); 
-                //System.out.println("geodefaultset"+geodefault.getLatitude());
-                //System.out.println("geodefaultset"+geodefault.getLongitude());
+                System.out.println("geodefaultset"+geodefault.getLatitude());
+                System.out.println("geodefaultset"+geodefault.getLongitude());
               
             }
         }

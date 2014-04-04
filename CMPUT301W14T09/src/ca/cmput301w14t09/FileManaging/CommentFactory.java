@@ -20,6 +20,8 @@ package ca.cmput301w14t09.FileManaging;
 
 import java.util.Date;
 
+import android.graphics.Bitmap;
+
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;

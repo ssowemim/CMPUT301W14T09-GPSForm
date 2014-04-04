@@ -40,9 +40,10 @@ public final class R {
         public static final int no_img=0x7f020010;
     }
     public static final class id {
+        public static final int Favourite=0x7f080028;
         public static final int UserList=0x7f080004;
-        public static final int action_settings=0x7f080031;
-        public static final int attachmentImageView=0x7f08002d;
+        public static final int action_settings=0x7f080033;
+        public static final int attachmentImageView=0x7f08002f;
         public static final int authorName=0x7f080012;
         public static final int authorNameData=0x7f080013;
         public static final int authorText=0x7f080021;
@@ -55,12 +56,12 @@ public final class R {
         public static final int commentData=0x7f080015;
         public static final int commentName=0x7f080014;
         public static final int commentText=0x7f080022;
+        public static final int edit=0x7f080029;
         public static final int editText1=0x7f08000b;
         public static final int editTextBio=0x7f08000e;
         public static final int editTextEmail=0x7f08000d;
         public static final int editTextFirstLastName=0x7f080009;
         public static final int editUsername=0x7f080002;
-        public static final int favButton=0x7f080028;
         public static final int favorite=0x7f080006;
         public static final int favorite1=0x7f080001;
         public static final int geoLocation=0x7f080010;
@@ -70,27 +71,28 @@ public final class R {
         public static final int imageViewAttachment=0x7f080017;
         public static final int imageViewUserProfile=0x7f08000c;
         public static final int map=0x7f080007;
-        public static final int middletext=0x7f08002b;
-        public static final int middletextdata=0x7f08002c;
+        public static final int middletext=0x7f08002d;
+        public static final int middletextdata=0x7f08002e;
         public static final int mq_geocode_btn=0x7f08001d;
         public static final int mq_geocode_input=0x7f08001c;
         public static final int picImagePreview=0x7f080025;
         public static final int pic_image_view=0x7f08001e;
         public static final int pic_text=0x7f08001f;
         public static final int pic_timestamp=0x7f080020;
+        public static final int reply=0x7f08002a;
         public static final int replyComment=0x7f080000;
         public static final int replyImagePreview=0x7f080016;
         public static final int save=0x7f080023;
-        public static final int sortByDiffLocation=0x7f080032;
-        public static final int sortDate=0x7f08002f;
-        public static final int sortLocation=0x7f08002e;
-        public static final int sortPicture=0x7f080030;
+        public static final int sortByDiffLocation=0x7f080034;
+        public static final int sortDate=0x7f080031;
+        public static final int sortLocation=0x7f080030;
+        public static final int sortPicture=0x7f080032;
         public static final int spinnerSex=0x7f08000a;
         public static final int takePicture=0x7f080026;
         public static final int textView1=0x7f08001b;
         public static final int textViewUsername=0x7f080008;
-        public static final int toptext=0x7f080029;
-        public static final int toptextdata=0x7f08002a;
+        public static final int toptext=0x7f08002b;
+        public static final int toptextdata=0x7f08002c;
     }
     public static final class layout {
         public static final int activity_comment_list=0x7f030000;

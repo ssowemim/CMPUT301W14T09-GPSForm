@@ -178,14 +178,15 @@ public class TopCommentsActivity extends ListActivity {
 
         // Handler polling
         updateHandler = new Handler();
-        updateFunction = new Runnable() {
-            @Override
-            public void run() {
+     /*   updateFunction = new Runnable() {
+        
+           // @Override
+           public void run() {
                 populateListView();
             }
         };
 
-        Thread update = new Thread() {
+       Thread update = new Thread() {
             public void run() {
                 while(true) {
                     try {
@@ -193,13 +194,13 @@ public class TopCommentsActivity extends ListActivity {
                         sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
+                    } 
                 }
             }
-        };
+        }; 
 
-        update.start();
-    }
+        update.start(); 
+    */ populateListView();} 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -433,8 +434,14 @@ public class TopCommentsActivity extends ListActivity {
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+        	fileUri = popUpComment.getFleUri();
+        //	System.out.print(fileUri);
             if (resultCode == RESULT_OK) {
                 popUpComment.pictureResult(fileUri);
+                Toast.makeText(this.getApplicationContext(),
+                        "Picture Taken" + fileUri, Toast.LENGTH_SHORT)
+                        .show();
+              //  System.out.print(fileUri);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
@@ -442,20 +449,23 @@ public class TopCommentsActivity extends ListActivity {
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
             }
-        } else {
+        } /**else {
             // failed to capture image
             Toast.makeText(this.getApplicationContext(),
-                    "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                    "SorryAB! Failed to capture image", Toast.LENGTH_SHORT)
                     .show();
-        }
+        } **/
     }
 
 
 
 
     private void customOptionsDialog(final int arg2){
+    	Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
+    	
     	final Dialog dialog = new Dialog(TopCommentsActivity.this);
-    	dialog.setTitle(user.profile.getUserName() + ": Comment Options");
+    	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Comment Options");
+   // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     	dialog.setContentView(R.layout.dialog_options);
     //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     	
@@ -494,8 +504,6 @@ public class TopCommentsActivity extends ListActivity {
 				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				Bitmap attachment = thread.getPicture().bitmap;
-        
-
 
 				if (thread.getHasPicture()){
 					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);

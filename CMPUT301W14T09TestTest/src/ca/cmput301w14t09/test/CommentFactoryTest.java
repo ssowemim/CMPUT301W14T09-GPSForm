@@ -22,7 +22,7 @@ public class CommentFactoryTest extends TestCase {
 
 	public void testBuildComment(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, true);
+		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, true, null);
 		assertNotNull(comment);
 		assertTrue(comment.getAuthorName().contains("Tester"));
 		assertTrue(comment.getCommentText().contains("testing"));
@@ -34,7 +34,7 @@ public class CommentFactoryTest extends TestCase {
 	
 	public void testBuildReplies(){
 		LocationController lc = new LocationController();
-		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", true);
+		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", true, null);
 		assertNotNull(comment);
 		assertTrue(comment.getAuthorName().contains("Tester"));
 		assertTrue(comment.getCommentText().contains("testing"));

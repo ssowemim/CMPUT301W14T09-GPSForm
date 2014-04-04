@@ -1,7 +1,5 @@
 package ca.cmput301w14t09.test;
 
-
-import ca.cmput301w14t09.Model.Profile;
 import ca.cmput301w14t09.Model.User;
 import junit.framework.TestCase;
 

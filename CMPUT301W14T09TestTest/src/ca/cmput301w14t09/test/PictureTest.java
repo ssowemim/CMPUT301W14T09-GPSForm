@@ -11,7 +11,11 @@ import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Model.Picture;
 
-
+/**
+ * 
+ * @author chunhan
+ * Testing Picture
+ */
 public class PictureTest extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
 
 

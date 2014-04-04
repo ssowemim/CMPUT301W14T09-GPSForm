@@ -95,6 +95,7 @@ public class TopCommentsActivity extends ListActivity {
     protected User user;
     protected Dialog dialog;
     protected ListView aCommentList;
+    protected ArrayList<Comment> topComments = null;
     Comment comment;
 
     ImageButton addPicImageButton;
@@ -208,7 +209,13 @@ public class TopCommentsActivity extends ListActivity {
         switch (item.getItemId()){
             case R.id.sortLocation:			
                 SortingController sorting = new SortingController();
-                ArrayList<Comment> sortedList = sorting.sortCommentsByLocation(lc1, null);
+
+        		try {
+        			topComments = ElasticSearchOperations.pullThreads();
+        		} catch (InterruptedException e) {
+        			e.printStackTrace();
+        		}
+                ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
                 adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
                 aCommentList.setAdapter(adapter1);
                 adapter1.notifyDataSetChanged();
@@ -494,7 +501,12 @@ public class TopCommentsActivity extends ListActivity {
             System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
             System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
             SortingController sorting2 = new SortingController();
-            ArrayList<Comment> sortedList1 = sorting2.sortTopComments(selectedgeosort);
+    		try {
+    			topComments = ElasticSearchOperations.pullThreads();
+    		} catch (InterruptedException e) {
+    			e.printStackTrace();
+    		}
+            ArrayList<Comment> sortedList1 = sorting2.sortTopComments(null, selectedgeosort, topComments);
             adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
             aCommentList.setAdapter(adapter1);
             adapter1.notifyDataSetChanged();

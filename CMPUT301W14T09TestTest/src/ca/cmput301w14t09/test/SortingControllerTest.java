@@ -32,7 +32,6 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		try {
 			assertNotNull(ElasticSearchOperations.pullThreads());
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

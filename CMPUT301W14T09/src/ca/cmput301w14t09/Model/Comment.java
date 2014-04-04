@@ -55,6 +55,7 @@ public class Comment implements Comparable<Comment>, Serializable {
 	private Boolean topComment;
 	private String threadId;
 	private Boolean hasPicture;
+	private String userName;
 
 	public Comment() {
 		super();
@@ -257,4 +258,24 @@ public class Comment implements Comparable<Comment>, Serializable {
 	public Boolean getHasPicture(){
 		return hasPicture;
 	}
+
+    
+    /**
+     * @return the userName
+     */
+    public String getUserName()
+    {
+    
+        return userName;
+    }
+
+    
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName)
+    {
+    
+        this.userName = userName;
+    }
 }

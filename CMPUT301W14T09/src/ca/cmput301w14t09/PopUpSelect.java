@@ -16,6 +16,7 @@ import ca.cmput301w14t09.Model.User;
 public class PopUpSelect extends PopUp{
 
     PopUpReply popUpReply;
+    PopUpEdit popUpEdit;
 
     public PopUpSelect(Activity caller) {
         super(caller);
@@ -57,9 +58,12 @@ public class PopUpSelect extends PopUp{
             @Override
             public void onClick(View v)
             {
-
-                dialog.dismiss();
-
+                if(user.getUserName().equals(comment.getUserName())) {
+                    dialog.dismiss();
+                    popUpEdit.popUpEdit(comment);
+                } else {
+                    
+                }
 
             }
         });

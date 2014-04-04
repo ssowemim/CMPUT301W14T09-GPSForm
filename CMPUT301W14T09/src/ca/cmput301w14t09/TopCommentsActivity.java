@@ -616,9 +616,9 @@ public class TopCommentsActivity extends ListActivity {
 
     private void customOptionsDialog(final int arg2){
     	final Dialog dialog = new Dialog(TopCommentsActivity.this);
-    	dialog.setTitle("");
+    	dialog.setTitle(user.profile.getUserName() + ": Comment Options");
     	dialog.setContentView(R.layout.dialog_options);
-    	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+    //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     	
     	Window window = dialog.getWindow();
     	WindowManager.LayoutParams wlp = window.getAttributes();
@@ -663,11 +663,9 @@ public class TopCommentsActivity extends ListActivity {
 				}
 				else
 				{
-					
 					dialog.dismiss();
 					dialog1.dismiss();
 					Toast.makeText(getApplicationContext(),"Not Attachment picture with Comment.", Toast.LENGTH_LONG).show();
-					
 				}
 			}
     	});

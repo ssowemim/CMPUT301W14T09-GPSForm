@@ -19,9 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import android.app.Activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
@@ -35,12 +34,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.SortingController;
-
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
@@ -137,6 +135,43 @@ public class CommentListActivity extends ListActivity {
 
         });
 
+        // Handler polling
+        updateHandler = new Handler();
+        updateFunction = new Runnable() {
+            @Override
+            public void run() {
+                populateListView();
+            }
+        };
+
+        Thread update = new Thread() {
+            public void run() {
+                while(true) {
+                    try {
+                        updateHandler.post(updateFunction);
+                        sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+
+        update.start(); 
+        populateListView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.comment_list, menu);
+
+        intent = getIntent();
+        user = (User) intent.getSerializableExtra("CURRENT_USER");
+        firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
+        System.out.println(firstComment);
+
+
 
 
 
@@ -188,20 +223,12 @@ public class CommentListActivity extends ListActivity {
             }
         };
         update.start();
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.comment_list, menu);
 
-        intent = getIntent();
-        user = (User) intent.getSerializableExtra("CURRENT_USER");
-        firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
-        System.out.println(firstComment);
 
         return true;
     }
+
 
 
 
@@ -297,25 +324,27 @@ public class CommentListActivity extends ListActivity {
     }
 
 
+    /**
+     * onActivityResult will Receive the activity result
+     * method and will be called after closing the camera,
+     * after the ChooseLocationActivity is closed to get geolocation, or the commentList. this method.
+     * Used for updating selectedgeolocation
+     * //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+
         if (requestCode == 122 && resultCode == Activity.RESULT_OK){
 
-            //succesfully get updated geolocation
             selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-      /**      System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
-            System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
-            Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show(); **/
+
+            Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
         }
-        //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
 
-            //succesfully get updated geolocation
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-       /**     System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
-            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
-            Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show(); **/
+
         }
 
 
@@ -346,8 +375,6 @@ public class CommentListActivity extends ListActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-
-
         // save file url in bundle as it will be null on screen orientation changes
         outState.putParcelable("file_uri",fileUri);
     }
@@ -361,6 +388,10 @@ public class CommentListActivity extends ListActivity {
     }
 
 
+    /**
+     * On back pressed pack up the geolocation that was selected and send back to parent activity to be processed
+     * http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+     */
     public void onBackPressed() {
         Intent intent = getIntent();
         intent.putExtra("CURRENT_USER", user);
@@ -368,10 +399,10 @@ public class CommentListActivity extends ListActivity {
         super.onBackPressed();
         finish();
     }
-    
+
     public void optionsDialog(Comment thread) {
         popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
-        
+
     }
 
 }

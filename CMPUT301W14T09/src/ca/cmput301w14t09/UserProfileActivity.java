@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 
 public class UserProfileActivity extends Activity{
 
+	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
+	
 	protected Spinner maleOrFemale;
 	protected EditText firstLastName;
 	protected EditText phoneText;
@@ -57,6 +61,19 @@ public class UserProfileActivity extends Activity{
 		return true;
 	}
 	
+	public void retrievePicture(View v){
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data){
+		if (requestCode == OBTAIN_PIC_REQUEST_CODE && resultCode == RESULT_OK){
+			currentPicture = (Bitmap)data.getExtras().get("data");
+			userProfilePicture.setImageBitmap(currentPicture);
+		}
+	}
+	
 	public void maleFemaleSpinner(){
 		List<String>list = new ArrayList<String>();
 		list.add("Male");
@@ -65,5 +82,9 @@ public class UserProfileActivity extends Activity{
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		this.maleOrFemale.setAdapter(adapter);
+	}
+	
+	public void saveUserProfile(View v){
+		finish();
 	}
 }

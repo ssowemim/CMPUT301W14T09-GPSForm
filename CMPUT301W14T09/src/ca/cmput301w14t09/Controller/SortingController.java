@@ -41,8 +41,6 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  */
 
 public class SortingController {
-
-
 	/**
 	 * 
 	 * Sorting Comments which have pictures attached to them

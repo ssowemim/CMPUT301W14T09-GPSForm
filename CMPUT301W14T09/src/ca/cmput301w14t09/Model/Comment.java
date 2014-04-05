@@ -56,6 +56,7 @@ public class Comment implements Comparable<Comment>, Serializable {
 	private String threadId;
 	private Boolean hasPicture;
 	private String userName;
+	private String uuid; 
 
 	public Comment() {
 		super();
@@ -277,5 +278,25 @@ public class Comment implements Comparable<Comment>, Serializable {
     {
     
         this.userName = userName;
+    }
+
+    
+    /**
+     * @return the uuid
+     */
+    public String getUuid()
+    {
+    
+        return uuid;
+    }
+
+    
+    /**
+     * @param uuid the uuid to set
+     */
+    public void setUuid(String uuid)
+    {
+    
+        this.uuid = uuid;
     }
 }

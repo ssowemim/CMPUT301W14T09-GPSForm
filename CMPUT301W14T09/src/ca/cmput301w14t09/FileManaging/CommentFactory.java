@@ -19,8 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09.FileManaging;
 
 import java.util.Date;
-
-import android.graphics.Bitmap;
+import java.util.UUID;
 
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Model.Comment;
@@ -63,6 +62,7 @@ public class CommentFactory {
 	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
 	                comment.setThreadId(threadId);
 	                comment.setUserName(userName);
+	                comment.setUuid(UUID.randomUUID().toString());
 	                return comment;
 	}
 	
@@ -78,6 +78,7 @@ public class CommentFactory {
             comment.setTopComment(topComment);
             comment.setPostDate(new Date());
             comment.setHasPicture(hasPicture);
+            comment.setUuid(UUID.randomUUID().toString());
             return comment;
 	}
 	

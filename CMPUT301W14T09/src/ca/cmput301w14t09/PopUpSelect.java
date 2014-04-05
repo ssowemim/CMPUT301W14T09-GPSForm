@@ -16,7 +16,7 @@ import ca.cmput301w14t09.Model.User;
 public class PopUpSelect extends PopUp{
 
     PopUpReply popUpReply;
-    PopUpEdit popUpEdit;
+    PopUpEdit pop_up_edit;
 
     public PopUpSelect(Activity caller) {
         super(caller);
@@ -27,6 +27,7 @@ public class PopUpSelect extends PopUp{
     public void popUpSelect(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName, final Comment comment) {
         final Dialog dialog = new Dialog(caller);
         popUpReply = new PopUpReply(caller);
+        pop_up_edit = new PopUpEdit(caller);
 
         dialog.setContentView(R.layout.pop_up_select);
         dialog.setTitle("Options");
@@ -44,7 +45,8 @@ public class PopUpSelect extends PopUp{
             {
 
                 if(user.getUserName().equals("Guest")) {
-
+                    Toast.makeText(caller.getApplicationContext(),
+                            "Guest Can Not Save Favourites", Toast.LENGTH_LONG).show(); 
                 } else {
                     user.profile.add(comment);
                     FileSaving.saveUserFile(user, caller);
@@ -60,9 +62,10 @@ public class PopUpSelect extends PopUp{
             {
                 if(user.getUserName().equals(comment.getUserName())) {
                     dialog.dismiss();
-                    popUpEdit.popUpEdit(comment);
+                    pop_up_edit.popUpEdit(comment);
                 } else {
-                    
+                    Toast.makeText(caller.getApplicationContext(),
+                            "You are not the original Author", Toast.LENGTH_LONG).show();   
                 }
 
             }

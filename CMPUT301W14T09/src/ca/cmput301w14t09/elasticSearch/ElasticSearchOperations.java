@@ -56,9 +56,9 @@ public class ElasticSearchOperations extends Server{
     private static String serverName = "ElasticSearch";
 
 
-    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test125/";
-    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/test125/_search?pretty=1&size=100";
-    private static String updateAddress = "http://cmput301.softwareprocess.es:8080/testing/lab02/1/_update";
+    private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/";
+    private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/_search?pretty=1&size=100";
+    private static String updateAddress = "http://cmput301.softwareprocess.es:8080/cmputing301w14t09/real01/";
 
 
 
@@ -92,7 +92,7 @@ public class ElasticSearchOperations extends Server{
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                HttpPost request = new HttpPost(postAddress);
+                HttpPost request = new HttpPost(postAddress + commentThread.getUuid() + "/");
 
                 try { 
                     //  String jsonString = gson.toJson(commentThread);
@@ -252,7 +252,7 @@ public class ElasticSearchOperations extends Server{
      * updateComment updates the text field of a comment
      * @throws InterruptedException 
      */
-    public void updateComment(final String str) throws ClientProtocolException, IOException, InterruptedException {
+    public static void updateComment(final Comment comment, final String str) throws ClientProtocolException, IOException, InterruptedException {
 
         final CountDownLatch latch = new CountDownLatch(1);
 
@@ -261,7 +261,7 @@ public class ElasticSearchOperations extends Server{
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                HttpPost updateRequest = new HttpPost(updateAddress);
+                HttpPost updateRequest = new HttpPost(updateAddress + comment.getUuid() + "/_update/");
                 String query = "{\"script\" : \"ctx._source." + str + "}";
                 StringEntity stringentity;
                 try

@@ -44,12 +44,6 @@
     		android:text="Search" />
     </LinearLayout>
 
-    <Button
-    	android:id="@+id/okbutton"
-    	android:layout_width="150dp"
-    	android:layout_height="100dp"
-    	android:layout_alignParentBottom="true"
-    	android:layout_alignParentRight="true"
-    	android:text="OK" />
+    
   
 </RelativeLayout>

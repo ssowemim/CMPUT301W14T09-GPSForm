@@ -218,7 +218,9 @@ public class TopCommentsActivity extends ListActivity {
 
             case R.id.sortPicture:
                 SortingController sorting1 = new SortingController();
-                ArrayList<Comment> commentList = sorting1.sortPictures(null);
+			ArrayList<Comment> commentList = null;
+			commentList = user.profile.cache.getTopComments(true);
+                commentList = sorting1.sortPicTopComments(commentList);
                 adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
                 aCommentList.setAdapter(adapter1);
                 adapter1.notifyDataSetChanged();

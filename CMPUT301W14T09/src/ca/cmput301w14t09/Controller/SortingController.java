@@ -27,6 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import ca.cmput301w14t09.R;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
@@ -50,7 +51,7 @@ public class SortingController {
 	 * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/PictureBranch/CMPUT301W14T09/src/ca/cmput301w14t09/TopCommentsActivity.java
 	 *
 	 */
-	public ArrayList<Comment> sortPictures(String comment){
+/**	public ArrayList<Comment> sortPictures(String comment){
 		ArrayList<Comment> commentList = null;
 		if (comment == null){
 			commentList = sortPicTopComments();
@@ -58,7 +59,7 @@ public class SortingController {
 			commentList = sortPicReplies(comment);
 		}
 		return commentList;
-	}
+	} **/
 	
 	/**
 	 * 
@@ -67,16 +68,18 @@ public class SortingController {
 	 * @return
 	 * 
 	 */
-	private ArrayList<Comment> sortPicTopComments(){
-
-		ArrayList<Comment> commentList = null;
-		try {
-			commentList = ElasticSearchOperations.pullThreads();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		commentList = compareAttachment(commentList);
+	public ArrayList<Comment> sortPicTopComments(ArrayList<Comment> commentList){
+		
+		Collections.sort(commentList, new Comparator<Comment>() {
+			public int compare(Comment o1, Comment o2) {
+				if (o1.getHasPicture() == null || o2.getHasPicture() == null)
+					return 0;
+				return o1.getHasPicture().compareTo(o2.getHasPicture());
+			}
+		});
+		Collections.reverse(commentList);
 		return commentList;
+		
 	}
 
 	/**

@@ -18,32 +18,28 @@
   />
 
     <LinearLayout
-    	android:layout_width="fill_parent"
-    	android:layout_height="fill_parent"
-    	android:layout_alignBottom="@+id/okbutton"
-    	android:layout_alignRight="@+id/okbutton"
-    	android:layout_weight="2"
-    	android:orientation="horizontal" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_weight="2"
+        android:orientation="horizontal" >
 
-    	<EditText
-    		android:id="@+id/mq_geocode_input"
-    		android:layout_width="183dp"
-    		android:layout_height="wrap_content"
-    		android:ems="10"
-    		android:inputType="textPostalAddress"
-    		android:maxLines="1"
-    		android:text="Enter your Search" >
+        <EditText
+            android:id="@+id/mq_geocode_input"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPostalAddress"
+            android:maxLines="1"
+            android:text="Enter your Search" />
 
-    		<requestFocus />
-    	</EditText>
-
-    	<Button
-    		android:id="@+id/mq_geocode_btn"
-    		android:layout_width="100dp"
-    		android:layout_height="75dp"
-    		android:text="Search" />
+        <Button
+            android:id="@+id/mq_geocode_btn"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
+            android:text="Search" />
+         
     </LinearLayout>
-
-    
   
 </RelativeLayout>

@@ -1,3 +1,20 @@
+/**
+
+License GPLv3: GNU GPL Version 3
+<http://gnu.org/licenses/gpl.html>.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package ca.cmput301w14t09;
 
 import android.app.Activity;
@@ -22,8 +39,17 @@ public class PopUpSelect extends PopUp{
         super(caller);
     }
 
-
-
+    /**
+     * Creates a popup window with the given input parameters.
+     * @param caller - calling activity
+     * @param fileUri - fileUri for file access
+     * @param lc1 - location controller for comment
+     * @param selectedgeo - selected location for comment
+     * @param user - user making comment
+     * @param firstComment - first comment in thread.
+     * @param windowName - name to display for this window.
+     * @param comment - the comment being edited.
+     */
     public void popUpSelect(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName, final Comment comment) {
         final Dialog dialog = new Dialog(caller);
         popUpReply = new PopUpReply(caller);
@@ -39,7 +65,6 @@ public class PopUpSelect extends PopUp{
         dialog.show();
 
         Favourite.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v)
             {
@@ -74,15 +99,11 @@ public class PopUpSelect extends PopUp{
         Reply.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onClick(View v)
-            {
-
+            public void onClick(View v) {
                 dialog.dismiss();
                 popUpReply.popUp(caller, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
-
             }
         });
-
 
     }
 }

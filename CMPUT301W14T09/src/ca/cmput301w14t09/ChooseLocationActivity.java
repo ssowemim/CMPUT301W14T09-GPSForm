@@ -1,3 +1,22 @@
+/**
+
+License GPLv3: GNU GPL Version 3
+<http://gnu.org/licenses/gpl.html>.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+
 package ca.cmput301w14t09;
 
 import java.util.List;
@@ -29,9 +48,16 @@ import com.mapquest.android.maps.MyLocationOverlay;
 import com.mapquest.android.maps.Overlay;
 import com.mapquest.android.maps.OverlayItem;
 
+/**
+ *  This class is responsible for creating the MapQuest activity , it allows the user to search for cities, click on the map
+ *  to set location and retrieve address info.
+ *  All of this code was found at 
+ *  http://developer.mapquest.com/web/products/featured/android-maps-api/documentation
+ *  I downloaded the Android Maps API & Samples which included the library I used and all the bits for this class
+ *  geolocation that will be returned upon leaving activity
+ *  @author Cameron Alexander
+ */
 
-//http://developer.mapquest.com/web/products/featured/android-maps-api/documentation
-//downloaded Android Maps API & Samples which included the library I used and all the bits and peices for this class
 public class ChooseLocationActivity extends MapActivity {
     protected MapView map;
     private MyLocationOverlay myLocationOverlay;
@@ -41,43 +67,57 @@ public class ChooseLocationActivity extends MapActivity {
     Geocoder code = null;
     GeocodeTask geocodeTask;
     ReverseGeocodeTask reverseGeocodeTask;
+    
+    
     GeoLocation geo = new GeoLocation();
     
     
-
+    /**
+     * OnCreate method code found from
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.location_layout);
+      
+    
       setupMapView();
       setupMyLocation();
       
-      // initialize the annotation to be shown later 
-      
+      //used for reverse geocoding
       annotation = new AnnotationView(map);
       code = new Geocoder(getApplicationContext());
       int id = getLayoutId();
       
       
-      //setup 
+      //setup views and overlay
       setupViews();
       setupOverlays();
-      //addPoiOverlay();
       
-      
+      //toast to tell user to click on map
+      //http://developer.android.com/guide/topics/ui/notifiers/toasts.html
       Toast.makeText(getApplicationContext(),"Click on map to Set your location.", Toast.LENGTH_LONG).show();
     
       
     }
 
-    // set your map and enable default zoom controls 
+    
+    /**
+     *set your map and enable default zoom controls 
+     *http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     protected void setupMapView() {
       this.map = (MapView) findViewById(R.id.map);
       map.setBuiltInZoomControls(true);
    		
     }
 
-    // set up a MyLocationOverlay and execute the runnable once we have a location fix 
+    
+    /**
+     * set up a MyLocationOverlay and execute the runnable once we have a location fix 
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     private void setupMyLocation() {
       this.myLocationOverlay = new MyLocationOverlay(this, map);
       myLocationOverlay.enableMyLocation();
@@ -95,8 +135,10 @@ public class ChooseLocationActivity extends MapActivity {
     }
     
   
-    
- // add an itemized overlay to map 
+    /**
+     * add an itemized overlay to map 
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     private void addPoiOverlay() {
 
       // use a custom POI marker by referencing the bitmap file directly,
@@ -126,7 +168,11 @@ public class ChooseLocationActivity extends MapActivity {
     }    
   
 
-    // enable features of the overlay 
+    
+    /**
+     * enable features of the overlay 
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     @Override
     protected void onResume() {
       myLocationOverlay.enableMyLocation();
@@ -134,7 +180,11 @@ public class ChooseLocationActivity extends MapActivity {
       super.onResume();
     }
 
-    // disable features of the overlay when in the background 
+   
+    /**
+     * disable features of the overlay when in the background 
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     @Override
     protected void onPause() {
       super.onPause();
@@ -142,6 +192,10 @@ public class ChooseLocationActivity extends MapActivity {
       myLocationOverlay.disableMyLocation();
     }
 
+    /**
+     * check is route is displayed
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     */
     @Override
     public boolean isRouteDisplayed() {
       return false;
@@ -149,7 +203,7 @@ public class ChooseLocationActivity extends MapActivity {
     
     /**
 	 * Get the id of the layout file.
-	 * @return
+	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
 	 */
 	protected int getLayoutId() {
 	    return R.layout.location_layout;
@@ -157,6 +211,7 @@ public class ChooseLocationActivity extends MapActivity {
 	
 	 /**
      * Sets up view and hooks up event handlers.
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     private void setupViews() {
         Button button = (Button) findViewById(R.id.mq_geocode_btn);
@@ -192,6 +247,7 @@ public class ChooseLocationActivity extends MapActivity {
     
     /**
      * Geocode background task
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     @SuppressLint("NewApi")
 	private class GeocodeTask extends AsyncTask<String, Void, List<Address>> {
@@ -204,8 +260,12 @@ public class ChooseLocationActivity extends MapActivity {
 
         }
 
+        /**
+         * Returns geocode
+         * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+         * @return
+         */
         private Geocoder getGeocoder() {
-			// TODO Auto-generated method stub
 			return code;
 		}
 
@@ -222,6 +282,7 @@ public class ChooseLocationActivity extends MapActivity {
     
     /**
      * ReversesGeocode background task
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     @SuppressLint("NewApi")
 	private class ReverseGeocodeTask extends AsyncTask<GeoPoint, Void, List<Address>> {
@@ -240,7 +301,11 @@ public class ChooseLocationActivity extends MapActivity {
             }
 
         }
-
+        
+        /**
+         * Used in searching for a adress when mapped clicked
+         * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+         */
         protected void onPostExecute(List<Address> result) {
             if (result == null || result.size() == 0) {
                 Toast.makeText(getApplicationContext(), "No match found!", Toast.LENGTH_SHORT).show();
@@ -257,12 +322,18 @@ public class ChooseLocationActivity extends MapActivity {
         }
     }
 
+    /**
+     * returns geocoder
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
+     * @return
+     */
 	public Geocoder getGeocoder() {
 		return code;
 	}
 	
-	  /**
+	/**
      * Add an overlay to reverse geocode on touch event.
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     private void setupOverlays() {
         map.getOverlays().add(new ReverseGeocodeOverlay());
@@ -270,6 +341,7 @@ public class ChooseLocationActivity extends MapActivity {
     
     /**
      * Execute the geocode task for location input
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     private void geocode() {
         if (geocodeTask == null) {
@@ -281,10 +353,10 @@ public class ChooseLocationActivity extends MapActivity {
             }
         }
     }
-
+    
     /**
      * An overlay class to handle the reverse geocoding on touch. 
-     *
+     * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
      */
     private class ReverseGeocodeOverlay extends Overlay {
 
@@ -299,7 +371,11 @@ public class ChooseLocationActivity extends MapActivity {
 
     }
     
-    //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+    /**
+     * On back pressed pack up the geolocation that was selected and send back to parent activity to be processed
+     * http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
+     */
+   
     public void onBackPressed()
     {
         // Update _workorder object

@@ -37,13 +37,6 @@ public class PopUpReply extends PopUpComment {
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
 
-        //new Location Controller 
-        //final LocationController lc = new LocationController();
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        //LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
         authorText.setText(user.getProfile().getAuthorName());
         Button save=(Button)dialog.findViewById(R.id.save);
         Button btnCancel=(Button)dialog.findViewById(R.id.cancel);
@@ -99,6 +92,13 @@ public class PopUpReply extends PopUpComment {
                 String text2 = authorText.getText().toString();
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, caller);
+                
+                //selected location
+                GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
+                final GeoLocation geodefault = lc1.getGeodefault();
+                
+                Toast.makeText(caller,"Selected reply geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(caller,"reply default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
 
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 Boolean hasPicture = pictureController.getHasPicture();
@@ -109,7 +109,11 @@ public class PopUpReply extends PopUpComment {
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture, user.getUserName());
                 hasPicture = false;
-                //reset selected location for comments
+               
+                //reset selectedgeo after save made
+                lc1.resetselectedlocation(selectedgeo);
+                topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
                 try {
                     ElasticSearchOperations.postThread(comment);
@@ -117,9 +121,6 @@ public class PopUpReply extends PopUpComment {
                     e.printStackTrace();
                 }
 
-                lc1.resetselectedlocation(selectedgeo);
-                System.out.println("Reset selected location back to default" +
-                        ":"+selectedgeo.getLatitude());
                 
                 dialog.dismiss();
             }

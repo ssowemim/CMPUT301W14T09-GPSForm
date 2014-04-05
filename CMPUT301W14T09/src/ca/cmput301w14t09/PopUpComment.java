@@ -129,8 +129,6 @@ public class PopUpComment extends PopUp {
                 Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
                 Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
                
-                
-                selectedgeo = topCommentActivity.getSelectedGeolocation();
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 hasPicture = pictureController.getHasPicture();
                 //check locations to see which one to use
@@ -139,8 +137,10 @@ public class PopUpComment extends PopUp {
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture, user.getUserName());
                 
-                
                 //reset selected location for comments
+                lc1.resetselectedlocation(selectedgeo);
+                topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
                 try {
                     ElasticSearchOperations.postThread(comment);
@@ -148,10 +148,7 @@ public class PopUpComment extends PopUp {
                     e.printStackTrace();
                 }
 
-                //reset selectedgeo after save made
-                lc1.resetselectedlocation(selectedgeo);
-                topCommentActivity.resetSelectedLocation();
-                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+              
                 
                 hasPicture = false;
                 picture = null;

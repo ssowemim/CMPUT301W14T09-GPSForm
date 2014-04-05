@@ -212,7 +212,7 @@ public class TopCommentsActivity extends ListActivity {
 	
 				ArrayList<Comment> commentList = null;
 				commentList = user.profile.cache.getTopComments(true);
-				commentList = sorting1.sortPictures(null);
+				//commentList = sorting1.sortPictures(null);
 				adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
 				aCommentList.setAdapter(adapter1);
 				adapter1.notifyDataSetChanged();				
@@ -262,13 +262,13 @@ public class TopCommentsActivity extends ListActivity {
 
 			// FIXME: On drugs.
 		case PICTURE:
-			SortingController sorting1 = new SortingController();
+/**			SortingController sorting1 = new SortingController();
 			filter = Filter.PICTURE;
 
 			ArrayList<Comment> commentList = sorting1.sortPictures(null);
 			adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
 			aCommentList.setAdapter(adapter1);
-			adapter1.notifyDataSetChanged();
+			adapter1.notifyDataSetChanged(); **/
 			break;
 
 		default:

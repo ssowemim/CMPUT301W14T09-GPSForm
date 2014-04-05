@@ -392,8 +392,6 @@ public class TopCommentsActivity extends ListActivity {
             user = (User) data.getSerializableExtra("CURRENT_USER");
         }
 
-
-
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
             ArrayList<Comment> topComments = null;
 

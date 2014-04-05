@@ -64,12 +64,7 @@ public class PopUpComment extends PopUp {
         commentText=(EditText)dialog.findViewById(R.id.commentText);
 
 
-        //new Location Controller 
-        //final LocationController lc = new LocationController();
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        //LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        
 
         authorText.setText(user.getProfile().getAuthorName());
         Button save=(Button)dialog.findViewById(R.id.save);
@@ -128,14 +123,14 @@ public class PopUpComment extends PopUp {
                 FileSaving.saveUserFile(user, caller);
                 
                 //selected location
-                final GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
+                GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
                 final GeoLocation geodefault = lc1.getGeodefault();
                 
-           //     Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
-            //    Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
                
                 
-               // selectedgeo = topCommentActivity.getSelectedGeolocation();
+                selectedgeo = topCommentActivity.getSelectedGeolocation();
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 hasPicture = pictureController.getHasPicture();
                 //check locations to see which one to use
@@ -154,11 +149,13 @@ public class PopUpComment extends PopUp {
                 }
 
                 //reset selectedgeo after save made
-                //lc1.resetselectedlocation(selectedgeo);
+                lc1.resetselectedlocation(selectedgeo);
                 topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                
                 hasPicture = false;
                 picture = null;
-          //      Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+              
                
                 
                 dialog.dismiss();

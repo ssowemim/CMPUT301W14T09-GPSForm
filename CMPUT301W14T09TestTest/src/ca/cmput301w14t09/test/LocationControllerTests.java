@@ -53,6 +53,8 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 
 	/**
 	 * @author Cameron Alexander
+	 * Check dafault vs selected location, if selected location exists use it if not use default
+	 * 
 	 */
 	public void testCheckLocations(){
 

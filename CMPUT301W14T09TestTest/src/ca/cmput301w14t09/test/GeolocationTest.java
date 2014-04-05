@@ -17,6 +17,9 @@ public class GeolocationTest extends TestCase {
 
 	/**
 	 * @author Cameron Alexander
+	 * Test update of Geolocation and insert into LocationController
+	 * make a comment and set the comment location from the location controller
+	 * see if the geolocation got into the controller
 	 */
 	public void GeolocationupdateTest() {
 

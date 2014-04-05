@@ -210,10 +210,12 @@ public class TopCommentsActivity extends ListActivity {
 				SortingController sorting1 = new SortingController();
 				filter = Filter.PICTURE;
 	
-				ArrayList<Comment> commentList = sorting1.sortPictures(null);
+				ArrayList<Comment> commentList = null;
+				commentList = user.profile.cache.getTopComments(true);
+				commentList = sorting1.sortPictures(null);
 				adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
 				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();
+				adapter1.notifyDataSetChanged();				
 				break;
 	
 			case R.id.sortByDiffLocation:
@@ -249,7 +251,7 @@ public class TopCommentsActivity extends ListActivity {
 			sortByLocation();
 			break;
 
-		case R.id.sortDate:
+		case DATE:
 
 			filter = Filter.DATE;
 
@@ -259,7 +261,7 @@ public class TopCommentsActivity extends ListActivity {
 			break;
 
 			// FIXME: On drugs.
-		case R.id.sortPicture:
+		case PICTURE:
 			SortingController sorting1 = new SortingController();
 			filter = Filter.PICTURE;
 
@@ -269,18 +271,12 @@ public class TopCommentsActivity extends ListActivity {
 			adapter1.notifyDataSetChanged();
 			break;
 
-		case R.id.sortByDiffLocation:
-			filter = Filter.DIFFLOCATION;
-
-			Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
-			startActivityForResult(intentdiff, 123);
-			return true;
 		default:
 			filter = Filter.NONE;
 			//return super.onOptionsItemSelected(item);
-			sorted = false;
+			//sorted = false;
 			break;
-
+		}
 	}
 
 
@@ -401,7 +397,7 @@ public class TopCommentsActivity extends ListActivity {
 			}
 		});
 	}
-
+	
 	/**
 	 * onSaveInstanceState stores the file url as
 	 * it will be null after returning from camera app
@@ -475,22 +471,20 @@ public class TopCommentsActivity extends ListActivity {
 
 
 
-	private void customOptionsDialog(final int arg2){
+	private void customOptionsDialog(final int arg2) {
 		final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
 
 		final Dialog dialog = new Dialog(TopCommentsActivity.this);
 		dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-		// 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dialog_options);
-		//	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 		Window window = dialog.getWindow();
 		WindowManager.LayoutParams wlp = window.getAttributes();
 
-
 		window.setAttributes(wlp);
 		dialog.show();
 
+		
 		Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
 		ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
 		ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
@@ -521,13 +515,10 @@ public class TopCommentsActivity extends ListActivity {
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				Bitmap attachment = thread.getPicture().bitmap;
 
-
-
+				
 				final Dialog dialog = new Dialog(TopCommentsActivity.this);
 				dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-				// 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 				dialog.setContentView(R.layout.dialog_options);
-				//	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 				Window window = dialog.getWindow();
 				WindowManager.LayoutParams wlp = window.getAttributes();
@@ -543,7 +534,6 @@ public class TopCommentsActivity extends ListActivity {
 
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
 						Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 						commentThread(thread);
 						dialog.dismiss();
@@ -621,13 +611,12 @@ public class TopCommentsActivity extends ListActivity {
 
 	}
 
-
 	/**
 	 * Return the selectedgeo object
 	 * @author Cameron Alexander
 	 * @return
 	 */
-	public GeoLocation getSelectedGeolocation(){
+	public GeoLocation getSelectedGeolocation() {
 		return selectedgeo;
 	}
 
@@ -635,15 +624,13 @@ public class TopCommentsActivity extends ListActivity {
 	 * Reset selected geolocation object
 	 * @author Cameron Alexander
 	 */
-	public void resetSelectedLocation(){
+	public void resetSelectedLocation() {
 		double latitude = 0.0;
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
 
 	}
-
-
 }
 
 

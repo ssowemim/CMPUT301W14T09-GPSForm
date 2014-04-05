@@ -70,14 +70,14 @@ public class LocationController {
             }
         }
     
-    public void checklocations(GeoLocation selectedgeo){
+    public void checklocations(GeoLocation selectedgeo, Context context){
     	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
     		geo = selectedgeo;
-    	//	 System.out.println("used selected geo"+geo.getLatitude());
+    		Toast.makeText(context,"Set geo to selected geo  "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show(); 
     	}
     	else{
     		geo = geodefault;
-    	//	 System.out.println("used default geo"+geo.getLatitude());
+    	
     	}
     	
     }

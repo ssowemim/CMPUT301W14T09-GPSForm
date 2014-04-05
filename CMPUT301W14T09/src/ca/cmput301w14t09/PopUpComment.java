@@ -138,9 +138,8 @@ public class PopUpComment extends PopUp {
                 comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture, user.getUserName());
                 
                 //reset selected location for comments
-                lc1.resetselectedlocation(selectedgeo);
                 topCommentActivity.resetSelectedLocation();
-                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                
 
                 try {
                     ElasticSearchOperations.postThread(comment);

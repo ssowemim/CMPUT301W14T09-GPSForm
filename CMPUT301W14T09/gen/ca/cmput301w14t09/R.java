@@ -88,7 +88,7 @@ public final class R {
         public static final int replyComment=0x7f080000;
         public static final int replyImagePreview=0x7f080016;
         public static final int save=0x7f080023;
-        public static final int sortByDiffLocation=0x7f080038;
+        public static final int sortByDiffLocation=0x7f080039;
         public static final int sortDate=0x7f080035;
         public static final int sortLocation=0x7f080034;
         public static final int sortPicture=0x7f080036;
@@ -98,6 +98,7 @@ public final class R {
         public static final int textViewUsername=0x7f080008;
         public static final int toptext=0x7f08002f;
         public static final int toptextdata=0x7f080030;
+        public static final int userProfile=0x7f080038;
     }
     public static final class layout {
         public static final int activity_comment_list=0x7f030000;

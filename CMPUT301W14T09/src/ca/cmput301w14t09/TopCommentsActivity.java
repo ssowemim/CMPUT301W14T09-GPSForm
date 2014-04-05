@@ -121,60 +121,19 @@ public class TopCommentsActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_comments);
         context = getApplicationContext();
-        //topActivity = this;
-        //	attachment = false;
 
         aCommentList = (ListView) findViewById(android.R.id.list);
 
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-              //  Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
-
-
                 customOptionsDialog(arg2);
             }
-
-            // Pass in comment object
-            //     commentThread(thread);
-            //  }
-
         });
         
         //mapstuff
         setupMapView();
         setupMyLocation();
-        // setupViews();
-        // setupOverlays();
 
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-       // LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        // Retrieve location updates through LocationListener interface
-        //https://github.com/baoliangwang/CurrentLocation
-        /*
-        LocationListener locationListener = new LocationListener() {
-            public void onProviderDisabled (String provider) {
-            }
-
-            public void onProviderEnabled (String provider) {
-            }
-
-            public void onStatusChanged (String provider, int status, Bundle extras) {
-            }
-
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location, getApplicationContext());
-            }
-        };
-
-        //request location update
-        //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-        
-        */
 
         // Handler polling
         updateHandler = new Handler();
@@ -224,22 +183,28 @@ public class TopCommentsActivity extends ListActivity {
         ArrayList<Comment> topComments = null;
 
         switch (item.getItemId()){
-            case R.id.sortLocation:     
-                SortingController sorting = new SortingController();
+        case R.id.userProfile:
+        	Intent intent = new Intent(this, UserProfileActivity.class);
+        	intent.putExtra("CURRENT_USER", user);   
+        	startActivity(intent);
+        	return true;
+        	
+        case R.id.sortLocation:     
+        	SortingController sorting = new SortingController();
 
-                try {
-                    topComments = ElasticSearchOperations.pullThreads();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                setupMyLocation();
-                ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
-                return true;
+        	try {
+        		topComments = ElasticSearchOperations.pullThreads();
+        	} catch (InterruptedException e) {
+        		e.printStackTrace();
+        	}
+        	setupMyLocation();
+        	ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
+        	adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
+        	aCommentList.setAdapter(adapter1);
+        	adapter1.notifyDataSetChanged();
+        	return true;
 
-            case R.id.sortDate:
+        case R.id.sortDate:
 
                 try {
                     topComments = ElasticSearchOperations.pullThreads();
@@ -457,7 +422,7 @@ public class TopCommentsActivity extends ListActivity {
     	Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
     	
     	final Dialog dialog = new Dialog(TopCommentsActivity.this);
-    	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Comment Options");
+    	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
    // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     	dialog.setContentView(R.layout.dialog_options);
     //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

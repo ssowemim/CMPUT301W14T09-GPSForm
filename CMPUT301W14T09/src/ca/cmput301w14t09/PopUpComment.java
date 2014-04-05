@@ -132,22 +132,23 @@ public class PopUpComment extends PopUp {
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 hasPicture = pictureController.getHasPicture();
                 //check locations to see which one to use
-                lc1.checklocations(selectedgeo);
+                lc1.checklocations(selectedgeo, caller);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture, user.getUserName());
                 
-                //reset selected location for comments
-                topCommentActivity.resetSelectedLocation();
                 
-
                 try {
                     ElasticSearchOperations.postThread(comment);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-              
+                //reset selected location for comments
+                topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+
+                
                 
                 hasPicture = false;
                 picture = null;

@@ -100,7 +100,7 @@ public class PopUpReply extends PopUpComment {
                 Boolean hasPicture = pictureController.getHasPicture();
 
                 //check locations to see which one to use
-                lc1.checklocations(selectedgeo);
+                lc1.checklocations(selectedgeo, caller);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture, user.getUserName());

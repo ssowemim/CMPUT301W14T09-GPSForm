@@ -1,12 +1,7 @@
 package ca.cmput301w14t09.Controller;
 
 
-import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-import ca.cmput301w14t09.R;
-import ca.cmput301w14t09.UserProfileActivity;
 import ca.cmput301w14t09.Model.UserProfileModelList;
 
 public class UserProfileController{
@@ -45,9 +40,5 @@ public class UserProfileController{
 			phone = phone.substring(0, MAX_PHONE_LENGTH);
 		
 		model.addUserProfile(uniqueID, fLName, sex, phone, email, bio, pic);
-	}
-	
-	public void clearModel() {
-		this.model.clear();
 	}
 }

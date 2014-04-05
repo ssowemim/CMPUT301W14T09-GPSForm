@@ -28,7 +28,7 @@ public class UserProfileModel {
 		this.uniqueID = uniqueID;
 	}
 	
-	public String uniqueID(){
+	public String getUniqueID(){
 		return uniqueID;
 	}
 	

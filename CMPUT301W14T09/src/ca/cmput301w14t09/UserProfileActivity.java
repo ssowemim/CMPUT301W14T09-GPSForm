@@ -5,15 +5,15 @@ import java.util.List;
 
 import ca.cmput301w14t09.Controller.UserProfileController;
 import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.Model.UserProfileModel;
 import ca.cmput301w14t09.Model.UserProfileModelList;
+import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Picture;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -39,6 +39,7 @@ public class UserProfileActivity extends Activity{
 	private Bitmap currentPicture = null;
 	
 	User user;
+	ArrayList<UserProfileModel> userProfile = null;
 	UserProfileModelList uPModelList;
 	UserProfileController uPController;
 	
@@ -70,13 +71,42 @@ public class UserProfileActivity extends Activity{
 		Intent intent = getIntent();
 		user = (User)intent.getSerializableExtra("CURRENT_USER");
 		
-		usernameText.setText("@/"+user.getUserName().toString() + user.getUniqueID());
+		usernameText.setText("@/"+user.getUserName().toString());
+		userToProfile();
 		return true;
 	}
 	
 	public void retrievePicture(View v){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
+	}
+	
+	public void userToProfile(){
+		int size, lastItem;
+		try {
+			userProfile = ElasticSearchOperations.pullUserProfile(user.getUniqueID());
+			
+			if(!userProfile.isEmpty()){
+				size = userProfile.size();
+				lastItem = size-1;
+				
+				this.currentPicture = userProfile.get(lastItem).getPicture();
+				this.userProfilePicture.setImageBitmap(this.currentPicture);
+				this.firstLastName.setText(userProfile.get(lastItem).getFirstLastName().toString());
+				if(userProfile.get(lastItem).getSex().equalsIgnoreCase("male"))
+					this.maleOrFemale.setSelection(0);
+				else
+					this.maleOrFemale.setSelection(1);
+				
+				this.phoneText.setText(userProfile.get(lastItem).getPhone().toString());
+				this.emailText.setText(userProfile.get(lastItem).getEmail().toString());
+				this.biographyText.setText(userProfile.get(lastItem).getBiography().toString());
+			}
+			
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

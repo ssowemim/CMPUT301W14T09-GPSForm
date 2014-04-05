@@ -168,7 +168,7 @@ public class CommentListActivity extends ListActivity {
 
         // Handler polling
         updateHandler = new Handler();
-      /**  updateFunction = new Runnable() {
+        updateFunction = new Runnable() {
             @Override
             public void run() {
                 populateListView();
@@ -187,9 +187,7 @@ public class CommentListActivity extends ListActivity {
                 }
             }
         };
-
-        update.start(); **/
-        populateListView();
+        update.start();
     }
 
     @Override

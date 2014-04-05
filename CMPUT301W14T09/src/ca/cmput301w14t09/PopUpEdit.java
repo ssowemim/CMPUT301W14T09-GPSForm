@@ -36,11 +36,12 @@ public class PopUpEdit extends PopUp {
             @Override
             public void onClick(View v)
             {
-                String str = "commentText = \\\"chop and fry\\\"\"";
+                String str = "commentText = \\\"" + commentText.getText() + "\\\"\"";
 
                 if(Server.getInstance().isServerReachable(caller)) {
                     try {
                         ElasticSearchOperations.updateComment(comment, str);
+                        
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();

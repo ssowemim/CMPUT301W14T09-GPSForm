@@ -56,18 +56,11 @@ import com.google.gson.reflect.TypeToken;
 public class ElasticSearchOperations extends Server{
 
     private static String serverName = "ElasticSearch";
-
-
-
     private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/";
     private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/_search?pretty=1&size=100";
-    private static String updateAddress = "http://cmput301.softwareprocess.es:8080/cmputing301w14t09/real01/";
+    private static String updateAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/";
 
-
-    
     private static String profileAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/testUser003/";
-
-
 
     private static Gson GSON = null;
     static Comment comment;
@@ -102,9 +95,6 @@ public class ElasticSearchOperations extends Server{
                 HttpPost request = new HttpPost(postAddress + commentThread.getUuid() + "/");
 
                 try { 
-                    //  String jsonString = gson.toJson(commentThread);
-                    //   System.out.println("JSON String:" +jsonString);
-
                     request.setEntity(new StringEntity(GSON.toJson(commentThread)));
 
                     HttpResponse response = client.execute(request);
@@ -154,7 +144,6 @@ public class ElasticSearchOperations extends Server{
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                //   Gson gson = new Gson();
 
                 try {
                     HttpPost searchRequest = new HttpPost(searchAddress);
@@ -179,7 +168,6 @@ public class ElasticSearchOperations extends Server{
                     Collections.reverse(commentList);
 
                     latch.countDown();
-                    //searchRequest.releaseConnection();	
 
                 } catch(Exception e){
                     e.printStackTrace();
@@ -191,7 +179,6 @@ public class ElasticSearchOperations extends Server{
         latch.await();
 
         return commentList;
-        //  return (ArrayList<Comment>) Collections.unmodifiableList(commentList);
     }
 
     /**
@@ -213,7 +200,6 @@ public class ElasticSearchOperations extends Server{
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
-                //   Gson gson = new Gson();
 
                 System.out.println("I am searching for: " + threadId);
 
@@ -239,14 +225,11 @@ public class ElasticSearchOperations extends Server{
                     // Sort by latest dated element.
                     Collections.sort(commentList);
 
-
                     latch.countDown();
-                    //searchRequest.releaseConnection();   
 
                 } catch(Exception e){
                     e.printStackTrace();
                 }
-
             }
         };
         thread.start();
@@ -260,11 +243,9 @@ public class ElasticSearchOperations extends Server{
      * @throws InterruptedException 
      */
     public static void updateComment(final Comment comment, final String str) throws ClientProtocolException, IOException, InterruptedException {
-
         final CountDownLatch latch = new CountDownLatch(1);
 
         Thread thread = new Thread() {
-
             @Override
             public void run() {
                 HttpClient client = new DefaultHttpClient();
@@ -285,24 +266,18 @@ public class ElasticSearchOperations extends Server{
 
                     latch.countDown();
 
-                }  catch (UnsupportedEncodingException e)
-                {
+                }  catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
-                } catch (ClientProtocolException e)
-                {
+                } catch (ClientProtocolException e) {
                     e.printStackTrace();
-                } catch (IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
         thread.start();
         latch.await();
-
     }       
-
-
 
     /**
      * getEntityContent prints result statements to logcat
@@ -324,8 +299,8 @@ public class ElasticSearchOperations extends Server{
         return json;
     }
 
-	public static void pushUserProfile(final UserProfileModel uPModel) throws InterruptedException{
-		// TODO Auto-generated method stub
+    public static void pushUserProfile(final UserProfileModel uPModel) throws InterruptedException {
+        // TODO Auto-generated method stub
         final CountDownLatch latch = new CountDownLatch(1);
 
         if (GSON == null)
@@ -363,58 +338,57 @@ public class ElasticSearchOperations extends Server{
         };
         thread.start();
         try {
-			latch.await();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
+            latch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-	public static ArrayList<UserProfileModel> pullUserProfile(final String uniqueID) throws InterruptedException {
-		final CountDownLatch latch = new CountDownLatch(1);
-		final ArrayList<UserProfileModel> userProfileList = new ArrayList<UserProfileModel> ();
+    }
 
-		if (GSON == null)
-			constructGson();
+    public static ArrayList<UserProfileModel> pullUserProfile(final String uniqueID) throws InterruptedException {
+        final CountDownLatch latch = new CountDownLatch(1);
+        final ArrayList<UserProfileModel> userProfileList = new ArrayList<UserProfileModel> ();
 
-		Thread thread = new Thread() {
+        if (GSON == null)
+            constructGson();
 
-			@Override
-			public void run() {
-				HttpClient client = new DefaultHttpClient();
+        Thread thread = new Thread() {
 
-				try {
+            @Override
+            public void run() {
+                HttpClient client = new DefaultHttpClient();
 
-					HttpPost searchRequest = new HttpPost(profileAddress + "_search?pretty=1");
-					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"uniqueID\",\"query\" : \""+uniqueID+"\"}}}";
+                try {
 
-					StringEntity stringentity = new StringEntity(query);
-					searchRequest.setEntity(stringentity);
+                    HttpPost searchRequest = new HttpPost(profileAddress + "_search?pretty=1");
+                    String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"uniqueID\",\"query\" : \""+uniqueID+"\"}}}";
 
-					HttpResponse response = client.execute(searchRequest);
-					String json = getEntityContent(response);
+                    StringEntity stringentity = new StringEntity(query);
+                    searchRequest.setEntity(stringentity);
 
-					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<UserProfileModel>>(){}.getType();
-					ElasticSearchSearchResponse<UserProfileModel> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
+                    HttpResponse response = client.execute(searchRequest);
+                    String json = getEntityContent(response);
 
-					for (ElasticSearchResponse<UserProfileModel> r : esResponse.getHits()) {
-						UserProfileModel userProfileModel = r.getSource();
-						userProfileList.add(userProfileModel);
-					}
+                    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<UserProfileModel>>(){}.getType();
+                    ElasticSearchSearchResponse<UserProfileModel> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
 
-					latch.countDown();
+                    for (ElasticSearchResponse<UserProfileModel> r : esResponse.getHits()) {
+                        UserProfileModel userProfileModel = r.getSource();
+                        userProfileList.add(userProfileModel);
+                    }
 
-				} catch(Exception e){
-					e.printStackTrace();
-				}
+                    latch.countDown();
 
-			}
-		};
-		thread.start();
-		latch.await();
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
 
-		return userProfileList;
-	}
+            }
+        };
+        thread.start();
+        latch.await();
+
+        return userProfileList;
+    }
 
 }

@@ -129,7 +129,7 @@ public class TopCommentsActivity extends ListActivity {
                 customOptionsDialog(arg2);
             }
         });
-        
+
         //mapstuff
         setupMapView();
         setupMyLocation();
@@ -137,15 +137,15 @@ public class TopCommentsActivity extends ListActivity {
 
         // Handler polling
         updateHandler = new Handler();
-     /*   updateFunction = new Runnable() {
-        
-           // @Override
-           public void run() {
+        updateFunction = new Runnable() {
+
+            // @Override
+            public void run() {
                 populateListView();
             }
         };
 
-       Thread update = new Thread() {
+        Thread update = new Thread() {
             public void run() {
                 while(true) {
                     try {
@@ -159,7 +159,7 @@ public class TopCommentsActivity extends ListActivity {
         }; 
 
         update.start(); 
-    */ populateListView();} 
+    } 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,28 +183,28 @@ public class TopCommentsActivity extends ListActivity {
         ArrayList<Comment> topComments = null;
 
         switch (item.getItemId()){
-        case R.id.userProfile:
-        	Intent intent = new Intent(this, UserProfileActivity.class);
-        	intent.putExtra("CURRENT_USER", user);   
-        	startActivity(intent);
-        	return true;
-        	
-        case R.id.sortLocation:     
-        	SortingController sorting = new SortingController();
+            case R.id.userProfile:
+                Intent intent = new Intent(this, UserProfileActivity.class);
+                intent.putExtra("CURRENT_USER", user);   
+                startActivity(intent);
+                return true;
 
-        	try {
-        		topComments = ElasticSearchOperations.pullThreads();
-        	} catch (InterruptedException e) {
-        		e.printStackTrace();
-        	}
-        	setupMyLocation();
-        	ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
-        	adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-        	aCommentList.setAdapter(adapter1);
-        	adapter1.notifyDataSetChanged();
-        	return true;
+            case R.id.sortLocation:     
+                SortingController sorting = new SortingController();
 
-        case R.id.sortDate:
+                try {
+                    topComments = ElasticSearchOperations.pullThreads();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setupMyLocation();
+                ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
+                adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
+                aCommentList.setAdapter(adapter1);
+                adapter1.notifyDataSetChanged();
+                return true;
+
+            case R.id.sortDate:
 
                 try {
                     topComments = ElasticSearchOperations.pullThreads();
@@ -246,7 +246,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     public void popUp(View v) throws InterruptedException {
-    	setupMyLocation();
+        setupMyLocation();
         popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
     }
 
@@ -257,21 +257,29 @@ public class TopCommentsActivity extends ListActivity {
             if(Server.getInstance().isServerReachable(this)) {
                 try {
                     topComments = ElasticSearchOperations.pullThreads();
-                    user.profile.cache.add(topComments);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+            else {
+                topComments = user.profile.cache.getTopComments(true);
+            }
 
-            Collections.sort(user.profile.cache.comments);
-            Collections.reverse(user.profile.cache.comments);
-            FileSaving.saveUserFile(user, this);
-            adapter1 = new ThreadAdapter(this,
-                    R.layout.thread_view,
-                    user.profile.cache.getTopComments(true));
+            if(aCommentList.getAdapter() == null) {
+                adapter1 = new ThreadAdapter(this,
+                        R.layout.thread_view,
+                        topComments);
 
-            aCommentList.setAdapter(adapter1);
+                aCommentList.setAdapter(adapter1);
+            } 
+                                    
+            Collections.sort(topComments);
+            Collections.reverse(topComments);
+            user.profile.cache.add(topComments);
+            adapter1.addAll(topComments);
             adapter1.notifyDataSetChanged();
+            FileSaving.saveUserFile(user, this);
         }
     }
 
@@ -373,7 +381,7 @@ public class TopCommentsActivity extends ListActivity {
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
             ArrayList<Comment> topComments = null;
 
-       /**     //succesfully get updated geolocation
+            /**     //succesfully get updated geolocation
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
             System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude()); **/
@@ -387,11 +395,11 @@ public class TopCommentsActivity extends ListActivity {
             adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
             aCommentList.setAdapter(adapter1);
             adapter1.notifyDataSetChanged();
-       //     Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
+            //     Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
         }
         if (requestCode == 122 && resultCode == Activity.RESULT_OK) {
             //successfully get updated geolocation
-      /**      selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+            /**      selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
             System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
             Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show(); **/
@@ -399,7 +407,7 @@ public class TopCommentsActivity extends ListActivity {
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
-        	fileUri = popUpComment.getFleUri();
+            fileUri = popUpComment.getFleUri();
             if (resultCode == RESULT_OK) {
                 popUpComment.pictureResult(fileUri);
                 Toast.makeText(this.getApplicationContext(),
@@ -419,78 +427,78 @@ public class TopCommentsActivity extends ListActivity {
 
 
     private void customOptionsDialog(final int arg2){
-    	final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
-    	
-    	final Dialog dialog = new Dialog(TopCommentsActivity.this);
-    	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-   // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    	dialog.setContentView(R.layout.dialog_options);
-    //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-    	
-    	Window window = dialog.getWindow();
-    	WindowManager.LayoutParams wlp = window.getAttributes();
-    	
-    	window.setAttributes(wlp);
-    	dialog.show();
-    	
-    	Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
-    	ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
-    	ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
-    	
-    	dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-				commentThread(thread);
-				dialog.dismiss();
-			}
-		});
-    	
-    	dialogAttachButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
-				dialog1.setTitle("Attachment");
-				dialog1.setContentView(R.layout.dialog_attachment);
-		    	dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-				dialog1.show();
-				
-				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
-				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-				Bitmap attachment = thread.getPicture().bitmap;
+        final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
 
-				if (thread.getHasPicture()){
-					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-					imageView.setImageBitmap(attachment);
-					dialog.dismiss();
-				}
-				else
-				{
-					dialog.dismiss();
-					dialog1.dismiss();
-					Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
-				}
-			}
-    	});
-    	
-    	dialogProfileButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
-				dialog2.setTitle(comment.getAuthorName() + " | Profile");
-				dialog2.setContentView(R.layout.dialog_user_profile);
-				dialog2.show();
-				
-				
-				
-			}
-		});
+        final Dialog dialog = new Dialog(TopCommentsActivity.this);
+        dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
+        // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_options);
+        //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+
+        window.setAttributes(wlp);
+        dialog.show();
+
+        Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
+        ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
+        ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
+
+        dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+                commentThread(thread);
+                dialog.dismiss();
+            }
+        });
+
+        dialogAttachButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
+                dialog1.setTitle("Attachment");
+                dialog1.setContentView(R.layout.dialog_attachment);
+                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog1.show();
+
+                ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
+                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+                Bitmap attachment = thread.getPicture().bitmap;
+
+                if (thread.getHasPicture()){
+                    attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
+                    imageView.setImageBitmap(attachment);
+                    dialog.dismiss();
+                }
+                else
+                {
+                    dialog.dismiss();
+                    dialog1.dismiss();
+                    Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+                dialog2.setTitle(comment.getAuthorName() + " | Profile");
+                dialog2.setContentView(R.layout.dialog_user_profile);
+                dialog2.show();
+
+
+
+            }
+        });
 
 
         window.setAttributes(wlp);
@@ -498,17 +506,17 @@ public class TopCommentsActivity extends ListActivity {
 
 
     }
-    
+
     public GeoLocation getSelectedGeolocation(){
-    	return selectedgeo;
+        return selectedgeo;
     }
-    
+
     public void resetSelectedLocation(){
-    	double latitude = 0.0;
-		double longitude = 0.0;
-		selectedgeo.setLatitude(latitude);
-		selectedgeo.setLongitude(longitude);
-    	
+        double latitude = 0.0;
+        double longitude = 0.0;
+        selectedgeo.setLatitude(latitude);
+        selectedgeo.setLongitude(longitude);
+
     }
 
 }

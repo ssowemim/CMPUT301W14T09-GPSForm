@@ -18,9 +18,9 @@ public class Cache implements Serializable {
     public Cache() {
         comments = new ArrayList<Comment>(MAX_LENGTH);
     }
-    
+
     public ArrayList<Comment> getCache(){
-    	return comments;
+        return comments;
     }
 
     /**
@@ -29,24 +29,27 @@ public class Cache implements Serializable {
      */
     public void add(Comment comment) {
         if (comment == null) return;
-
+        //   comments.remove(comment);
+        //}
         if (existsInCache(comment) == false) {
+
             if (comments.size() < MAX_LENGTH) {
                 comments.add(comment);
             }
             else {
                 replaceTail(comment);
-            }
+            } 
+
         }
-    }
+    } 
 
     /**
      * Simplifies Cache by allowing us to pass in an ArrayList each element
      * of which is parsed using add(single comment).
      * @param comments
      */
-    
-    
+
+
     public void add(ArrayList<Comment> newComments) {
         if (newComments == null) return;
 
@@ -54,7 +57,7 @@ public class Cache implements Serializable {
             add(newComments.get(index));
         }
     }
-    
+
 
     /**
      * In the event comment list size is exceeded, replace tail comment with newly cached comment.
@@ -79,16 +82,25 @@ public class Cache implements Serializable {
 
         if(comments.size() > 0) {
             for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
-               // if(comment.equals(comments.get(index))) {
-                 if(comment.getPostDate().equals(comments.get(index).getPostDate()) 
-                         && comment.getCommentText().equals(comments.get(index).getCommentText())){   
+                if(comment.getUuid().equals(comments.get(index).getUuid())) {   
                     found = true;
+                    replaceComment(index, comment);
                     break;
                 }
             }
         }
 
         return found;
+    }
+    
+    /**
+     * replaces the old comment in the cache with the new comment
+     * @param index
+     * @param comment
+     */
+    private void replaceComment(int index, Comment comment) {
+        comments.remove(index);
+        comments.add(comment);
     }
 
     /**

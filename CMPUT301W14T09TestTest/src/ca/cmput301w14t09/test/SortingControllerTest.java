@@ -14,11 +14,14 @@ import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing Sorting for comments
  */
 public class SortingControllerTest extends TestCase {
 
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testSortingCommentsByLocation(){
 		Comment comment = null;
 		LocationController lc = new LocationController();
@@ -29,13 +32,13 @@ public class SortingControllerTest extends TestCase {
 		geo.setLongitude(34.0);
 		geo.setLatitude(-111.0);
 		lc.setGeo(geo);
-		comment = CommentFactory.buildComment(lc, "test1", "testing1", true, null, null);
+		comment = CommentFactory.buildComment(lc, "test1", "testing1", true, null, null, null);
 		commList.add(comment);
 		
 		geo.setLongitude(35.0);
 		geo.setLatitude(-1.0);
 		lc.setGeo(geo);
-		comment = CommentFactory.buildComment(lc, "test2", "testing2", true, null, null);
+		comment = CommentFactory.buildComment(lc, "test2", "testing2", true, null, null, null);
 		commList.add(comment);
 
 		geo.setLatitude(54.0);
@@ -46,5 +49,12 @@ public class SortingControllerTest extends TestCase {
 		String name2 = testList.get(1).getAuthorName();
 		assertTrue(name.contains("test1"));
 		assertTrue(name2.contains("test2"));
+	}
+	
+	/**
+	 * @author ssowemim
+	 */
+	public void testSortingPicture(){
+		
 	}
 }

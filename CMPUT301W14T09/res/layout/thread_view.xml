@@ -71,8 +71,8 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_alignRight="@+id/toptextdata"
-       android:layout_below="@+id/toptext"
+       android:layout_centerVertical="true"
        android:contentDescription="@string/attachment_description"
-       android:src="@drawable/attachment_pic" />
+       android:src="@drawable/icon_attachment" />
 
 </RelativeLayout>

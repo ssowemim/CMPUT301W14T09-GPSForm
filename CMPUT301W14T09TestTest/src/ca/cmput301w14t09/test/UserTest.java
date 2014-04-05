@@ -5,20 +5,14 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Test User methods functionality.
  */
 public class UserTest extends TestCase {
 
-	public UserTest(String name) {
-		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-	
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testCreateUser(){
 		User newUser = new User();
 		newUser.setDeviceId("dev1");

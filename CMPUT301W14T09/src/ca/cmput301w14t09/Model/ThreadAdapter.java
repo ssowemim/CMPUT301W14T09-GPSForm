@@ -21,8 +21,9 @@ package ca.cmput301w14t09.Model;
 import java.util.ArrayList;
 
 import ca.cmput301w14t09.R;
-
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,10 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			TextView mt = (TextView) v.findViewById(R.id.middletext);
 			TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
 			ImageView piv = (ImageView)v.findViewById(R.id.attachmentImageView);
+			Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_attachment);
+			
+			if(!i.getHasPicture())
+				bitmap = Bitmap.createScaledBitmap(bitmap, 1, 1, false);
 
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -94,7 +99,14 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			}
 
 			if(piv != null){
-			        piv.setImageBitmap(i.getPicture().bitmap);
+				if(i != null) {
+				//	if(!i.getHasPicture()){
+						//i.getPicture().bitmap
+						piv.setImageBitmap(bitmap);
+				//	}
+				}
+				
+
 			}
 		}
 

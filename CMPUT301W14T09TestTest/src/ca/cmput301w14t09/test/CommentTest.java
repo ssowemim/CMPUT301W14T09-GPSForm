@@ -5,14 +5,16 @@ import ca.cmput301w14t09.Model.Comment;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Tests to see if comments are manipulable 
  *
  */
 
 public class CommentTest extends TestCase{
 
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testAddComment() {
 		
 		Comment newComment = new Comment();
@@ -25,7 +27,9 @@ public class CommentTest extends TestCase{
 		assertTrue(newComment.getFavoriteCount() == 0);
 	}
 
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testIfTopComment() {
 		Comment newComment = new Comment();
 		newComment.setAuthorName("tester");
@@ -34,7 +38,9 @@ public class CommentTest extends TestCase{
 		assertTrue(newComment.getTopComment());
 	}
 	
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testNotTopComment(){
 		Comment newComment = new Comment();
 		newComment.setAuthorName("tester");

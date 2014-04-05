@@ -110,6 +110,7 @@ public class TopCommentsActivity extends ListActivity {
     GeoPoint currentLocation;
     int id = 0;
     Geocoder code = null;
+    Context context = null;
 
     private Handler  updateHandler;
     private Runnable updateFunction;
@@ -119,70 +120,32 @@ public class TopCommentsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_comments);
-        //topActivity = this;
-        //	attachment = false;
+        context = getApplicationContext();
 
         aCommentList = (ListView) findViewById(android.R.id.list);
 
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
-
-
                 customOptionsDialog(arg2);
             }
-
-            // Pass in comment object
-            //     commentThread(thread);
-            //  }
-
         });
-
-
-
+        
         //mapstuff
         setupMapView();
         setupMyLocation();
-        // setupViews();
-        // setupOverlays();
 
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        // Retrieve location updates through LocationListener interface
-        //https://github.com/baoliangwang/CurrentLocation
-        LocationListener locationListener = new LocationListener() {
-            public void onProviderDisabled (String provider) {
-            }
-
-            public void onProviderEnabled (String provider) {
-            }
-
-            public void onStatusChanged (String provider, int status, Bundle extras) {
-            }
-
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location, getApplicationContext());
-            }
-        };
-
-        //request location update
-        //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
 
         // Handler polling
         updateHandler = new Handler();
-        updateFunction = new Runnable() {
-            @Override
-            public void run() {
+     /*   updateFunction = new Runnable() {
+        
+           // @Override
+           public void run() {
                 populateListView();
             }
         };
 
-        Thread update = new Thread() {
+       Thread update = new Thread() {
             public void run() {
                 while(true) {
                     try {
@@ -190,13 +153,13 @@ public class TopCommentsActivity extends ListActivity {
                         sleep(3000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
-                    }
+                    } 
                 }
             }
-        };
+        }; 
 
-        update.start();
-    }
+        update.start(); 
+    */ populateListView();} 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -220,21 +183,28 @@ public class TopCommentsActivity extends ListActivity {
         ArrayList<Comment> topComments = null;
 
         switch (item.getItemId()){
-            case R.id.sortLocation:     
-                SortingController sorting = new SortingController();
+        case R.id.userProfile:
+        	Intent intent = new Intent(this, UserProfileActivity.class);
+        	intent.putExtra("CURRENT_USER", user);   
+        	startActivity(intent);
+        	return true;
+        	
+        case R.id.sortLocation:     
+        	SortingController sorting = new SortingController();
 
-                try {
-                    topComments = ElasticSearchOperations.pullThreads();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
-                adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-                aCommentList.setAdapter(adapter1);
-                adapter1.notifyDataSetChanged();
-                return true;
+        	try {
+        		topComments = ElasticSearchOperations.pullThreads();
+        	} catch (InterruptedException e) {
+        		e.printStackTrace();
+        	}
+        	setupMyLocation();
+        	ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, topComments);
+        	adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
+        	aCommentList.setAdapter(adapter1);
+        	adapter1.notifyDataSetChanged();
+        	return true;
 
-            case R.id.sortDate:
+        case R.id.sortDate:
 
                 try {
                     topComments = ElasticSearchOperations.pullThreads();
@@ -253,8 +223,6 @@ public class TopCommentsActivity extends ListActivity {
                 aCommentList.setAdapter(adapter1);
                 adapter1.notifyDataSetChanged();
                 return true;
-
-
 
             case R.id.sortByDiffLocation:
                 Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
@@ -278,6 +246,7 @@ public class TopCommentsActivity extends ListActivity {
     }
 
     public void popUp(View v) throws InterruptedException {
+    	setupMyLocation();
         popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
     }
 
@@ -361,6 +330,7 @@ public class TopCommentsActivity extends ListActivity {
             @Override
             public void run() {
                 currentLocation = myLocationOverlay.getMyLocation();
+                lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
                 map.getController().animateTo(currentLocation);
                 map.getController().setZoom(14);
                 map.getOverlays().add(myLocationOverlay);
@@ -403,10 +373,10 @@ public class TopCommentsActivity extends ListActivity {
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
             ArrayList<Comment> topComments = null;
 
-            //succesfully get updated geolocation
+       /**     //succesfully get updated geolocation
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
-            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
+            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude()); **/
             SortingController sorting2 = new SortingController();
             try {
                 topComments = ElasticSearchOperations.pullThreads();
@@ -417,20 +387,24 @@ public class TopCommentsActivity extends ListActivity {
             adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
             aCommentList.setAdapter(adapter1);
             adapter1.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
+       //     Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
         }
         if (requestCode == 122 && resultCode == Activity.RESULT_OK) {
             //successfully get updated geolocation
-            selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+      /**      selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
             System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
-            Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show(); **/
         }
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
+        	fileUri = popUpComment.getFleUri();
             if (resultCode == RESULT_OK) {
                 popUpComment.pictureResult(fileUri);
+                Toast.makeText(this.getApplicationContext(),
+                        "Picture Taken" + fileUri, Toast.LENGTH_SHORT)
+                        .show();
 
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
@@ -438,11 +412,6 @@ public class TopCommentsActivity extends ListActivity {
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
             }
-        } else {
-            // failed to capture image
-            Toast.makeText(this.getApplicationContext(),
-                    "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
-                    .show();
         }
     }
 
@@ -450,8 +419,11 @@ public class TopCommentsActivity extends ListActivity {
 
 
     private void customOptionsDialog(final int arg2){
+    	final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
+    	
     	final Dialog dialog = new Dialog(TopCommentsActivity.this);
-    	dialog.setTitle(user.profile.getUserName() + ": Comment Options");
+    	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
+   // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
     	dialog.setContentView(R.layout.dialog_options);
     //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
     	
@@ -490,8 +462,6 @@ public class TopCommentsActivity extends ListActivity {
 				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				Bitmap attachment = thread.getPicture().bitmap;
-        
-
 
 				if (thread.getHasPicture()){
 					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
@@ -502,10 +472,25 @@ public class TopCommentsActivity extends ListActivity {
 				{
 					dialog.dismiss();
 					dialog1.dismiss();
-					Toast.makeText(getApplicationContext(),"Not Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
 				}
 			}
     	});
+    	
+    	dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+				dialog2.setTitle(comment.getAuthorName() + " | Profile");
+				dialog2.setContentView(R.layout.dialog_user_profile);
+				dialog2.show();
+				
+				
+				
+			}
+		});
 
 
         window.setAttributes(wlp);

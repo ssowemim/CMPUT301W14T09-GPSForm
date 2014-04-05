@@ -6,7 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  *
  */
 public class ServerTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
@@ -18,7 +18,9 @@ public class ServerTest extends ActivityInstrumentationTestCase2<TopCommentsActi
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testGetInstance(){
 		Server server=Server.getInstance();
 		assertNotNull(server);

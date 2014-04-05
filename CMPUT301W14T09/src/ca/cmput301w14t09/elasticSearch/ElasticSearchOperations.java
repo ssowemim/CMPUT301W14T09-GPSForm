@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -37,6 +38,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.graphics.Bitmap;
 import android.util.Log;
 import ca.cmput301w14t09.Model.Comment;
+import ca.cmput301w14t09.Model.UserProfileModel;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,9 +58,14 @@ public class ElasticSearchOperations extends Server{
     private static String serverName = "ElasticSearch";
 
 
+
     private static String postAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/";
     private static String searchAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/real01/_search?pretty=1&size=100";
     private static String updateAddress = "http://cmput301.softwareprocess.es:8080/cmputing301w14t09/real01/";
+
+
+    
+    private static String profileAddress = "http://cmput301.softwareprocess.es:8080/cmput301w14t09/testUser003/";
 
 
 
@@ -276,7 +283,6 @@ public class ElasticSearchOperations extends Server{
                     String status = response.getStatusLine().toString();
                     System.out.println(status);
 
-                    //String json = getEntityContent(response);
                     latch.countDown();
 
                 }  catch (UnsupportedEncodingException e)
@@ -318,5 +324,97 @@ public class ElasticSearchOperations extends Server{
         return json;
     }
 
+	public static void pushUserProfile(final UserProfileModel uPModel) throws InterruptedException{
+		// TODO Auto-generated method stub
+        final CountDownLatch latch = new CountDownLatch(1);
+
+        if (GSON == null)
+            constructGson();
+
+        Thread thread = new Thread() {
+
+            @Override
+            public void run() {
+                HttpClient client = new DefaultHttpClient();
+                HttpPost request = new HttpPost(profileAddress+uPModel.getUniqueID()+"/");
+
+                try { 
+
+                    request.setEntity(new StringEntity(GSON.toJson(uPModel)));
+
+                    HttpResponse response = client.execute(request);
+                    Log.w(serverName, response.getStatusLine().toString());
+
+                    response.getStatusLine().toString();
+                    HttpEntity entity = response.getEntity();
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+                    String output = reader.readLine();
+                    while (output != null) {
+                        Log.w(serverName, output);
+                        output = reader.readLine();
+                    }
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                latch.countDown();
+            }
+        };
+        thread.start();
+        try {
+			latch.await();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public static ArrayList<UserProfileModel> pullUserProfile(final String uniqueID) throws InterruptedException {
+		final CountDownLatch latch = new CountDownLatch(1);
+		final ArrayList<UserProfileModel> userProfileList = new ArrayList<UserProfileModel> ();
+
+		if (GSON == null)
+			constructGson();
+
+		Thread thread = new Thread() {
+
+			@Override
+			public void run() {
+				HttpClient client = new DefaultHttpClient();
+
+				try {
+
+					HttpPost searchRequest = new HttpPost(profileAddress + "_search?pretty=1");
+					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"uniqueID\",\"query\" : \""+uniqueID+"\"}}}";
+
+					StringEntity stringentity = new StringEntity(query);
+					searchRequest.setEntity(stringentity);
+
+					HttpResponse response = client.execute(searchRequest);
+					String json = getEntityContent(response);
+
+					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<UserProfileModel>>(){}.getType();
+					ElasticSearchSearchResponse<UserProfileModel> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
+
+					for (ElasticSearchResponse<UserProfileModel> r : esResponse.getHits()) {
+						UserProfileModel userProfileModel = r.getSource();
+						userProfileList.add(userProfileModel);
+					}
+
+					latch.countDown();
+
+				} catch(Exception e){
+					e.printStackTrace();
+				}
+
+			}
+		};
+		thread.start();
+		latch.await();
+
+		return userProfileList;
+	}
 
 }

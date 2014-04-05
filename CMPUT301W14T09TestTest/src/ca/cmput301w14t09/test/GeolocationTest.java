@@ -8,9 +8,19 @@ import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
-
+/**
+ * 
+ * @author Cameron Alexander
+ *
+ */
 public class GeolocationTest extends TestCase {
 
+	/**
+	 * @author Cameron Alexander
+	 * Test update of Geolocation and insert into LocationController
+	 * make a comment and set the comment location from the location controller
+	 * see if the geolocation got into the controller
+	 */
 	public void GeolocationupdateTest() {
 
 
@@ -27,7 +37,7 @@ public class GeolocationTest extends TestCase {
 		String authorname = "";
 		String commentText = "";
 
-		Comment comment = CommentFactory.buildComment(lc, authorname, commentText, topComment, null, false);
+		Comment comment = CommentFactory.buildComment(lc, authorname, commentText, topComment, null, false, null);
 
 		comment.setGeoLocation(lc.getGeoLocation());
 
@@ -37,7 +47,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationupdatelargeinput() {
 
 
@@ -55,7 +67,7 @@ public class GeolocationTest extends TestCase {
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment1 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
+		Comment comment1 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false, null);
 
 		comment1.setGeoLocation(lc.getGeoLocation());
 
@@ -65,7 +77,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationzeroupdate() {
 
 
@@ -84,7 +98,7 @@ public class GeolocationTest extends TestCase {
 		String authorname1 = "";
 		String commentText1 = "";
 
-		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false);
+		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false, null);
 
 		comment2.setGeoLocation(lc.getGeoLocation());
 
@@ -97,6 +111,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationname() {
 
 		GeoLocation geo213 = new GeoLocation();

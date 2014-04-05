@@ -8,7 +8,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing the fileloading & filesaving methods 
  */
 public class FileLoadingSavingTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
@@ -16,14 +16,10 @@ public class FileLoadingSavingTest extends ActivityInstrumentationTestCase2<TopC
 	public FileLoadingSavingTest() {
 		super(TopCommentsActivity.class);
 	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
 	
 	/**
 	 * 
-	 * @author chunhan
+	 * @author Chun-Han Lee
 	 * Testing Saving and Loading at the same time 
 	 * 
 	 */
@@ -34,6 +30,12 @@ public class FileLoadingSavingTest extends ActivityInstrumentationTestCase2<TopC
 		assertNotNull(testList);
 	}
 	
+	/**
+	 * 
+	 * @author Chun-Han Lee
+	 * Test to return User 
+	 * 
+	 */
 	public void testReturnUser(){
 		User newuser = new User("hey");
 		FileSaving.saveUserFile(newuser, getActivity());

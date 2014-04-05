@@ -15,7 +15,7 @@ public class CacheTest extends TestCase {
 	private static final int Comment = 0;
 
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testcache(){
 			final int MAX_LENGTH = 200;
@@ -25,7 +25,7 @@ public class CacheTest extends TestCase {
 	
 	
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testadd(){
 		Cache cache = new Cache();
@@ -33,7 +33,7 @@ public class CacheTest extends TestCase {
 	    String text2 = "cameron";
 	    String text1 = "this is a comment";
 	    
-	    Comment comment = CommentFactory.buildComment(lc1, text2, text1, true, null, null);
+	    Comment comment = CommentFactory.buildComment(lc1, text2, text1, true, null, null, null);
 	    
 	    cache.add(comment);
 	    
@@ -43,7 +43,7 @@ public class CacheTest extends TestCase {
 	}
 	
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testadd2(){
 		Cache cache = new Cache();
@@ -58,7 +58,7 @@ public class CacheTest extends TestCase {
 	}
 	
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testGetTopComments(){
 		Cache cache = new Cache();
@@ -72,7 +72,7 @@ public class CacheTest extends TestCase {
 	}
 
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testGetSubComments(){
 		Cache cache = new Cache();

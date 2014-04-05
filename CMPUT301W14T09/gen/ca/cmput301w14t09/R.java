@@ -62,9 +62,9 @@ public final class R {
         public static final int commentText=0x7f080022;
         public static final int edit=0x7f08002b;
         public static final int editComment=0x7f080028;
-        public static final int editText1=0x7f08000b;
+        public static final int editText1=0x7f08000a;
         public static final int editTextBio=0x7f08000e;
-        public static final int editTextEmail=0x7f08000d;
+        public static final int editTextEmail=0x7f08000b;
         public static final int editTextFirstLastName=0x7f080009;
         public static final int editUsername=0x7f080002;
         public static final int favorite=0x7f080006;
@@ -74,7 +74,7 @@ public final class R {
         public static final int imButtonAttachment=0x7f08001a;
         public static final int imButtonProfile=0x7f080018;
         public static final int imageViewAttachment=0x7f080017;
-        public static final int imageViewUserProfile=0x7f08000c;
+        public static final int imageViewUserProfile=0x7f08000d;
         public static final int map=0x7f080007;
         public static final int middletext=0x7f080031;
         public static final int middletextdata=0x7f080032;
@@ -92,7 +92,7 @@ public final class R {
         public static final int sortDate=0x7f080035;
         public static final int sortLocation=0x7f080034;
         public static final int sortPicture=0x7f080036;
-        public static final int spinnerSex=0x7f08000a;
+        public static final int spinnerSex=0x7f08000c;
         public static final int takePicture=0x7f080026;
         public static final int textView1=0x7f08001b;
         public static final int textViewUsername=0x7f080008;
@@ -125,6 +125,7 @@ public final class R {
         public static final int favorites=0x7f070002;
         public static final int main=0x7f070003;
         public static final int top_comments=0x7f070004;
+        public static final int user_profile=0x7f070005;
     }
     public static final class string {
         public static final int Favorite=0x7f050009;

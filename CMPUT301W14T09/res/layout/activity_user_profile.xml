@@ -17,23 +17,31 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Firstname, Lastname" >
+        android:hint="Firstname, Lastname:" >
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone:"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email:"
+        android:inputType="textEmailAddress" />
 
     <Spinner
         android:id="@+id/spinnerSex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Phone number"
-        android:inputType="phone" />
 
     <ImageView
         android:id="@+id/imageViewUserProfile"
@@ -42,14 +50,6 @@
         android:layout_marginTop="12sp"
         android:layout_weight="0.36"
         android:src="@drawable/icon_user_profile" />
-
-    <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="abcd@email.com"
-        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/editTextBio"

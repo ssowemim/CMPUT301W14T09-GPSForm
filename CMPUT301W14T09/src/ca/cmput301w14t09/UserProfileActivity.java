@@ -9,8 +9,11 @@ import ca.cmput301w14t09.Model.UserProfileModelList;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -32,7 +35,8 @@ public class UserProfileActivity extends Activity{
 	protected Button saveButton;
 	protected ImageView userProfilePicture;
 	protected TextView usernameText;
-	protected Bitmap currentPicture;
+	
+	private Bitmap currentPicture = null;
 	
 	User user;
 	UserProfileModelList uPModelList;
@@ -43,18 +47,20 @@ public class UserProfileActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_profile);
 		
-		this.maleOrFemale = (Spinner)findViewById(R.id.spinnerSex);
-		this.firstLastName = (EditText)findViewById(R.id.editTextFirstLastName);
-		this.emailText= (EditText)findViewById(R.id.editTextEmail);
-		this.biographyText= (EditText)findViewById(R.id.editTextBio);
-		this.saveButton = (Button)findViewById(R.id.buttonSave);
-		this.usernameText = (TextView)findViewById(R.id.textViewUsername);
-		this.userProfilePicture = (ImageView)findViewById(R.id.imageViewUserProfile);
+		this.maleOrFemale = (Spinner)this.findViewById(R.id.spinnerSex);
+		this.firstLastName = (EditText)this.findViewById(R.id.editTextFirstLastName);
+		this.emailText= (EditText)this.findViewById(R.id.editTextEmail);
+		this.phoneText=(EditText)this.findViewById(R.id.editTextPhone);
+		this.biographyText= (EditText)this.findViewById(R.id.editTextBio);
+		this.saveButton = (Button)this.findViewById(R.id.buttonSave);
+		this.usernameText = (TextView)this.findViewById(R.id.textViewUsername);
+		this.userProfilePicture = (ImageView)this.findViewById(R.id.imageViewUserProfile);
 		
 		uPModelList = new UserProfileModelList();
-		uPController = new UserProfileController(uPModelList, this);
+		uPController = new UserProfileController(uPModelList, UserProfileActivity.this);
 		
 		maleFemaleSpinner();
+		initializeVariables();
 	}
 	
 	@Override
@@ -64,7 +70,7 @@ public class UserProfileActivity extends Activity{
 		Intent intent = getIntent();
 		user = (User)intent.getSerializableExtra("CURRENT_USER");
 		
-		usernameText.setText("@/"+user.getUserName().toString());
+		usernameText.setText("@/"+user.getUserName().toString() + user.getUniqueID());
 		return true;
 	}
 	
@@ -76,8 +82,8 @@ public class UserProfileActivity extends Activity{
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
 		if (requestCode == OBTAIN_PIC_REQUEST_CODE && resultCode == RESULT_OK){
-			currentPicture = (Bitmap)data.getExtras().get("data");
-			userProfilePicture.setImageBitmap(currentPicture);
+			this.currentPicture = (Bitmap)data.getExtras().get("data");
+			this.userProfilePicture.setImageBitmap(this.currentPicture);
 		}
 	}
 	
@@ -92,7 +98,28 @@ public class UserProfileActivity extends Activity{
 	}
 	
 	public void saveUserProfile(View v){
+		
+	//	currentPicture = 
+	//	Log.e("PICTURE", this.currentPicture.toString());
+	//	this.currentPicture = null;
+	//	if (currentPicture == null)
+			currentPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.icon_user_profile);
+
+		uPController.finalizeVariables(user.getUniqueID().toString(), firstLastName.getText().toString(), 
+									   maleOrFemale.getSelectedItem().toString(), phoneText.getText().toString(),emailText.getText().toString(), 
+									   biographyText.getText().toString(), currentPicture);
+
 		finish();
+	}
+	
+	public void initializeVariables(){
+		this.phoneText.setText("");
+		this.firstLastName.setText("");
+		this.emailText.setText("");
+		this.biographyText.setText("");
+		this.maleOrFemale.setSelection(0);
+		this.currentPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.icon_user_profile);
+
 	}
 
 }

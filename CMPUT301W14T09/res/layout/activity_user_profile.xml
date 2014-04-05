@@ -16,6 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:text=""
         android:inputType="textPersonName"
         android:hint="Firstname, Lastname:" >
 
@@ -23,10 +24,11 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/editTextPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+                android:text=""
         android:hint="Phone:"
         android:inputType="phone" />
 
@@ -35,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+                android:text=""
         android:hint="Email:"
         android:inputType="textEmailAddress" />
 
@@ -58,6 +61,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Biography:"
+                android:text=""
         android:inputType="textMultiLine" />
 
     <Button

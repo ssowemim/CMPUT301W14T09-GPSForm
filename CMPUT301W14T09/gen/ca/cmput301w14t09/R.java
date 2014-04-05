@@ -62,10 +62,10 @@ public final class R {
         public static final int commentText=0x7f080022;
         public static final int edit=0x7f08002b;
         public static final int editComment=0x7f080028;
-        public static final int editText1=0x7f08000a;
         public static final int editTextBio=0x7f08000e;
         public static final int editTextEmail=0x7f08000b;
         public static final int editTextFirstLastName=0x7f080009;
+        public static final int editTextPhone=0x7f08000a;
         public static final int editUsername=0x7f080002;
         public static final int favorite=0x7f080006;
         public static final int favorite1=0x7f080001;

@@ -127,7 +127,7 @@ public class TopCommentsActivity extends ListActivity {
 
 		// Handler polling
 		updateHandler = new Handler();
-		/*   updateFunction = new Runnable() {
+	    updateFunction = new Runnable() {
 
            // @Override
            public void run() {
@@ -149,7 +149,7 @@ public class TopCommentsActivity extends ListActivity {
         }; 
 
         update.start(); 
-		 */ populateListView();} 
+	 	populateListView();} 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

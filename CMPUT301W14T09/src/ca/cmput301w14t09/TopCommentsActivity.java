@@ -419,7 +419,7 @@ public class TopCommentsActivity extends ListActivity {
 
 
     private void customOptionsDialog(final int arg2){
-    	Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
+    	final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
     	
     	final Dialog dialog = new Dialog(TopCommentsActivity.this);
     	dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
@@ -476,6 +476,21 @@ public class TopCommentsActivity extends ListActivity {
 				}
 			}
     	});
+    	
+    	dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+				dialog2.setTitle(comment.getAuthorName() + " | Profile");
+				dialog2.setContentView(R.layout.dialog_user_profile);
+				dialog2.show();
+				
+				
+				
+			}
+		});
 
 
         window.setAttributes(wlp);

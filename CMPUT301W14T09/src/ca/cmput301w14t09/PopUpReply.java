@@ -22,6 +22,7 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 
 public class PopUpReply extends PopUpComment {
+	
     public PopUpReply(Activity caller) {
         super(caller);
     }
@@ -29,8 +30,7 @@ public class PopUpReply extends PopUpComment {
     //@SuppressLint("NewApi")
     public void popUp(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
     	dialog = new Dialog(caller);
-    	topCommentActivity = (TopCommentsActivity) caller;
-
+    	
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle(windowName);
 
@@ -95,13 +95,7 @@ public class PopUpReply extends PopUpComment {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, caller);
                 
-                //selected location
-                GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
-                final GeoLocation geodefault = lc1.getGeodefault();
-                
-                Toast.makeText(caller,"Selected reply geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
-                Toast.makeText(caller,"reply default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
-
+               
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 Boolean hasPicture = pictureController.getHasPicture();
 
@@ -112,10 +106,7 @@ public class PopUpReply extends PopUpComment {
                 comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture, user.getUserName());
                 hasPicture = false;
                
-                //reset selectedgeo after save made
-                lc1.resetselectedlocation(selectedgeo);
-                topCommentActivity.resetSelectedLocation();
-                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                
 
                 try {
                     ElasticSearchOperations.postThread(comment);

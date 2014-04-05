@@ -317,10 +317,13 @@ public class TopCommentsActivity extends ListActivity {
     public void commentThread(Comment thread) {
         String stringId = new String();
         stringId = thread.getThreadId();
+        
+        setupMyLocation();
 
         Intent intent = new Intent(this, CommentListActivity.class);
         intent.putExtra("THREAD_ID", stringId);
-        intent.putExtra("CURRENT_USER", user);                
+        intent.putExtra("CURRENT_USER", user);    
+        intent.putExtra("CURRENT_LOCATION", lc1.getGeodefault());
 
         startActivityForResult(intent, FAVORITE_LIST);
     }

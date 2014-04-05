@@ -404,5 +404,25 @@ public class CommentListActivity extends ListActivity {
         popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
 
     }
+    /**
+     * Return the selectedgeo object
+     * @author Cameron Alexander
+     * @return
+     */
+    public GeoLocation getSelectedGeolocation(){
+        return selectedgeo;
+    }
+
+    /**
+     * Reset selected geolocation object
+     * @author Cameron Alexander
+     */
+    public void resetSelectedLocation(){
+        double latitude = 0.0;
+        double longitude = 0.0;
+        selectedgeo.setLatitude(latitude);
+        selectedgeo.setLongitude(longitude);
+
+    }
 
 }

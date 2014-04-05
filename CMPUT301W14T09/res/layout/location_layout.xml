@@ -37,7 +37,7 @@
         <Button
             android:id="@+id/mq_geocode_btn"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="75dp"
             android:text="Search" />
          
     </LinearLayout>

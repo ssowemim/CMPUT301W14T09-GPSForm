@@ -96,7 +96,16 @@ public class ChooseLocationActivity extends MapActivity {
 		//toast to tell user to click on map
 		//http://developer.android.com/guide/topics/ui/notifiers/toasts.html
 		Toast.makeText(getApplicationContext(),"Click on map to Set your location.", Toast.LENGTH_LONG).show();
-
+		
+		Button okbutton=(Button)findViewById(R.id.okbutton);
+		
+		//Capture image button click event              
+        okbutton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               onBackPressed();
+            }
+        });
 
 	}
 

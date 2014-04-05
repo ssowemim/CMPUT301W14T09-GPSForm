@@ -367,50 +367,50 @@ public class ElasticSearchOperations extends Server{
 		
 	}
 
-	public static ArrayList<UserProfileModel>pullUserProfile(final String uniqueID) throws InterruptedException {
-		 final CountDownLatch latch = new CountDownLatch(1);
-	        final ArrayList<UserProfileModel> userProfileList = new ArrayList<UserProfileModel> ();
+	public static ArrayList<UserProfileModel> pullUserProfile(final String uniqueID) throws InterruptedException {
+		final CountDownLatch latch = new CountDownLatch(1);
+		final ArrayList<UserProfileModel> userProfileList = new ArrayList<UserProfileModel> ();
 
-	        if (GSON == null)
-	            constructGson();
+		if (GSON == null)
+			constructGson();
 
-	        Thread thread = new Thread() {
+		Thread thread = new Thread() {
 
-	            @Override
-	            public void run() {
-	                HttpClient client = new DefaultHttpClient();
+			@Override
+			public void run() {
+				HttpClient client = new DefaultHttpClient();
 
-	                try {
-	                    HttpPost searchRequest = new HttpPost(profileAddress+"_search?pretty=1&size=100");
-	                    String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"uniqueID\", \"query\" : \"" + uniqueID + "\"}}}";
+				try {
 
+					HttpPost searchRequest = new HttpPost(profileAddress + "_search?pretty=1");
+					String query = "{\"query\" : {\"query_string\" : {\"default_field\" : \"uniqueID\",\"query\" : \""+uniqueID+"\"}}}";
 
-	                    StringEntity stringentity = new StringEntity(query);
-	                    searchRequest.setEntity(stringentity);
+					StringEntity stringentity = new StringEntity(query);
+					searchRequest.setEntity(stringentity);
 
-	                    HttpResponse response = client.execute(searchRequest);
-	                    String json = getEntityContent(response);
+					HttpResponse response = client.execute(searchRequest);
+					String json = getEntityContent(response);
 
-	                    Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<Comment>>(){}.getType();
-	                    ElasticSearchSearchResponse<UserProfileModel> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
+					Type elasticSearchSearchResponseType = new TypeToken<ElasticSearchSearchResponse<UserProfileModel>>(){}.getType();
+					ElasticSearchSearchResponse<UserProfileModel> esResponse = GSON.fromJson(json, elasticSearchSearchResponseType);
 
-	                    for (ElasticSearchResponse<UserProfileModel> r : esResponse.getHits()) {
-	                        UserProfileModel userProfileModel = r.getSource();
-	                        userProfileList.add(userProfileModel);
-	                    }
+					for (ElasticSearchResponse<UserProfileModel> r : esResponse.getHits()) {
+						UserProfileModel userProfileModel = r.getSource();
+						userProfileList.add(userProfileModel);
+					}
 
-	                    latch.countDown();  
+					latch.countDown();
 
-	                } catch(Exception e){
-	                    e.printStackTrace();
-	                }
+				} catch(Exception e){
+					e.printStackTrace();
+				}
 
-	            }
-	        };
-	        thread.start();
-	        latch.await();
+			}
+		};
+		thread.start();
+		latch.await();
 
-	        return userProfileList;
+		return userProfileList;
 	}
 
 }

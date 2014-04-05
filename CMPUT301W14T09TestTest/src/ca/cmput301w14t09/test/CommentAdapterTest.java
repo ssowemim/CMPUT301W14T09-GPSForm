@@ -19,5 +19,5 @@ public class CommentAdapterTest extends ActivityInstrumentationTestCase2<TopComm
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
-	
+
 }

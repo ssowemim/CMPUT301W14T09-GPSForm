@@ -57,7 +57,7 @@ public class UserProfileActivity extends Activity{
 		this.userProfilePicture = (ImageView)this.findViewById(R.id.imageViewUserProfile);
 		
 		uPModelList = new UserProfileModelList();
-		uPController = new UserProfileController(uPModelList, UserProfileActivity.this);
+		uPController = new UserProfileController(uPModelList);
 		
 		maleFemaleSpinner();
 		initializeVariables();
@@ -98,17 +98,11 @@ public class UserProfileActivity extends Activity{
 	}
 	
 	public void saveUserProfile(View v){
-		
-	//	currentPicture = 
-	//	Log.e("PICTURE", this.currentPicture.toString());
-	//	this.currentPicture = null;
-	//	if (currentPicture == null)
-			currentPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.icon_user_profile);
 
+		currentPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.icon_user_profile);
 		uPController.finalizeVariables(user.getUniqueID().toString(), firstLastName.getText().toString(), 
 									   maleOrFemale.getSelectedItem().toString(), phoneText.getText().toString(),emailText.getText().toString(), 
 									   biographyText.getText().toString(), currentPicture);
-
 		finish();
 	}
 	

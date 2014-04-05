@@ -15,22 +15,17 @@ public class UserProfileController{
 	public static final int MAX_PHONE_LENGTH = 12;
 	public static final int MAX_BITMAP_DIMENSIONS = 50;
 	
-	private UserProfileActivity activity;
 	private UserProfileModelList model;
 	
-	public UserProfileController(UserProfileModelList uPModelList,
-			UserProfileActivity userProfileActivity) {
+	public UserProfileController(UserProfileModelList uPModelList) {
 		// TODO Auto-generated constructor stub
 		this.model = uPModelList;
-		this.activity = userProfileActivity;
 		
 	}
 
 	public void finalizeVariables(String uniqueID, String fLName,
 			String sex, String phone, String email,
 			String bio, Bitmap pic) {
-		// TODO Auto-generated method stub
-		//Log.e("PICTURE11",pic.toString());
 		
 		if (pic.getWidth() > MAX_BITMAP_DIMENSIONS || pic.getHeight() > MAX_BITMAP_DIMENSIONS){
 			double scalingFactor = pic.getWidth() * 1.0 / MAX_BITMAP_DIMENSIONS;
@@ -42,6 +37,13 @@ public class UserProfileController{
 			
 			pic = Bitmap.createScaledBitmap(pic, newWidth, newHeight, false);
 		} 
+		
+		if (bio.length() > MAX_BIO_LENGTH)
+			bio=bio.substring(0, MAX_BIO_LENGTH);
+		
+		if (phone.length() > MAX_PHONE_LENGTH)
+			phone = phone.substring(0, MAX_PHONE_LENGTH);
+		
 		model.addUserProfile(uniqueID, fLName, sex, phone, email, bio, pic);
 	}
 	

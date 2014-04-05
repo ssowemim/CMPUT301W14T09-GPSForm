@@ -306,17 +306,15 @@ public class CommentListActivity extends ListActivity {
                 try {
                     commentThread = ElasticSearchOperations.pullOneThread(firstComment);
                     user.profile.cache.add(commentThread);
+                    FileSaving.saveUserFile(user, this);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-
-            FileSaving.saveUserFile(user, this);
             adapter = new CommentAdapter(this,
                     R.layout.comment_view,
                     user.profile.cache.getSubComments(firstComment));
-
 
             favList.setAdapter(adapter);
             adapter.notifyDataSetChanged();

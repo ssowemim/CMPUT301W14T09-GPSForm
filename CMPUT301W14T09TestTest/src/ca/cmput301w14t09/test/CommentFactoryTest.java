@@ -7,19 +7,15 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing CommentFactory
+ * 
  */
 public class CommentFactoryTest extends TestCase {
 
-	public CommentFactoryTest(String name) {
-		super(name);
-	}
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testBuildComment(){
 		LocationController lc = new LocationController();
 		Comment comment = CommentFactory.buildComment(lc, "Tester", "testing", true, null, true, null);
@@ -27,11 +23,13 @@ public class CommentFactoryTest extends TestCase {
 		assertTrue(comment.getAuthorName().contains("Tester"));
 		assertTrue(comment.getCommentText().contains("testing"));
 		assertTrue(comment.getTopComment().equals(true));
-		//assertNotNull(comment.getPicture());
 		assertTrue(comment.getHasPicture().equals(true));
 
 	}
 	
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testBuildReplies(){
 		LocationController lc = new LocationController();
 		Comment comment = CommentFactory.buildReplyComment(lc, "Tester", "testing", true, null, "Tester testing", true, null);
@@ -39,7 +37,6 @@ public class CommentFactoryTest extends TestCase {
 		assertTrue(comment.getAuthorName().contains("Tester"));
 		assertTrue(comment.getCommentText().contains("testing"));
 		assertTrue(comment.getTopComment().equals(true));
-		//assertNotNull(comment.getPicture());
 		assertTrue(comment.getThreadId().equals("Tester testing"));
 		assertTrue(comment.getHasPicture().equals(true));
 	}

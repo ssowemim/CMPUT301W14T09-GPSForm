@@ -13,9 +13,9 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 
 /**
- *Author: Cameron Alexander 
+ * @author Cameron Alexander 
  * 
- **/
+ */
 
 
 public class LocationControllerTests extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
@@ -23,25 +23,24 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 
 	public LocationControllerTests() {
 		super(TopCommentsActivity.class);
-		// TODO Auto-generated constructor stub
 	}
 
 
-
+	/**
+	 * @author Cameron Alexander 
+	 */
 	public void testGetGeolocation()
 	{
-
 		LocationController locationcontroller = new LocationController();
 		GeoLocation geo2 = locationcontroller.getGeoLocation();
-
 		assertTrue(geo2 == locationcontroller.getGeoLocation());
-
 	}
 
 
-
+	/**
+	 * @author Cameron Alexander 
+	 */
 	public void testLocationChanged(){
-
 		LocationController locationcontroller = new LocationController();
 		Location location = new Location("dummyprovider");
 		Context context = this.getActivity().getApplication();
@@ -49,12 +48,12 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		location.setLongitude(103.44566);
 		assertTrue(location.getLatitude() == -53.2345);
 		locationcontroller.locationchanged(location, context);
-
 		assertTrue(locationcontroller.getGeodefault().getLatitude() == -53.2345);
-
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testCheckLocations(){
 
 		GeoLocation geo = new GeoLocation();
@@ -87,11 +86,12 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testResetSelectedLocation(){
 
 		LocationController locationcontroller = new LocationController();
-
 
 		GeoLocation selectedgeo = new GeoLocation();
 		selectedgeo.setLatitude(9.345);

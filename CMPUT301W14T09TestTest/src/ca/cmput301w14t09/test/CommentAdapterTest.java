@@ -7,7 +7,7 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing the comment adapter
  */
 public class CommentAdapterTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {

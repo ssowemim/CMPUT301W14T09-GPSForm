@@ -13,7 +13,11 @@ import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
 
-
+/**
+ * 
+ * @author Cameron Alexander
+ *
+ */
 public class ThreadAdapterTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
 
 	public ThreadAdapterTest() {
@@ -22,7 +26,7 @@ public class ThreadAdapterTest extends ActivityInstrumentationTestCase2<TopComme
 	}
 	
 	/**
-	 * Cameron Alexander
+	 * @author Cameron Alexander
 	 */
 	public void testThreadAdapter(){
 		ArrayList<Comment> comments = new ArrayList<Comment>(200);

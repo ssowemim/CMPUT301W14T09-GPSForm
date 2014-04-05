@@ -8,9 +8,16 @@ import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 
-
+/**
+ * 
+ * @author Cameron Alexander
+ *
+ */
 public class GeolocationTest extends TestCase {
 
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void GeolocationupdateTest() {
 
 
@@ -37,7 +44,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationupdatelargeinput() {
 
 
@@ -65,7 +74,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
-
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationzeroupdate() {
 
 
@@ -97,6 +108,9 @@ public class GeolocationTest extends TestCase {
 
 	}
 
+	/**
+	 * @author Cameron Alexander
+	 */
 	public void testGeolocationname() {
 
 		GeoLocation geo213 = new GeoLocation();

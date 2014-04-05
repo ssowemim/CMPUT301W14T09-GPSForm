@@ -7,17 +7,16 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing for CreateComment functionality
  *
  */
 
 public class CreateCommentTest extends TestCase {
-
-	protected void setUp() throws Exception {
-		super.setUp();
-	}
-
+	
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testCreateCommentFunction () {
 		CommentFactory newComment = new CommentFactory();
 		LocationController lc = new LocationController();

@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  *
  */
 public class UnreadMarkerTest extends TestCase {
@@ -21,6 +21,9 @@ public class UnreadMarkerTest extends TestCase {
 		super.setUp();
 	}
 
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testUnreadMarker(){
 		Comment comment = new Comment();
 		comment.setAuthorName("tester");

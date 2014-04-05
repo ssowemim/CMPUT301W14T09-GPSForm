@@ -14,11 +14,14 @@ import android.test.ActivityInstrumentationTestCase2;
 
 /**
  * 
- * @author chunhan
+ * @author Chun-Han Lee
  * Testing Sorting for comments
  */
 public class SortingControllerTest extends TestCase {
 
+	/**
+	 * @author Chun-Han Lee
+	 */
 	public void testSortingCommentsByLocation(){
 		Comment comment = null;
 		LocationController lc = new LocationController();
@@ -46,5 +49,12 @@ public class SortingControllerTest extends TestCase {
 		String name2 = testList.get(1).getAuthorName();
 		assertTrue(name.contains("test1"));
 		assertTrue(name2.contains("test2"));
+	}
+	
+	/**
+	 * @author ssowemim
+	 */
+	public void testSortingPicture(){
+		
 	}
 }

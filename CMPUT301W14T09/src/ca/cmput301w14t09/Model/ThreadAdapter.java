@@ -80,7 +80,7 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 			ImageView piv = (ImageView)v.findViewById(R.id.attachmentImageView);
 			Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_attachment);
 			
-			if(i.getHasPicture() == false)
+			if(!i.getHasPicture())
 				bitmap = Bitmap.createScaledBitmap(bitmap, 1, 1, false);
 
 			// check to see if each individual textview is null.

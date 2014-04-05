@@ -128,7 +128,7 @@ public class TopCommentsActivity extends ListActivity {
 
         aCommentList.setOnItemClickListener(new OnItemClickListener(){
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
+              //  Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2)); 
 
 
                 customOptionsDialog(arg2);
@@ -408,10 +408,10 @@ public class TopCommentsActivity extends ListActivity {
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
             ArrayList<Comment> topComments = null;
 
-            //succesfully get updated geolocation
+       /**     //succesfully get updated geolocation
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
-            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
+            System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude()); **/
             SortingController sorting2 = new SortingController();
             try {
                 topComments = ElasticSearchOperations.pullThreads();
@@ -422,26 +422,24 @@ public class TopCommentsActivity extends ListActivity {
             adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList1);
             aCommentList.setAdapter(adapter1);
             adapter1.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
+       //     Toast.makeText(getApplicationContext(),"Sorting By Your Selected Location.", Toast.LENGTH_LONG).show();
         }
         if (requestCode == 122 && resultCode == Activity.RESULT_OK) {
             //successfully get updated geolocation
-            selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
+      /**      selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
             System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
             System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
-            Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this.getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show(); **/
         }
 
         // if the result is capturing Image
         if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
         	fileUri = popUpComment.getFleUri();
-        //	System.out.print(fileUri);
             if (resultCode == RESULT_OK) {
                 popUpComment.pictureResult(fileUri);
                 Toast.makeText(this.getApplicationContext(),
                         "Picture Taken" + fileUri, Toast.LENGTH_SHORT)
                         .show();
-              //  System.out.print(fileUri);
 
             } else if (resultCode == RESULT_CANCELED) {
                 // user cancelled Image capture
@@ -449,12 +447,7 @@ public class TopCommentsActivity extends ListActivity {
                         "User cancelled image capture", Toast.LENGTH_SHORT)
                         .show();
             }
-        } /**else {
-            // failed to capture image
-            Toast.makeText(this.getApplicationContext(),
-                    "SorryAB! Failed to capture image", Toast.LENGTH_SHORT)
-                    .show();
-        } **/
+        }
     }
 
 
@@ -514,7 +507,7 @@ public class TopCommentsActivity extends ListActivity {
 				{
 					dialog.dismiss();
 					dialog1.dismiss();
-					Toast.makeText(getApplicationContext(),"Not Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
 				}
 			}
     	});

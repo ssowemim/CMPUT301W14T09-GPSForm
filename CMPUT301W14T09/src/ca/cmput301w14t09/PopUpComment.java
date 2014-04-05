@@ -38,6 +38,7 @@ public class PopUpComment extends PopUp {
     protected EditText commentText;
     protected Bitmap picture = null;
     protected Comment comment;
+    protected Boolean hasPicture;
 
     protected Uri getFileUri;
     protected TopCommentsActivity topCommentActivity;
@@ -47,6 +48,7 @@ public class PopUpComment extends PopUp {
         super(caller);
         pictureController = new PictureController();
         picture = null;
+        hasPicture = false;
     }
 
     //@SuppressLint("NewApi")
@@ -129,19 +131,20 @@ public class PopUpComment extends PopUp {
                 final GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
                 final GeoLocation geodefault = lc1.getGeodefault();
                 
-                Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
-                Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+           //     Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+            //    Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
                
                 
                // selectedgeo = topCommentActivity.getSelectedGeolocation();
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
-                Boolean hasPicture = pictureController.getHasPicture();
+                hasPicture = pictureController.getHasPicture();
                 //check locations to see which one to use
                 lc1.checklocations(selectedgeo);
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildComment(lc1, text2, text1, true, serializePic, hasPicture, user.getUserName());
-
+                
+                
                 //reset selected location for comments
 
                 try {
@@ -153,7 +156,9 @@ public class PopUpComment extends PopUp {
                 //reset selectedgeo after save made
                 //lc1.resetselectedlocation(selectedgeo);
                 topCommentActivity.resetSelectedLocation();
-                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                hasPicture = false;
+                picture = null;
+          //      Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
                
                 
                 dialog.dismiss();

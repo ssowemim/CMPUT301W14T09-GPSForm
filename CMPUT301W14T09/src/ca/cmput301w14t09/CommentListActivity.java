@@ -235,6 +235,7 @@ public class CommentListActivity extends ListActivity {
                     ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
                     adapter = new CommentAdapter(this,R.layout.comment_view, comment);
                     favList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -305,18 +306,18 @@ public class CommentListActivity extends ListActivity {
 
             //succesfully get updated geolocation
             selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-            System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
+      /**      System.out.println("GEO TOP: LAT"+ selectedgeo.getLatitude());
             System.out.println("GEO TOP: LNG"+ selectedgeo.getLongitude());
-            Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show(); **/
         }
         //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
         if (requestCode == 123 && resultCode == Activity.RESULT_OK){
 
             //succesfully get updated geolocation
             selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-            System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
+       /**     System.out.println("GEO TOP: LAT sort"+ selectedgeosort.getLatitude());
             System.out.println("GEO TOP: LNG sort"+ selectedgeosort.getLongitude());
-            Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Your Location Updated.", Toast.LENGTH_LONG).show(); **/
         }
 
 

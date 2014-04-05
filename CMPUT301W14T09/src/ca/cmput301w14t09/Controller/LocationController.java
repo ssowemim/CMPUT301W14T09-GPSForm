@@ -62,9 +62,9 @@ public class LocationController {
         	
                 geodefault.setLatitude(location.getLatitude());
                 geodefault.setLongitude(location.getLongitude()); 
-                System.out.println("geodefaultset"+geodefault.getLatitude());
+          /**      System.out.println("geodefaultset"+geodefault.getLatitude());
                 System.out.println("geodefaultset"+geodefault.getLongitude());
-                Toast.makeText(context,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show(); **/
                
               
             }
@@ -73,11 +73,11 @@ public class LocationController {
     public void checklocations(GeoLocation selectedgeo){
     	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
     		geo = selectedgeo;
-    		 System.out.println("used selected geo"+geo.getLatitude());
+    	//	 System.out.println("used selected geo"+geo.getLatitude());
     	}
     	else{
     		geo = geodefault;
-    		 System.out.println("used default geo"+geo.getLatitude());
+    	//	 System.out.println("used default geo"+geo.getLatitude());
     	}
     	
     }

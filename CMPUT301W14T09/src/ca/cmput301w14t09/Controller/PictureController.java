@@ -43,7 +43,7 @@ public class PictureController extends Activity{
     
     public static final int MAX_BITMAP_DIMENSIONS = 80;
     
-    public boolean hasPicture;
+    public boolean hasPicture=false;
 
     public PictureController() {
     	
@@ -130,22 +130,23 @@ public class PictureController extends Activity{
     		picture = Bitmap.createScaledBitmap(picture, 1, 1, false);
     		hasPicture = false;
     	}
-    	else
+    	else{
     		hasPicture = true;
-    	
-    	if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
-    		double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
-    		
-    		if(picture.getHeight() > picture.getWidth())
-    			scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
-    		
-    		int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
-    		int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
-    		
-    		 picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
-    		
+
+    		if(picture.getWidth() > MAX_BITMAP_DIMENSIONS || picture.getHeight() > MAX_BITMAP_DIMENSIONS){
+    			double scalingFactor = picture.getWidth()*1.0 / MAX_BITMAP_DIMENSIONS;
+
+    			if(picture.getHeight() > picture.getWidth())
+    				scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
+
+    			int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
+    			int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
+
+    			picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
+
+    		}
     	}
-    	return picture;
+		return picture;
     }
 
 	public Boolean getHasPicture() {

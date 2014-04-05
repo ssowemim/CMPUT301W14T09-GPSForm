@@ -108,7 +108,7 @@ public class PopUpReply extends PopUpComment {
 
                 SerializableBitmap serializePic = new SerializableBitmap(picture);
                 comment = CommentFactory.buildReplyComment(lc1, text2, text1, false, serializePic, firstComment, hasPicture, user.getUserName());
-                
+                hasPicture = false;
                 //reset selected location for comments
 
                 try {

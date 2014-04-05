@@ -3,7 +3,9 @@ package ca.cmput301w14t09;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.cmput301w14t09.Controller.UserProfileController;
 import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.Model.UserProfileModelList;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -33,6 +35,8 @@ public class UserProfileActivity extends Activity{
 	protected Bitmap currentPicture;
 	
 	User user;
+	UserProfileModelList uPModelList;
+	UserProfileController uPController;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -46,6 +50,9 @@ public class UserProfileActivity extends Activity{
 		this.saveButton = (Button)findViewById(R.id.buttonSave);
 		this.usernameText = (TextView)findViewById(R.id.textViewUsername);
 		this.userProfilePicture = (ImageView)findViewById(R.id.imageViewUserProfile);
+		
+		uPModelList = new UserProfileModelList();
+		uPController = new UserProfileController(uPModelList, this);
 		
 		maleFemaleSpinner();
 	}
@@ -87,4 +94,5 @@ public class UserProfileActivity extends Activity{
 	public void saveUserProfile(View v){
 		finish();
 	}
+
 }

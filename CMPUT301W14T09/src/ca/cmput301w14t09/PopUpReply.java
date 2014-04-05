@@ -29,11 +29,13 @@ public class PopUpReply extends PopUpComment {
     //@SuppressLint("NewApi")
     public void popUp(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
     	dialog = new Dialog(caller);
+    	topCommentActivity = (TopCommentsActivity) caller;
 
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle(windowName);
 
-
+        final TopCommentsActivity topCommentActivity = null;
+        
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
 

@@ -161,7 +161,7 @@ public class CommentListActivity extends ListActivity {
 
 		});
 
-		// Handler polling
+	/**	// Handler polling
 		updateHandler = new Handler();
 		updateFunction = new Runnable() {
 			@Override
@@ -183,7 +183,7 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-		update.start(); 
+		update.start();  **/
 		//populateListView();
 	}
 
@@ -207,7 +207,7 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-		Thread update = new Thread() {
+	/**	Thread update = new Thread() {
 			public void run() {
 				while(true) {
 					try {
@@ -219,7 +219,7 @@ public class CommentListActivity extends ListActivity {
 				}
 			}
 		};
-		update.start();
+		update.start(); **/
 
 
 
@@ -392,7 +392,7 @@ public class CommentListActivity extends ListActivity {
 
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
 
-			Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
 		}
 
 		if (requestCode == 123 && resultCode == Activity.RESULT_OK){

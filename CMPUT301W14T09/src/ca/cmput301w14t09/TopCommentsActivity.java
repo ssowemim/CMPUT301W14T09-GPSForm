@@ -53,6 +53,7 @@ import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.Model.UserProfileModel;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
 
@@ -178,7 +179,7 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		ArrayList<Comment> topComments = null;
+		//ArrayList<Comment> topComments = null;
 		boolean sorted = true;
 
 		switch (item.getItemId()) {
@@ -606,27 +607,65 @@ public class TopCommentsActivity extends ListActivity {
 
         dialogProfileButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
-                dialog2.setTitle(comment.getAuthorName() + " | Profile");
-                dialog2.setContentView(R.layout.dialog_user_profile);
-                dialog2.show();
-                
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                
-                TextView tVUsername = (TextView)dialog2.findViewById(R.id.textView_username);
-                TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
-                TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
-                TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
-                TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
-                ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
-                TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
-                
-                tVUsername.setText("Username:"+thread.getUserName().toString());
-           //     tVName.setText("First,Lastname: "+ thread.);
-            }
+        	@Override
+        	public void onClick(View v) {
+
+        		Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+        		ArrayList<UserProfileModel> userProfile = null;
+        		int size, lastItem;
+        		
+        		if (thread.getUserName().equalsIgnoreCase("guest")){
+        			//dialog2.dismiss();
+        			Toast.makeText(getApplicationContext(),"Guests don't have a user profile", Toast.LENGTH_LONG).show();
+        		}
+
+        		else {
+        			try {
+        				userProfile = ElasticSearchOperations.pullUserProfile(thread.getUserName());
+
+        			} catch (InterruptedException e) {
+        				// TODO Auto-generated catch block
+        				e.printStackTrace();
+        			}
+
+
+        			size = userProfile.size();
+        			lastItem = size-1;	
+
+        			// TODO Auto-generated method stub
+        			final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+        			dialog2.setTitle(comment.getAuthorName() + " | Profile");
+        			dialog2.setContentView(R.layout.dialog_user_profile);
+        			dialog2.show();
+
+        			Button returnButton = (Button)dialog2.findViewById(R.id.button_return);
+        			TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
+        			TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
+        			TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
+        			TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
+        			ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
+        			TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
+
+        			returnButton.setOnClickListener(new View.OnClickListener() {
+
+        				@Override
+        				public void onClick(View v) {
+        					// TODO Auto-generated method stub
+        					dialog2.dismiss();
+
+        				}
+        			});
+
+        			tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
+        			tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
+        			tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
+        			tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
+        			iVPic.setImageBitmap(userProfile.get(lastItem).getPicture());
+        			tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
+        		}
+
+
+        	}
         });
         window.setAttributes(wlp);
         dialog.show();

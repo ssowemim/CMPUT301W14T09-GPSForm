@@ -141,8 +141,8 @@ public class PopUpComment extends PopUp {
 				GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
 				final GeoLocation geodefault = lc1.getGeodefault();
 
-				Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
-				Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+			//	Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+			//	Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
 
 				picture = pictureController.finalizePicture(picture, (ListActivity) caller);
 				hasPicture = pictureController.getHasPicture();
@@ -161,7 +161,7 @@ public class PopUpComment extends PopUp {
 
 				//reset selected location for comments
 				topCommentActivity.resetSelectedLocation();
-				Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+			//	Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
 				hasPicture = false;
 				picture = null;

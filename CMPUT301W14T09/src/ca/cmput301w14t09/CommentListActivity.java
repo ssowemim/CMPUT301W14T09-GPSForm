@@ -74,7 +74,6 @@ public class CommentListActivity extends ListActivity {
 	protected Dialog dialog;
 	protected ListView aCommentList;
 
-
 	//initialize variables for map 
 	protected MapView map;
 	private MyLocationOverlay myLocationOverlay;
@@ -88,18 +87,15 @@ public class CommentListActivity extends ListActivity {
 	protected PopUpReply popUpReply = new PopUpReply(this);
 	protected PopUpSelect popUpSelect = new PopUpSelect(this);
 
-
 	//comment vars
 	protected CommentAdapter adapter;
 	Comment comment;
 	protected ListView favList;
 	protected String firstComment;
 
-
 	//init handlers for  caching
 	private Handler  updateHandler;
 	private Runnable updateFunction;
-
 
 	//File uri to store Images
 	private Uri fileUri;
@@ -117,7 +113,6 @@ public class CommentListActivity extends ListActivity {
 	}
 	private Filter filter = Filter.DATE;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,7 +120,6 @@ public class CommentListActivity extends ListActivity {
 		favList = (ListView) findViewById(android.R.id.list);
 		final Activity commentActivity = this;
 
-		
 		//setup map
 		setupMapView();
 		setupMyLocation();
@@ -138,9 +132,7 @@ public class CommentListActivity extends ListActivity {
 				optionsDialog(thread);
 
 			}
-
-
-
+			
 		});
 
 		// Handler polling
@@ -164,9 +156,8 @@ public class CommentListActivity extends ListActivity {
 				}
 			}
 		};
-
-		update.start();
 		
+		update.start();
 	}
 	
 	/**
@@ -191,8 +182,6 @@ public class CommentListActivity extends ListActivity {
 
 		return true;
 	}
-
-
 
 
 	/**
@@ -316,7 +305,6 @@ public class CommentListActivity extends ListActivity {
 
 	}
 
-
 	/**
 	 * This function is responsible for pulling the thread of comments and getting the comment replies
 	 * It then populates the listview to display the replies, it reapplies the default filter to sort comments
@@ -324,7 +312,6 @@ public class CommentListActivity extends ListActivity {
 	 */
 	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
-
 
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
@@ -347,7 +334,6 @@ public class CommentListActivity extends ListActivity {
 		}
 	}
 
-
 	/**
 	 * onActivityResult will Receive the activity result method and will be called after closing 
 	 * the camera and after the ChooseLocationActivity is closed to get geolocation, or the commentList. 
@@ -368,7 +354,6 @@ public class CommentListActivity extends ListActivity {
 			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
 
 		}
-
 
 		// if the result is capturing Image
 		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
@@ -428,6 +413,7 @@ public class CommentListActivity extends ListActivity {
 		popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
 
 	}
+	
 	/**
 	 * Return the selectedgeo object
 	 * @author Cameron Alexander
@@ -477,7 +463,4 @@ public class CommentListActivity extends ListActivity {
 			}
 		});
 	}
-
-
-
 }

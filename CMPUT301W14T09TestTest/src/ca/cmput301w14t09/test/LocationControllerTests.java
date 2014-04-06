@@ -75,7 +75,7 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		locationcontroller.checklocations(selectedgeo);
 
 		//since selected location not 0.0 0.0 the geolocation used Geo should equal selected
-		assertTrue(locationcontroller.getGeo() == selectedgeo);
+		assertTrue(locationcontroller.getGeoLocation() == selectedgeo);
 
 
 		selectedgeo.setLatitude(0.0);
@@ -84,7 +84,7 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		locationcontroller.checklocations(selectedgeo);
 
 		//since the selected location is 0.0 default location should be used which right now is equal to geo2
-		assertTrue(locationcontroller.getGeo() == geo2);	
+		assertTrue(locationcontroller.getGeoLocation() == geo2);	
 
 	}
 

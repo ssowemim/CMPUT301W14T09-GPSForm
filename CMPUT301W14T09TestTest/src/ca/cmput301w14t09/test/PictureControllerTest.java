@@ -59,6 +59,7 @@ public class PictureControllerTest extends ActivityInstrumentationTestCase2<TopC
 	 * The finalize method shrinks an image if the image size is too big, 
 	 * so I am testing this, but sending in an image with a big size and hopefully, it shrinks it 
 	 * causing the size to change.
+	 * 
 	 */
 	public void testFinalizePicture(){
 		PictureController pCTest = new PictureController();
@@ -76,6 +77,33 @@ public class PictureControllerTest extends ActivityInstrumentationTestCase2<TopC
 		assertFalse(height == height1);
 		assertFalse(width == width1);
 
+	}
+	
+	/**
+	 * This method is testing the hasPicture method.
+	 * This method simply returns a boolean on if there is a picture or not.
+	 * And this two cases are testing by seing in a null in finalize picture and also an actual picture.
+	 */
+	public void testHasPicture(){
+		PictureController pCTest = new PictureController();
+		Bitmap bitmapTest = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
+		bitmapTest = Bitmap.createScaledBitmap(bitmapTest, 200, 200, false);
+		Bitmap bitmapTest1, bitmapTest2 = null;
+		int height, width, height1, width1;
+
+		height = bitmapTest.getHeight();
+		width = bitmapTest.getWidth();
+		bitmapTest1 = pCTest.finalizePicture(bitmapTest, this.getActivity()); 
+		height1 = bitmapTest1.getHeight();
+		width1 = bitmapTest1.getWidth();
+		
+		assertFalse(height == height1);
+		assertFalse(width == width1);
+		
+		assertTrue(pCTest.hasPicture);
+
+		bitmapTest2 = pCTest.finalizePicture(bitmapTest2, getActivity());
+		assertFalse(pCTest.hasPicture);
 	}
 
 }

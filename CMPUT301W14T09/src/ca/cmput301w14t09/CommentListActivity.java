@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.mapquest.android.Geocoder;
 import com.mapquest.android.maps.AnnotationView;
@@ -50,7 +51,9 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.PictureModelList;
+import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.TopCommentsActivity.Filter;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
 
@@ -125,6 +128,11 @@ public class CommentListActivity extends ListActivity {
 
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
+	
+	public enum Filter {
+		DATE, PICTURE, LOCATION, DIFFLOCATION, NONE;
+	}
+	private Filter filter = Filter.DATE;
 
 
 	@Override
@@ -176,7 +184,7 @@ public class CommentListActivity extends ListActivity {
 		};
 
 		update.start(); 
-		populateListView();
+		//populateListView();
 	}
 
 	@Override
@@ -230,43 +238,97 @@ public class CommentListActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		ArrayList<Comment> replyComments = null;
-		switch (item.getItemId()){
-			case R.id.sortLocation:			
-				SortingController sorting = new SortingController();
-				try {
-					replyComments = ElasticSearchOperations.pullOneThread(firstComment);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, replyComments);
-				adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
-				favList.setAdapter(adapter);
-				adapter.notifyDataSetChanged();
-				return true;
+		ArrayList<Comment> topComments = null;
+		boolean sorted = true;
+
+		switch (item.getItemId()) {
+			case R.id.userProfile:
+				Intent intent = new Intent(this, UserProfileActivity.class);
+				intent.putExtra("CURRENT_USER", user);   
+				startActivity(intent);
+				break;
+	
+			case R.id.sortLocation:     
+				sortByLocation();
+				break;
 			case R.id.sortDate:
-				try {
-					ArrayList<Comment> comment = ElasticSearchOperations.pullOneThread(firstComment);
-					adapter = new CommentAdapter(this,R.layout.comment_view, comment);
-					favList.setAdapter(adapter);
-					adapter.notifyDataSetChanged();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return true;
+				sortByDate();
+				break;
 			case R.id.sortPicture:
-				/**         SortingController sorting1 = new SortingController();
-                ArrayList<Comment> commentList = sorting1.sortPictures(firstComment);
-                adapter = new CommentAdapter(this,R.layout.comment_view, commentList);
-                favList.setAdapter(adapter);
-                adapter.notifyDataSetChanged(); **/
-				return true; 
-
+				sortByPicture();
+				break;	
 			default:
-				return super.onOptionsItemSelected(item);
+				filter = Filter.NONE;
+				sorted = false;
+				break;
+		}
 
+		return sorted;
+	}
+
+	/**
+	 * Sorts the list by location.
+	 */
+	private void sortByLocation() {
+		SortingController sorting = new SortingController();
+		filter = Filter.LOCATION;
+
+		setupMyLocation();
+		ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getSubComments(firstComment));
+		adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
+		favList.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+	}
+	
+	/**
+	 * Sorts the list by post-date.
+	 */
+	private void sortByDate() {
+		filter = Filter.DATE;
+
+		adapter = new CommentAdapter(this,R.layout.comment_view, user.profile.cache.getSubComments(firstComment));
+		favList.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+	}
+	
+	/**
+	 * Sorts the list by picture.
+	 */
+	private void sortByPicture() {
+		SortingController sorting1 = new SortingController();
+		filter = Filter.PICTURE;
+
+		ArrayList<Comment> commentList = null;
+		commentList = user.profile.cache.getSubComments(firstComment);
+		commentList = sorting1.sortPicTopComments(commentList);
+		adapter = new CommentAdapter(this,R.layout.comment_view, commentList);
+		favList.setAdapter(adapter);
+		adapter.notifyDataSetChanged();	
+	}
+	
+
+	/**
+	 * re-applies filter to results brought back from poll.
+	 */
+	private void reapplyFilter() {
+		switch (filter) {
+		case LOCATION:     
+			sortByLocation();
+			break;
+		case DATE:
+			sortByDate();
+			break;
+		case PICTURE:
+			sortByPicture();
+			break;
+		default:
+			filter = Filter.NONE;
+			//return super.onOptionsItemSelected(item);
+			//sorted = false;\
+			break;
 		}
 	}
+
 
 	public void popUp(View v) throws InterruptedException {
 		popUpReply.popUp(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
@@ -306,6 +368,11 @@ public class CommentListActivity extends ListActivity {
 					user.profile.cache.getSubComments(firstComment));
 
 			favList.setAdapter(adapter);
+			
+
+			//Collections.sort(user.profile.cache.comments);
+			//Collections.reverse(user.profile.cache.comments);
+			reapplyFilter();
 			adapter.notifyDataSetChanged();
 		}
 	}

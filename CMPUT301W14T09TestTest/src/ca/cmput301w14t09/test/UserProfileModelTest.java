@@ -73,4 +73,8 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		testUPModel.setPicture(BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img));
 		assertNotNull(testUPModel.getPicture());
 	}
+	
+	public void testUserModel(){
+		assertNotNull(testUPModel);
+	}
 }

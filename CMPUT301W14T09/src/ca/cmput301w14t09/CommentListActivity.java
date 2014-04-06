@@ -175,7 +175,7 @@ public class CommentListActivity extends ListActivity {
 				while(true) {
 					try {
 						updateHandler.post(updateFunction);
-						sleep(3000);
+						sleep(10000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -212,7 +212,7 @@ public class CommentListActivity extends ListActivity {
 				while(true) {
 					try {
 						updateHandler.post(updateFunction);
-						sleep(3000);
+						sleep(10000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -273,7 +273,8 @@ public class CommentListActivity extends ListActivity {
 		SortingController sorting = new SortingController();
 		filter = Filter.LOCATION;
 
-		setupMyLocation();
+		currentLocation = myLocationOverlay.getMyLocation();
+		lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
 		ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getSubComments(firstComment));
 		adapter = new CommentAdapter(this,R.layout.comment_view, sortedList);
 		favList.setAdapter(adapter);

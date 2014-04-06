@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import ca.cmput301w14t09.Controller.PictureController;
 import ca.cmput301w14t09.Model.Comment;
-import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 
@@ -38,8 +37,6 @@ public class FavoriteActivity extends ListActivity
     ImageButton addPicImageButton;
     ImageView picImagePreview;
     Bitmap picture = null;
-
-    PictureModelList pictureModel;
 
     EditText authorText;
     EditText commentText;

@@ -50,7 +50,6 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.Model.UserProfileModel;
@@ -87,8 +86,6 @@ public class TopCommentsActivity extends ListActivity {
 	protected Uri fileUri;
 
 	protected PopUpComment popUpComment = new PopUpComment(this);
-
-	PictureModelList pictureModel;
 
 	protected ThreadAdapter adapter1;
 

@@ -24,7 +24,7 @@ import android.net.NetworkInfo;
 
 /**
  *  
- * @author mcmorris
+ * @author Michael
  * Server handles server configuration and status.  
  * Serves as intermediary between Cache and ElasticSearch.
  * Design structure consideration to allow for the existence of multiple servers in a scaled project.
@@ -39,36 +39,44 @@ public class Server {
 	 * isServerReachable can reach the server from this connection
 	 * @return true if server can be reached.
 	 */
-    protected static Server instance = null;
-    protected Server() {
-        
-    }
-    
-    public static Server getInstance() {
-        if (instance == null)
-            instance = new Server();
-        return instance;
-    }
-	
-	public boolean isServerReachable(Context con) {
-		return haveNetworkConnection(con);
-	}
-	
-	private boolean haveNetworkConnection(Context con) {
-	    boolean haveConnectedWifi = false;
-	    boolean haveConnectedMobile = false;
+	protected static Server instance = null;
+	protected Server() {
 
-	    ConnectivityManager cm = (ConnectivityManager) con.getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-	    for (NetworkInfo ni : netInfo) {
-	        if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-	            if (ni.isConnected())
-	                haveConnectedWifi = true;
-	        if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-	            if (ni.isConnected())
-	                haveConnectedMobile = true;
-	    }
-	    return haveConnectedWifi || haveConnectedMobile;
 	}
+
+	public static Server getInstance() {
+		if (instance == null)
+			instance = new Server();
+		return instance;
+	}
+
+	/**
+	 * @param con
+	 * @return
+	 */
+	 public boolean isServerReachable(Context con) {
+		 return haveNetworkConnection(con);
+	 }
+
+	 /**
+	  * @param con
+	  * @return
+	  */
+	 private boolean haveNetworkConnection(Context con) {
+		 boolean haveConnectedWifi = false;
+		 boolean haveConnectedMobile = false;
+
+		 ConnectivityManager cm = (ConnectivityManager) con.getSystemService(Context.CONNECTIVITY_SERVICE);
+		 NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+		 for (NetworkInfo ni : netInfo) {
+			 if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+				 if (ni.isConnected())
+					 haveConnectedWifi = true;
+			 if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+				 if (ni.isConnected())
+					 haveConnectedMobile = true;
+		 }
+		 return haveConnectedWifi || haveConnectedMobile;
+	 }
 
 }

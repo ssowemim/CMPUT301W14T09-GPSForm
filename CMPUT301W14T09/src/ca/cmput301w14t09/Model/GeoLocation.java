@@ -85,12 +85,4 @@ public class GeoLocation implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	/**
-	 * This function will be used in further iterations to calculate proximity to a
-	 * target location
-	 */
-	public double calculateProximity(GeoLocation targetLocation){
-		return 0;
-	}
 }

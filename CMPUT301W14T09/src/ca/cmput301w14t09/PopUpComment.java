@@ -42,6 +42,13 @@ import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
+/**
+ * @author Conner
+ * PopUpComment extends popup and is a specialized dialog popup for creating comments
+ * This dialog popup is created when a new comment is wanted to be created or when a reply
+ * to a comment is wanted to be made.  
+ */
+
 
 public class PopUpComment extends PopUp {
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
@@ -141,10 +148,8 @@ public class PopUpComment extends PopUp {
 				GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
 				final GeoLocation geodefault = lc1.getGeodefault();
 
-			//	Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
-			//	Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
-
 				picture = pictureController.finalizePicture(picture, (ListActivity) caller);
+
 				hasPicture = pictureController.getHasPicture();
 				//check locations to see which one to use
 				lc1.checklocations(selectedgeo);
@@ -161,7 +166,6 @@ public class PopUpComment extends PopUp {
 
 				//reset selected location for comments
 				topCommentActivity.resetSelectedLocation();
-			//	Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
 				hasPicture = false;
 				picture = null;

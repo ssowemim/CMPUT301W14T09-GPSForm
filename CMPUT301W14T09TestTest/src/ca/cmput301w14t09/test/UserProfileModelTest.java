@@ -31,4 +31,32 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		testUPModel.setUniqueID("CHANGEUNIQUEID");
 		assertEquals("CHANGEUNIQUEID", testUPModel.getUniqueID());
 	}
+	
+	public void testName(){
+		assertEquals("Benjamin Button", testUPModel.getFirstLastName());
+		
+		testUPModel.setFirstLastName("Button Benjamin");
+		assertEquals("Button Benjamin", testUPModel.getFirstLastName());
+	}
+	
+	public void testSex(){
+		assertEquals("Male", testUPModel.getSex());
+		
+		testUPModel.setSex("Female");
+		assertEquals("Female", testUPModel.getSex());
+	}
+	
+	public void testPhone(){
+		assertEquals("1234567899", testUPModel.getPhone());
+		
+		testUPModel.setPhone("9987654321");
+		assertEquals("9987654321", testUPModel.getPhone());
+	}
+	
+	public void testEmail(){
+		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
+		
+		testUPModel.setEmail("bobby@brown.com");
+		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
+	}
 }

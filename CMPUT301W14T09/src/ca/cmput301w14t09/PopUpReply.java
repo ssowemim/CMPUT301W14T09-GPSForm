@@ -125,7 +125,7 @@ public class PopUpReply extends PopUpComment {
                 
                 
                 //selected location
-                GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
+                GeoLocation selectedgeo = commentListActivity.getSelectedGeolocation();
                 final GeoLocation geodefault = lc1.getGeodefault();
                 
                 Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
@@ -150,7 +150,7 @@ public class PopUpReply extends PopUpComment {
 
                 
                 //reset selected location for comments
-                topCommentActivity.resetSelectedLocation();
+                commentListActivity.resetSelectedLocation();
                 Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
 

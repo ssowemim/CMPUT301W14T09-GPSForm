@@ -652,6 +652,7 @@ public class TopCommentsActivity extends ListActivity {
 		selectedgeo.setLongitude(longitude);
 
 	}
+
 }
 
 

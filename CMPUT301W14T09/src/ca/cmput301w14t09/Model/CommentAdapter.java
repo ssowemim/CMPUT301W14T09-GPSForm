@@ -77,7 +77,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			// check to see if each individual textview is null.
 			// if not, assign some text!
 			if (geoLocation != null) {
-				geoLocation.setText("Location: "+i.getGeoLocation().getLatitude());
+				geoLocation.setText("Location: "+i.getGeoLocation().getLatitude()+" "+i.getGeoLocation().getLongitude());
 			}
 			if (geoLocationData != null) {
 				if (i.getGeoLocation() != null) {

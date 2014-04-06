@@ -30,6 +30,11 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
 
+/**
+ * @author Conner
+ * PopUpComment extends popup and is a specialized dialog popup for creating
+ * a popup edit dialog. This is used for when a user is wanting to edit a comment
+ */
 
 public class PopUpEdit extends PopUp {
 

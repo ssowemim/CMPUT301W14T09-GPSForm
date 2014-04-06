@@ -48,7 +48,6 @@ import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.SortingController;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
-import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
@@ -67,7 +66,7 @@ import com.mapquest.android.maps.MyLocationOverlay;
  * 
  * @author ssowemim, Conner, Cameron, Chun-Han
  * TopCommentsActivity handles all the functions that the pop_up_comment.xml has to offer.
- * Controlling the longitude & latitude. 
+ * Controlling the longitude & latitude of a comment by receiving information from the ChooseLocationActivity.
  * Attaching a picture to a comment.
  * Most of the code referring to handling the picture is taken from
  * http://www.androidhive.info/2013/09/android-working-with-camera-api/
@@ -185,7 +184,7 @@ public class TopCommentsActivity extends ListActivity {
 				intent.putExtra("CURRENT_USER", user);   
 				startActivity(intent);
 				break;
-	
+
 			case R.id.sortLocation:     
 				sortByLocation();
 				break;
@@ -220,7 +219,7 @@ public class TopCommentsActivity extends ListActivity {
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
 	}
-	
+
 	/**
 	 * Sorts the list by post-date.
 	 */
@@ -231,7 +230,7 @@ public class TopCommentsActivity extends ListActivity {
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
 	}
-	
+
 	/**
 	 * Sorts the list by picture.
 	 */
@@ -246,36 +245,36 @@ public class TopCommentsActivity extends ListActivity {
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();	
 	}
-	
+
 	/**
 	 * Sorts the list by a different location.
 	 */
 	private void sortByDiffLocation() {
 		filter = Filter.DIFFLOCATION;
-		
+
 		Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
 		startActivityForResult(intentdiff, 123);
 	}
-	
+
 	/**
 	 * re-applies filter to results brought back from poll.
 	 */
 	private void reapplyFilter() {
 		switch (filter) {
-		case LOCATION:     
-			sortByLocation();
-			break;
-		case DATE:
-			sortByDate();
-			break;
-		case PICTURE:
-			sortByPicture();
-			break;
-		default:
-			filter = Filter.NONE;
-			//return super.onOptionsItemSelected(item);
-			//sorted = false;\
-			break;
+			case LOCATION:     
+				sortByLocation();
+				break;
+			case DATE:
+				sortByDate();
+				break;
+			case PICTURE:
+				sortByPicture();
+				break;
+			default:
+				filter = Filter.NONE;
+				//return super.onOptionsItemSelected(item);
+				//sorted = false;\
+				break;
 		}
 	}
 
@@ -319,7 +318,7 @@ public class TopCommentsActivity extends ListActivity {
 			Collections.sort(user.profile.cache.comments);
 			Collections.reverse(user.profile.cache.comments);
 			reapplyFilter();
-			
+
 			adapter1.notifyDataSetChanged();
 		}
 	}
@@ -397,7 +396,7 @@ public class TopCommentsActivity extends ListActivity {
 			}
 		});
 	}
-	
+
 	/**
 	 * onSaveInstanceState stores the file url as
 	 * it will be null after returning from camera app
@@ -473,214 +472,212 @@ public class TopCommentsActivity extends ListActivity {
 	 * @param arg2
 	 * @author ssowemim
 	 */
-    private void customOptionsDialog(final int arg2){
-        final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
+	private void customOptionsDialog(final int arg2){
+		final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
 
-        final Dialog dialog = new Dialog(TopCommentsActivity.this);
-        dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-        // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_options);
-        //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		final Dialog dialog = new Dialog(TopCommentsActivity.this);
+		dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
 
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams wlp = window.getAttributes();
+		dialog.setContentView(R.layout.dialog_options);
 
 
-        window.setAttributes(wlp);
-        dialog.show();
-
-        Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
-        ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
-        ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
-
-        dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                commentThread(thread);
-                dialog.dismiss();
-            }
-        });
-
-        dialogAttachButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
-                dialog1.setTitle("Attachment");
-                dialog1.setContentView(R.layout.dialog_attachment);
-                dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                dialog1.show();
-
-                ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                Bitmap attachment = thread.getPicture().bitmap;
+		Window window = dialog.getWindow();
+		WindowManager.LayoutParams wlp = window.getAttributes();
 
 
+		window.setAttributes(wlp);
+		dialog.show();
 
-                final Dialog dialog = new Dialog(TopCommentsActivity.this);
-                dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-                // 	dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.dialog_options);
-                //	dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+		Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
+		ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
+		ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
 
-                Window window = dialog.getWindow();
-                WindowManager.LayoutParams wlp = window.getAttributes();
+		dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
 
-                window.setAttributes(wlp);
-                dialog.show();
+			@Override
+			public void onClick(View v) {
 
-                Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
-                ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
-                ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+				commentThread(thread);
+				dialog.dismiss();
+			}
+		});
 
-                dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
+		dialogAttachButton.setOnClickListener(new View.OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                        commentThread(thread);
-                        dialog.dismiss();
-                    }
-                });
+			@Override
+			public void onClick(View v) {
 
-                dialogAttachButton.setOnClickListener(new View.OnClickListener() {
+				final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
+				dialog1.setTitle("Attachment");
+				dialog1.setContentView(R.layout.dialog_attachment);
+				dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+				dialog1.show();
 
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
-                        dialog1.setTitle("Attachment");
-                        dialog1.setContentView(R.layout.dialog_attachment);
-                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                        dialog1.show();
+				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+				Bitmap attachment = thread.getPicture().bitmap;
 
-                        ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
-                        Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                        Bitmap attachment = thread.getPicture().bitmap;
+				final Dialog dialog = new Dialog(TopCommentsActivity.this);
+				dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
 
-                        if (thread.getHasPicture()){
-                            attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-                            imageView.setImageBitmap(attachment);
-                            dialog.dismiss();
-                        }
-                        else
-                        {
-                            dialog.dismiss();
-                            dialog1.dismiss();
-                            Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-                dialogProfileButton.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
-                        dialog2.setTitle(comment.getAuthorName() + " | Profile");
-                        dialog2.setContentView(R.layout.dialog_user_profile);
-                        dialog2.show();
-
-                    }
-                });
-
-                if (thread.getHasPicture()){
-                    attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-                    imageView.setImageBitmap(attachment);
-                    dialog.dismiss();
-                }
-                else
-                {
-                    dialog.dismiss();
-                    dialog1.dismiss();
-                    Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        dialogProfileButton.setOnClickListener(new View.OnClickListener() {
-
-        	@Override
-        	public void onClick(View v) {
-
-        		Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-        		ArrayList<UserProfileModel> userProfile = null;
-        		int size, lastItem;
-        		
-        		if (thread.getUserName().equalsIgnoreCase("guest")){
-        			//dialog2.dismiss();
-        			Toast.makeText(getApplicationContext(),"Guests don't have a user profile", Toast.LENGTH_LONG).show();
-        		}
-
-        		else {
-        			try {
-        				userProfile = ElasticSearchOperations.pullUserProfile(thread.getUserName());
-
-        			} catch (InterruptedException e) {
-        				// TODO Auto-generated catch block
-        				e.printStackTrace();
-        			}
+				dialog.setContentView(R.layout.dialog_options);
 
 
-        			size = userProfile.size();
-        			lastItem = size-1;	
+				Window window = dialog.getWindow();
+				WindowManager.LayoutParams wlp = window.getAttributes();
 
-        			// TODO Auto-generated method stub
-        			final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
-        			dialog2.setTitle(comment.getAuthorName() + " | Profile");
-        			dialog2.setContentView(R.layout.dialog_user_profile);
-        			dialog2.show();
+				window.setAttributes(wlp);
+				dialog.show();
 
-        			Button returnButton = (Button)dialog2.findViewById(R.id.button_return);
-        			TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
-        			TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
-        			TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
-        			TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
-        			ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
-        			TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
-        			Bitmap pic;
+				Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
+				ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
+				ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
 
-        			returnButton.setOnClickListener(new View.OnClickListener() {
+				dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
 
-        				@Override
-        				public void onClick(View v) {
-        					// TODO Auto-generated method stub
-        					dialog2.dismiss();
+					@Override
+					public void onClick(View v) {
 
-        				}
-        			});
+						Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+						commentThread(thread);
+						dialog.dismiss();
+					}
+				});
 
-        			if(!(userProfile.isEmpty() || size == 0)){
+				dialogAttachButton.setOnClickListener(new View.OnClickListener() {
 
-        				tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
-        				tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
-        				tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
-        				tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
-        				pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
-        				iVPic.setImageBitmap(pic);
-        				tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
-        			}
-        			else {
-        				tVName.setText("Name: ");
-        				tVPhone.setText("Phone: ");
-        				tVEmail.setText("Email: ");
-        				tVSex.setText("Sex: ");
-        				tVBio.setText("Bio: ");
-        			}
-        		}
+					@Override
+					public void onClick(View v) {
+
+						final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
+						dialog1.setTitle("Attachment");
+						dialog1.setContentView(R.layout.dialog_attachment);
+						dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+						dialog1.show();
+
+						ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
+						Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+						Bitmap attachment = thread.getPicture().bitmap;
+
+						if (thread.getHasPicture()){
+							attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
+							imageView.setImageBitmap(attachment);
+							dialog.dismiss();
+						}
+						else
+						{
+							dialog.dismiss();
+							dialog1.dismiss();
+							Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+						}
+					}
+				});
+
+				dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+
+						final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+						dialog2.setTitle(comment.getAuthorName() + " | Profile");
+						dialog2.setContentView(R.layout.dialog_user_profile);
+						dialog2.show();
+
+					}
+				});
+
+				if (thread.getHasPicture()){
+					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
+					imageView.setImageBitmap(attachment);
+					dialog.dismiss();
+				}
+				else
+				{
+					dialog.dismiss();
+					dialog1.dismiss();
+					Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+
+		dialogProfileButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+				ArrayList<UserProfileModel> userProfile = null;
+				int size, lastItem;
+
+				if (thread.getUserName().equalsIgnoreCase("guest")){
+
+					Toast.makeText(getApplicationContext(),"Guests don't have a user profile", Toast.LENGTH_LONG).show();
+				}
+
+				else {
+					try {
+						userProfile = ElasticSearchOperations.pullUserProfile(thread.getUserName());
+
+					} catch (InterruptedException e) {
+
+						e.printStackTrace();
+					}
 
 
-        	}
-        });
-        window.setAttributes(wlp);
-        dialog.show();
-    }
+					size = userProfile.size();
+					lastItem = size-1;	
+
+
+					final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+					dialog2.setTitle(comment.getAuthorName() + " | Profile");
+					dialog2.setContentView(R.layout.dialog_user_profile);
+					dialog2.show();
+
+					Button returnButton = (Button)dialog2.findViewById(R.id.button_return);
+					TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
+					TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
+					TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
+					TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
+					ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
+					TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
+					Bitmap pic;
+
+					returnButton.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+
+							dialog2.dismiss();
+
+						}
+					});
+
+					if(!(userProfile.isEmpty() || size == 0)){
+
+						tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
+						tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
+						tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
+						tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
+						pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
+						iVPic.setImageBitmap(pic);
+						tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
+					}
+					else {
+						tVName.setText("Name: ");
+						tVPhone.setText("Phone: ");
+						tVEmail.setText("Email: ");
+						tVSex.setText("Sex: ");
+						tVBio.setText("Bio: ");
+					}
+				}
+
+
+			}
+		});
+		window.setAttributes(wlp);
+		dialog.show();
+	}
 
 	/**
 	 * Return the selectedgeo object

@@ -42,25 +42,8 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  */
 
 public class SortingController {
-	/**
-	 * 
-	 * Sorting Comments which have pictures attached to them
-	 * @author chunhan, ssowemim
-	 * @param comment
-	 * @return
-	 * https://github.com/Mrbilec/CMPUT301W14T09-GPSForm/blob/PictureBranch/CMPUT301W14T09/src/ca/cmput301w14t09/TopCommentsActivity.java
-	 *
-	 */
-/**	public ArrayList<Comment> sortPictures(String comment){
-		ArrayList<Comment> commentList = null;
-		if (comment == null){
-			commentList = sortPicTopComments();
-		}else{
-			commentList = sortPicReplies(comment);
-		}
-		return commentList;
-	} **/
-	
+
+
 	/**
 	 * 
 	 * Sort Pictures in top comments view
@@ -69,7 +52,7 @@ public class SortingController {
 	 * 
 	 */
 	public ArrayList<Comment> sortPicTopComments(ArrayList<Comment> commentList){
-		
+
 		Collections.sort(commentList, new Comparator<Comment>() {
 			public int compare(Comment o1, Comment o2) {
 				if (o1.getHasPicture() == null || o2.getHasPicture() == null)
@@ -79,47 +62,9 @@ public class SortingController {
 		});
 		Collections.reverse(commentList);
 		return commentList;
-		
+
 	}
 
-	/**
-	 * 
-	 * Sort Pictures in the replies view
-	 * @author chunhan, ssowemim
-	 * @param comment
-	 * @return
-	 * 
-	 */
-	private ArrayList<Comment> sortPicReplies(String comment){
-		ArrayList<Comment> commentList = null;
-		try {
-			commentList = ElasticSearchOperations.pullOneThread(comment);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		commentList = compareAttachment(commentList);
-		return commentList;
-	}
-	
-	/**
-	 * 
-	 * Method to compare if comment has attachment or not 
-	 * @author ssowemim
-	 * @param list
-	 * @return
-	 * 
-	 */
-	private ArrayList<Comment> compareAttachment(ArrayList<Comment> list){
-		Collections.sort(list, new Comparator<Comment>() {
-			  public int compare(Comment o1, Comment o2) {
-			      //if ( o1.getHasPicture() == null || o2.getHasPicture() == null)
-			        return 0;
-			     // return o1.getHasPicture().compareTo(o2.getHasPicture());
-			  }
-			}); 
-		Collections.reverse(list);
-		return list;
-	}
 
 	/**
 	 * 
@@ -140,7 +85,7 @@ public class SortingController {
 		double comRank = 0;
 		double lon = geo.getLongitude();
 		double lat = geo.getLatitude();
-		
+
 		ArrayList<Comment> sortedComments = new ArrayList<Comment>();
 		for (int i=0; i< topComments.size(); i++){
 			Comment tComment = topComments.get(i);
@@ -154,13 +99,15 @@ public class SortingController {
 		}
 
 		//http://www.mkyong.com/java/how-to-sort-a-map-in-java/
+		@SuppressWarnings("unchecked")
 		Map<Comment, Double> sortedMap = sortByComparator(myHashMap);
-		for (Map.Entry entry : sortedMap.entrySet()){
+		for (@SuppressWarnings("rawtypes") Map.Entry entry : sortedMap.entrySet()){
 			Comment comm = (Comment) entry.getKey();
 			sortedComments.add(comm);
 		}
 		return sortedComments;
 	}
+
 	/**
 	 * 
 	 * @author chunhan
@@ -170,7 +117,9 @@ public class SortingController {
 	 * http://www.mkyong.com/java/how-to-sort-a-map-in-java/
 	 * 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static <E> Map sortByComparator(Map unsorted){
+
 
 		List list = new LinkedList(unsorted.entrySet());
 

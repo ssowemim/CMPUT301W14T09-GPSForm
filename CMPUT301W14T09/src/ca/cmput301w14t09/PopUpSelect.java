@@ -29,7 +29,11 @@ import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.User;
 
-
+/**
+ * @author Conner
+ * PopUpComment extends popup and is a class that is reponsible for setting up all the 
+ * listeners and buttons for the popup dialogs, this means for PopUpComment, PopUpReply,PopUpEdit
+ */
 public class PopUpSelect extends PopUp{
 
     PopUpReply popUpReply;

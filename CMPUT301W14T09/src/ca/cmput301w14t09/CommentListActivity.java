@@ -53,8 +53,8 @@ import com.mapquest.android.maps.MyLocationOverlay;
 
 /**
  * 
- * @author Conner
- * @editor ChunHan
+ * @author Conner, Cameron, Chunhan, Micheal
+ * 
  * This activity shows the top comment that was selected in a 
  * previous activity and displays all the replies to that comment
  * This activity shows the top comment that was selected in a 

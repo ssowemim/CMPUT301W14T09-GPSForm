@@ -79,7 +79,6 @@ public class ChooseLocationActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.location_layout);
 
-
 		setupMapView();
 		setupMyLocation();
 
@@ -87,7 +86,6 @@ public class ChooseLocationActivity extends MapActivity {
 		annotation = new AnnotationView(map);
 		code = new Geocoder(getApplicationContext());
 		int id = getLayoutId();
-
 
 		//setup views and overlay
 		setupViews();
@@ -97,10 +95,7 @@ public class ChooseLocationActivity extends MapActivity {
 		//http://developer.android.com/guide/topics/ui/notifiers/toasts.html
 		Toast.makeText(getApplicationContext(),"Click on map to Set your location and then click Back to Confirm.", Toast.LENGTH_LONG).show();
 
-
-
 	}
-
 
 	/**
 	 *set your map and enable default zoom controls 
@@ -111,7 +106,6 @@ public class ChooseLocationActivity extends MapActivity {
 		map.setBuiltInZoomControls(true);
 
 	}
-
 
 	/**
 	 * set up a MyLocationOverlay and execute the runnable once we have a location fix 
@@ -129,6 +123,7 @@ public class ChooseLocationActivity extends MapActivity {
 				map.getController().setZoom(14);
 				map.getOverlays().add(myLocationOverlay);
 				myLocationOverlay.setFollowing(true);
+				
 			}
 		});
 	}
@@ -148,7 +143,6 @@ public class ChooseLocationActivity extends MapActivity {
 		// set GeoPoints and title/snippet to be used in the annotation view 
 		OverlayItem poi1 = new OverlayItem(new GeoPoint (53.54439,-113.49093), "Edmonton, Alberta", "");
 		poiOverlay.addItem(poi1);
-
 
 		// add a tap listener for the POI overlay 
 		poiOverlay.setTapListener(new ItemizedOverlay.OverlayTapListener() {
@@ -223,8 +217,6 @@ public class ChooseLocationActivity extends MapActivity {
 			}
 		});
 
-
-
 		EditText mqGeocodeInput = (EditText) findViewById(R.id.mq_geocode_input);
 		mqGeocodeInput.setOnKeyListener(new OnKeyListener() {
 
@@ -241,8 +233,6 @@ public class ChooseLocationActivity extends MapActivity {
 			}
 		});
 	}
-
-
 
 	/**
 	 * Geocode background task
@@ -384,8 +374,5 @@ public class ChooseLocationActivity extends MapActivity {
 		super.onBackPressed();
 
 	}
-
-
-
-
+	
 }

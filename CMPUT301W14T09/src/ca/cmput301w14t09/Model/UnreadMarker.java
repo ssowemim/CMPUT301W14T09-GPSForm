@@ -30,13 +30,11 @@ import java.util.Date;
  * on a per Profile basis.
  * 
  */
-
 public class UnreadMarker implements Serializable, Comparable<UnreadMarker> {
 	private boolean unread;
 	private Comment comment;
-
 	private static final long serialVersionUID = 13L;
-	
+
 	public UnreadMarker() {
 		unread = true;
 	}
@@ -46,7 +44,6 @@ public class UnreadMarker implements Serializable, Comparable<UnreadMarker> {
 	 * @param unread - is this comment unread?  T/F
 	 * @param comment - The comment this unread marker marks.
 	 */
-
 	public UnreadMarker(boolean unread, Comment comment) {
 		this.unread = unread;
 		this.comment = comment;
@@ -57,30 +54,37 @@ public class UnreadMarker implements Serializable, Comparable<UnreadMarker> {
 	 * @param otherComment - other comment object to compare to.
 	 * @return - this or otherComment, whichever has earlier date.
 	 */
-
 	public int compareTo(UnreadMarker otherMarker) {
 		Date compareDate = ((UnreadMarker) otherMarker).comment.getPostDate();
 		return this.comment.getPostDate().compareTo(compareDate);
 	}
-
+	/**
+	 * @return boolean
+	 */
 	public boolean isUnread() {
 		return unread;
 	}
 
-
+	/**
+	 * @param unread
+	 */
 	public void setUnread(boolean unread) {
 		this.unread = unread;
 	}
 
+	/**
+	 * @return comment
+	 */
 	public Comment getComment() {
 		return comment;
 	}
 
-
+	/**
+	 * @param comment
+	 */
 	public void setComment(Comment comment) {
 		this.comment = comment;
 	}
-
 
 	/**
 	 * generateNewMarkers goes through all comments, check a read flag exists for each one.

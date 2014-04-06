@@ -19,21 +19,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
-import com.mapquest.android.Geocoder;
-import com.mapquest.android.maps.AnnotationView;
-import com.mapquest.android.maps.GeoPoint;
-import com.mapquest.android.maps.MapView;
-import com.mapquest.android.maps.MyLocationOverlay;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,11 +41,15 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
-import ca.cmput301w14t09.TopCommentsActivity.Filter;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
+
+import com.mapquest.android.Geocoder;
+import com.mapquest.android.maps.AnnotationView;
+import com.mapquest.android.maps.GeoPoint;
+import com.mapquest.android.maps.MapView;
+import com.mapquest.android.maps.MyLocationOverlay;
 
 /**
  * 
@@ -74,7 +69,6 @@ public class CommentListActivity extends ListActivity {
 	//Activity request codes to take pictures
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
-
 	protected Intent intent;
 	protected User user;
 	protected Dialog dialog;
@@ -90,23 +84,19 @@ public class CommentListActivity extends ListActivity {
 	Geocoder code = null;
 	Context context = null;
 
-
+	//initialize popups
 	protected PopUpReply popUpReply = new PopUpReply(this);
 	protected PopUpSelect popUpSelect = new PopUpSelect(this);
 
 
-
+	//comment vars
 	protected CommentAdapter adapter;
-
 	Comment comment;
-
-
-
 	protected ListView favList;
 	protected String firstComment;
 
 
-
+	//init handlers for  caching
 	private Handler  updateHandler;
 	private Runnable updateFunction;
 
@@ -114,16 +104,14 @@ public class CommentListActivity extends ListActivity {
 	//File uri to store Images
 	private Uri fileUri;
 
-
-
 	//selected geolocation object used for when person selects geolocation from
 	GeoLocation selectedgeo = new GeoLocation();
 	GeoLocation selectedgeosort = new GeoLocation();
 
-
 	//new Location Controller 
 	final LocationController lc1 = new LocationController();
 	
+	//filter used for sorting
 	public enum Filter {
 		DATE, PICTURE, LOCATION, DIFFLOCATION, NONE;
 	}
@@ -135,13 +123,12 @@ public class CommentListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment_list);
 		favList = (ListView) findViewById(android.R.id.list);
+		final Activity commentActivity = this;
 
+		
 		//setup map
 		setupMapView();
 		setupMyLocation();
-
-		final Activity commentActivity = this;
-
 
 		favList.setOnItemClickListener(new OnItemClickListener(){
 
@@ -156,7 +143,7 @@ public class CommentListActivity extends ListActivity {
 
 		});
 
-	/**	// Handler polling
+		// Handler polling
 		updateHandler = new Handler();
 		updateFunction = new Runnable() {
 			@Override
@@ -178,8 +165,8 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-		update.start();  **/
-		//populateListView();
+		update.start();
+		
 	}
 
 	@Override

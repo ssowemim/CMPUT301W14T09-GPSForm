@@ -96,8 +96,8 @@ public class ChooseLocationActivity extends MapActivity {
 		//toast to tell user to click on map
 		//http://developer.android.com/guide/topics/ui/notifiers/toasts.html
 		Toast.makeText(getApplicationContext(),"Click on map to Set your location and then click Back to Confirm.", Toast.LENGTH_LONG).show();
-		
-		
+
+
 
 	}
 

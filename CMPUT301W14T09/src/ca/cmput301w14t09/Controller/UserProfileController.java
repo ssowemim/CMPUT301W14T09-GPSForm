@@ -11,6 +11,8 @@ public class UserProfileController{
 	public static final int MAX_BITMAP_DIMENSIONS = 50;
 	
 	private UserProfileModelList model;
+	String bio, phone;
+	Bitmap pic;
 	
 	public UserProfileController(UserProfileModelList uPModelList) {
 		// TODO Auto-generated constructor stub
@@ -39,6 +41,21 @@ public class UserProfileController{
 		if (phone.length() > MAX_PHONE_LENGTH)
 			phone = phone.substring(0, MAX_PHONE_LENGTH);
 		
+		this.bio =bio;
+		this.phone = phone;
+		this.pic = pic;
 		model.addUserProfile(uniqueID, fLName, sex, phone, email, bio, pic);
+	}
+	
+	public String getNewbio(){
+		return bio;
+	}
+	
+	public String getNewphone(){
+		return phone;
+	}
+	
+	public Bitmap getNewPicture(){
+		return pic;
 	}
 }

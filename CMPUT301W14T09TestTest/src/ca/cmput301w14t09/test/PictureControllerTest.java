@@ -8,11 +8,10 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ImageView;
-import junit.framework.TestCase;
 
 /**
  * 
- * @author Chun-Han Lee, sswoemim
+ * @author sswoemim
  *
  */
 public class PictureControllerTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
@@ -34,6 +33,9 @@ public class PictureControllerTest extends ActivityInstrumentationTestCase2<TopC
 		
 	}
 	
+	/**
+	 * Purpose of preview captured image is simply putting a picture onto an imageview.
+	 */
 	public void testPreviewCapturedImage(){
 		PictureController pCTest = new PictureController();
 		ImageView iVTest= new ImageView(null);

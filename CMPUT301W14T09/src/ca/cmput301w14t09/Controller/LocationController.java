@@ -19,10 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.Controller;
 
-import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.widget.Toast;
 import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
@@ -35,7 +33,6 @@ import ca.cmput301w14t09.Model.GeoLocation;
  * @param LocationController
  * 
  */
-
 public class LocationController {
 
     private GeoLocation geo = new GeoLocation();
@@ -44,44 +41,50 @@ public class LocationController {
     LocationManager lm = null;
     Intent intent = null;
     
-
+   /**
+    * function returns geolocation object
+    * @return
+    */
     public GeoLocation getGeoLocation() {
         return geo;
     }
     
-  
-
     /**
    	* location changed function responsible for getting location points from GPS location on android activity
    	* and then setting the geolocation in Location controller to the current location of the GPS.
    	* @param LocationController
     */
-    
     public void locationchanged(android.location.Location location){
         if(location != null){
         	
                 geodefault.setLatitude(location.getLatitude());
                 geodefault.setLongitude(location.getLongitude()); 
-          /**      System.out.println("geodefaultset"+geodefault.getLatitude());
-                System.out.println("geodefaultset"+geodefault.getLongitude());
-                Toast.makeText(context,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show(); **/
-               
-              
+                      
             }
         }
     
+    /**
+     * This function compares a geolocation to another geolocation in this case default or selected
+     * If selected contains points then the geolocation will be set to defaultgeo
+     * @param selectedgeo
+     */
     public void checklocations(GeoLocation selectedgeo){
     	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
-    		geo = selectedgeo;
     		
+    		geo = selectedgeo;
+
     	}
     	else{
+    		
     		geo = geodefault;
     	
     	}
-    	
     }
     
+    /**
+     * This function resets a geolocations lat and long coordinates to 0.0 0.0
+     * @param selectedgeo
+     */
     public void resetselectedlocation(GeoLocation selectedgeo){
     	
     	double latitude = 0.0;
@@ -113,17 +116,6 @@ public class LocationController {
 		geodefault.setLongitude(lng);
 		//Toast.makeText(context,"Mapquest updates default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
 		
-	}
-
-
-	
-	/**
-	 * @return the geo
-	 */
-	public GeoLocation getGeo()
-	{
-	
-		return geo;
 	}
 
 	

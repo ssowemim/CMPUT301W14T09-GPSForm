@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -43,6 +43,7 @@ import ca.cmput301w14t09.Model.User;
  */
 public class MainActivity extends Activity {
 
+	//initialize vars
 	protected ListView UserList;
 	protected EditText editText;
 	protected User user;

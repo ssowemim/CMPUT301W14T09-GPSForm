@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -60,6 +61,7 @@ import com.mapquest.android.maps.AnnotationView;
 import com.mapquest.android.maps.GeoPoint;
 import com.mapquest.android.maps.MapView;
 import com.mapquest.android.maps.MyLocationOverlay;
+
 
 /**
  * 
@@ -187,46 +189,19 @@ public class TopCommentsActivity extends ListActivity {
 				break;
 	
 			case R.id.sortLocation:     
-				SortingController sorting = new SortingController();
-				filter = Filter.LOCATION;
-	
-				setupMyLocation();
-				ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getTopComments(true));
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();
+				sortByLocation();
 				break;
-	
 			case R.id.sortDate:
-
-				filter = Filter.DATE;
-
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();
+				sortByDate();
 				break;
-
-				// FIXME: On drugs.
-
 			case R.id.sortPicture:
-				SortingController sorting1 = new SortingController();
-				ArrayList<Comment> commentList = null;
-				commentList = user.profile.cache.getTopComments(true);
-				commentList = sorting1.sortPicTopComments(commentList);
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();			
-				break;
-
+				sortByPicture();
+				break;	
 			case R.id.sortByDiffLocation:
-				filter = Filter.DIFFLOCATION;
-
-				Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
-				startActivityForResult(intentdiff, 123);
-				return true;
+				sortByDiffLocation();
+				break;
 			default:
 				filter = Filter.NONE;
-				//return super.onOptionsItemSelected(item);
 				sorted = false;
 				break;
 		}
@@ -234,6 +209,9 @@ public class TopCommentsActivity extends ListActivity {
 		return sorted;
 	}
 
+	/**
+	 * Sorts the list by location.
+	 */
 	private void sortByLocation() {
 		SortingController sorting = new SortingController();
 		filter = Filter.LOCATION;
@@ -245,40 +223,63 @@ public class TopCommentsActivity extends ListActivity {
 		adapter1.notifyDataSetChanged();
 	}
 	
-	private void aaaaa() {
+	/**
+	 * Sorts the list by post-date.
+	 */
+	private void sortByDate() {
+		filter = Filter.DATE;
+
+		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
+		aCommentList.setAdapter(adapter1);
+		adapter1.notifyDataSetChanged();
+	}
+	
+	/**
+	 * Sorts the list by picture.
+	 */
+	private void sortByPicture() {
+		SortingController sorting1 = new SortingController();
+		filter = Filter.PICTURE;
+
+		ArrayList<Comment> commentList = null;
+		commentList = user.profile.cache.getTopComments(true);
+		commentList = sorting1.sortPicTopComments(commentList);
+		adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
+		aCommentList.setAdapter(adapter1);
+		adapter1.notifyDataSetChanged();	
+	}
+	
+	/**
+	 * Sorts the list by a different location.
+	 */
+	private void sortByDiffLocation() {
+		filter = Filter.DIFFLOCATION;
+		
+		Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
+		startActivityForResult(intentdiff, 123);
+	}
+	
+	/**
+	 * re-applies filter to results brought back from poll.
+	 */
+	private void reapplyFilter() {
 		switch (filter) {
 		case LOCATION:     
 			sortByLocation();
 			break;
-
 		case DATE:
-
-			filter = Filter.DATE;
-
-			adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
-			aCommentList.setAdapter(adapter1);
-			adapter1.notifyDataSetChanged();
+			sortByDate();
 			break;
-
-			// FIXME: On drugs.
 		case PICTURE:
-/**			SortingController sorting1 = new SortingController();
-			filter = Filter.PICTURE;
-
-			ArrayList<Comment> commentList = sorting1.sortPictures(null);
-			adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
-			aCommentList.setAdapter(adapter1);
-			adapter1.notifyDataSetChanged(); **/
+			sortByPicture();
 			break;
-
 		default:
 			filter = Filter.NONE;
 			//return super.onOptionsItemSelected(item);
-			//sorted = false;
+			//sorted = false;\
 			break;
 		}
 	}
-
 
 	/**
 	 * onResume populates the listview with results from
@@ -317,9 +318,10 @@ public class TopCommentsActivity extends ListActivity {
 					user.profile.cache.getTopComments(true));
 			aCommentList.setAdapter(adapter1);
 
-			//Collections.sort(user.profile.cache.comments);
-			//Collections.reverse(user.profile.cache.comments);
-
+			Collections.sort(user.profile.cache.comments);
+			Collections.reverse(user.profile.cache.comments);
+			reapplyFilter();
+			
 			adapter1.notifyDataSetChanged();
 		}
 	}
@@ -624,24 +626,10 @@ public class TopCommentsActivity extends ListActivity {
                 
                 tVUsername.setText("Username:"+thread.getUserName().toString());
            //     tVName.setText("First,Lastname: "+ thread.);
-                
-                
-                
-                
-                
-
-
-
             }
         });
-
-
-
         window.setAttributes(wlp);
         dialog.show();
-
-
-
     }
 
 	/**

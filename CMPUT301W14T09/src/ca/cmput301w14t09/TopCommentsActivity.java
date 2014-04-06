@@ -754,21 +754,14 @@ public class TopCommentsActivity extends ListActivity {
 			case R.id.sortDate:
 				sortByDate();
 				break;
-	
-				// FIXME: On drugs.
 			case R.id.sortPicture:
-			
-				break;
-	
+				sortByPicture();
+				break;	
 			case R.id.sortByDiffLocation:
-				filter = Filter.DIFFLOCATION;
-	
-				Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
-				startActivityForResult(intentdiff, 123);
-				return true;
+				sortByDiffLocation();
+				break;
 			default:
 				filter = Filter.NONE;
-				//return super.onOptionsItemSelected(item);
 				sorted = false;
 				break;
 		}
@@ -801,6 +794,9 @@ public class TopCommentsActivity extends ListActivity {
 		adapter1.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Sorts the list by picture.
+	 */
 	private void sortByPicture() {
 		SortingController sorting1 = new SortingController();
 		filter = Filter.PICTURE;
@@ -813,7 +809,20 @@ public class TopCommentsActivity extends ListActivity {
 		adapter1.notifyDataSetChanged();	
 	}
 	
-	private void aaaaa() {
+	/**
+	 * Sorts the list by a different location.
+	 */
+	private void sortByDiffLocation() {
+		filter = Filter.DIFFLOCATION;
+		
+		Intent intentdiff = new Intent(getApplicationContext(), ChooseLocationActivity.class);
+		startActivityForResult(intentdiff, 123);
+	}
+	
+	/**
+	 * re-applies filter to results brought back from poll.
+	 */
+	private void reapplyFilter() {
 		switch (filter) {
 		case LOCATION:     
 			sortByLocation();
@@ -824,15 +833,13 @@ public class TopCommentsActivity extends ListActivity {
 		case PICTURE:
 			sortByPicture();
 			break;
-
 		default:
 			filter = Filter.NONE;
 			//return super.onOptionsItemSelected(item);
-			//sorted = false;
+			//sorted = false;\
 			break;
 		}
 	}
-
 
 	/**
 	 * onResume populates the listview with results from

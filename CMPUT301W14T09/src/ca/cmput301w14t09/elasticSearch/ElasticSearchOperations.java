@@ -300,7 +300,6 @@ public class ElasticSearchOperations extends Server{
     }
 
     public static void pushUserProfile(final UserProfileModel uPModel) throws InterruptedException {
-        // TODO Auto-generated method stub
         final CountDownLatch latch = new CountDownLatch(1);
 
         if (GSON == null)

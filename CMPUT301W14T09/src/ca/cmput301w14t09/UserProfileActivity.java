@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserProfileActivity extends Activity{
 
@@ -71,8 +72,13 @@ public class UserProfileActivity extends Activity{
 		Intent intent = getIntent();
 		user = (User)intent.getSerializableExtra("CURRENT_USER");
 		
+		
 		usernameText.setText("@/"+user.getUserName().toString());
-		userToProfile();
+		if (user.getUserName().toString().equalsIgnoreCase("guest"))
+			userToProfile("guest");
+		else 
+			userToProfile("notguest");
+		
 		return true;
 	}
 	
@@ -81,31 +87,38 @@ public class UserProfileActivity extends Activity{
 		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
 	}
 	
-	public void userToProfile(){
-		int size, lastItem;
-		try {
-			userProfile = ElasticSearchOperations.pullUserProfile(user.getUniqueID());
-			
-			if(!userProfile.isEmpty()){
-				size = userProfile.size();
-				lastItem = size-1;
-				
-				this.currentPicture = userProfile.get(lastItem).getPicture();
-				this.userProfilePicture.setImageBitmap(this.currentPicture);
-				this.firstLastName.setText(userProfile.get(lastItem).getFirstLastName().toString());
-				if(userProfile.get(lastItem).getSex().equalsIgnoreCase("male"))
-					this.maleOrFemale.setSelection(0);
-				else
-					this.maleOrFemale.setSelection(1);
-				
-				this.phoneText.setText(userProfile.get(lastItem).getPhone().toString());
-				this.emailText.setText(userProfile.get(lastItem).getEmail().toString());
-				this.biographyText.setText(userProfile.get(lastItem).getBiography().toString());
+	public void userToProfile(String text){
+
+		if (!text.equals("guest")){
+			int size, lastItem;
+			try {
+				userProfile = ElasticSearchOperations.pullUserProfile(user.getUniqueID());
+
+				if(!userProfile.isEmpty()){
+					size = userProfile.size();
+					lastItem = size-1;
+
+					this.currentPicture = userProfile.get(lastItem).getPicture();
+					this.userProfilePicture.setImageBitmap(this.currentPicture);
+					this.firstLastName.setText(userProfile.get(lastItem).getFirstLastName().toString());
+					if(userProfile.get(lastItem).getSex().equalsIgnoreCase("male"))
+						this.maleOrFemale.setSelection(0);
+					else
+						this.maleOrFemale.setSelection(1);
+
+					this.phoneText.setText(userProfile.get(lastItem).getPhone().toString());
+					this.emailText.setText(userProfile.get(lastItem).getEmail().toString());
+					this.biographyText.setText(userProfile.get(lastItem).getBiography().toString());
+				}
+
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}
+		else {
+			Toast.makeText(getApplicationContext(),"Guest can't have userprofile.", Toast.LENGTH_LONG).show();
+			finish();
 		}
 	}
 	

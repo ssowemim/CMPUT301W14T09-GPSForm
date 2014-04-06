@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import junit.framework.TestCase;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.FileManaging.CommentFactory;
+import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Cache;
 import ca.cmput301w14t09.Model.Comment;
 
@@ -30,10 +31,12 @@ public class CacheTest extends TestCase {
 	public void testadd(){
 		Cache cache = new Cache();
 	    LocationController lc1 = new LocationController();
-	    String text2 = "cameron";
-	    String text1 = "this is a comment";
+	    String authorname = "cameron";
+	    String commentText = "this is a comment";
+	    Boolean TopComment = true;
+	    SerializableBitmap pic = null;
 	    
-	    Comment comment = CommentFactory.buildComment(lc1, text2, text1, true, null, null, null);
+	    Comment comment = CommentFactory.buildComment(lc1, authorname, commentText, TopComment, pic, null, null);
 	    
 	    cache.add(comment);
 	    

@@ -54,6 +54,7 @@ public final class R {
         public static final int button2=0x7f080005;
         public static final int buttonReplies=0x7f080019;
         public static final int buttonSave=0x7f08000f;
+        public static final int button_return=0x7f080021;
         public static final int cancel=0x7f08002b;
         public static final int changebutton=0x7f08002e;
         public static final int comment=0x7f080003;
@@ -75,7 +76,7 @@ public final class R {
         public static final int imButtonProfile=0x7f080018;
         public static final int imageViewAttachment=0x7f080017;
         public static final int imageViewUserProfile=0x7f08000d;
-        public static final int imageView_profilePicture=0x7f080021;
+        public static final int imageView_profilePicture=0x7f080020;
         public static final int map=0x7f080001;
         public static final int middletext=0x7f080038;
         public static final int middletextdata=0x7f080039;
@@ -97,12 +98,11 @@ public final class R {
         public static final int takePicture=0x7f08002d;
         public static final int textView1=0x7f080022;
         public static final int textViewUsername=0x7f080008;
-        public static final int textView_bio=0x7f080020;
-        public static final int textView_email=0x7f08001e;
-        public static final int textView_fLastname=0x7f08001c;
-        public static final int textView_phone=0x7f08001d;
-        public static final int textView_sex=0x7f08001f;
-        public static final int textView_username=0x7f08001b;
+        public static final int textView_bio=0x7f08001f;
+        public static final int textView_email=0x7f08001d;
+        public static final int textView_fLastname=0x7f08001b;
+        public static final int textView_phone=0x7f08001c;
+        public static final int textView_sex=0x7f08001e;
         public static final int toptext=0x7f080036;
         public static final int toptextdata=0x7f080037;
         public static final int userProfile=0x7f08003f;

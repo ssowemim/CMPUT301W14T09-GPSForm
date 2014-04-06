@@ -50,7 +50,6 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.TopCommentsActivity.Filter;
@@ -100,10 +99,6 @@ public class CommentListActivity extends ListActivity {
 	protected CommentAdapter adapter;
 
 	Comment comment;
-
-
-
-	PictureModelList pictureModel;
 
 
 
@@ -161,7 +156,7 @@ public class CommentListActivity extends ListActivity {
 
 		});
 
-		// Handler polling
+	/**	// Handler polling
 		updateHandler = new Handler();
 		updateFunction = new Runnable() {
 			@Override
@@ -183,7 +178,7 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-		update.start(); 
+		update.start();  **/
 		//populateListView();
 	}
 
@@ -207,7 +202,7 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-		Thread update = new Thread() {
+	/**	Thread update = new Thread() {
 			public void run() {
 				while(true) {
 					try {
@@ -219,7 +214,7 @@ public class CommentListActivity extends ListActivity {
 				}
 			}
 		};
-		update.start();
+		update.start(); **/
 
 
 
@@ -393,7 +388,7 @@ public class CommentListActivity extends ListActivity {
 
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
 
-			Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
 		}
 
 		if (requestCode == 123 && resultCode == Activity.RESULT_OK){

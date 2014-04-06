@@ -44,6 +44,7 @@ public class User implements Serializable {
 	public User() {
 		this.userName = "";
 		this.deviceId = "";
+		this.uniqueID = "007";
 	}
 
 	public User(String userName) {
@@ -54,7 +55,7 @@ public class User implements Serializable {
 		if (userName.equalsIgnoreCase("guest"))
 			this.uniqueID="00000".toString();
 		else
-			this.uniqueID = UUID.randomUUID().toString();
+			this.uniqueID = userName;
 	}
 
 	

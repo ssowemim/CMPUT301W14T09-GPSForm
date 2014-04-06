@@ -142,10 +142,9 @@ public class UserProfileActivity extends Activity{
 	
 	public void saveUserProfile(View v){
 
-		currentPicture = BitmapFactory.decodeResource(this.getResources(), R.drawable.icon_user_profile);
 		uPController.finalizeVariables(user.getUniqueID().toString(), firstLastName.getText().toString(), 
 									   maleOrFemale.getSelectedItem().toString(), phoneText.getText().toString(),emailText.getText().toString(), 
-									   biographyText.getText().toString(), currentPicture);
+									   biographyText.getText().toString(), this.currentPicture);
 		finish();
 	}
 	

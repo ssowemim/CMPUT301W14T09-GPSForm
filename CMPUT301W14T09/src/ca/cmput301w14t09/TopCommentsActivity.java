@@ -50,9 +50,9 @@ import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.CommentAdapter;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.Model.PictureModelList;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import ca.cmput301w14t09.Model.User;
+import ca.cmput301w14t09.Model.UserProfileModel;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
 
@@ -86,8 +86,6 @@ public class TopCommentsActivity extends ListActivity {
 	protected Uri fileUri;
 
 	protected PopUpComment popUpComment = new PopUpComment(this);
-
-	PictureModelList pictureModel;
 
 	protected ThreadAdapter adapter1;
 
@@ -178,7 +176,7 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		ArrayList<Comment> topComments = null;
+		//ArrayList<Comment> topComments = null;
 		boolean sorted = true;
 
 		switch (item.getItemId()) {
@@ -458,9 +456,6 @@ public class TopCommentsActivity extends ListActivity {
 			fileUri = popUpComment.getFleUri();
 			if (resultCode == RESULT_OK) {
 				popUpComment.pictureResult(fileUri);
-				Toast.makeText(this.getApplicationContext(),
-						"Picture Taken" + fileUri, Toast.LENGTH_SHORT)
-						.show();
 
 			} else if (resultCode == RESULT_CANCELED) {
 				// user cancelled Image capture
@@ -472,7 +467,12 @@ public class TopCommentsActivity extends ListActivity {
 	}
 
 
-
+	/**
+	 * This customdialog method bring up the three options of viewing attachment,
+	 * viewing user profile and viewing replies.
+	 * @param arg2
+	 * @author ssowemim
+	 */
     private void customOptionsDialog(final int arg2){
         final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
 
@@ -606,27 +606,77 @@ public class TopCommentsActivity extends ListActivity {
 
         dialogProfileButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
-                dialog2.setTitle(comment.getAuthorName() + " | Profile");
-                dialog2.setContentView(R.layout.dialog_user_profile);
-                dialog2.show();
-                
-                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-                
-                TextView tVUsername = (TextView)dialog2.findViewById(R.id.textView_username);
-                TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
-                TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
-                TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
-                TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
-                ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
-                TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
-                
-                tVUsername.setText("Username:"+thread.getUserName().toString());
-           //     tVName.setText("First,Lastname: "+ thread.);
-            }
+        	@Override
+        	public void onClick(View v) {
+
+        		Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+        		ArrayList<UserProfileModel> userProfile = null;
+        		int size, lastItem;
+        		
+        		if (thread.getUserName().equalsIgnoreCase("guest")){
+        			//dialog2.dismiss();
+        			Toast.makeText(getApplicationContext(),"Guests don't have a user profile", Toast.LENGTH_LONG).show();
+        		}
+
+        		else {
+        			try {
+        				userProfile = ElasticSearchOperations.pullUserProfile(thread.getUserName());
+
+        			} catch (InterruptedException e) {
+        				// TODO Auto-generated catch block
+        				e.printStackTrace();
+        			}
+
+
+        			size = userProfile.size();
+        			lastItem = size-1;	
+
+        			// TODO Auto-generated method stub
+        			final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
+        			dialog2.setTitle(comment.getAuthorName() + " | Profile");
+        			dialog2.setContentView(R.layout.dialog_user_profile);
+        			dialog2.show();
+
+        			Button returnButton = (Button)dialog2.findViewById(R.id.button_return);
+        			TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
+        			TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
+        			TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
+        			TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
+        			ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
+        			TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
+        			Bitmap pic;
+
+        			returnButton.setOnClickListener(new View.OnClickListener() {
+
+        				@Override
+        				public void onClick(View v) {
+        					// TODO Auto-generated method stub
+        					dialog2.dismiss();
+
+        				}
+        			});
+
+        			if(!(userProfile.isEmpty() || size == 0)){
+
+        				tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
+        				tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
+        				tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
+        				tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
+        				pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
+        				iVPic.setImageBitmap(pic);
+        				tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
+        			}
+        			else {
+        				tVName.setText("Name: ");
+        				tVPhone.setText("Phone: ");
+        				tVEmail.setText("Email: ");
+        				tVSex.setText("Sex: ");
+        				tVBio.setText("Bio: ");
+        			}
+        		}
+
+
+        	}
         });
         window.setAttributes(wlp);
         dialog.show();

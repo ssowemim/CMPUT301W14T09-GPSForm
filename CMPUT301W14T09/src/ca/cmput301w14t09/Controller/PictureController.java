@@ -101,7 +101,7 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview, Comment comment) {
+    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview) {
         try {
             picImagePreview.setVisibility(View.VISIBLE);
 
@@ -125,7 +125,6 @@ public class PictureController extends Activity{
 
     public Bitmap finalizePicture(Bitmap picture, ListActivity activity) {
     	if (picture == null) {
-    	      //  picture = new SerializableBitmap();
     		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
     		picture = Bitmap.createScaledBitmap(picture, 1, 1, false);
     		hasPicture = false;

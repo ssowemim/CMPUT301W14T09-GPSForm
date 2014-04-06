@@ -25,16 +25,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import ca.cmput301w14t09.R;
 
 /**
- * 
  * @author Conner
  * CommentAdapter sets up a listview of the object comment
  * http://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
- * 
  */
 public class CommentAdapter extends ArrayAdapter<Comment> {
 	private ArrayList<Comment> objects;
@@ -63,16 +60,15 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 		Comment i = objects.get(position);
 
 		if (i != null) {
+			
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
-
 			TextView geoLocation = (TextView) v.findViewById(R.id.geoLocation);
 			TextView geoLocationData = (TextView) v.findViewById(R.id.geoLocationData);
 			TextView authorName = (TextView) v.findViewById(R.id.authorName);
 			TextView authorNameData = (TextView) v.findViewById(R.id.authorNameData);
 			TextView commentName = (TextView) v.findViewById(R.id.commentName);
 			TextView commentData = (TextView) v.findViewById(R.id.commentData);
-		//	ImageView piv = (ImageView)v.findViewById(R.id.replyImagePreview);
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -100,10 +96,6 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 				    commentData.setText(i.getCommentText());
 				}
 			}
-			
-		/**	if (piv != null) {
-				piv.setImageBitmap(i.getPicture().bitmap);
-			} **/
 		}
 
 		// the view must be returned to our activity

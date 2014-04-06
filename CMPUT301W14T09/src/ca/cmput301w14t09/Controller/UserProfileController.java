@@ -15,7 +15,6 @@ public class UserProfileController{
 	Bitmap pic;
 	
 	public UserProfileController(UserProfileModelList uPModelList) {
-		// TODO Auto-generated constructor stub
 		this.model = uPModelList;
 		
 	}

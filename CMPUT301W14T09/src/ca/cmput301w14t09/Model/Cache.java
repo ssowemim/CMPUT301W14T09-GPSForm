@@ -113,7 +113,7 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Get a sub-list of all top-comments from cache.
+     * Get a list of all top-comments from cache.
      * @return the comments
      */
     public ArrayList<Comment> getTopComments(boolean isTopComment) {

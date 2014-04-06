@@ -57,7 +57,7 @@ public class LocationController {
    	* @param LocationController
     */
     
-    public void locationchanged(android.location.Location location, Context context){
+    public void locationchanged(android.location.Location location){
         if(location != null){
         	
                 geodefault.setLatitude(location.getLatitude());
@@ -70,10 +70,10 @@ public class LocationController {
             }
         }
     
-    public void checklocations(GeoLocation selectedgeo, Context context){
+    public void checklocations(GeoLocation selectedgeo){
     	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
     		geo = selectedgeo;
-    		Toast.makeText(context,"Set geo to selected geo  "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show(); 
+    		
     	}
     	else{
     		geo = geodefault;

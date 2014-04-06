@@ -172,35 +172,6 @@ public class CommentListActivity extends ListActivity {
         System.out.println(firstComment);
 
 
-
-
-
-        //https://github.com/baoliangwang/CurrentLocation
-        //setup location manager
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        // Retrieve location updates through LocationListener interface
-        //https://github.com/baoliangwang/CurrentLocation
-        LocationListener locationListener = new LocationListener() {				
-
-            public void onProviderDisabled (String provider) {
-            }
-
-            public void onProviderEnabled (String provider) {
-            }
-
-            public void onStatusChanged (String provider, int status, Bundle extras) {
-            }
-
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                lc1.locationchanged(location, getApplicationContext());
-            }
-        };
-        //request location update
-        //https://github.com/baoliangwang/CurrentLocation
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListener);
-
         // Handler polling
         updateHandler = new Handler();
         updateFunction = new Runnable() {
@@ -306,17 +277,15 @@ public class CommentListActivity extends ListActivity {
                 try {
                     commentThread = ElasticSearchOperations.pullOneThread(firstComment);
                     user.profile.cache.add(commentThread);
+                    FileSaving.saveUserFile(user, this);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-
-            FileSaving.saveUserFile(user, this);
             adapter = new CommentAdapter(this,
                     R.layout.comment_view,
                     user.profile.cache.getSubComments(firstComment));
-
 
             favList.setAdapter(adapter);
             adapter.notifyDataSetChanged();

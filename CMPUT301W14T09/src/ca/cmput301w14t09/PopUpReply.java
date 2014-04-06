@@ -23,18 +23,22 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 public class PopUpReply extends PopUpComment {
 	
+	 CommentListActivity commentListActivity = null;
+	
     public PopUpReply(Activity caller) {
         super(caller);
     }
 
     //@SuppressLint("NewApi")
     public void popUp(final Activity caller, final Uri fileUri, final LocationController lc1, final GeoLocation selectedgeo, final User user, final String firstComment, String windowName) {
+    	
+    	commentListActivity = (CommentListActivity) caller;
     	dialog = new Dialog(caller);
     	
         dialog.setContentView(R.layout.pop_up_comment);
         dialog.setTitle(windowName);
 
-        final TopCommentsActivity topCommentActivity = null;
+       
         
         authorText=(EditText)dialog.findViewById(R.id.authorText);
         commentText=(EditText)dialog.findViewById(R.id.commentText);
@@ -95,7 +99,14 @@ public class PopUpReply extends PopUpComment {
                 user.getProfile().setAuthorName(text2);
                 FileSaving.saveUserFile(user, caller);
                 
-               
+                
+                //selected location
+                GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
+                final GeoLocation geodefault = lc1.getGeodefault();
+                
+                Toast.makeText(caller,"Selected geo "+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
+                Toast.makeText(caller,"Selected default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
+                
                 picture = pictureController.finalizePicture(picture, (ListActivity) caller);
                 Boolean hasPicture = pictureController.getHasPicture();
 
@@ -113,6 +124,10 @@ public class PopUpReply extends PopUpComment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                
+                //reset selected location for comments
+                topCommentActivity.resetSelectedLocation();
+                Toast.makeText(caller,"Selectedgeo reset"+selectedgeo.getLatitude(), Toast.LENGTH_LONG).show();
 
                 
                 dialog.dismiss();

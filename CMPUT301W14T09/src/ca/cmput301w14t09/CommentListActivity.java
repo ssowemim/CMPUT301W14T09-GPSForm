@@ -127,8 +127,7 @@ public class CommentListActivity extends ListActivity {
 
                 Comment thread = (Comment)(favList.getItemAtPosition(arg2)); 
                 optionsDialog(thread);
-                //Toast.makeText(getApplicationContext(),
-                //        "Comment Added To Favourites.", Toast.LENGTH_LONG).show();
+               
             }
 
 
@@ -393,5 +392,7 @@ public class CommentListActivity extends ListActivity {
         selectedgeo.setLongitude(longitude);
 
     }
+    
+    
 
 }

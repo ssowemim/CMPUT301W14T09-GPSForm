@@ -21,7 +21,7 @@ package ca.cmput301w14t09.elasticSearch;
 import java.util.Collection;
 
 /**
- * 
+ * @author Conner 
  * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/Hits.java
  * @param <T>
  */

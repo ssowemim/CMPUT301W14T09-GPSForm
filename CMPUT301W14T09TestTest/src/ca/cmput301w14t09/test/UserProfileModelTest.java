@@ -21,7 +21,7 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 	
 	UserProfileModel testUPModel = new UserProfileModel("UNIQUEID", "Benjamin Button", "Male", 
 											"1234567899", "benjamin@gutton.com", "something long", 
-											BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img));
+											null);
 	
 	public void testUniqueID(){
 		//check if the unique id matches the one created with the user profile
@@ -58,5 +58,19 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		
 		testUPModel.setEmail("bobby@brown.com");
 		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
+	}
+	
+	public void testBio(){
+		assertEquals("something long", testUPModel.getBiography());
+		
+		testUPModel.setBiography("biography");
+		assertEquals("biography", testUPModel.getBiography());
+	}
+	
+	public void testPicture(){
+		assertNull(testUPModel.getPicture());
+		
+		testUPModel.setPicture(BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img));
+		assertNotNull(testUPModel.getPicture());
 	}
 }

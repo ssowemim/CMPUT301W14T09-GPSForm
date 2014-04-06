@@ -18,12 +18,24 @@
         android:onClick = "popUp" />
 
     <ListView
-        android:id="@+id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/favorite1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp" >
+    	android:id="@+id/android:list"
+    	android:layout_width="match_parent"
+    	android:layout_height="500dp"
+    	android:layout_above="@+id/map"
+    	android:layout_below="@+id/favorite1"
+    	android:layout_centerHorizontal="true"
+    	android:layout_marginTop="52dp" >
+
     </ListView>
+    
+    <com.mapquest.android.maps.MapView
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         android:id="@+id/map"
+         android:layout_width="fill_parent"
+         android:layout_height="150dp"
+         android:layout_alignParentBottom="true"
+         android:layout_alignRight="@+id/comment"
+         android:apiKey="YOUR_APPKEY_HERE" >
+     </com.mapquest.android.maps.MapView>
 
 </RelativeLayout>

@@ -645,6 +645,7 @@ public class TopCommentsActivity extends ListActivity {
         			TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
         			ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
         			TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
+        			Bitmap pic;
 
         			returnButton.setOnClickListener(new View.OnClickListener() {
 
@@ -660,7 +661,8 @@ public class TopCommentsActivity extends ListActivity {
         			tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
         			tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
         			tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
-        			iVPic.setImageBitmap(userProfile.get(lastItem).getPicture());
+        			pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
+        			iVPic.setImageBitmap(pic);
         			tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
         		}
 

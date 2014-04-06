@@ -15,6 +15,8 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		super(activityClass);
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 
 }

@@ -1,6 +1,9 @@
 package ca.cmput301w14t09.test;
 
+import ca.cmput301w14t09.R;
 import ca.cmput301w14t09.TopCommentsActivity;
+import ca.cmput301w14t09.Model.UserProfileModel;
+import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.TestCase;
 
@@ -15,5 +18,17 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		super(activityClass);
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	UserProfileModel testUPModel = new UserProfileModel("UNIQUEID", "Benjamin Button", "Male", 
+											"1234567899", "benjamin@gutton.com", "something long", 
+											BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img));
+	
+	public void testUniqueID(){
+		//check if the unique id matches the one created with the user profile
+		assertEquals("UNIQUEID", testUPModel.getUniqueID());
+		
+		//going to change the uniqueID then check if it matches the changed one.
+		testUPModel.setUniqueID("CHANGEUNIQUEID");
+		assertEquals("CHANGEUNIQUEID", testUPModel.getUniqueID());
+	}
 }

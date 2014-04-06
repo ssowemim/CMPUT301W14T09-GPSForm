@@ -35,8 +35,9 @@ public class CacheTest extends TestCase {
 	    String commentText = "this is a comment";
 	    Boolean TopComment = true;
 	    SerializableBitmap pic = null;
+	    Boolean haspic = false;
 	    
-	    Comment comment = CommentFactory.buildComment(lc1, authorname, commentText, TopComment, pic, null, null);
+	    Comment comment = CommentFactory.buildComment(lc1, authorname, commentText, TopComment, pic, haspic, authorname);
 	    
 	    cache.add(comment);
 	    

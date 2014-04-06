@@ -59,4 +59,11 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		testUPModel.setEmail("bobby@brown.com");
 		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
 	}
+	
+	public void testBio(){
+		assertEquals("something long", testUPModel.getBiography());
+		
+		testUPModel.setBiography("biography");
+		assertEquals("biography", testUPModel.getBiography());
+	}
 }

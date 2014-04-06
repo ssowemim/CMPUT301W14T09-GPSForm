@@ -42,6 +42,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.cmput301w14t09.Controller.LocationController;
 import ca.cmput301w14t09.Controller.SortingController;
@@ -124,8 +125,6 @@ public class TopCommentsActivity extends ListActivity {
         setupMapView();
         setupMyLocation();
 
-
-        // Handler polling
         updateHandler = new Handler();
         updateFunction = new Runnable() {
 
@@ -234,8 +233,6 @@ public class TopCommentsActivity extends ListActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
     /**
      * onResume popluates the listview with results from
@@ -553,8 +550,6 @@ public class TopCommentsActivity extends ListActivity {
                         dialog2.setContentView(R.layout.dialog_user_profile);
                         dialog2.show();
 
-
-
                     }
                 });
 
@@ -581,6 +576,24 @@ public class TopCommentsActivity extends ListActivity {
                 dialog2.setTitle(comment.getAuthorName() + " | Profile");
                 dialog2.setContentView(R.layout.dialog_user_profile);
                 dialog2.show();
+                
+                Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
+                
+                TextView tVUsername = (TextView)dialog2.findViewById(R.id.textView_username);
+                TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
+                TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
+                TextView tVEmail = (TextView)dialog2.findViewById(R.id.textView_email);
+                TextView tVSex = (TextView)dialog2.findViewById(R.id.textView_sex);
+                ImageView iVPic = (ImageView)dialog2.findViewById(R.id.imageView_profilePicture);
+                TextView tVBio = (TextView)dialog2.findViewById(R.id.textView_bio);
+                
+                tVUsername.setText("Username:"+thread.getUserName().toString());
+           //     tVName.setText("First,Lastname: "+ thread.);
+                
+                
+                
+                
+                
 
 
 

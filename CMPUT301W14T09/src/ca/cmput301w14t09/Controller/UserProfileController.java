@@ -49,7 +49,7 @@ public class UserProfileController{
 	
 	public String getNewbio(){
 		return bio;
-	}
+	} 
 	
 	public String getNewphone(){
 		return phone;

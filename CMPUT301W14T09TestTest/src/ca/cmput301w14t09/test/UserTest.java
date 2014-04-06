@@ -16,11 +16,7 @@ public class UserTest extends TestCase {
 	public void testCreateUser(){
 		User newUser = new User();
 		newUser.setDeviceId("dev1");
-		newUser.setUserName("Tester");
-		
+		newUser.setUserName("Tester");	
 		assertTrue(newUser.getDeviceId() == "dev1" && newUser.getUserName() == "Tester");
-		
 	}
-	
-
 }

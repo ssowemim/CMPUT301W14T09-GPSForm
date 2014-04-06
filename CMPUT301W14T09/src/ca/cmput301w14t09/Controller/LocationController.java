@@ -25,7 +25,7 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
  * 
- * @author Cameron Alexander
+ * @author Cameron 
  * This class is reponsible for getting geolocation when it is requested. It can setup a location
  * manager and take geolocation update requests. It will create a geolocation object using the android GPS location
  * listener.  This controller is also used for updating the location of a user if the user wants to post a comment in a

@@ -74,7 +74,6 @@ public class CommentListActivity extends ListActivity {
 	protected Dialog dialog;
 	protected ListView aCommentList;
 
-
 	//initialize variables for map 
 	protected MapView map;
 	private MyLocationOverlay myLocationOverlay;
@@ -88,18 +87,15 @@ public class CommentListActivity extends ListActivity {
 	protected PopUpReply popUpReply = new PopUpReply(this);
 	protected PopUpSelect popUpSelect = new PopUpSelect(this);
 
-
 	//comment vars
 	protected CommentAdapter adapter;
 	Comment comment;
 	protected ListView favList;
 	protected String firstComment;
 
-
 	//init handlers for  caching
 	private Handler  updateHandler;
 	private Runnable updateFunction;
-
 
 	//File uri to store Images
 	private Uri fileUri;
@@ -117,7 +113,6 @@ public class CommentListActivity extends ListActivity {
 	}
 	private Filter filter = Filter.DATE;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,7 +120,6 @@ public class CommentListActivity extends ListActivity {
 		favList = (ListView) findViewById(android.R.id.list);
 		final Activity commentActivity = this;
 
-		
 		//setup map
 		setupMapView();
 		setupMyLocation();
@@ -138,9 +132,7 @@ public class CommentListActivity extends ListActivity {
 				optionsDialog(thread);
 
 			}
-
-
-
+			
 		});
 
 		// Handler polling
@@ -164,23 +156,22 @@ public class CommentListActivity extends ListActivity {
 				}
 			}
 		};
-
-		update.start();
 		
+		update.start();
 	}
-
+	
+	/**
+	 * This function inflates the menu and adds items to the action bar if it is present.
+	 * It also intialized Handler polling and populates the listview with reply comments
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		
 		getMenuInflater().inflate(R.menu.comment_list, menu);
-
 		intent = getIntent();
 		user = (User) intent.getSerializableExtra("CURRENT_USER");
 		firstComment = (String) getIntent().getSerializableExtra("THREAD_ID");
-		System.out.println(firstComment);
-
-
-		// Handler polling
+	
 		updateHandler = new Handler();
 		updateFunction = new Runnable() {
 			@Override
@@ -189,26 +180,8 @@ public class CommentListActivity extends ListActivity {
 			}
 		};
 
-	/**	Thread update = new Thread() {
-			public void run() {
-				while(true) {
-					try {
-						updateHandler.post(updateFunction);
-						sleep(10000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		};
-		update.start(); **/
-
-
-
 		return true;
 	}
-
-
 
 
 	/**
@@ -289,7 +262,6 @@ public class CommentListActivity extends ListActivity {
 		adapter.notifyDataSetChanged();	
 	}
 	
-
 	/**
 	 * re-applies filter to results brought back from poll.
 	 */
@@ -313,11 +285,14 @@ public class CommentListActivity extends ListActivity {
 	}
 
 
+	/**
+	 * this function calls the popup reply to be generated when the reply button is pressed
+	 * @param v
+	 * @throws InterruptedException
+	 */
 	public void popUp(View v) throws InterruptedException {
 		popUpReply.popUp(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply");
 	}
-
-
 
 
 	/**
@@ -330,10 +305,13 @@ public class CommentListActivity extends ListActivity {
 
 	}
 
-
+	/**
+	 * This function is responsible for pulling the thread of comments and getting the comment replies
+	 * It then populates the listview to display the replies, it reapplies the default filter to sort comments
+	 * which by default is date, The filter changes if user has selected to sort by a different way.
+	 */
 	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
-
 
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
@@ -351,21 +329,14 @@ public class CommentListActivity extends ListActivity {
 					user.profile.cache.getSubComments(firstComment));
 
 			favList.setAdapter(adapter);
-			
-
-			//Collections.sort(user.profile.cache.comments);
-			//Collections.reverse(user.profile.cache.comments);
 			reapplyFilter();
 			adapter.notifyDataSetChanged();
 		}
 	}
 
-
 	/**
-	 * onActivityResult will Receive the activity result
-	 * method and will be called after closing the camera,
-	 * after the ChooseLocationActivity is closed to get geolocation, or the commentList. this method.
-	 * Used for updating selectedgeolocation
+	 * onActivityResult will Receive the activity result method and will be called after closing 
+	 * the camera and after the ChooseLocationActivity is closed to get geolocation, or the commentList. 
 	 * //http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
 	 */
 	@Override
@@ -384,11 +355,10 @@ public class CommentListActivity extends ListActivity {
 
 		}
 
-
 		// if the result is capturing Image
 		if (requestCode == OBTAIN_PIC_REQUEST_CODE) {
 			if (resultCode == RESULT_OK) {
-				popUpReply.pictureResult(fileUri);
+					popUpReply.pictureResult(fileUri);
 			} else if (resultCode == RESULT_CANCELED) {
 				// user cancelled Image capture
 				Toast.makeText(this.getApplicationContext(),
@@ -417,7 +387,9 @@ public class CommentListActivity extends ListActivity {
 	}
 
 
-
+	/**
+	 * This function restores the saved instance state using a file_uri
+	 */
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
@@ -441,6 +413,7 @@ public class CommentListActivity extends ListActivity {
 		popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
 
 	}
+	
 	/**
 	 * Return the selectedgeo object
 	 * @author Cameron Alexander
@@ -490,7 +463,4 @@ public class CommentListActivity extends ListActivity {
 			}
 		});
 	}
-
-
-
 }

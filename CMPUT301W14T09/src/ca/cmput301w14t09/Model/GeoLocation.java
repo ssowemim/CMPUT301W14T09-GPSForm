@@ -21,7 +21,7 @@ package ca.cmput301w14t09.Model;
 import java.io.Serializable;
 
 /**
- * 
+ * @author Cameron
  * GeoLocation is an object that holds the
  * latitude and longitude of a comment
  *
@@ -38,36 +38,50 @@ public class GeoLocation implements Serializable {
 	 * initiate the Geolocation object with set lat lng as 0 and name as ""
 	 *
 	 */
-
 	public GeoLocation() {
 		latitude = 0.0;
 		longitude = 0.0;
 		name = "";
 	}
 
+	/**
+	 * @return latitude
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
+	/**
+	 * @param latitude
+	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
+	/**
+	 * @return longitude
+	 */
 	public double getLongitude() {
 		return longitude;
 	}
 
-
+	/**
+	 * @param longitude
+	 */
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
 
-
+	/**
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
 
-
+	/**
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -75,11 +89,8 @@ public class GeoLocation implements Serializable {
 	/**
 	 * This function will be used in further iterations to calculate proximity to a
 	 * target location
-	 * 
 	 */
-
 	public double calculateProximity(GeoLocation targetLocation){
 		return 0;
 	}
-
 }

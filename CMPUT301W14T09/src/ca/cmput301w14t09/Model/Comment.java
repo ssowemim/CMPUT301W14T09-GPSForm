@@ -42,7 +42,6 @@ import com.google.gson.Gson;
  * Comparable<Comment> - Allows for sorting on Comments
  * 
  */
-
 public class Comment implements Comparable<Comment>, Serializable {
 
 	private static final long serialVersionUID = 3L;
@@ -103,7 +102,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	public Comment load(String userName, String name, Activity main) {
 		Gson gson = new Gson();
 		Comment comment = null;
-
 		try{
 			FileInputStream fis = main.openFileInput(userName + ".sav");
 			InputStreamReader isr = new InputStreamReader(fis);
@@ -112,10 +110,8 @@ public class Comment implements Comparable<Comment>, Serializable {
 			comment = gson.fromJson(jsonOut, Comment.class);
 			buff.close();
 		} catch (FileNotFoundException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		return comment;
@@ -126,7 +122,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	 * @param otherComment - other comment object to compare to.
 	 * @return - this or otherComment, whichever has earlier date.
 	 */
-
 	public int compareTo(Comment otherComment) {
 		Date compareDate = ((Comment) otherComment).getPostDate();
 		return this.postDate.compareTo(compareDate);
@@ -135,7 +130,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the geoLocation
 	 */
-
 	public GeoLocation getGeoLocation() {
 		return geoLocation;
 	}
@@ -143,7 +137,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @param geoLocation the geoLocation to set
 	 */
-
 	public void setGeoLocation(GeoLocation geoLocation) {
 		this.geoLocation = geoLocation;
 	}
@@ -151,14 +144,14 @@ public class Comment implements Comparable<Comment>, Serializable {
 	public SerializableBitmap getPicture(){
 		return picture;
 	}
-	
+
 	public void setPicture(SerializableBitmap picture){
 		this.picture = picture;
 	}
+	
 	/**
 	 * @return the authorName
 	 */
-
 	public String getAuthorName() {
 		return authorName;
 	}
@@ -166,7 +159,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @param authorName the authorName to set
 	 */
-
 	public void setAuthorName(String authorName) {
 		this.authorName = authorName;
 	}
@@ -174,7 +166,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the commentText
 	 */
-
 	public String getCommentText() {
 		return commentText;
 	}
@@ -189,7 +180,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the favoriteCount
 	 */
-
 	public int getFavoriteCount() {
 		return favoriteCount;
 	}
@@ -197,7 +187,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @param favoriteCount the favoriteCount to set
 	 */
-
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
@@ -205,7 +194,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the postDate
 	 */
-
 	public Date getPostDate() {
 		return postDate;
 	}
@@ -214,7 +202,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	 * Set the post date variable. 
 	 * @param now
 	 */
-
 	public void setPostDate(Date now) {
 		this.postDate = now;
 	}
@@ -223,7 +210,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the topComment
 	 */
-
 	public Boolean getTopComment() {
 		return topComment;
 	}
@@ -231,7 +217,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @param topComment the topComment to set
 	 */
-
 	public void setTopComment(Boolean topComment) {
 		this.topComment = topComment;
 	}
@@ -239,7 +224,6 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @return the threadId
 	 */
-
 	public String getThreadId() {
 		return threadId;
 	}
@@ -247,56 +231,53 @@ public class Comment implements Comparable<Comment>, Serializable {
 	/**
 	 * @param threadId the threadId to set
 	 */
-
 	public void setThreadId(String threadId) {
 		this.threadId = threadId;
 	}
-	
+
+	/**
+	 * @param hasPicture
+	 */
 	public void setHasPicture(Boolean hasPicture){
 		this.hasPicture = hasPicture;
 	}
-
+	
+	/**
+	 * @return Boolean
+	 */
 	public Boolean getHasPicture(){
 		return hasPicture;
 	}
 
-    
-    /**
-     * @return the userName
-     */
-    public String getUserName()
-    {
-    
-        return userName;
-    }
+	/**
+	 * @return the userName
+	 */
+	public String getUserName()
+	{
+		return userName;
+	}
 
-    
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName)
-    {
-    
-        this.userName = userName;
-    }
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
 
-    
-    /**
-     * @return the uuid
-     */
-    public String getUuid()
-    {
-    
-        return uuid;
-    }
+	/**
+	 * @return the uuid
+	 */
+	public String getUuid()
+	{
+		return uuid;
+	}
 
-    
-    /**
-     * @param uuid the uuid to set
-     */
-    public void setUuid(String uuid)
-    {
-    
-        this.uuid = uuid;
-    }
+	/**
+	 * @param uuid the uuid to set
+	 */
+	public void setUuid(String uuid)
+	{
+		this.uuid = uuid;
+	}
 }

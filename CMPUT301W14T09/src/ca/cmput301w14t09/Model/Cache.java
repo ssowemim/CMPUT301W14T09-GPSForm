@@ -1,3 +1,21 @@
+/**
+
+License GPLv3: GNU GPL Version 3
+<http://gnu.org/licenses/gpl.html>.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package ca.cmput301w14t09.Model;
 
 import java.io.Serializable;
@@ -6,8 +24,9 @@ import java.util.Collections;
 
 /**
  * 
- * @author bilec
- *
+ * @author Conner
+ * Caching model for to allow saving for the comments 
+ * 
  */
 public class Cache implements Serializable {
 
@@ -29,17 +48,13 @@ public class Cache implements Serializable {
      */
     public void add(Comment comment) {
         if (comment == null) return;
-        //   comments.remove(comment);
-        //}
         if (existsInCache(comment) == false) {
-
             if (comments.size() < MAX_LENGTH) {
                 comments.add(comment);
             }
             else {
                 replaceTail(comment);
             } 
-
         }
     } 
 
@@ -48,8 +63,6 @@ public class Cache implements Serializable {
      * of which is parsed using add(single comment).
      * @param comments
      */
-
-
     public void add(ArrayList<Comment> newComments) {
         if (newComments == null) return;
 
@@ -58,7 +71,6 @@ public class Cache implements Serializable {
         }
     }
 
-
     /**
      * In the event comment list size is exceeded, replace tail comment with newly cached comment.
      * Called by add(comment) if max size exceeded.
@@ -66,7 +78,6 @@ public class Cache implements Serializable {
      */
     private void replaceTail(Comment comment) {
         int tailIndex = MAX_LENGTH - 1;
-
         comments.remove(tailIndex);
         comments.add(tailIndex, comment);
         Collections.rotate(comments, 1);
@@ -79,7 +90,6 @@ public class Cache implements Serializable {
      */
     private boolean existsInCache(Comment comment) {
         boolean found = false;
-
         if(comments.size() > 0) {
             for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
                 if(comment.getUuid().equals(comments.get(index).getUuid())) {   
@@ -89,7 +99,6 @@ public class Cache implements Serializable {
                 }
             }
         }
-
         return found;
     }
     
@@ -109,13 +118,11 @@ public class Cache implements Serializable {
      */
     public ArrayList<Comment> getTopComments(boolean isTopComment) {
         ArrayList<Comment> topComments = new ArrayList<Comment>();
-
         for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
             if(comments.get(index).getTopComment() == true) {
                 topComments.add(comments.get(index));
             }
         }
-
         return topComments;
     }
 
@@ -131,7 +138,6 @@ public class Cache implements Serializable {
                 commonThreadComments.add(comments.get(index));
             }
         }
-
         return commonThreadComments;
     }
 

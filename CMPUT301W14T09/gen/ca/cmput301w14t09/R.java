@@ -51,13 +51,13 @@ public final class R {
         public static final int authorName=0x7f080012;
         public static final int authorNameData=0x7f080013;
         public static final int authorText=0x7f080028;
-        public static final int button2=0x7f080005;
+        public static final int button2=0x7f080004;
         public static final int buttonReplies=0x7f080019;
         public static final int buttonSave=0x7f08000f;
         public static final int button_return=0x7f080021;
         public static final int cancel=0x7f08002b;
         public static final int changebutton=0x7f08002e;
-        public static final int comment=0x7f080003;
+        public static final int comment=0x7f080002;
         public static final int commentData=0x7f080015;
         public static final int commentName=0x7f080014;
         public static final int commentText=0x7f080029;
@@ -67,9 +67,9 @@ public final class R {
         public static final int editTextEmail=0x7f08000b;
         public static final int editTextFirstLastName=0x7f080009;
         public static final int editTextPhone=0x7f08000a;
-        public static final int editUsername=0x7f080004;
+        public static final int editUsername=0x7f080003;
         public static final int favorite=0x7f080007;
-        public static final int favorite1=0x7f080002;
+        public static final int favorite1=0x7f080005;
         public static final int geoLocation=0x7f080010;
         public static final int geoLocationData=0x7f080011;
         public static final int imButtonAttachment=0x7f08001a;
@@ -77,7 +77,7 @@ public final class R {
         public static final int imageViewAttachment=0x7f080017;
         public static final int imageViewUserProfile=0x7f08000d;
         public static final int imageView_profilePicture=0x7f080020;
-        public static final int map=0x7f080001;
+        public static final int map=0x7f080000;
         public static final int middletext=0x7f080038;
         public static final int middletextdata=0x7f080039;
         public static final int mq_geocode_btn=0x7f080024;
@@ -87,7 +87,7 @@ public final class R {
         public static final int pic_text=0x7f080026;
         public static final int pic_timestamp=0x7f080027;
         public static final int reply=0x7f080033;
-        public static final int replyComment=0x7f080000;
+        public static final int replyComment=0x7f080001;
         public static final int replyImagePreview=0x7f080016;
         public static final int save=0x7f08002a;
         public static final int sortByDiffLocation=0x7f080040;

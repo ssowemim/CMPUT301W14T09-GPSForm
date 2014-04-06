@@ -51,7 +51,6 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		
 		testUPController.finalizeVariables("UniqueID", "Name", "Female", phone, "email@facebook.com", 
 										bio, picture);
-		
 		assertNull(list);
 		list = testUPModel.getList();
 		assertNotNull(list);

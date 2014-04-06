@@ -47,7 +47,7 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		location.setLatitude(-53.2345);
 		location.setLongitude(103.44566);
 		assertTrue(location.getLatitude() == -53.2345);
-		locationcontroller.locationchanged(location, context);
+		locationcontroller.locationchanged(location);
 		assertTrue(locationcontroller.getGeodefault().getLatitude() == -53.2345);
 	}
 

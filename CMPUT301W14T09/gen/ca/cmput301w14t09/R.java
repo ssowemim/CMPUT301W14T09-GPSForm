@@ -68,7 +68,7 @@ public final class R {
         public static final int editTextPhone=0x7f08000a;
         public static final int editUsername=0x7f080004;
         public static final int favorite=0x7f080007;
-        public static final int favorite1=0x7f080001;
+        public static final int favorite1=0x7f080002;
         public static final int geoLocation=0x7f080010;
         public static final int geoLocationData=0x7f080011;
         public static final int imButtonAttachment=0x7f08001a;
@@ -76,7 +76,7 @@ public final class R {
         public static final int imageViewAttachment=0x7f080017;
         public static final int imageViewUserProfile=0x7f08000d;
         public static final int imageView_profilePicture=0x7f080021;
-        public static final int map=0x7f080002;
+        public static final int map=0x7f080001;
         public static final int middletext=0x7f080038;
         public static final int middletextdata=0x7f080039;
         public static final int mq_geocode_btn=0x7f080024;

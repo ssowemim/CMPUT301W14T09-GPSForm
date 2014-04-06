@@ -37,7 +37,6 @@ public class LocationController {
 
 	private GeoLocation geo = new GeoLocation();
 	GeoLocation geodefault = new GeoLocation();
-	//GeoLocation selcommentlocation = new GeoLocation();
 	LocationManager lm = null;
 	Intent intent = null;
 
@@ -114,7 +113,6 @@ public class LocationController {
 	{
 		geodefault.setLatitude(lat);
 		geodefault.setLongitude(lng);
-		//Toast.makeText(context,"Mapquest updates default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
 
 	}
 

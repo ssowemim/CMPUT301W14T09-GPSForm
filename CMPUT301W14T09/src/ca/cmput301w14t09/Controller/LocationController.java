@@ -1,5 +1,5 @@
 /**
- 
+
 License GPLv3: GNU GPL Version 3
 <http://gnu.org/licenses/gpl.html>.
 This program is free software: you can redistribute it and/or modify
@@ -35,78 +35,78 @@ import ca.cmput301w14t09.Model.GeoLocation;
  */
 public class LocationController {
 
-    private GeoLocation geo = new GeoLocation();
-    GeoLocation geodefault = new GeoLocation();
-    //GeoLocation selcommentlocation = new GeoLocation();
-    LocationManager lm = null;
-    Intent intent = null;
-    
-   /**
-    * function returns geolocation object
-    * @return
-    */
-    public GeoLocation getGeoLocation() {
-        return geo;
-    }
-    
-    /**
-   	* location changed function responsible for getting location points from GPS location on android activity
-   	* and then setting the geolocation in Location controller to the current location of the GPS.
-   	* @param LocationController
-    */
-    public void locationchanged(android.location.Location location){
-        if(location != null){
-        	
-                geodefault.setLatitude(location.getLatitude());
-                geodefault.setLongitude(location.getLongitude()); 
-                      
-            }
-        }
-    
-    /**
-     * This function compares a geolocation to another geolocation in this case default or selected
-     * If selected contains points then the geolocation will be set to defaultgeo
-     * @param selectedgeo
-     */
-    public void checklocations(GeoLocation selectedgeo){
-    	if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
-    		
-    		geo = selectedgeo;
+	private GeoLocation geo = new GeoLocation();
+	GeoLocation geodefault = new GeoLocation();
+	//GeoLocation selcommentlocation = new GeoLocation();
+	LocationManager lm = null;
+	Intent intent = null;
 
-    	}
-    	else{
-    		
-    		geo = geodefault;
-    	
-    	}
-    }
-    
-    /**
-     * This function resets a geolocations lat and long coordinates to 0.0 0.0
-     * @param selectedgeo
-     */
-    public void resetselectedlocation(GeoLocation selectedgeo){
-    	
-    	double latitude = 0.0;
+	/**
+	 * function returns geolocation object
+	 * @return
+	 */
+	public GeoLocation getGeoLocation() {
+		return geo;
+	}
+
+	/**
+	 * location changed function responsible for getting location points from GPS location on android activity
+	 * and then setting the geolocation in Location controller to the current location of the GPS.
+	 * @param LocationController
+	 */
+	public void locationchanged(android.location.Location location){
+		if(location != null){
+
+			geodefault.setLatitude(location.getLatitude());
+			geodefault.setLongitude(location.getLongitude()); 
+
+		}
+	}
+
+	/**
+	 * This function compares a geolocation to another geolocation in this case default or selected
+	 * If selected contains points then the geolocation will be set to defaultgeo
+	 * @param selectedgeo
+	 */
+	public void checklocations(GeoLocation selectedgeo){
+		if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
+
+			geo = selectedgeo;
+
+		}
+		else{
+
+			geo = geodefault;
+
+		}
+	}
+
+	/**
+	 * This function resets a geolocations lat and long coordinates to 0.0 0.0
+	 * @param selectedgeo
+	 */
+	public void resetselectedlocation(GeoLocation selectedgeo){
+
+		double latitude = 0.0;
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-    	
-    }
+
+	}
 
 
-	
+
 	/**
 	 * @return the geodefault
 	 */
 	public GeoLocation getGeodefault()
 	{
-	
+
 		return geodefault;
 	}
 
 
-	
+
 	/**
 	 * @param geodefault the geodefault to set
 	 */
@@ -115,19 +115,19 @@ public class LocationController {
 		geodefault.setLatitude(lat);
 		geodefault.setLongitude(lng);
 		//Toast.makeText(context,"Mapquest updates default "+geodefault.getLatitude(), Toast.LENGTH_LONG).show();
-		
+
 	}
 
-	
+
 	/**
 	 * @param geo the geo to set
 	 */
 	public void setGeo(GeoLocation geo)
 	{
-	
+
 		this.geo = geo;
 	}
 
-    
+
 }
 

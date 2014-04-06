@@ -35,7 +35,6 @@ import ca.cmput301w14t09.Model.User;
  * requested by a method
  * 
  */
-
 public class FileLoading {
 
 	private static final String FILENAME = "Username.sav";
@@ -48,7 +47,6 @@ public class FileLoading {
 	 * @param main
 	 * @return
 	 */
-
 	public static String[] loadFromFile(Activity main) {
 		ArrayList<String> usernames = new ArrayList<String>();
 		try {
@@ -59,7 +57,6 @@ public class FileLoading {
 				usernames.add(line);
 				line = in.readLine();
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -75,10 +72,8 @@ public class FileLoading {
 	 * @param main
 	 * @return
 	 */
-
 	public static User returnUser(String name, Activity main) {
 		Gson gson = new Gson();
-
 		try{
 			FileInputStream fis = main.openFileInput(name + ".sav");
 			InputStreamReader isr = new InputStreamReader(fis);
@@ -91,8 +86,6 @@ public class FileLoading {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return user;
 	}
-
 }

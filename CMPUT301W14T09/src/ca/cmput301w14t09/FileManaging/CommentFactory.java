@@ -27,7 +27,7 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
  * 
- * @author Conner
+ * @author Conner, Michael
  * CommentFactory creates top comments and reply comments
  * when requested by methods. reply comments has not
  * been completed yet
@@ -46,7 +46,6 @@ public class CommentFactory {
 	 * @param picture
 	 * @return
 	 */
-	
 	public static Comment buildComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture, String userName) {
 		Comment comment = new Comment();
 		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
@@ -56,37 +55,62 @@ public class CommentFactory {
 		comment.setUserName(userName);
 		return comment;
 	}
-	
-	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId, Boolean hasPicture, String userName) {
-	                Comment comment = new Comment();
-	                comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
-	                comment.setThreadId(threadId);
-	                comment.setUserName(userName);
-	                comment.setUuid(UUID.randomUUID().toString());
-	                return comment;
-	}
-	
-	private static Comment instantiateComment(Comment comment, LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture) {
-            comment.setAuthorName(authorname);
-            comment.setCommentText(commentText);            
-            
-            comment.setPicture(picture);
-            
-            GeoLocation geo = lc.getGeoLocation();
-            comment.setGeoLocation(geo);
 
-            comment.setTopComment(topComment);
-            comment.setPostDate(new Date());
-            comment.setHasPicture(hasPicture);
-            comment.setUuid(UUID.randomUUID().toString());
-            return comment;
+	/**
+	 * Build Reply creates a comment specific to a reply of a prarent comment
+	 * @param lc
+	 * @param authorname
+	 * @param commentText
+	 * @param topComment
+	 * @param picture
+	 * @param threadId
+	 * @param hasPicture
+	 * @param userName
+	 * @return
+	 */
+	public static Comment buildReplyComment(LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, String threadId, Boolean hasPicture, String userName) {
+		Comment comment = new Comment();
+		comment = instantiateComment(comment, lc, authorname, commentText, topComment, picture, hasPicture);
+		comment.setThreadId(threadId);
+		comment.setUserName(userName);
+		comment.setUuid(UUID.randomUUID().toString());
+		return comment;
 	}
-	
+
+	/**
+	 * Sets all the comments information into a comment model
+	 * @param comment
+	 * @param lc
+	 * @param authorname
+	 * @param commentText
+	 * @param topComment
+	 * @param picture
+	 * @param hasPicture
+	 * @return
+	 */
+	private static Comment instantiateComment(Comment comment, LocationController lc, String authorname, String commentText, Boolean topComment, SerializableBitmap picture, Boolean hasPicture) {
+		comment.setAuthorName(authorname);
+		comment.setCommentText(commentText);
+		comment.setPicture(picture);
+		GeoLocation geo = lc.getGeoLocation();
+		comment.setGeoLocation(geo);
+		comment.setTopComment(topComment);
+		comment.setPostDate(new Date());
+		comment.setHasPicture(hasPicture);
+		comment.setUuid(UUID.randomUUID().toString());
+		return comment;
+	}
+
+	/**
+	 * Formating for the storing of the date when comment is created
+	 * @param date
+	 * @return
+	 */
 	private static String removeDateColon(String date) {
-	    System.out.println(date);
-	    date = date.replaceAll(":", "");
-	    System.out.println(date);
-	    return date;
+		System.out.println(date);
+		date = date.replaceAll(":", "");
+		System.out.println(date);
+		return date;
 	}
-	
+
 }

@@ -34,7 +34,6 @@ import com.google.gson.Gson;
  * current device
  * 
  */
-
 public class FileSaving {
 	private static final String FILENAME = "Username.sav";
 	protected static User user;
@@ -45,7 +44,6 @@ public class FileSaving {
 	 * @param text
 	 * @param main
 	 */
-
 	public static void appendUserNameToList(String text, Activity main) {
 		try {
 			FileOutputStream fos = main.openFileOutput(FILENAME,
@@ -54,10 +52,8 @@ public class FileSaving {
 			.getBytes());
 			fos.close();
 		} catch (FileNotFoundException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 	}
@@ -68,10 +64,8 @@ public class FileSaving {
 	 * @param user
 	 * @param main
 	 */
-
 	public static void saveUserFile(User user, Activity main) {
 		Gson gson = new Gson();
-
 		try {
 			String jsonIn = gson.toJson(user);
 			FileOutputStream fos = main.openFileOutput(user.getUserName() + ".sav",

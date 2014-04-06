@@ -208,7 +208,7 @@ public class PopUpComment extends PopUp {
 	public void pictureResult(Uri fileUri) {
 		// successfully captured the image
 		// display it in image view
-		picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview, comment);
+		picture = pictureController.previewCapturedImage(fileUri, picture, picImagePreview);
 	}
 
 	public Uri getFleUri(){

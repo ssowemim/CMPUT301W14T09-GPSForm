@@ -101,7 +101,7 @@ public class PictureController extends Activity{
      * previewCaputuredImage displays the image
      * taken into an ImageView for preview
      */
-    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview, Comment comment) {
+    public Bitmap previewCapturedImage(Uri fileUri, Bitmap picture, ImageView picImagePreview) {
         try {
             picImagePreview.setVisibility(View.VISIBLE);
 

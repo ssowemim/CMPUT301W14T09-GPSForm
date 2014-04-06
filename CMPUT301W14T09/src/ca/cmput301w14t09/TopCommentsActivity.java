@@ -459,9 +459,6 @@ public class TopCommentsActivity extends ListActivity {
 			fileUri = popUpComment.getFleUri();
 			if (resultCode == RESULT_OK) {
 				popUpComment.pictureResult(fileUri);
-				Toast.makeText(this.getApplicationContext(),
-						"Picture Taken" + fileUri, Toast.LENGTH_SHORT)
-						.show();
 
 			} else if (resultCode == RESULT_CANCELED) {
 				// user cancelled Image capture
@@ -473,7 +470,12 @@ public class TopCommentsActivity extends ListActivity {
 	}
 
 
-
+	/**
+	 * This customdialog method bring up the three options of viewing attachment,
+	 * viewing user profile and viewing replies.
+	 * @param arg2
+	 * @author ssowemim
+	 */
     private void customOptionsDialog(final int arg2){
         final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
 
@@ -657,13 +659,25 @@ public class TopCommentsActivity extends ListActivity {
         				}
         			});
 
-        			tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
-        			tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
-        			tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
-        			tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
-        			pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
-        			iVPic.setImageBitmap(pic);
-        			tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
+        			if(!(userProfile.isEmpty() || size == 0)){
+
+        				tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
+        				tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
+        				tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
+        				tVSex.setText("Sex: "+userProfile.get(lastItem).getSex());
+        				pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
+        				iVPic.setImageBitmap(pic);
+        				tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
+        			}
+        			else {
+        				tVName.setText("Name: ");
+        				tVPhone.setText("Phone: ");
+        				tVEmail.setText("Email: ");
+        				tVSex.setText("Sex: ");
+        			//	pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
+        			//	iVPic.setImageBitmap(pic);
+        				tVBio.setText("Bio: ");
+        			}
         		}
 
 

@@ -125,7 +125,6 @@ public class PictureController extends Activity{
 
     public Bitmap finalizePicture(Bitmap picture, ListActivity activity) {
     	if (picture == null) {
-    	      //  picture = new SerializableBitmap();
     		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
     		picture = Bitmap.createScaledBitmap(picture, 1, 1, false);
     		hasPicture = false;

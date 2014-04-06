@@ -25,13 +25,12 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 /**
  * 
- * @author mcmorris
+ * @author Michael, Conner
  * User stores user information, and a reference to profile.
  * The user is not the profile, so profile specific information not
  * stored here.
  * 
  */
-
 public class User implements Serializable {
 
 	public Profile profile;
@@ -51,21 +50,23 @@ public class User implements Serializable {
 		this.userName = userName;
 		this.profile = new Profile(userName);
 		this.deviceId = "";
-		
+
 		if (userName.equalsIgnoreCase("guest"))
 			this.uniqueID="00000".toString();
 		else
 			this.uniqueID = userName;
 	}
 
-	
+	/**
+	 * @return uniqueID
+	 */
 	public String getUniqueID(){
 		return uniqueID;
 	}
+
 	/**
 	 * @return the profile
 	 */
-
 	public Profile getProfile() {
 		return profile;
 	}
@@ -73,7 +74,6 @@ public class User implements Serializable {
 	/**
 	 * @param profile the profile to set
 	 */
-
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
@@ -81,7 +81,6 @@ public class User implements Serializable {
 	/**
 	 * @return the currentLocation
 	 */
-
 	public GeoLocation getCurrentLocation() {
 		return currentLocation;
 	}
@@ -89,7 +88,6 @@ public class User implements Serializable {
 	/**
 	 * @param currentLocation the currentLocation to set
 	 */
-
 	public void setCurrentLocation(GeoLocation currentLocation) {
 		this.currentLocation = currentLocation;
 	}
@@ -97,7 +95,6 @@ public class User implements Serializable {
 	/**
 	 * @return the deviceId
 	 */
-
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -105,7 +102,6 @@ public class User implements Serializable {
 	/**
 	 * @param deviceId the deviceId to set
 	 */
-
 	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
@@ -113,7 +109,6 @@ public class User implements Serializable {
 	/**
 	 * @return the userName
 	 */
-
 	public String getUserName() {
 		return userName;
 	}
@@ -121,7 +116,6 @@ public class User implements Serializable {
 	/**
 	 * @param userName the userName to set
 	 */
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}

@@ -26,110 +26,105 @@ import ca.cmput301w14t09.Model.UnreadMarker;
 
 /**
  * 
- * @author mcmorris
+ * @author Michael
  * Profile tracks the settings of the associated user.
  * 
  */
-
 public class Profile implements Serializable {
 
-    private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 2L;
+	private ArrayList<Comment> favorites;
+	private java.util.ArrayList<UnreadMarker> unreadComments;
+	private String authorName;
+	private String userName;
+	public Cache cache;
 
-    private ArrayList<Comment> favorites;
-    private java.util.ArrayList<UnreadMarker> unreadComments;
-    private String authorName;
-    private String userName;
-    public Cache cache;
+	public Profile(String userName) {
+		this.favorites = new ArrayList<Comment>();
+		this.unreadComments = new ArrayList<UnreadMarker>();
+		this.cache = new Cache();
+		this.authorName = userName;
+		this.userName = userName;
+	}
 
+	/**
+	 * @return the favorites
+	 */
+	 public ArrayList<Comment> getFavorites() {
+		 return favorites;
+	 }
 
-    public Profile(String userName) {
-        this.favorites = new ArrayList<Comment>();
-        this.unreadComments = new ArrayList<UnreadMarker>();
-        this.cache = new Cache();
-        this.authorName = userName;
-        this.userName = userName;
-    }
+	 /**
+	  * @param newFavorite
+	  */
+	 public void add(Comment newFavorite) {
+		 favorites.add(newFavorite);
+	 }
 
-    /**
-     * @return the favorites
-     */
+	 /**
+	  * @param favorites the favorites to set
+	  */
+	 public void setFavorites(ArrayList<Comment> favorites) {
+		 this.favorites = favorites;
+	 }
 
-    public ArrayList<Comment> getFavorites() {
-        return favorites;
-    }
+	 /**
+	  * @return the unreadComments
+	  */
+	 public java.util.ArrayList<UnreadMarker> getUnreadComments() {
+		 return unreadComments;
+	 }
 
+	 /**
+	  * @param unreadComments the unreadComments to set
+	  */
+	 public void setUnreadComments(java.util.ArrayList<UnreadMarker> unreadComments) {
+		 this.unreadComments = unreadComments;
+	 }
 
-    public void add(Comment newFavorite) {
-        favorites.add(newFavorite);
-    }
+	 /**
+	  * @return the authorName
+	  */
+	 public String getAuthorName() {
+		 return authorName;
+	 }
 
-    /**
-     * @param favorites the favorites to set
-     */
+	 /**
+	  * @param authorName the authorName to set
+	  */
+	 public void setAuthorName(String authorName) {
+		 this.authorName = authorName;
+	 }
 
-    public void setFavorites(ArrayList<Comment> favorites) {
-        this.favorites = favorites;
-    }
+	 /**
+	  * @return the userName
+	  */
+	 public String getUserName()
+	 {
+		 return userName;
+	 }
 
-    /**
-     * @return the unreadComments
-     */
+	 /**
+	  * @param userName the userName to set
+	  */
+	 public void setUserName(String userName)
+	 {
+		 this.userName = userName;
+	 }
 
-    public java.util.ArrayList<UnreadMarker> getUnreadComments() {
-        return unreadComments;
-    }
+	 /**
+	  * @return cache
+	  */
+	 public Cache getCache()
+	 {
+		 return cache;
+	 }
 
-    /**
-     * @param unreadComments the unreadComments to set
-     */
-
-    public void setUnreadComments(java.util.ArrayList<UnreadMarker> unreadComments) {
-        this.unreadComments = unreadComments;
-    }
-
-    /**
-     * @return the authorName
-     */
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    /**
-     * @param authorName the authorName to set
-     */
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
-    /**
-     * @return the userName
-     */
-
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
-    }
-
-    
-    public Cache getCache()
-    {
-        return cache;
-    }
-
-    
-    public void setCache(Cache cache)
-    {
-        this.cache = cache;
-    }	
+	 /**
+	  * @param cache
+	  */
+	 public void setCache(Cache cache)
+	 {
+		 this.cache = cache;
+	 }	
 }

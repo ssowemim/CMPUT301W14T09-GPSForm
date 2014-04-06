@@ -674,8 +674,6 @@ public class TopCommentsActivity extends ListActivity {
         				tVPhone.setText("Phone: ");
         				tVEmail.setText("Email: ");
         				tVSex.setText("Sex: ");
-        			//	pic = Bitmap.createScaledBitmap(userProfile.get(lastItem).getPicture(), 200, 200, false);
-        			//	iVPic.setImageBitmap(pic);
         				tVBio.setText("Bio: ");
         			}
         		}

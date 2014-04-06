@@ -72,7 +72,7 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			TextView authorNameData = (TextView) v.findViewById(R.id.authorNameData);
 			TextView commentName = (TextView) v.findViewById(R.id.commentName);
 			TextView commentData = (TextView) v.findViewById(R.id.commentData);
-			ImageView piv = (ImageView)v.findViewById(R.id.replyImagePreview);
+		//	ImageView piv = (ImageView)v.findViewById(R.id.replyImagePreview);
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
@@ -101,9 +101,9 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 				}
 			}
 			
-			if (piv != null) {
+		/**	if (piv != null) {
 				piv.setImageBitmap(i.getPicture().bitmap);
-			}
+			} **/
 		}
 
 		// the view must be returned to our activity

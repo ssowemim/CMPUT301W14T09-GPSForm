@@ -28,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,8 +40,7 @@ import android.widget.TextView;
  * 
  */
 
-public class ThreadAdapter extends ArrayAdapter<Comment>{
-
+public class ThreadAdapter extends ArrayAdapter<Comment> {
 	private ArrayList<Comment> objects;
 
 	public ThreadAdapter(Context context, int textViewResourceId, ArrayList<Comment> objects) {
@@ -53,7 +51,7 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 	/**
 	 * getView formats the listview to show the fields of comment
 	 */
-	
+
 	public View getView(int position, View convertView, ViewGroup parent){
 
 		// assign the view we are converting to a local variable
@@ -69,17 +67,15 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 		Comment i = objects.get(position);
 
 		if (i != null) {
-
 			// This is how you obtain a reference to the TextViews.
 			// These TextViews are created in the XML files we defined.
 
 			TextView tt = (TextView) v.findViewById(R.id.toptext);
 			TextView ttd = (TextView) v.findViewById(R.id.toptextdata);
-			TextView mt = (TextView) v.findViewById(R.id.middletext);
 			TextView mtd = (TextView) v.findViewById(R.id.middletextdata);
 			ImageView piv = (ImageView)v.findViewById(R.id.attachmentImageView);
 			Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_attachment);
-			
+
 			if(!i.getHasPicture())
 				bitmap = Bitmap.createScaledBitmap(bitmap, 1, 1, false);
 
@@ -100,18 +96,12 @@ public class ThreadAdapter extends ArrayAdapter<Comment>{
 
 			if(piv != null){
 				if(i != null) {
-				//	if(!i.getHasPicture()){
-						//i.getPicture().bitmap
-						piv.setImageBitmap(bitmap);
-				//	}
+					piv.setImageBitmap(bitmap);
 				}
-				
-
 			}
 		}
 
 		// the view must be returned to our activity
 		return v;
-
 	}
 }

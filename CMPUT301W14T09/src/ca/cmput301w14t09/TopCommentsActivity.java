@@ -59,6 +59,7 @@ import com.mapquest.android.maps.AnnotationView;
 import com.mapquest.android.maps.GeoPoint;
 import com.mapquest.android.maps.MapView;
 import com.mapquest.android.maps.MyLocationOverlay;
+import com.mapquest.android.maps.RouteResponse.Collections;
 
 /**
  * 
@@ -185,36 +186,15 @@ public class TopCommentsActivity extends ListActivity {
 				break;
 	
 			case R.id.sortLocation:     
-				SortingController sorting = new SortingController();
-				filter = Filter.LOCATION;
-	
-				setupMyLocation();
-				ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getTopComments(true));
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();
+				sortByLocation();
 				break;
-	
 			case R.id.sortDate:
-	
-				filter = Filter.DATE;
-	
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();
+				sortByDate();
 				break;
 	
 				// FIXME: On drugs.
 			case R.id.sortPicture:
-				SortingController sorting1 = new SortingController();
-				filter = Filter.PICTURE;
-	
-				ArrayList<Comment> commentList = null;
-				commentList = user.profile.cache.getTopComments(true);
-				//commentList = sorting1.sortPictures(null);
-				adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
-				aCommentList.setAdapter(adapter1);
-				adapter1.notifyDataSetChanged();				
+			
 				break;
 	
 			case R.id.sortByDiffLocation:
@@ -233,6 +213,9 @@ public class TopCommentsActivity extends ListActivity {
 		return sorted;
 	}
 
+	/**
+	 * Sorts the list by location.
+	 */
 	private void sortByLocation() {
 		SortingController sorting = new SortingController();
 		filter = Filter.LOCATION;
@@ -244,30 +227,39 @@ public class TopCommentsActivity extends ListActivity {
 		adapter1.notifyDataSetChanged();
 	}
 	
+	/**
+	 * Sorts the list by post-date.
+	 */
+	private void sortByDate() {
+		filter = Filter.DATE;
+
+		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
+		aCommentList.setAdapter(adapter1);
+		adapter1.notifyDataSetChanged();
+	}
+	
+	private void sortByPicture() {
+		SortingController sorting1 = new SortingController();
+		filter = Filter.PICTURE;
+
+		ArrayList<Comment> commentList = null;
+		commentList = user.profile.cache.getTopComments(true);
+		//commentList = sorting1.sortPictures(null);
+		adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
+		aCommentList.setAdapter(adapter1);
+		adapter1.notifyDataSetChanged();	
+	}
+	
 	private void aaaaa() {
 		switch (filter) {
 		case LOCATION:     
 			sortByLocation();
 			break;
-
 		case DATE:
-
-			filter = Filter.DATE;
-
-			adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
-			aCommentList.setAdapter(adapter1);
-			adapter1.notifyDataSetChanged();
+			sortByDate();
 			break;
-
-			// FIXME: On drugs.
 		case PICTURE:
-/**			SortingController sorting1 = new SortingController();
-			filter = Filter.PICTURE;
-
-			ArrayList<Comment> commentList = sorting1.sortPictures(null);
-			adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
-			aCommentList.setAdapter(adapter1);
-			adapter1.notifyDataSetChanged(); **/
+			sortByPicture();
 			break;
 
 		default:
@@ -316,9 +308,10 @@ public class TopCommentsActivity extends ListActivity {
 					user.profile.cache.getTopComments(true));
 			aCommentList.setAdapter(adapter1);
 
-			//Collections.sort(user.profile.cache.comments);
-			//Collections.reverse(user.profile.cache.comments);
-
+			Collections.sort(user.profile.cache.comments);
+			Collections.reverse(user.profile.cache.comments);
+			aaaaa();
+			
 			adapter1.notifyDataSetChanged();
 		}
 	}

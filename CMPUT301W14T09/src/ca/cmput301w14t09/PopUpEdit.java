@@ -33,49 +33,46 @@ import ca.cmput301w14t09.elasticSearch.Server;
 
 public class PopUpEdit extends PopUp {
 
-    public PopUpEdit(Activity caller) {
-        super(caller);
-    }
+	public PopUpEdit(Activity caller) {
+		super(caller);
+	}
 
-    public void popUpEdit(final Comment comment) {
-        final Dialog dialog = new Dialog(caller);
-        dialog.setContentView(R.layout.pop_up_edit);
-        dialog.setTitle("Comment Text");
+    /**
+     * Creates a popup edit window with the given input parameters.
+     * @param comment - edited comment.
+     */
+	public void popUpEdit(final Comment comment) {
+		final Dialog dialog = new Dialog(caller);
+		dialog.setContentView(R.layout.pop_up_edit);
+		dialog.setTitle("Comment Text");
 
-        Button Submit=(Button)dialog.findViewById(R.id.Submit);
-        final EditText commentText=(EditText)dialog.findViewById(R.id.editComment);
+		Button Submit=(Button)dialog.findViewById(R.id.Submit);
+		final EditText commentText=(EditText)dialog.findViewById(R.id.editComment);
 
-        commentText.setHint(comment.getCommentText());
-        dialog.show();
+		commentText.setHint(comment.getCommentText());
+		dialog.show();
 
-        Submit.setOnClickListener(new View.OnClickListener() {
+		Submit.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v)
-            {
-                String str = "commentText = \\\"" + commentText.getText() + "\\\"\"";
+			@Override
+			public void onClick(View v)
+			{
+				String str = "commentText = \\\"" + commentText.getText() + "\\\"\"";
 
-                if(Server.getInstance().isServerReachable(caller)) {
-                    try {
-                        ElasticSearchOperations.updateComment(comment, str);
-                        
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ClientProtocolException e)
-                    {
-
-                        e.printStackTrace();
-                    } catch (IOException e)
-                    {
-
-                        e.printStackTrace();
-                    }
-                }
-                dialog.dismiss();
-            }  
-
-        });
-    }
+				if(Server.getInstance().isServerReachable(caller)) {
+					try {
+						ElasticSearchOperations.updateComment(comment, str);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (ClientProtocolException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				dialog.dismiss();
+			}  
+		});
+	}
 
 }

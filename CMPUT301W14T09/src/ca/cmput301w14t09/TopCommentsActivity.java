@@ -72,6 +72,7 @@ import com.mapquest.android.maps.MyLocationOverlay;
  */
 
 public class TopCommentsActivity extends ListActivity {
+	private TopCommentsActivityLocation topCommentsActivityProduct = new TopCommentsActivityLocation();
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int FAVORITE_LIST = 42;
 
@@ -91,11 +92,7 @@ public class TopCommentsActivity extends ListActivity {
 
 	final LocationController lc1 = new LocationController();
 
-	//initialize variables for map 
-	protected MapView map;
-	private MyLocationOverlay myLocationOverlay;
 	AnnotationView annotation;
-	GeoPoint currentLocation;
 	int id = 0;
 	Geocoder code = null;
 	Context context = null;
@@ -123,8 +120,8 @@ public class TopCommentsActivity extends ListActivity {
 		});
 
 		//setup map
-		setupMapView();
-		setupMyLocation();
+		topCommentsActivityProduct.setupMapView(this);
+		topCommentsActivityProduct.setupMyLocation(lc1, this);
 
 
 		// Handler polling
@@ -210,7 +207,7 @@ public class TopCommentsActivity extends ListActivity {
 		SortingController sorting = new SortingController();
 		filter = Filter.LOCATION;
 
-		setupMyLocation();
+		topCommentsActivityProduct.setupMyLocation(lc1, this);
 		ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getTopComments(true));
 		adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
 		aCommentList.setAdapter(adapter1);
@@ -293,7 +290,7 @@ public class TopCommentsActivity extends ListActivity {
 	 * @throws InterruptedException
 	 */
 	public void popUp(View v) throws InterruptedException {
-		setupMyLocation();
+		topCommentsActivityProduct.setupMyLocation(lc1, this);
 		popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
 	}
 
@@ -364,7 +361,7 @@ public class TopCommentsActivity extends ListActivity {
 		String stringId = new String();
 		stringId = thread.getThreadId();
 
-		setupMyLocation();
+		topCommentsActivityProduct.setupMyLocation(lc1, this);
 
 		Intent intent = new Intent(this, CommentListActivity.class);
 		intent.putExtra("THREAD_ID", stringId);
@@ -379,35 +376,6 @@ public class TopCommentsActivity extends ListActivity {
 		finish();
 	}
 
-
-	/**
-	 *set your map and enable default zoom controls 
-	 *http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
-	 */
-	protected void setupMapView() {
-		this.map = (MapView) findViewById(R.id.map);
-		map.setBuiltInZoomControls(true);
-	}
-
-	/**
-	 * set up a MyLocationOverlay and execute the runnable once we have a location fix 
-	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
-	 */
-	private void setupMyLocation() {
-		this.myLocationOverlay = new MyLocationOverlay(this, map);
-		myLocationOverlay.enableMyLocation();
-		myLocationOverlay.runOnFirstFix(new Runnable() {
-			@Override
-			public void run() {
-				currentLocation = myLocationOverlay.getMyLocation();
-				lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
-				map.getController().animateTo(currentLocation);
-				map.getController().setZoom(14);
-				map.getOverlays().add(myLocationOverlay);
-				myLocationOverlay.setFollowing(true);
-			}
-		});
-	}
 
 	/**
 	 * onSaveInstanceState stores the file url as

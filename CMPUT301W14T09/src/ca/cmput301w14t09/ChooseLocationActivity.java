@@ -59,10 +59,10 @@ import com.mapquest.android.maps.OverlayItem;
  */
 
 public class ChooseLocationActivity extends MapActivity {
+	private ChooseLocationActivitySetupLocation chooseLocationActivityProduct = new ChooseLocationActivitySetupLocation();
 	protected MapView map;
 	private MyLocationOverlay myLocationOverlay;
 	AnnotationView annotation;
-	GeoPoint currentLocation;
 	int id = 0;
 	Geocoder code = null;
 	GeocodeTask geocodeTask;
@@ -80,7 +80,7 @@ public class ChooseLocationActivity extends MapActivity {
 		setContentView(R.layout.location_layout);
 
 		setupMapView();
-		setupMyLocation();
+		chooseLocationActivityProduct.setupMyLocation(this, map);
 
 		//used for reverse geocoding
 		annotation = new AnnotationView(map);
@@ -113,27 +113,6 @@ public class ChooseLocationActivity extends MapActivity {
 		this.map = (MapView) findViewById(R.id.map);
 		map.setBuiltInZoomControls(true);
 	}
-
-	/**
-	 * set up a MyLocationOverlay and execute the runnable once we have a location fix 
-	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
-	 */
-	private void setupMyLocation() {
-		this.myLocationOverlay = new MyLocationOverlay(this, map);
-		myLocationOverlay.enableMyLocation();
-		myLocationOverlay.runOnFirstFix(new Runnable() {
-			@Override
-			public void run() {
-
-				currentLocation = myLocationOverlay.getMyLocation();
-				map.getController().animateTo(currentLocation);
-				map.getController().setZoom(14);
-				map.getOverlays().add(myLocationOverlay);
-				myLocationOverlay.setFollowing(true);
-			}
-		});
-	}
-
 
 	/**
 	 * add an itemized overlay to map 
@@ -375,6 +354,18 @@ public class ChooseLocationActivity extends MapActivity {
 		setResult(Activity.RESULT_OK, intent);
 		super.onBackPressed();
 
+	}
+
+	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay)
+	{
+
+		this.myLocationOverlay = myLocationOverlay;
+	}
+
+	public MyLocationOverlay getMyLocationOverlay()
+	{
+
+		return myLocationOverlay;
 	}
 	
 }

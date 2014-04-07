@@ -19,8 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
-import java.util.Collections;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
@@ -54,7 +52,6 @@ import ca.cmput301w14t09.Model.User;
 import ca.cmput301w14t09.Model.UserProfileModel;
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
-
 import com.mapquest.android.Geocoder;
 import com.mapquest.android.maps.AnnotationView;
 import com.mapquest.android.maps.GeoPoint;
@@ -154,7 +151,7 @@ public class TopCommentsActivity extends ListActivity {
 		update.start();
 	}
 
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -289,12 +286,23 @@ public class TopCommentsActivity extends ListActivity {
 	}
 
 
+	/**
+	 * When a user wants to make a new comment this method is called, which in turn
+	 * calls the class popUpCommnt/
+	 * @param v
+	 * @throws InterruptedException
+	 */
 	public void popUp(View v) throws InterruptedException {
 		setupMyLocation();
 		popUpComment.popUp(v, this, fileUri, lc1, user, "New Top Comment");
 	}
 
 
+	/**
+	 * This pulls all the threads from server and puts them all into a list.
+	 * This list is now what is being reffered too than calling from elasticOprations all 
+	 * the time.
+	 */
 	public void populateListView() {
 		ArrayList<Comment> topComments = null;
 		SortingController popsort = new SortingController();
@@ -314,7 +322,6 @@ public class TopCommentsActivity extends ListActivity {
 			}
 
 			topComments = user.profile.cache.getTopComments(true);
-			ArrayList<Comment> newCommentList = popsort.sortTopComments(lc1, null, topComments);
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
 					user.profile.cache.getTopComments(true));
@@ -477,16 +484,14 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	private void customOptionsDialog(final int arg2){
 		final Comment comment = (Comment)(aCommentList.getItemAtPosition(arg2));
-
+		
+		//Creates a dialog with the 'ialog_options' layout
 		final Dialog dialog = new Dialog(TopCommentsActivity.this);
 		dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-
 		dialog.setContentView(R.layout.dialog_options);
-
 
 		Window window = dialog.getWindow();
 		WindowManager.LayoutParams wlp = window.getAttributes();
-
 
 		window.setAttributes(wlp);
 		dialog.show();
@@ -495,6 +500,7 @@ public class TopCommentsActivity extends ListActivity {
 		ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
 		ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
 
+		//reply button takes you to the thread that shows you all the replies.
 		dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -506,50 +512,8 @@ public class TopCommentsActivity extends ListActivity {
 			}
 		});
 
+		//Attachment button, lets you see an picture if there was one attached to the comment
 		dialogAttachButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				final Dialog dialog1 = new Dialog(TopCommentsActivity.this);
-				dialog1.setTitle("Attachment");
-				dialog1.setContentView(R.layout.dialog_attachment);
-				dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-				dialog1.show();
-
-				ImageView imageView = (ImageView)dialog1.findViewById(R.id.imageViewAttachment);
-				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-				Bitmap attachment = thread.getPicture().bitmap;
-
-				final Dialog dialog = new Dialog(TopCommentsActivity.this);
-				dialog.setTitle( user.getUserName()+ ": " +comment.getAuthorName().toString() + ": Options");
-
-				dialog.setContentView(R.layout.dialog_options);
-
-
-				Window window = dialog.getWindow();
-				WindowManager.LayoutParams wlp = window.getAttributes();
-
-				window.setAttributes(wlp);
-				dialog.show();
-
-				Button dialogRepliesButton = (Button)dialog.findViewById(R.id.buttonReplies);
-				ImageButton dialogAttachButton = (ImageButton)dialog.findViewById(R.id.imButtonAttachment);
-				ImageButton dialogProfileButton = (ImageButton)dialog.findViewById(R.id.imButtonProfile);
-
-				dialogRepliesButton.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-
-						Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
-						commentThread(thread);
-						dialog.dismiss();
-					}
-				});
-
-				dialogAttachButton.setOnClickListener(new View.OnClickListener() {
-
 					@Override
 					public void onClick(View v) {
 
@@ -568,42 +532,27 @@ public class TopCommentsActivity extends ListActivity {
 							imageView.setImageBitmap(attachment);
 							dialog.dismiss();
 						}
-						else
-						{
+						else{
 							dialog.dismiss();
 							dialog1.dismiss();
 							Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
 						}
 					}
+					
 				});
 
 				dialogProfileButton.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-
 						final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
 						dialog2.setTitle(comment.getAuthorName() + " | Profile");
 						dialog2.setContentView(R.layout.dialog_user_profile);
 						dialog2.show();
-
 					}
 				});
 
-				if (thread.getHasPicture()){
-					attachment = Bitmap.createScaledBitmap(attachment, 500, 500, false);
-					imageView.setImageBitmap(attachment);
-					dialog.dismiss();
-				}
-				else
-				{
-					dialog.dismiss();
-					dialog1.dismiss();
-					Toast.makeText(getApplicationContext(),"No Attachment picture with Comment.", Toast.LENGTH_LONG).show();
-				}
-			}
-		});
-
+		//profile button lets you see the usernames profile
 		dialogProfileButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -612,9 +561,7 @@ public class TopCommentsActivity extends ListActivity {
 				Comment thread = (Comment)(aCommentList.getItemAtPosition(arg2));
 				ArrayList<UserProfileModel> userProfile = null;
 				int size, lastItem;
-
 				if (thread.getUserName().equalsIgnoreCase("guest")){
-
 					Toast.makeText(getApplicationContext(),"Guests don't have a user profile", Toast.LENGTH_LONG).show();
 				}
 
@@ -626,17 +573,17 @@ public class TopCommentsActivity extends ListActivity {
 
 						e.printStackTrace();
 					}
-
-
+					//Size of how many changes have been made to that user profile
 					size = userProfile.size();
 					lastItem = size-1;	
-
-
+					
+					//Creates dialog to display all those information of the user profile
 					final Dialog dialog2 = new Dialog(TopCommentsActivity.this);
 					dialog2.setTitle(comment.getAuthorName() + " | Profile");
 					dialog2.setContentView(R.layout.dialog_user_profile);
 					dialog2.show();
 
+					//Sets all buttons and textviews
 					Button returnButton = (Button)dialog2.findViewById(R.id.button_return);
 					TextView tVName = (TextView)dialog2.findViewById(R.id.textView_fLastname);
 					TextView tVPhone = (TextView)dialog2.findViewById(R.id.textView_phone);
@@ -650,14 +597,12 @@ public class TopCommentsActivity extends ListActivity {
 
 						@Override
 						public void onClick(View v) {
-
 							dialog2.dismiss();
-
 						}
 					});
 
+					//if a profile exists picks the last one and displays it
 					if(!(userProfile.isEmpty() || size == 0)){
-
 						tVName.setText("Name: "+userProfile.get(lastItem).getFirstLastName());
 						tVPhone.setText("Phone: "+userProfile.get(lastItem).getPhone());
 						tVEmail.setText("Email: "+userProfile.get(lastItem).getEmail());
@@ -666,6 +611,7 @@ public class TopCommentsActivity extends ListActivity {
 						iVPic.setImageBitmap(pic);
 						tVBio.setText("Bio: "+userProfile.get(lastItem).getBiography());
 					}
+					//else just put a set of default information in the textview
 					else {
 						tVName.setText("Name: ");
 						tVPhone.setText("Phone: ");
@@ -678,8 +624,6 @@ public class TopCommentsActivity extends ListActivity {
 
 			}
 		});
-		window.setAttributes(wlp);
-		dialog.show();
 	}
 
 	/**
@@ -700,9 +644,7 @@ public class TopCommentsActivity extends ListActivity {
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-
 	}
-
 }
 
 

@@ -103,7 +103,7 @@ public class TopCommentsActivity extends ListActivity {
 	public enum Filter {
 		DATE, PICTURE, LOCATION, DIFFLOCATION, NONE;
 	}
-	private Filter filter = Filter.DATE;
+	private Filter filter = Filter.NONE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -266,8 +266,6 @@ public class TopCommentsActivity extends ListActivity {
 				break;
 			default:
 				filter = Filter.NONE;
-				sortByDate();
-				sortByLocation();
 				break;
 		}
 	}
@@ -302,13 +300,13 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	public void populateListView() {
 		ArrayList<Comment> topComments = null;
+		SortingController sc = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 
-
 					topComments = ElasticSearchOperations.pullThreads();
-
+					topComments = sc.sortTopComments(lc1, null, topComments);
 
 					user.profile.cache.add(topComments);
 					

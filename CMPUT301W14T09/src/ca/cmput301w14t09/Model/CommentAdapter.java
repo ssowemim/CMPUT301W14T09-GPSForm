@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 package ca.cmput301w14t09.Model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -72,8 +73,17 @@ public class CommentAdapter extends ArrayAdapter<Comment> {
 			
 			// check to see if each individual textview is null.
 			// if not, assign some text!
+			//http://stackoverflow.com/questions/2808535/round-a-double-to-2-decimal-places
 			if (geoLocation != null) {
-				geoLocation.setText("Location: "+i.getGeoLocation().getLatitude()+" "+i.getGeoLocation().getLongitude());
+				double latround = i.getGeoLocation().getLatitude();
+				DecimalFormat df = new DecimalFormat("#.##");      
+				latround = Double.valueOf(df.format(latround));
+				
+				double lnground = i.getGeoLocation().getLongitude();
+				DecimalFormat df2 = new DecimalFormat("#.##");      
+				lnground = Double.valueOf(df2.format(lnground));
+				
+				geoLocation.setText("Location: "+latround+" "+lnground);
 			}
 			if (geoLocationData != null) {
 				if (i.getGeoLocation() != null) {

@@ -111,7 +111,7 @@ public class CommentListActivity extends ListActivity {
 	public enum Filter {
 		DATE, PICTURE, LOCATION, DIFFLOCATION, NONE;
 	}
-	private Filter filter = Filter.DATE;
+	private Filter filter = Filter.NONE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -323,7 +323,7 @@ public class CommentListActivity extends ListActivity {
 			adapter = new CommentAdapter(this,
 					R.layout.comment_view,
 					user.profile.cache.getSubComments(firstComment));
-
+			
 			favList.setAdapter(adapter);
 			reapplyFilter();
 			adapter.notifyDataSetChanged();

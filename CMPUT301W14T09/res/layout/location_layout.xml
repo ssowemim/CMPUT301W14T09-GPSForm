@@ -32,7 +32,7 @@
             android:ems="10"
             android:inputType="textPostalAddress"
             android:maxLines="1"
-            android:text="Enter your Search" />
+            android:hint="Enter a Search" />
 
         <Button
             android:id="@+id/mq_geocode_btn"

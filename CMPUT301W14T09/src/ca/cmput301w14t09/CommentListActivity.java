@@ -119,7 +119,6 @@ public class CommentListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment_list);
 		favList = (ListView) findViewById(android.R.id.list);
-		final Activity commentActivity = this;
 
 		//setup map
 		setupMapView();
@@ -194,7 +193,6 @@ public class CommentListActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		ArrayList<Comment> topComments = null;
 		boolean sorted = true;
 
 		switch (item.getItemId()) {
@@ -342,15 +340,11 @@ public class CommentListActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
-
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-
 		}
 
 		if (requestCode == 123 && resultCode == Activity.RESULT_OK){
-
 			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-
 		}
 
 		// if the result is capturing Image
@@ -370,7 +364,6 @@ public class CommentListActivity extends ListActivity {
 					.show();
 		}
 	}
-
 
 	/**
 	 * onSaveInstanceState stores the file url as
@@ -430,7 +423,6 @@ public class CommentListActivity extends ListActivity {
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-
 	}
 	
 	/**

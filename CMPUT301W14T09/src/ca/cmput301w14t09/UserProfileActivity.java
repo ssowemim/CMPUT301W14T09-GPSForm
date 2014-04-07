@@ -82,6 +82,10 @@ public class UserProfileActivity extends Activity{
 		return true;
 	}
 	
+	/**
+	 * This method retrieves the picture taken by the phone and runs it thought ForResult
+	 * @param v
+	 */
 	public void retrievePicture(View v){
 		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);

@@ -113,9 +113,9 @@ public class MainActivity extends Activity {
 	 * @param user
 	 */
 	public void topComments(User user) {
-		Intent intent = new Intent(this, TopCommentsActivity.class);
+		Intent intent = new Intent(MainActivity.this, TopCommentsActivity.class);
 		intent.putExtra("CURRENT_USER", user);
-		this.startActivity(intent);
+		MainActivity.this.startActivity(intent);
 	}
 
 	/**

@@ -320,7 +320,7 @@ public class TopCommentsActivity extends ListActivity {
 			aCommentList.setAdapter(adapter1);
 
 			//Collections.sort(user.profile.cache.comments);
-			Collections.reverse(user.profile.cache.comments);
+			//Collections.reverse(user.profile.cache.comments);
 			reapplyFilter();
 
 			adapter1.notifyDataSetChanged();

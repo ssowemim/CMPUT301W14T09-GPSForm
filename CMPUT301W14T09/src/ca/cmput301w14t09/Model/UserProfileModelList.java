@@ -76,6 +76,6 @@ public class UserProfileModelList {
 	 * @return
 	 */
 	public List<UserProfileModel> getList(){
-		return (List<UserProfileModel>) Collections.unmodifiableCollection(list);
+		return (List<UserProfileModel>) list;
 	}
 }

@@ -14,9 +14,6 @@ import junit.framework.TestCase;
  */
 public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
 
-	public UserProfileModelTest(){
-		
-	}
 	public UserProfileModelTest(Class<TopCommentsActivity> activityClass) {
 		super(activityClass);
 		// TODO Auto-generated constructor stub

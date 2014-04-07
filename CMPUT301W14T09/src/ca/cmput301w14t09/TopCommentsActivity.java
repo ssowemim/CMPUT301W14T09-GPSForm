@@ -302,12 +302,18 @@ public class TopCommentsActivity extends ListActivity {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					topComments = ElasticSearchOperations.pullThreads();
+				
 					user.profile.cache.add(topComments);
+					
 					FileSaving.saveUserFile(user, this);
 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}
+			
+			else{
+				topComments = user.profile.cache.comments;
 			}
 
 			adapter1 = new ThreadAdapter(this,

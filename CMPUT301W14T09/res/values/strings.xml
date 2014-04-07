@@ -13,5 +13,6 @@
     <string name="Favorite">favButton</string>
     <string name="favButton">Favorite</string>
     <string name="title_activity_favorite">FavoriteActivity</string>
+    <string name="final_app_name">GPostIT</string>
 
 </resources>

@@ -142,6 +142,7 @@ public final class R {
         public static final int attachment_description=0x7f050008;
         public static final int camera_button_description=0x7f050006;
         public static final int favButton=0x7f05000a;
+        public static final int final_app_name=0x7f05000c;
         public static final int hello_world=0x7f050002;
         public static final int image_view_description=0x7f050007;
         public static final int title_activity_comment_list=0x7f050005;

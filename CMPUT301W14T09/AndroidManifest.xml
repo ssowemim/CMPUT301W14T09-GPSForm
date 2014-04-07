@@ -24,7 +24,8 @@
         android:debuggable="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false">
         <activity
             android:name="ca.cmput301w14t09.MainActivity"
             android:label="@string/app_name" >

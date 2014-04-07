@@ -27,7 +27,8 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import android.graphics.Bitmap;
 
 /**
- * 
+ * The user profile model list takes in the final information of the userprofile and pushes this 
+ * information onto the server
  * @author Femi
  *
  */
@@ -39,7 +40,8 @@ public class UserProfileModelList {
 	}
 	
 	/**
-	 * 
+	 * This method addds the information into a model, that model is now put into an array list
+	 * and then pushes it onto elastic search operation
 	 * @param uniqueID
 	 * @param fLName
 	 * @param sex
@@ -57,13 +59,12 @@ public class UserProfileModelList {
 		try {
 			ElasticSearchOperations.pushUserProfile(uPModel);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	/**
-	 * 
+	 * Adds all te profiles into the list
 	 * @param profiles
 	 */
 	public void addUserProfileCollections(Collection<UserProfileModel> profiles){
@@ -71,7 +72,7 @@ public class UserProfileModelList {
 	}
 	
 	/**
-	 * 
+	 * This returns the list of model, without it being able to change.
 	 * @return
 	 */
 	public List<UserProfileModel> getList(){

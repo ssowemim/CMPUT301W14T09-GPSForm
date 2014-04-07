@@ -47,6 +47,7 @@ public class PopUpEdit extends PopUp {
      * @param comment - edited comment.
      */
 	public void popUpEdit(final Comment comment) {
+		//Creates a dialog box
 		final Dialog dialog = new Dialog(caller);
 		dialog.setContentView(R.layout.pop_up_edit);
 		dialog.setTitle("Comment Text");
@@ -59,6 +60,7 @@ public class PopUpEdit extends PopUp {
 
 		Submit.setOnClickListener(new View.OnClickListener() {
 
+			//when submit is pressed everything is pused to the server
 			@Override
 			public void onClick(View v)
 			{

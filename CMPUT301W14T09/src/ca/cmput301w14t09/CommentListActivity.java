@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -118,7 +119,6 @@ public class CommentListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment_list);
 		favList = (ListView) findViewById(android.R.id.list);
-		final Activity commentActivity = this;
 
 		//setup map
 		setupMapView();
@@ -193,7 +193,6 @@ public class CommentListActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		ArrayList<Comment> topComments = null;
 		boolean sorted = true;
 
 		switch (item.getItemId()) {
@@ -241,8 +240,9 @@ public class CommentListActivity extends ListActivity {
 	 */
 	private void sortByDate() {
 		filter = Filter.DATE;
-
-		adapter = new CommentAdapter(this,R.layout.comment_view, user.profile.cache.getSubComments(firstComment));
+		ArrayList<Comment> newList = user.profile.cache.getSubComments(firstComment);
+		Collections.reverse(newList);
+		adapter = new CommentAdapter(this,R.layout.comment_view, newList);
 		favList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
@@ -278,8 +278,6 @@ public class CommentListActivity extends ListActivity {
 			break;
 		default:
 			filter = Filter.NONE;
-			//return super.onOptionsItemSelected(item);
-			//sorted = false;\
 			break;
 		}
 	}
@@ -312,12 +310,10 @@ public class CommentListActivity extends ListActivity {
 	 */
 	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
-		SortingController popsort = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					commentThread = ElasticSearchOperations.pullOneThread(firstComment);
-					commentThread = popsort.sortTopComments(lc1, null, commentThread);
 					user.profile.cache.add(commentThread);
 					FileSaving.saveUserFile(user, this);
 				} catch (InterruptedException e) {
@@ -344,16 +340,11 @@ public class CommentListActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 		if (requestCode == 122 && resultCode == Activity.RESULT_OK){
-
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-
-			//Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
 		}
 
 		if (requestCode == 123 && resultCode == Activity.RESULT_OK){
-
 			selectedgeosort = (GeoLocation) data.getExtras().get("SomeUniqueKey");
-
 		}
 
 		// if the result is capturing Image
@@ -373,7 +364,6 @@ public class CommentListActivity extends ListActivity {
 					.show();
 		}
 	}
-
 
 	/**
 	 * onSaveInstanceState stores the file url as
@@ -433,7 +423,6 @@ public class CommentListActivity extends ListActivity {
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-
 	}
 	
 	/**

@@ -146,7 +146,6 @@ public class PopUpComment extends PopUp {
 
 				//selected location
 				GeoLocation selectedgeo = topCommentActivity.getSelectedGeolocation();
-				final GeoLocation geodefault = lc1.getGeodefault();
 
 				picture = pictureController.finalizePicture(picture, (ListActivity) caller);
 

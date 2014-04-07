@@ -47,15 +47,15 @@ public class Cache implements Serializable {
      * @param comment
      */
     public void add(Comment comment) {
-        if (comment == null) return;
-        if (existsInCache(comment) == false) {
-            if (comments.size() < MAX_LENGTH) {
-                comments.add(comment);
-            }
-            else {
-                replaceTail(comment);
-            } 
-        }
+    	if (comment == null) return;
+    	if (existsInCache(comment) == false) {
+    		if (comments.size() < MAX_LENGTH) {
+    			comments.add(comment);
+    		}
+    		else {
+    			replaceTail(comment);
+    		} 
+    	}
     } 
 
     /**
@@ -147,6 +147,4 @@ public class Cache implements Serializable {
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
-    
-  
 }

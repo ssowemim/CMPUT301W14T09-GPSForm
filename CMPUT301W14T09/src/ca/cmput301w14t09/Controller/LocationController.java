@@ -49,34 +49,16 @@ public class LocationController {
 	}
 
 	/**
-	 * location changed function responsible for getting location points from GPS location on android activity
-	 * and then setting the geolocation in Location controller to the current location of the GPS.
-	 * @param LocationController
-	 */
-	public void locationchanged(android.location.Location location){
-		if(location != null){
-
-			geodefault.setLatitude(location.getLatitude());
-			geodefault.setLongitude(location.getLongitude()); 
-
-		}
-	}
-
-	/**
 	 * This function compares a geolocation to another geolocation in this case default or selected
 	 * If selected contains points then the geolocation will be set to defaultgeo
 	 * @param selectedgeo
 	 */
 	public void checklocations(GeoLocation selectedgeo){
 		if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
-
 			geo = selectedgeo;
-
 		}
 		else{
-
 			geo = geodefault;
-
 		}
 	}
 
@@ -85,32 +67,24 @@ public class LocationController {
 	 * @param selectedgeo
 	 */
 	public void resetselectedlocation(GeoLocation selectedgeo){
-
 		double latitude = 0.0;
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-
 	}
-
-
 
 	/**
 	 * @return the geodefault
 	 */
-	public GeoLocation getGeodefault()
-	{
+	public GeoLocation getGeodefault(){
 
 		return geodefault;
 	}
 
-
-
 	/**
 	 * @param geodefault the geodefault to set
 	 */
-	public void setGeodefault(double lat, double lng)
-	{
+	public void setGeodefault(double lat, double lng){
 		geodefault.setLatitude(lat);
 		geodefault.setLongitude(lng);
 
@@ -120,8 +94,7 @@ public class LocationController {
 	/**
 	 * @param geo the geo to set
 	 */
-	public void setGeo(GeoLocation geo)
-	{
+	public void setGeo(GeoLocation geo){
 
 		this.geo = geo;
 	}

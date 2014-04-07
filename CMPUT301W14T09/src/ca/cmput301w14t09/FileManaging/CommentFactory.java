@@ -107,9 +107,7 @@ public class CommentFactory {
 	 * @return
 	 */
 	private static String removeDateColon(String date) {
-		System.out.println(date);
 		date = date.replaceAll(":", "");
-		System.out.println(date);
 		return date;
 	}
 

@@ -35,23 +35,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import ca.cmput301w14t09.R;
-import ca.cmput301w14t09.Model.Comment;
 
 public class PictureController extends Activity{
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
-    
-    public static final int MAX_BITMAP_DIMENSIONS = 80;
-    
+    public static final int MAX_BITMAP_DIMENSIONS = 80;   
+    //Directory name to store captured images
+    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
     public boolean hasPicture=false;
-
+    
+    /**
+     * Picture Controller, makes adjustment to pictures    
+     */
     public PictureController() {
     	
     }
-    
-    //Directory name to store captured images
-    private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
-
     /**
      * getOutputMediaFileUri Creates the File Uri
      * that will be used to store images
@@ -93,7 +91,6 @@ public class PictureController extends Activity{
         } else {
             return null;
         }
-
         return mediaFile;
     }
 
@@ -108,7 +105,7 @@ public class PictureController extends Activity{
             //bitmap factory
             BitmapFactory.Options options = new BitmapFactory.Options();
 
-            //downsizing image into a smaller size will throw exception for larger images
+            //down-sizing image into a smaller size will throw exception for larger images
             options.inSampleSize = 8;
 
             final Bitmap bitmap = BitmapFactory.decodeFile(fileUri.getPath(), options);
@@ -123,6 +120,15 @@ public class PictureController extends Activity{
         return picture;
     }
 
+    /**
+     * finalize picture takes in a picture and an activity.
+     * Purpose is to create a scaled picture if picture size is too big
+     * and for activity is for being able to retrieve a default image if no picture
+     * is taken.
+     * @param picture
+     * @param activity
+     * @return
+     */
     public Bitmap finalizePicture(Bitmap picture, ListActivity activity) {
     	if (picture == null) {
     		picture = BitmapFactory.decodeResource(activity.getResources(), R.drawable.no_img);
@@ -138,16 +144,20 @@ public class PictureController extends Activity{
     			if(picture.getHeight() > picture.getWidth())
     				scalingFactor = picture.getHeight() * 1.0 / MAX_BITMAP_DIMENSIONS;
 
+    			//new sizes the new picutre will be compressed too.
     			int newWidth = (int)Math.round(picture.getWidth()/scalingFactor);
     			int newHeight = (int)Math.round(picture.getHeight()/scalingFactor);
 
     			picture = Bitmap.createScaledBitmap(picture, newWidth, newHeight, false);
-
     		}
     	}
 		return picture;
     }
 
+    /**
+     * This returns the boolean that checks off if a picture was taken or not.
+     * @return
+     */
 	public Boolean getHasPicture() {
 		return hasPicture;
 	}

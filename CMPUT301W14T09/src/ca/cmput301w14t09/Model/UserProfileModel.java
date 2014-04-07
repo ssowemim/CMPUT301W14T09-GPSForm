@@ -21,12 +21,13 @@ package ca.cmput301w14t09.Model;
 import android.graphics.Bitmap;
 
 /**
- * 
- * @author Femi
+ * All the information for the user profile are stored in this model.
+ * @author ssowemim
  *
  */
 public class UserProfileModel {
 	
+	//Initialize variable
 	private String uniqueID;
 	private String firstLastName;
 	private String sex;
@@ -35,6 +36,7 @@ public class UserProfileModel {
 	private String biography;
 	private Bitmap picture;
 	
+	//bind each variable to each specific field
 	public UserProfileModel(String uniqueID, String fLName, String sex, String phone,
 							String email, String bio, Bitmap pic){
 		this.uniqueID = uniqueID;
@@ -48,6 +50,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set unique ID
 	 * @param uniqueID
 	 */
 	public void setUniqueID(String uniqueID){
@@ -55,6 +58,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * get the uniqueID
 	 * @return uniqueID
 	 */
 	public String getUniqueID(){
@@ -62,6 +66,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set the first, last name
 	 * @param fLName
 	 */
 	public void setFirstLastName(String fLName){
@@ -69,6 +74,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * get the first, last name
 	 * @return fLName
 	 */
 	public String getFirstLastName(){
@@ -76,6 +82,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set sex(male/female)
 	 * @param sex
 	 */
 	public void setSex(String sex){
@@ -83,6 +90,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * get sex
 	 * @return sex
 	 */
 	public String getSex(){
@@ -90,6 +98,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set the phone number
 	 * @param phone
 	 */
 	public void setPhone(String phone){
@@ -97,6 +106,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * gets the phone number
 	 * @return phone
 	 */
 	public String getPhone(){
@@ -104,6 +114,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set the email
 	 * @param email
 	 */
 	public void setEmail(String email){
@@ -111,6 +122,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * return the  email
 	 * @return email
 	 */
 	public String getEmail(){
@@ -118,6 +130,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * set the biography
 	 * @param bio
 	 */
 	public void setBiography(String bio){
@@ -125,6 +138,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * get the biography
 	 * @return biography
 	 */
 	public String getBiography(){
@@ -132,6 +146,7 @@ public class UserProfileModel {
 	}
 
 	/**
+	 * set the picture
 	 * @param pic
 	 */
 	public void setPicture(Bitmap pic){
@@ -139,6 +154,7 @@ public class UserProfileModel {
 	}
 	
 	/**
+	 * get the picture
 	 * @return picture
 	 */
 	public Bitmap getPicture(){

@@ -32,9 +32,10 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 /**
+ * This code was borrowed from @zjullion to aid in being able to serialize bitmap pictures. 
  * Provides custom base64 serialization / deserialization for Bitmaps.
  * Algorithm taken from: http://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
- * @author zjullion
+ * @author zjullion, ssowemim
  */
 
 /**

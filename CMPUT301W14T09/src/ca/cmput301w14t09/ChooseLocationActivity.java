@@ -55,7 +55,7 @@ import com.mapquest.android.maps.OverlayItem;
  *  http://developer.mapquest.com/web/products/featured/android-maps-api/documentation
  *  I downloaded the Android Maps API & Samples which included the library I used and all the bits for this class
  *  geolocation that will be returned upon leaving activity
- *  @author Cameron Alexander
+ *  @author Cameron Alexander, ssowemim minor documentation
  */
 
 public class ChooseLocationActivity extends MapActivity {
@@ -85,7 +85,6 @@ public class ChooseLocationActivity extends MapActivity {
 		//used for reverse geocoding
 		annotation = new AnnotationView(map);
 		code = new Geocoder(getApplicationContext());
-		int id = getLayoutId();
 
 		//setup views and overlay
 		setupViews();
@@ -104,9 +103,6 @@ public class ChooseLocationActivity extends MapActivity {
 				onBackPressed();
 			}
 		});
-
-		
-		
 	}
 
 	/**
@@ -116,7 +112,6 @@ public class ChooseLocationActivity extends MapActivity {
 	protected void setupMapView() {
 		this.map = (MapView) findViewById(R.id.map);
 		map.setBuiltInZoomControls(true);
-
 	}
 
 	/**
@@ -135,7 +130,6 @@ public class ChooseLocationActivity extends MapActivity {
 				map.getController().setZoom(14);
 				map.getOverlays().add(myLocationOverlay);
 				myLocationOverlay.setFollowing(true);
-				
 			}
 		});
 	}
@@ -145,6 +139,7 @@ public class ChooseLocationActivity extends MapActivity {
 	 * add an itemized overlay to map 
 	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
 	 */
+	@SuppressWarnings("unused")
 	private void addPoiOverlay() {
 
 		// use a custom POI marker by referencing the bitmap file directly,
@@ -172,8 +167,6 @@ public class ChooseLocationActivity extends MapActivity {
 		map.getOverlays().add(poiOverlay);
 	}    
 
-
-
 	/**
 	 * enable features of the overlay 
 	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
@@ -184,7 +177,6 @@ public class ChooseLocationActivity extends MapActivity {
 		myLocationOverlay.enableCompass();
 		super.onResume();
 	}
-
 
 	/**
 	 * disable features of the overlay when in the background 
@@ -258,7 +250,6 @@ public class ChooseLocationActivity extends MapActivity {
 			} catch (Exception e) {
 				return null;
 			}
-
 		}
 
 		/**
@@ -270,6 +261,9 @@ public class ChooseLocationActivity extends MapActivity {
 			return code;
 		}
 
+		/**
+		 * Gets the geolocation from selection on the map, or returns the message nothing is found.	
+		 */
 		protected void onPostExecute(List<Address> result) {
 			if (result == null || result.size() == 0) {
 				Toast.makeText(getApplicationContext(), "No match found!", Toast.LENGTH_SHORT).show();
@@ -292,9 +286,6 @@ public class ChooseLocationActivity extends MapActivity {
 
 				geo.setLatitude(geoPoint[0].getLatitude());
 				geo.setLongitude(geoPoint[0].getLongitude());
-
-				System.out.println("hey: geolat "+geo.getLatitude());
-				System.out.println("hey: geolng "+geo.getLongitude());
 				return getGeocoder().getFromLocation(geoPoint[0].getLatitude(), geoPoint[0].getLongitude(), 1);
 
 			} catch (Exception e) {
@@ -376,7 +367,6 @@ public class ChooseLocationActivity extends MapActivity {
 	 * On back pressed pack up the geolocation that was selected and send back to parent activity to be processed
 	 * http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
 	 */
-
 	public void onBackPressed()
 	{
 		// Update _workorder object

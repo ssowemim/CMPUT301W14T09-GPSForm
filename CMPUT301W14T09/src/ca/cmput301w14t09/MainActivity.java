@@ -28,6 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import ca.cmput301w14t09.FileManaging.FileLoading;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.User;
@@ -100,10 +101,16 @@ public class MainActivity extends Activity {
 	 * @param v
 	 */
 	public void newUser(View v) {
-		user = new User(editText.getText().toString());
-		FileSaving.appendUserNameToList(user.getUserName(), this);
-		FileSaving.saveUserFile(user, this);
-		topComments(user);
+		editText = (EditText) findViewById(R.id.editUsername);
+		String newUserName = editText.getText().toString().replaceAll("\\s+","");
+		if (!(newUserName.equals(""))){
+			user = new User(editText.getText().toString());
+			FileSaving.appendUserNameToList(user.getUserName(), this);
+			FileSaving.saveUserFile(user, this);
+			topComments(user);
+		}else{
+			Toast.makeText(getApplicationContext(),"No UserName specified", Toast.LENGTH_LONG).show();
+		}
 	}
 
 	/**
@@ -112,9 +119,9 @@ public class MainActivity extends Activity {
 	 * @param user
 	 */
 	public void topComments(User user) {
-		Intent intent = new Intent(this, TopCommentsActivity.class);
+		Intent intent = new Intent(MainActivity.this, TopCommentsActivity.class);
 		intent.putExtra("CURRENT_USER", user);
-		this.startActivity(intent);
+		MainActivity.this.startActivity(intent);
 	}
 
 	/**

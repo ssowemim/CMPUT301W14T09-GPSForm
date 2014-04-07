@@ -67,11 +67,10 @@ public class PopUpSelect extends PopUp{
         Button Reply=(Button)dialog.findViewById(R.id.Reply);
 
         dialog.show();
-
+        //Adds the comment to favourite when favourite button is pressed
         Favourite.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v){
 
                 if(user.getUserName().equals("Guest")) {
                     Toast.makeText(caller.getApplicationContext(),
@@ -83,7 +82,7 @@ public class PopUpSelect extends PopUp{
                 dialog.dismiss();
             }
         });
-
+        //Enables you to edit comment, when edit comment button is pressed
         Edit.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -99,7 +98,7 @@ public class PopUpSelect extends PopUp{
 
             }
         });
-
+        //Allows you to reply to comments
         Reply.setOnClickListener(new View.OnClickListener(){
 
             @Override

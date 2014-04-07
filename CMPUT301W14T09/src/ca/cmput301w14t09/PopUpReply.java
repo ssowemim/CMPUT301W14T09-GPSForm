@@ -70,8 +70,6 @@ public class PopUpReply extends PopUpComment {
 		dialog.setContentView(R.layout.pop_up_comment);
 		dialog.setTitle(windowName);
 
-
-
 		authorText=(EditText)dialog.findViewById(R.id.authorText);
 		commentText=(EditText)dialog.findViewById(R.id.commentText);
 
@@ -129,10 +127,8 @@ public class PopUpReply extends PopUpComment {
 				user.getProfile().setAuthorName(text2);
 				FileSaving.saveUserFile(user, caller);
 
-
 				//selected location
 				GeoLocation selectedgeo = commentListActivity.getSelectedGeolocation();
-				final GeoLocation geodefault = lc1.getGeodefault();
 
 				picture = pictureController.finalizePicture(picture, (ListActivity) caller);
 				Boolean hasPicture = pictureController.getHasPicture();

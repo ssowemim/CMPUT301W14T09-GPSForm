@@ -45,6 +45,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * get latitude
 	 * @return latitude
 	 */
 	public double getLatitude() {
@@ -52,6 +53,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * set latitude
 	 * @param latitude
 	 */
 	public void setLatitude(double latitude) {
@@ -59,6 +61,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * get longitude
 	 * @return longitude
 	 */
 	public double getLongitude() {
@@ -66,6 +69,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * set longitude
 	 * @param longitude
 	 */
 	public void setLongitude(double longitude) {
@@ -73,6 +77,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * return name
 	 * @return name
 	 */
 	public String getName() {
@@ -80,6 +85,7 @@ public class GeoLocation implements Serializable {
 	}
 
 	/**
+	 * set name
 	 * @param name
 	 */
 	public void setName(String name) {

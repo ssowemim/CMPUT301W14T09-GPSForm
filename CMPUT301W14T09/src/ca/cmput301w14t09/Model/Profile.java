@@ -21,7 +21,6 @@ package ca.cmput301w14t09.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
 import ca.cmput301w14t09.Model.UnreadMarker;
 
 /**
@@ -32,6 +31,7 @@ import ca.cmput301w14t09.Model.UnreadMarker;
  */
 public class Profile implements Serializable {
 
+	//Initialize variable
 	private static final long serialVersionUID = 2L;
 	private ArrayList<Comment> favorites;
 	private java.util.ArrayList<UnreadMarker> unreadComments;
@@ -48,6 +48,7 @@ public class Profile implements Serializable {
 	}
 
 	/**
+	 * get favourties
 	 * @return the favorites
 	 */
 	 public ArrayList<Comment> getFavorites() {
@@ -55,6 +56,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * add a new favourite
 	  * @param newFavorite
 	  */
 	 public void add(Comment newFavorite) {
@@ -62,6 +64,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * set favourites
 	  * @param favorites the favorites to set
 	  */
 	 public void setFavorites(ArrayList<Comment> favorites) {
@@ -69,6 +72,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * get the unread Comment
 	  * @return the unreadComments
 	  */
 	 public java.util.ArrayList<UnreadMarker> getUnreadComments() {
@@ -76,6 +80,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * set unread comments
 	  * @param unreadComments the unreadComments to set
 	  */
 	 public void setUnreadComments(java.util.ArrayList<UnreadMarker> unreadComments) {
@@ -83,6 +88,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * get the author name
 	  * @return the authorName
 	  */
 	 public String getAuthorName() {
@@ -90,6 +96,7 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * set the author name
 	  * @param authorName the authorName to set
 	  */
 	 public void setAuthorName(String authorName) {
@@ -97,34 +104,34 @@ public class Profile implements Serializable {
 	 }
 
 	 /**
+	  * get the username
 	  * @return the userName
 	  */
-	 public String getUserName()
-	 {
+	 public String getUserName(){
 		 return userName;
 	 }
 
 	 /**
+	  * set the user name
 	  * @param userName the userName to set
 	  */
-	 public void setUserName(String userName)
-	 {
+	 public void setUserName(String userName){
 		 this.userName = userName;
 	 }
 
 	 /**
+	  * get the cache
 	  * @return cache
 	  */
-	 public Cache getCache()
-	 {
+	 public Cache getCache(){
 		 return cache;
 	 }
 
 	 /**
+	  * set the cache
 	  * @param cache
 	  */
-	 public void setCache(Cache cache)
-	 {
+	 public void setCache(Cache cache){
 		 this.cache = cache;
 	 }	
 }

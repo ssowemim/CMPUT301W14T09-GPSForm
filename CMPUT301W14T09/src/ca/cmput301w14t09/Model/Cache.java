@@ -22,12 +22,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import android.app.Activity;
-
-import ca.cmput301w14t09.TopCommentsActivity;
-import ca.cmput301w14t09.FileManaging.FileLoading;
-import ca.cmput301w14t09.FileManaging.FileSaving;
-
 /**
  * 
  * @author Conner
@@ -39,7 +33,6 @@ public class Cache implements Serializable {
     private static final long serialVersionUID = 3735065364081988008L;
     private static final int MAX_LENGTH = 200;
     public ArrayList<Comment> comments;
-    Activity cacheactivity;
 
     public Cache() {
         comments = new ArrayList<Comment>(MAX_LENGTH);

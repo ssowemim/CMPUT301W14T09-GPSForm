@@ -311,7 +311,9 @@ public class TopCommentsActivity extends ListActivity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+
 			}
+
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
 					user.profile.cache.getTopComments(true));

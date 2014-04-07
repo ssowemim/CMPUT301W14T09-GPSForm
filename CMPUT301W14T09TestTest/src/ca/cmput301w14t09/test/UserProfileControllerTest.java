@@ -11,10 +11,9 @@ import ca.cmput301w14t09.Model.UserProfileModelList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
-import junit.framework.TestCase;
 
 /**
- * 
+ * This test case tests the user profile controller.
  * @author ssowemim
  *
  */

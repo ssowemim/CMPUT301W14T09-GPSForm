@@ -36,21 +36,6 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		assertTrue(geo2 == locationcontroller.getGeoLocation());
 	}
 
-
-	/**
-	 * @author Cameron Alexander 
-	 */
-	public void testLocationChanged(){
-		LocationController locationcontroller = new LocationController();
-		Location location = new Location("dummyprovider");
-		Context context = this.getActivity().getApplication();
-		location.setLatitude(-53.2345);
-		location.setLongitude(103.44566);
-		assertTrue(location.getLatitude() == -53.2345);
-		locationcontroller.locationchanged(location);
-		assertTrue(locationcontroller.getGeodefault().getLatitude() == -53.2345);
-	}
-
 	/**
 	 * @author Cameron Alexander
 	 * Check dafault vs selected location, if selected location exists use it if not use default

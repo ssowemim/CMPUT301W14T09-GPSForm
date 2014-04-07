@@ -234,9 +234,9 @@ public class ElasticSearchOperations extends Server{
 		final CountDownLatch latch = new CountDownLatch(1);
 
 		Thread thread = new Thread() {
+			@SuppressWarnings("hiding")
 			@Override
 			public void run() {
-				HttpClient client = new DefaultHttpClient();
 				HttpPost updateRequest = new HttpPost(updateAddress + comment.getUuid() + "/_update/");
 				String query = "{\"script\" : \"ctx._source." + str + "}";
 				StringEntity stringentity;
@@ -246,14 +246,9 @@ public class ElasticSearchOperations extends Server{
 					updateRequest.setHeader("Accept","application/json");
 					updateRequest.setEntity(stringentity);
 
-					HttpResponse response = client.execute(updateRequest);
-					String status = response.getStatusLine().toString();
-
 					latch.countDown();
 
 				}  catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				} catch (ClientProtocolException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -282,7 +277,7 @@ public class ElasticSearchOperations extends Server{
 	}
 
 	/**
-	 * 
+	 * Pushes the UserProfileModel onto the server
 	 * @param uPModel
 	 * @throws InterruptedException
 	 */
@@ -331,7 +326,8 @@ public class ElasticSearchOperations extends Server{
 	}
 	
 	/**
-	 * 
+	 * Pulls the userProfile from the server, uses their uniqueID as a key source of extracting
+	 * Information.
 	 * @param uniqueID
 	 * @return
 	 * @throws InterruptedException

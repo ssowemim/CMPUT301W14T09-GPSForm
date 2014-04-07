@@ -101,10 +101,14 @@ public class MainActivity extends Activity {
 	 * @param v
 	 */
 	public void newUser(View v) {
-		user = new User(editText.getText().toString());
-		FileSaving.appendUserNameToList(user.getUserName(), this);
-		FileSaving.saveUserFile(user, this);
-		topComments(user);
+		editText = (EditText) findViewById(R.id.editUsername);
+		String newUserName = editText.getText().toString().replaceAll("\\s+","");
+		if (!(newUserName.equals(""))){
+			user = new User(editText.getText().toString());
+			FileSaving.appendUserNameToList(user.getUserName(), this);
+			FileSaving.saveUserFile(user, this);
+			topComments(user);
+		}
 	}
 
 	/**

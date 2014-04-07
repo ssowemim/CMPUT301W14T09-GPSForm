@@ -73,7 +73,7 @@ public class FavoriteActivity extends ListActivity
 
     /**
      * Function responsible for creating the menu and creating the list of the users 
-     * favourtes. 
+     * Favorites. 
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)

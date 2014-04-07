@@ -312,10 +312,6 @@ public class TopCommentsActivity extends ListActivity {
 					e.printStackTrace();
 				}
 			}
-			
-			else{
-				topComments = user.profile.cache.comments;
-			}
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
 					user.profile.cache.getTopComments(true));

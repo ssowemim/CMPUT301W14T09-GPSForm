@@ -19,8 +19,8 @@ import android.test.ActivityInstrumentationTestCase2;
  */
 public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
 
-	public UserProfileControllerTest(Class<TopCommentsActivity> activityClass) {
-		super(activityClass);
+	public UserProfileControllerTest() {
+		super(TopCommentsActivity.class);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -50,10 +50,10 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		
 		testUPController.finalizeVariables("UniqueID", "Name", "Female", phone, "email@facebook.com", 
 										bio, picture);
-		assertNull(list);
+		assertTrue(list.isEmpty());
 		list = testUPModel.getList();
 		assertNotNull(list);
-		assertEquals(1, list);
+		assertEquals(1, list.size());
 	}
 
 

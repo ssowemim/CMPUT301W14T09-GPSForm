@@ -25,7 +25,6 @@ package ca.cmput301w14t09.elasticSearch;
  */
 
 public class ElasticSearchResponse<T> {
-
 	String _index;
 	String _type;
 	String _id;

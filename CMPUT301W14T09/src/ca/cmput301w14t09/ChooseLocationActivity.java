@@ -292,9 +292,6 @@ public class ChooseLocationActivity extends MapActivity {
 
 				geo.setLatitude(geoPoint[0].getLatitude());
 				geo.setLongitude(geoPoint[0].getLongitude());
-
-				System.out.println("hey: geolat "+geo.getLatitude());
-				System.out.println("hey: geolng "+geo.getLongitude());
 				return getGeocoder().getFromLocation(geoPoint[0].getLatitude(), geoPoint[0].getLongitude(), 1);
 
 			} catch (Exception e) {

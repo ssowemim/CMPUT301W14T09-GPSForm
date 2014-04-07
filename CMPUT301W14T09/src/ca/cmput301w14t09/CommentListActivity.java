@@ -280,8 +280,6 @@ public class CommentListActivity extends ListActivity {
 			break;
 		default:
 			filter = Filter.NONE;
-			//return super.onOptionsItemSelected(item);
-			//sorted = false;\
 			break;
 		}
 	}
@@ -347,7 +345,6 @@ public class CommentListActivity extends ListActivity {
 
 			selectedgeo = (GeoLocation) data.getExtras().get("SomeUniqueKey");
 
-			//Toast.makeText(getApplicationContext(),"Comment Location Updated.", Toast.LENGTH_LONG).show();
 		}
 
 		if (requestCode == 123 && resultCode == Activity.RESULT_OK){

@@ -175,7 +175,7 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item){
-		//ArrayList<Comment> topComments = null;
+
 		boolean sorted = true;
 
 		switch (item.getItemId()) {
@@ -225,9 +225,7 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	private void sortByDate() {
 		filter = Filter.DATE;
-		//ArrayList newDateList = user.profile.cache.getTopComments(true);
-		//Collections.sort(newDateList);
-		//Collections.reverse(newDateList);
+
 		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
@@ -276,8 +274,6 @@ public class TopCommentsActivity extends ListActivity {
 				filter = Filter.NONE;
 				sortByDate();
 				sortByLocation();
-				//return super.onOptionsItemSelected(item);
-				//sorted = false;\
 				break;
 		}
 	}
@@ -324,8 +320,6 @@ public class TopCommentsActivity extends ListActivity {
 					user.profile.cache.getTopComments(true));
 			aCommentList.setAdapter(adapter1);
 
-			//Collections.sort(user.profile.cache.comments);
-			//Collections.reverse(user.profile.cache.comments);
 			reapplyFilter();
 
 			adapter1.notifyDataSetChanged();

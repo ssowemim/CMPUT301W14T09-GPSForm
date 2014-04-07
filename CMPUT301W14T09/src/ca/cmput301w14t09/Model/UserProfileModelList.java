@@ -57,7 +57,6 @@ public class UserProfileModelList {
 		try {
 			ElasticSearchOperations.pushUserProfile(uPModel);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

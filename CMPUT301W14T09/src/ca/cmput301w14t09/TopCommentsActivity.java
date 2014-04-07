@@ -312,9 +312,9 @@ public class TopCommentsActivity extends ListActivity {
 				}
 			}
 			
-			else{
+		/**	else{
 				topComments = user.profile.cache.comments;
-			}
+			} **/
 
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,

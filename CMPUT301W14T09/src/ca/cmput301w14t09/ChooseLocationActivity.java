@@ -85,7 +85,6 @@ public class ChooseLocationActivity extends MapActivity {
 		//used for reverse geocoding
 		annotation = new AnnotationView(map);
 		code = new Geocoder(getApplicationContext());
-		int id = getLayoutId();
 
 		//setup views and overlay
 		setupViews();
@@ -140,6 +139,7 @@ public class ChooseLocationActivity extends MapActivity {
 	 * add an itemized overlay to map 
 	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
 	 */
+	@SuppressWarnings("unused")
 	private void addPoiOverlay() {
 
 		// use a custom POI marker by referencing the bitmap file directly,

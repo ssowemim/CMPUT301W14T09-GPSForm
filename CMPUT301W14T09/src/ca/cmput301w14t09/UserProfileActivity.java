@@ -196,7 +196,7 @@ public class UserProfileActivity extends Activity{
 	}
 
 	/**
-	 * This gives all the textfield an initial value, just to avoid a nullpointerexception.
+	 * This gives all the text fields an initial value, just to avoid a nullpointerexception.
 	 */
 	public void initializeVariables(){
 		this.phoneText.setText("");

@@ -300,12 +300,11 @@ public class TopCommentsActivity extends ListActivity {
 
 	/**
 	 * This pulls all the threads from server and puts them all into a list.
-	 * This list is now what is being reffered too than calling from elasticOprations all 
+	 * This list is now what is being referred too than calling from elasticOprations all 
 	 * the time.
 	 */
 	public void populateListView() {
 		ArrayList<Comment> topComments = null;
-		SortingController popsort = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {

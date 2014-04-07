@@ -55,14 +55,11 @@ public class LocationController {
 	 */
 	public void checklocations(GeoLocation selectedgeo){
 		if(selectedgeo.getLatitude()!= 0 && selectedgeo.getLongitude()!= 0){
-
 			geo = selectedgeo;
-
 		}
 		else{
 
 			geo = geodefault;
-
 		}
 	}
 
@@ -71,7 +68,6 @@ public class LocationController {
 	 * @param selectedgeo
 	 */
 	public void resetselectedlocation(GeoLocation selectedgeo){
-
 		double latitude = 0.0;
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);

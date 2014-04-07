@@ -16,7 +16,6 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 
 	public UserProfileModelTest() {
 		super(TopCommentsActivity.class);
-	
 	}
 	
 	UserProfileModel testUPModel = new UserProfileModel("UNIQUEID", "Benjamin Button", "Male", 
@@ -57,7 +56,7 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
 		
 		testUPModel.setEmail("bobby@brown.com");
-		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
+		assertEquals("bobby@brown.com", testUPModel.getEmail());
 	}
 	
 	public void testBio(){

@@ -58,7 +58,6 @@ public class LocationController {
 			geo = selectedgeo;
 		}
 		else{
-
 			geo = geodefault;
 		}
 	}
@@ -72,27 +71,20 @@ public class LocationController {
 		double longitude = 0.0;
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
-
 	}
-
-
 
 	/**
 	 * @return the geodefault
 	 */
-	public GeoLocation getGeodefault()
-	{
+	public GeoLocation getGeodefault(){
 
 		return geodefault;
 	}
 
-
-
 	/**
 	 * @param geodefault the geodefault to set
 	 */
-	public void setGeodefault(double lat, double lng)
-	{
+	public void setGeodefault(double lat, double lng){
 		geodefault.setLatitude(lat);
 		geodefault.setLongitude(lng);
 
@@ -102,8 +94,7 @@ public class LocationController {
 	/**
 	 * @param geo the geo to set
 	 */
-	public void setGeo(GeoLocation geo)
-	{
+	public void setGeo(GeoLocation geo){
 
 		this.geo = geo;
 	}

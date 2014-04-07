@@ -27,14 +27,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import ca.cmput301w14t09.R;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 
 /**
  * 
- * @author chunhan
+ * @author chunhan, ssowemim
  * Controller handling the logic behind sorting the comments for proximity.
  * Compatible with sorting from default location or changed locations. 
  * Also sorts comments based of if there is a picture attached to that comment
@@ -42,8 +40,7 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
  */
 
 public class SortingController {
-
-
+	
 	/**
 	 * 
 	 * Sort Pictures in top comments view
@@ -62,7 +59,6 @@ public class SortingController {
 		});
 		Collections.reverse(commentList);
 		return commentList;
-
 	}
 
 
@@ -78,9 +74,11 @@ public class SortingController {
 	 * @return
 	 */
 	public ArrayList<Comment> sortTopComments(LocationController lc, GeoLocation geo, ArrayList<Comment> topComments){
+		
 		if(geo == null){
 			geo = lc.getGeodefault();
 		}
+		
 		final Map<Comment, Double> myHashMap = new HashMap<Comment, Double>();
 		double comRank = 0;
 		double lon = geo.getLongitude();
@@ -120,9 +118,7 @@ public class SortingController {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static <E> Map sortByComparator(Map unsorted){
 
-
 		List list = new LinkedList(unsorted.entrySet());
-
 		Collections.sort(list, new Comparator(){
 			public int compare(Object o1, Object o2){
 				return (Integer) ((((Comparable) ((Map.Entry) (o1)).getValue()).compareTo(((Map.Entry)(o2)).getValue()) ));

@@ -20,7 +20,6 @@ package ca.cmput301w14t09.Model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;

@@ -302,7 +302,7 @@ public class TopCommentsActivity extends ListActivity {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					topComments = ElasticSearchOperations.pullThreads();
-					topComments = popsort.sortTopComments(lc1, null, topComments);
+				//	topComments = popsort.sortTopComments(lc1, null, topComments);
 
 					user.profile.cache.add(topComments);
 					

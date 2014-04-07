@@ -26,6 +26,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import android.app.Activity;
+import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.User;
 
 /**
@@ -88,4 +89,6 @@ public class FileLoading {
 		}
 		return user;
 	}
+	
+	
 }

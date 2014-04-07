@@ -303,12 +303,18 @@ public class TopCommentsActivity extends ListActivity {
 				try {
 					topComments = ElasticSearchOperations.pullThreads();
 					topComments = popsort.sortTopComments(lc1, null, topComments);
+
 					user.profile.cache.add(topComments);
+					
 					FileSaving.saveUserFile(user, this);
 
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+			}
+			
+			else{
+				topComments = user.profile.cache.comments;
 			}
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,

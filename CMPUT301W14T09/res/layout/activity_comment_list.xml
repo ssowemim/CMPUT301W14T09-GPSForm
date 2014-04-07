@@ -13,8 +13,7 @@
     	android:layout_width="match_parent"
     	android:layout_height="500dp"
     	android:layout_above="@+id/map"
-    	android:layout_alignLeft="@+id/map"
-    	android:layout_below="@+id/replyComment" >
+    	android:layout_alignLeft="@+id/map" >
 
     </ListView>
     
@@ -27,14 +26,5 @@
          android:layout_alignRight="@+id/comment"
          android:apiKey="YOUR_APPKEY_HERE" >
      </com.mapquest.android.maps.MapView>
-
-    <Button
-    	android:id="@+id/replyComment"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content"
-    	android:layout_alignParentTop="true"
-    	android:layout_alignRight="@+id/android:list"
-    	android:onClick="popUp"
-    	android:text="Reply" />
 
 </RelativeLayout>

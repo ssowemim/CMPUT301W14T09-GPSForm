@@ -67,6 +67,7 @@ import com.mapquest.android.maps.MyLocationOverlay;
  */
 public class CommentListActivity extends ListActivity {
 
+	private CommentListActivityLocation commentListActivityProduct = new CommentListActivityLocation();
 	//Activity request codes to take pictures
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -75,8 +76,6 @@ public class CommentListActivity extends ListActivity {
 	protected Dialog dialog;
 	protected ListView aCommentList;
 
-	//initialize variables for map 
-	protected MapView map;
 	private MyLocationOverlay myLocationOverlay;
 	AnnotationView annotation;
 	GeoPoint currentLocation;
@@ -121,8 +120,8 @@ public class CommentListActivity extends ListActivity {
 		favList = (ListView) findViewById(android.R.id.list);
 
 		//setup map
-		setupMapView();
-		setupMyLocation();
+		commentListActivityProduct.setupMapView(this);
+		commentListActivityProduct.setupMyLocation(this, lc1);
 
 		favList.setOnItemClickListener(new OnItemClickListener(){
 
@@ -424,33 +423,28 @@ public class CommentListActivity extends ListActivity {
 		selectedgeo.setLatitude(latitude);
 		selectedgeo.setLongitude(longitude);
 	}
-	
-	/**
-	 *set your map and enable default zoom controls 
-	 *http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
-	 */
-	protected void setupMapView() {
-		this.map = (MapView) findViewById(R.id.map);
-		map.setBuiltInZoomControls(true);
+
+	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay)
+	{
+
+		this.myLocationOverlay = myLocationOverlay;
 	}
 
-	/**
-	 * set up a MyLocationOverlay and execute the runnable once we have a location fix 
-	 * http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
-	 */
-	private void setupMyLocation() {
-		this.myLocationOverlay = new MyLocationOverlay(this, map);
-		myLocationOverlay.enableMyLocation();
-		myLocationOverlay.runOnFirstFix(new Runnable() {
-			@Override
-			public void run() {
-				currentLocation = myLocationOverlay.getMyLocation();
-				lc1.setGeodefault(currentLocation.getLatitude(), currentLocation.getLongitude());
-				map.getController().animateTo(currentLocation);
-				map.getController().setZoom(14);
-				map.getOverlays().add(myLocationOverlay);
-				myLocationOverlay.setFollowing(true);
-			}
-		});
+	public void setCurrentLocation(GeoPoint currentLocation)
+	{
+
+		this.currentLocation = currentLocation;
+	}
+
+	public MyLocationOverlay getMyLocationOverlay()
+	{
+
+		return myLocationOverlay;
+	}
+
+	public GeoPoint getCurrentLocation()
+	{
+
+		return currentLocation;
 	}
 }

@@ -225,7 +225,9 @@ public class TopCommentsActivity extends ListActivity {
 	 */
 	private void sortByDate() {
 		filter = Filter.DATE;
-
+		//ArrayList newDateList = user.profile.cache.getTopComments(true);
+		//Collections.sort(newDateList);
+		//Collections.reverse(newDateList);
 		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
@@ -272,6 +274,8 @@ public class TopCommentsActivity extends ListActivity {
 				break;
 			default:
 				filter = Filter.NONE;
+				sortByDate();
+				sortByLocation();
 				//return super.onOptionsItemSelected(item);
 				//sorted = false;\
 				break;
@@ -302,7 +306,6 @@ public class TopCommentsActivity extends ListActivity {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					topComments = ElasticSearchOperations.pullThreads();
-					topComments = popsort.sortTopComments(lc1, null, topComments);
 
 					user.profile.cache.add(topComments);
 					
@@ -314,6 +317,8 @@ public class TopCommentsActivity extends ListActivity {
 
 			}
 
+			topComments = user.profile.cache.getTopComments(true);
+			ArrayList<Comment> newCommentList = popsort.sortTopComments(lc1, null, topComments);
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
 					user.profile.cache.getTopComments(true));

@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -241,8 +242,9 @@ public class CommentListActivity extends ListActivity {
 	 */
 	private void sortByDate() {
 		filter = Filter.DATE;
-
-		adapter = new CommentAdapter(this,R.layout.comment_view, user.profile.cache.getSubComments(firstComment));
+		ArrayList<Comment> newList = user.profile.cache.getSubComments(firstComment);
+		Collections.reverse(newList);
+		adapter = new CommentAdapter(this,R.layout.comment_view, newList);
 		favList.setAdapter(adapter);
 		adapter.notifyDataSetChanged();
 	}
@@ -312,12 +314,10 @@ public class CommentListActivity extends ListActivity {
 	 */
 	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
-		SortingController popsort = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					commentThread = ElasticSearchOperations.pullOneThread(firstComment);
-					commentThread = popsort.sortTopComments(lc1, null, commentThread);
 					user.profile.cache.add(commentThread);
 					FileSaving.saveUserFile(user, this);
 				} catch (InterruptedException e) {

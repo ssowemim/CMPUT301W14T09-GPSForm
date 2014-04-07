@@ -297,12 +297,13 @@ public class TopCommentsActivity extends ListActivity {
 
 	public void populateListView() {
 		ArrayList<Comment> topComments = null;
-
+		SortingController popsort = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					topComments = ElasticSearchOperations.pullThreads();
-				
+					topComments = popsort.sortTopComments(lc1, null, topComments);
+
 					user.profile.cache.add(topComments);
 					
 					FileSaving.saveUserFile(user, this);
@@ -310,18 +311,15 @@ public class TopCommentsActivity extends ListActivity {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+
 			}
-			
-		/**	else{
-				topComments = user.profile.cache.comments;
-			} **/
 
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
 					user.profile.cache.getTopComments(true));
 			aCommentList.setAdapter(adapter1);
 
-			Collections.sort(user.profile.cache.comments);
+			//Collections.sort(user.profile.cache.comments);
 			Collections.reverse(user.profile.cache.comments);
 			reapplyFilter();
 

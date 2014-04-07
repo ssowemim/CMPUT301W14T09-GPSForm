@@ -114,7 +114,7 @@ public class MainActivity extends Activity {
 	public void topComments(User user) {
 		Intent intent = new Intent(this, TopCommentsActivity.class);
 		intent.putExtra("CURRENT_USER", user);
-		startActivity(intent);
+		this.startActivity(intent);
 	}
 
 	/**

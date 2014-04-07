@@ -312,11 +312,12 @@ public class CommentListActivity extends ListActivity {
 	 */
 	public void populateListView() {
 		ArrayList<Comment> commentThread = null;
-
+		SortingController popsort = new SortingController();
 		if(user != null) {
 			if(Server.getInstance().isServerReachable(this)) {
 				try {
 					commentThread = ElasticSearchOperations.pullOneThread(firstComment);
+					commentThread = popsort.sortTopComments(lc1, null, commentThread);
 					user.profile.cache.add(commentThread);
 					FileSaving.saveUserFile(user, this);
 				} catch (InterruptedException e) {

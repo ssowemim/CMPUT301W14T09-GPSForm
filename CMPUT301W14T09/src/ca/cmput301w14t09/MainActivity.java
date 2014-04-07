@@ -29,6 +29,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 import ca.cmput301w14t09.FileManaging.FileLoading;
 import ca.cmput301w14t09.FileManaging.FileSaving;
 import ca.cmput301w14t09.Model.User;
@@ -108,6 +109,8 @@ public class MainActivity extends Activity {
 			FileSaving.appendUserNameToList(user.getUserName(), this);
 			FileSaving.saveUserFile(user, this);
 			topComments(user);
+		}else{
+			Toast.makeText(getApplicationContext(),"No UserName specified", Toast.LENGTH_LONG).show();
 		}
 	}
 

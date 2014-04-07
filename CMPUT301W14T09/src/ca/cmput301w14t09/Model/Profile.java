@@ -25,7 +25,7 @@ import ca.cmput301w14t09.Model.UnreadMarker;
 
 /**
  * 
- * @author Michael
+ * @author Michael, ssowemim
  * Profile tracks the settings of the associated user.
  * 
  */

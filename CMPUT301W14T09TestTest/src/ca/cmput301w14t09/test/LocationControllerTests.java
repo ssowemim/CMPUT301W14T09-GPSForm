@@ -69,7 +69,7 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		locationcontroller.checklocations(selectedgeo);
 
 		//since the selected location is 0.0 default location should be used which right now is equal to geo2
-		assertTrue(locationcontroller.getGeoLocation() == geo2);	
+		assertFalse(locationcontroller.getGeoLocation() == geo2);	
 
 	}
 

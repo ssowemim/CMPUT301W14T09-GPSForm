@@ -552,7 +552,7 @@ public class TopCommentsActivity extends ListActivity {
 					}
 				});
 
-		//profile button lets you see the usernames profile
+		//profile button lets you see the user names profile
 		dialogProfileButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override

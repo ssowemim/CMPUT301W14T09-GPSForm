@@ -1,3 +1,21 @@
+/**
+
+License GPLv3: GNU GPL Version 3
+<http://gnu.org/licenses/gpl.html>.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package ca.cmput301w14t09;
 
 import java.util.ArrayList;
@@ -24,10 +42,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This class is in full control of the UserPofile interface.
+ * Controlling all its input and display.
+ * It pulls all its information from the elasticsearchOperations
+ * and also saves all its information to elasticsearchOperations as soon as save is clicked.
+ * All coding was done by myself.
+ * @author ssowemim
+ *
+ */
 public class UserProfileActivity extends Activity{
 
+	//Used to obtain the picture request from activity request
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
 	
+	//Initialize variable
 	protected Spinner maleOrFemale;
 	protected EditText firstLastName;
 	protected EditText phoneText;
@@ -91,6 +120,13 @@ public class UserProfileActivity extends Activity{
 		startActivityForResult(intent, OBTAIN_PIC_REQUEST_CODE);
 	}
 	
+	/**
+	 * Takes in a string text, this either being guest or notguest.
+	 * guest is not allowed to have a user profile so this closes this dialog and displays
+	 * a toast. But if it is not a guest, it goes through all the operations to find a userprofiel
+	 * if one exists.
+	 * @param text
+	 */
 	public void userToProfile(String text){
 
 		if (!text.equals("guest")){
@@ -133,6 +169,9 @@ public class UserProfileActivity extends Activity{
 		}
 	}
 	
+	/**
+	 * This initializes the spinner for male/female
+	 */
 	public void maleFemaleSpinner(){
 		List<String>list = new ArrayList<String>();
 		list.add("Male");
@@ -143,6 +182,11 @@ public class UserProfileActivity extends Activity{
 		this.maleOrFemale.setAdapter(adapter);
 	}
 	
+	/**
+	 * The process of saving the user profile to elastic search.
+	 * First passes it through the finalize variables in the user profile controller.
+	 * @param v
+	 */
 	public void saveUserProfile(View v){
 
 		uPController.finalizeVariables(user.getUniqueID().toString(), firstLastName.getText().toString(), 
@@ -150,7 +194,10 @@ public class UserProfileActivity extends Activity{
 									   biographyText.getText().toString(), this.currentPicture);
 		finish();
 	}
-	
+
+	/**
+	 * This gives all the textfield an initial value, just to avoid a nullpointerexception.
+	 */
 	public void initializeVariables(){
 		this.phoneText.setText("");
 		this.firstLastName.setText("");

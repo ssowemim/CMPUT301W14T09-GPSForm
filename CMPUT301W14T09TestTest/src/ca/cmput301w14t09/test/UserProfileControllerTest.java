@@ -21,13 +21,17 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 
 	public UserProfileControllerTest() {
 		super(TopCommentsActivity.class);
-		// TODO Auto-generated constructor stub
 	}
 	
 	UserProfileModelList testUPModel = new UserProfileModelList();
 	UserProfileController testUPController = new UserProfileController(testUPModel);
 	List<UserProfileModel> list = new ArrayList<UserProfileModel>();
 	
+	/**
+	 * This tests to see if finalize variable does deliver its information properly to
+	 * the model
+	 * @author ssowemim
+	 */
 	public void testFinalizeVariables() {
 		
 		Bitmap picture = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
@@ -56,6 +60,11 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		assertEquals(1, list.size());
 	}
 	
+	/**
+	 * Testing to see if the length of the bio is actually reduce if it exceeds the max size of 
+	 * the new bio
+	 * @author ssowemim
+	 */
 	public void testNewBio(){
 		Bitmap picture = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
 		picture = Bitmap.createScaledBitmap(picture, 70, 70, false);
@@ -71,7 +80,7 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		testUPController.finalizeVariables("UniqueID", "Name", "Female", phone, "email@facebook.com", 
 				bio, picture);
 		bio = testUPController.getNewBio();
-		//Checking to see that the length of the bio is now less than its inital length
+		//Checking to see that the length of the bio is now less than its initial length
 		assertTrue(bio.length() < 150);
 		
 		//Checking to see the length was reduced to an exact length of 100
@@ -79,6 +88,11 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		
 	}
 	
+	/**
+	 * Testing to see if the length of the phone is actually reduced if it exceeds the 
+	 * max size
+	 * @author ssowemim
+	 */
 	public void testNewPhone(){
 		Bitmap picture = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
 		picture = Bitmap.createScaledBitmap(picture, 70, 70, false);

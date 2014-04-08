@@ -5,9 +5,8 @@ import ca.cmput301w14t09.elasticSearch.Server;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
- * 
- * @author Chun-Han Lee
- *
+ * This test case just simply tests the server
+ * @author Chun-Han Lee & ssowemim
  */
 public class ServerTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
 
@@ -19,10 +18,14 @@ public class ServerTest extends ActivityInstrumentationTestCase2<TopCommentsActi
 		super.setUp();
 	}
 	/**
-	 * @author Chun-Han Lee
+	 * Testing to see if an instance of a server is actually received
+	 * @author Chun-Han Lee & ssowemim
 	 */
 	public void testGetInstance(){
-		Server server=Server.getInstance();
+		Server server= null;
+		assertNull(server);
+		
+		server = Server.getInstance();
 		assertNotNull(server);
 	}
 

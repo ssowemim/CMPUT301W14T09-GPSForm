@@ -88,8 +88,6 @@ public class UnreadMarker implements Serializable, Comparable<UnreadMarker> {
 
 	/**
 	 * generateNewMarkers goes through all comments, check a read flag exists for each one.
-	 * TODO: I'm pretty sure this won't actually work - oldMarkers is made up of UnreadMarkers, so it is logical
-	 * that it won't say it "contains" a Comment.
 	 */
 
 	public ArrayList<UnreadMarker> generateNewMarkers(ArrayList<UnreadMarker> oldMarkers, ArrayList<Comment> allComments) {

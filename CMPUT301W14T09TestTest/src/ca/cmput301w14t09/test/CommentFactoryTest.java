@@ -14,6 +14,7 @@ import junit.framework.TestCase;
 public class CommentFactoryTest extends TestCase {
 
 	/**
+	 * Tests to see if a comment is built succesfully
 	 * @author Chun-Han Lee
 	 */
 	public void testBuildComment(){
@@ -28,6 +29,7 @@ public class CommentFactoryTest extends TestCase {
 	}
 	
 	/**
+	 * Tests to see if a reply can be built succesfully
 	 * @author Chun-Han Lee
 	 */
 	public void testBuildReplies(){

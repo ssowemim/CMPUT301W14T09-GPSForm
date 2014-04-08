@@ -13,7 +13,8 @@ import ca.cmput301w14t09.Model.Comment;
 public class CommentTest extends TestCase{
 
 	/**
-	 * @author Chun-Han Lee
+	 * This tests to see if comments are added successfully
+	 * @author Chun-Han Lee & ssowemim
 	 */
 	public void testAddComment() {
 		
@@ -28,6 +29,7 @@ public class CommentTest extends TestCase{
 	}
 
 	/**
+	 * This tests to see a comment can be made into a top comment.
 	 * @author Chun-Han Lee
 	 */
 	public void testIfTopComment() {
@@ -39,6 +41,7 @@ public class CommentTest extends TestCase{
 	}
 	
 	/**
+	 * This tests to see if a comment can not be made into a top comment
 	 * @author Chun-Han Lee
 	 */
 	public void testNotTopComment(){
@@ -48,7 +51,4 @@ public class CommentTest extends TestCase{
 		
 		assertFalse(newComment.getTopComment());
 	}
-	
-	
-
 }

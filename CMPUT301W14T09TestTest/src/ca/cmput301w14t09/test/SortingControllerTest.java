@@ -65,7 +65,7 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		assertTrue(commList.get(0).getAuthorName().equals("test1"));
 		assertTrue(commList.get(1).getAuthorName().equals("test2"));
 		
-		ArrayList<Comment> testList = sc.sortTopComments(lc, null, commList);
+		ArrayList<Comment> testList = sc.sortTopComments(lc, geo, commList);
 		String name = testList.get(0).getAuthorName();
 		String name2 = testList.get(1).getAuthorName();
 

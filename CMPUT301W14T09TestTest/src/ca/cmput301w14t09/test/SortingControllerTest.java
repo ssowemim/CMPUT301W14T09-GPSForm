@@ -86,6 +86,7 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		Comment comment = null, comment1 = null;
 		LocationController lc1 = new LocationController();
 		
+		//Initialize variables
 		GeoLocation geo = new GeoLocation();
 		ArrayList<Comment> commList = new ArrayList<Comment>();
 		SortingController sc = new SortingController();

@@ -5,7 +5,6 @@ import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Model.UserProfileModel;
 import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;
-import junit.framework.TestCase;
 
 /**
  * 

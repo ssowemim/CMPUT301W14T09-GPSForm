@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * @author Conner
+ * @author Conner & ssowemim
  * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/ElasticSearchSearchResponse.java
  * @param <T>
  */
@@ -35,10 +35,18 @@ public class ElasticSearchSearchResponse<T> {
 	Hits<T> hits;
 	boolean exists;
 	
+	/**
+	 * Returns the hits
+	 * @return
+	 */
 	public Collection<ElasticSearchResponse<T>> getHits() {
 		return hits.getHits();
 	}
 	
+	/**
+	 * Returns the sources based on the amount of hits it gets
+	 * @return
+	 */
 	public Collection<T> getSources() {
 		Collection<T> out = new ArrayList<T>();
 		for (ElasticSearchResponse<T> essrt : getHits()) {
@@ -47,6 +55,9 @@ public class ElasticSearchSearchResponse<T> {
 		return out;
 	}
 	
+	/**
+	 * Returns the information of the hits in a string format
+	 */
 	public String toString() {
 		return (super.toString() + ":" + took + "," + _shards + "," + exists + "," + hits);
 	}

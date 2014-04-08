@@ -17,7 +17,7 @@
      android:layout_alignParentRight="true"
      android:layout_marginBottom="59dp"
      android:ems="10"
-     android:hint="New Username" />
+     android:hint="@string/new_username" />
 
  <Button
      android:id="@+id/button2"
@@ -27,7 +27,7 @@
      android:layout_alignParentRight="true"
      android:layout_marginBottom="14dp"
      android:onClick="guestUser"
-     android:text="Continue as Guest" />
+     android:text="@string/continue_guest" />
 
  <Button
      android:id="@+id/favorite1"
@@ -37,7 +37,7 @@
      android:layout_alignLeft="@+id/button2"
      android:layout_alignParentRight="true"
      android:onClick="newUser"
-     android:text="Continue" />
+     android:text="@string/continue" />
 
  <ListView
      android:id="@+id/UserList"

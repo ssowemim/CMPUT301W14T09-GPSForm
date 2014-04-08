@@ -24,7 +24,7 @@ import android.net.NetworkInfo;
 
 /**
  *  
- * @author Michael
+ * @author Michael & ssowemim
  * Server handles server configuration and status.  
  * Serves as intermediary between Cache and ElasticSearch.
  * Design structure consideration to allow for the existence of multiple servers in a scaled project.
@@ -44,6 +44,10 @@ public class Server {
 
 	}
 
+	/**
+	 * returns an instance of a new server or if there is already one it returns that one
+	 * @return
+	 */
 	public static Server getInstance() {
 		if (instance == null)
 			instance = new Server();
@@ -51,7 +55,7 @@ public class Server {
 	}
 
 	/**
-	 * @param con
+	 * @param con, retuns t/f in regards to if server is reachable or not
 	 * @return
 	 */
 	 public boolean isServerReachable(Context con) {
@@ -59,7 +63,7 @@ public class Server {
 	 }
 
 	 /**
-	  * @param con
+	  * @param con, checks to see if connected wifi or mobile is in service
 	  * @return
 	  */
 	 private boolean haveNetworkConnection(Context con) {

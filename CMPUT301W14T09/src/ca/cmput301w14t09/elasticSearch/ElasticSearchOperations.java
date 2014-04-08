@@ -46,7 +46,7 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  * 
- * @author Conner
+ * @author Conner & ssowemim
  * ElasticSearchOperations contains all methods that talk to the internet that either 
  * upload information onto the elasticSearch website or pull information for the same
  * site
@@ -68,6 +68,10 @@ public class ElasticSearchOperations extends Server{
 		super();
 	}
 
+	/**
+	 * returns the instance of the ElasticSearchOperations
+	 * @return
+	 */
 	public static ElasticSearchOperations getInstance() {
 		if (instance == null)
 			instance = new ElasticSearchOperations();
@@ -119,6 +123,9 @@ public class ElasticSearchOperations extends Server{
 		latch.await();
 	}
 
+	/**
+	 * This method creates is what makes the bitmap into a json serialzable format
+	 */
 	private static void constructGson(){
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(Bitmap.class, new JsonBitmapConverter());

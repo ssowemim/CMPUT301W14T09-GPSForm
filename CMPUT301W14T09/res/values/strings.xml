@@ -15,4 +15,7 @@
     <string name="title_activity_favorite">FavoriteActivity</string>
     <string name="final_app_name">GPostIT</string>
 
+    <string name="new_username">New Username</string>
+    <string name="continue_guest">Continue as Guest</string>
+    <string name="continue">Continue</string>
 </resources>

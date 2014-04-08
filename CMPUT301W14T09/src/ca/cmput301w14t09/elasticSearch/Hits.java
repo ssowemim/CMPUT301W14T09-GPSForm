@@ -21,7 +21,7 @@ package ca.cmput301w14t09.elasticSearch;
 import java.util.Collection;
 
 /**
- * @author Conner 
+ * @author Conner & ssowemim
  * code from https://github.com/Mrbilec/PicPoster/blob/master/src/ca/ualberta/cs/picposter/Hits.java
  * @param <T>
  */
@@ -31,9 +31,18 @@ public class Hits<T> {
 	int total;
 	double max_score;
 	Collection<ElasticSearchResponse<T>> hits;
+	
+	/**
+	 * returns the hits
+	 * @return
+	 */
 	public Collection<ElasticSearchResponse<T>> getHits() {
 		return hits;
 	}
+	
+	/**
+	 * returns the hits in a string format
+	 */
 	public String toString() {
 		return (super.toString()+","+total+","+max_score+","+hits);
 	}

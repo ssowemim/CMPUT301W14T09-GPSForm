@@ -11,21 +11,20 @@ import ca.cmput301w14t09.Model.GeoLocation;
 import ca.cmput301w14t09.Model.ThreadAdapter;
 import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
-import junit.framework.TestCase;
 
 /**
- * 
- * @author Cameron Alexander
+ * This test cases tests the ThreadAdapter java model class
+ * @author Cameron Alexander & ssowemim
  *
  */
 public class ThreadAdapterTest extends ActivityInstrumentationTestCase2<TopCommentsActivity> {
 
 	public ThreadAdapterTest() {
 		super(TopCommentsActivity.class);
-		
 	}
 	
 	/**
+	 * This test cases tests the threadAdapter to see if it can be created successfully
 	 * @author Cameron Alexander
 	 */
 	public void testThreadAdapter(){
@@ -34,7 +33,6 @@ public class ThreadAdapterTest extends ActivityInstrumentationTestCase2<TopComme
 		LocationController lc = new LocationController();
 		Context context = this.getActivity().getApplicationContext();
 		SortingController sorting = new SortingController();
-		LocationController lc1 = new LocationController();
         ArrayList<Comment> sortedList = sorting.sortTopComments(lc, geo, comments);
         ThreadAdapter adapter1 = new ThreadAdapter(context,R.layout.thread_view, sortedList);
         

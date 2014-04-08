@@ -39,7 +39,7 @@ import ca.cmput301w14t09.R;
 public class PictureController extends Activity{
     public static final int OBTAIN_PIC_REQUEST_CODE = 117;
     public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MAX_BITMAP_DIMENSIONS = 80;   
+    public static final int MAX_BITMAP_DIMENSIONS = 60;   
     //Directory name to store captured images
     private static final String IMAGE_DIRECTORY_NAME = "CAMERA";
     public boolean hasPicture=false;

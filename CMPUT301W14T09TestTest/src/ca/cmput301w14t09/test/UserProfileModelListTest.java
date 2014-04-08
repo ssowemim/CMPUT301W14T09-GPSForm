@@ -22,6 +22,9 @@ public class UserProfileModelListTest extends ActivityInstrumentationTestCase2<T
 	}
 
 	/**
+	 * I test the add user profile method here along with the other methods, since they all work together.
+	 * I check to see if variables are initialized right.
+	 * Then check to see if it can add one user, then onto adding two users.
 	 * @author ssowemim
 	 */
 	public void testAddUserProfile(){

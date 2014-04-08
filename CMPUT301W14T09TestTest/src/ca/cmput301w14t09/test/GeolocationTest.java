@@ -98,7 +98,8 @@ public class GeolocationTest extends TestCase {
 	}
 
 	/**
-	 * @author Cameron Alexander
+	 * testing the geolocation, when the geolocation is set to be zero.
+	 * @author Cameron Alexander & ssowemim
 	 */
 	public void testGeolocationzeroupdate() {
 
@@ -111,17 +112,22 @@ public class GeolocationTest extends TestCase {
 		geo.setLatitude(lat2);
 		geo.setLongitude(lng2);
 		lc.setGeo(geo);
-
+		
+		//Checking if variables were initialized properly.
+		assertEquals(0.0, geo.getLatitude());
+		assertEquals(0.0, geo.getLongitude());
 
 		boolean topComment1 = true;
 		String authorname1 = "";
 		String commentText1 = "";
 
 		Comment comment2 = CommentFactory.buildComment(lc, authorname1, commentText1, topComment1, null, false, null);
-
 		comment2.setGeoLocation(lc.getGeoLocation());
-
 		GeoLocation geo212 = comment2.getGeoLocation();
+		
+		//Checking if comment was initialized properly
+		assertEquals("", comment2.getAuthorName());
+		assertEquals("", comment2.getCommentText());
 
 		Double lat33 = geo212.getLatitude();
 		Double lng33 = geo212.getLongitude();
@@ -131,6 +137,7 @@ public class GeolocationTest extends TestCase {
 	}
 
 	/**
+	 * testing the name of geolocation
 	 * @author Cameron Alexander
 	 */
 	public void testGeolocationname() {

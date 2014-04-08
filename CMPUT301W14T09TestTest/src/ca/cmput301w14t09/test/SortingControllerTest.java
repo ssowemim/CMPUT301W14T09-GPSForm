@@ -28,7 +28,9 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 	}
 	
 	/**
-	 * @author Chun-Han Lee
+	 * Create two comments with to unique location, create a third location (0,0) and 
+	 * make a comparison based on that gps location
+	 * @author Chun-Han Lee & ssowemim
 	 */
 	public void testSortingCommentsByLocation(){
 		Comment comment = null, comment1 = null;
@@ -36,6 +38,7 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		LocationController lc1 = new LocationController();
 		LocationController lc2 = new LocationController();
 		
+		//Creating resources that will be used to make a comment
 		GeoLocation geo = new GeoLocation();
 		ArrayList<Comment> commList = new ArrayList<Comment>();
 		SortingController sc = new SortingController();
@@ -60,13 +63,13 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		geo.setLatitude(0);
 		lc.setGeo(geo);
 		
-		ArrayList<Comment> testList = sc.sortTopComments(lc, null, commList);
-		String name = testList.get(0).getAuthorName();
-		String name2 = testList.get(1).getAuthorName();
-		
 		// names are put into the list as follows
 		assertTrue(commList.get(0).getAuthorName().equals("test1"));
 		assertTrue(commList.get(1).getAuthorName().equals("test2"));
+		
+		ArrayList<Comment> testList = sc.sortTopComments(lc, null, commList);
+		String name = testList.get(0).getAuthorName();
+		String name2 = testList.get(1).getAuthorName();
 
 		// after sorting names are now reversed due to their comments location
 		assertEquals("test2", name);
@@ -76,13 +79,14 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 	}
 	
 	/**
+	 * Creates two unique comments and puts them into a list, it now simply runs the list through
+	 * the sorting picture algorithm and returns another list in the right order of pictures being sorted
+	 * or not.
 	 * @author ssowemim
 	 */
 	public void testSortingPicture(){
 		Comment comment = null, comment1 = null;
-		LocationController lc = new LocationController();
 		LocationController lc1 = new LocationController();
-		LocationController lc2 = new LocationController();
 		
 		GeoLocation geo = new GeoLocation();
 		ArrayList<Comment> commList = new ArrayList<Comment>();
@@ -94,27 +98,20 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		geo.setLongitude(10.0);
 		lc1.setGeo(geo);
 		
-		comment = CommentFactory.buildComment(lc1, "test1", "testing1", true, sBitmap, false, "username");
+		//Building comments
+		comment = CommentFactory.buildComment(lc1, "test1", "testing1", true, null, false, "username");
 		commList.add(comment);
-
-		geo.setLatitude(25.0);
-		geo.setLongitude(12.0);
-		lc2.setGeo(geo);
 		
-		comment1 = CommentFactory.buildComment(lc2, "test2", "testing2", true, sBitmap, true, "username1");
+		comment1 = CommentFactory.buildComment(lc1, "test2", "testing2", true, sBitmap, true, "username1");
 		commList.add(comment1);
-
-		geo.setLongitude(0);
-		geo.setLatitude(0);
-		lc.setGeo(geo);
+	
+		// names are put into the list as follows
+		assertEquals("test1",commList.get(0).getAuthorName());
+		assertEquals("test2",commList.get(1).getAuthorName());
 		
 		ArrayList<Comment> testList = sc.sortPicTopComments(commList);
 		String name = testList.get(0).getAuthorName();
 		String name2 = testList.get(1).getAuthorName();
-		
-		// names are put into the list as follows
-		assertTrue(commList.get(0).getAuthorName().equals("test2"));
-		assertTrue(commList.get(1).getAuthorName().equals("test1"));
 
 		// after sorting names are now reversed due to their comments location
 		assertEquals("test2", name);

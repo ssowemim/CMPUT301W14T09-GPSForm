@@ -7,8 +7,9 @@ import ca.cmput301w14t09.Model.GeoLocation;
 
 
 /**
- * @author Cameron Alexander 
- * 
+ * Testing if the initializing of the longitude and latitude works perfectly, 
+ * with along of getting proper outputs.
+ * @author Cameron Alexander & ssowemim
  */
 public class LocationControllerTests extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
 	public LocationControllerTests() {
@@ -17,14 +18,19 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 
 
 	/**
-	 * @author Cameron Alexander 
+	 * Testing if geolocation receives its input properly.
+	 * @author Cameron Alexander & ssowemim
 	 */
 	public void testGetGeolocation(){
-		
+
 		LocationController locationcontroller = new LocationController();
+
+		//checking if initializing of variable works fine.
+		GeoLocation geo2 = null;
+		assertNull(geo2);
 		
-		GeoLocation geo2 = locationcontroller.getGeoLocation();
-		assertTrue(geo2 == locationcontroller.getGeoLocation());
+		geo2 = locationcontroller.getGeoLocation();
+		assertNotNull(geo2);
 	}
 
 	/**

@@ -111,7 +111,7 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		String name = testList.get(0).getAuthorName();
 		String name2 = testList.get(1).getAuthorName();
 
-		// after sorting names are now reversed due to their comments location
+		// after sorting names are now reversed due to them having picture or not
 		assertEquals("test2", name);
 		assertEquals("test1", name2);
 	}

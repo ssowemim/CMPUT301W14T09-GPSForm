@@ -44,18 +44,24 @@ public class FileLoadingSavingTest extends ActivityInstrumentationTestCase2<TopC
 	}
 	
 	/**
-	 * 
-	 * @author Chun-Han Lee
-	 * Test to return User 
-	 * 
+	 * Tests to see if the initialization worked fine.
+	 * Tests to see if the user requested is actually the user returned.
+	 * @author Chun-Han Lee & ssowemim
 	 */
 	public void testReturnUser(){
-		User newuser = new User("hey");
-		FileSaving.saveUserFile(newuser, getActivity());
-		User testuser = FileLoading.returnUser("hey", getActivity());
-		assertNotNull(testuser);
-		String username = newuser.getUserName();
-		assertTrue(username.equals("hey"));
+		User newUser = new User("heytesting");
+		FileSaving.saveUserFile(newUser, getActivity());
+		
+		//Checks initialization
+		User testUser = null;
+		assertNull(testUser);
+		
+		testUser = FileLoading.returnUser(newUser.getUserName(), getActivity());;
+		assertNotNull(testUser);
+		
+		//checks to see if the user requested matched the user that was saved in
+		String userName = testUser.getUserName();
+		assertEquals("heytesting", userName);
 	}
 
 }

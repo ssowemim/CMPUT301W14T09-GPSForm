@@ -3,7 +3,6 @@
  */
 package ca.cmput301w14t09;
 
-
 import com.mapquest.android.maps.GeoPoint;
 import com.mapquest.android.maps.MyLocationOverlay;
 import com.mapquest.android.maps.MapView;

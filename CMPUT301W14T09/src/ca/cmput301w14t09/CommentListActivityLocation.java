@@ -8,19 +8,24 @@ import com.mapquest.android.maps.MapView;
 import com.mapquest.android.maps.MyLocationOverlay;
 import ca.cmput301w14t09.Controller.LocationController;
 
-public class CommentListActivityLocation
-{
+public class CommentListActivityLocation{
 
 	private MapView map;
 
-	public MapView getMap()
-	{
+	/**
+	 * Return a mapview
+	 * @return
+	 */
+	public MapView getMap(){
 
 		return map;
 	}
 
-	public void setMap(MapView map)
-	{
+	/**
+	 * set the mapview
+	 * @param map
+	 */
+	public void setMap(MapView map){
 
 		this.map = map;
 	}
@@ -28,8 +33,7 @@ public class CommentListActivityLocation
 	/**
 	 * set your map and enable default zoom controls  http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
 	 */
-	public void setupMapView(CommentListActivity commentListActivity)
-	{
+	public void setupMapView(CommentListActivity commentListActivity){
 
 		this.map = (MapView) commentListActivity.findViewById(R.id.map);
 		map.setBuiltInZoomControls(true);
@@ -39,18 +43,15 @@ public class CommentListActivityLocation
 	 * set up a MyLocationOverlay and execute the runnable once we have a location fix  http://developer.mapquest.com/web/products/featured/android-maps-api/documentation samples download
 	 */
 	public void setupMyLocation(final CommentListActivity commentListActivity,
-			final LocationController lc1)
-	{
+			final LocationController lc1){
 
 		commentListActivity.setMyLocationOverlay(new MyLocationOverlay(
 				commentListActivity, map));
 		commentListActivity.getMyLocationOverlay().enableMyLocation();
-		commentListActivity.getMyLocationOverlay().runOnFirstFix(new Runnable()
-		{
+		commentListActivity.getMyLocationOverlay().runOnFirstFix(new Runnable(){
 
 			@Override
-			public void run()
-			{
+			public void run(){
 
 				commentListActivity.setCurrentLocation(commentListActivity
 						.getMyLocationOverlay().getMyLocation());

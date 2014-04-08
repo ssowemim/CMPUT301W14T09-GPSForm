@@ -398,6 +398,10 @@ public class CommentListActivity extends ListActivity {
 		finish();
 	}
 
+	/**
+	 * Bring up the dialog box and input thread.
+	 * @param thread
+	 */
 	public void optionsDialog(Comment thread) {
 		popUpSelect.popUpSelect(this, fileUri, lc1, selectedgeo, user, firstComment, "Comment Reply", thread);
 
@@ -423,26 +427,30 @@ public class CommentListActivity extends ListActivity {
 		selectedgeo.setLongitude(longitude);
 	}
 
-	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay)
-	{
+	/**
+	 * set location overlay
+	 * @param myLocationOverlay
+	 */
+	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay){
 
 		this.myLocationOverlay = myLocationOverlay;
 	}
 
-	public void setCurrentLocation(GeoPoint currentLocation)
-	{
+	/**
+	 * set the current location is now fully working
+	 * @param currentLocation
+	 */
+	public void setCurrentLocation(GeoPoint currentLocation){
 
 		this.currentLocation = currentLocation;
 	}
 
-	public MyLocationOverlay getMyLocationOverlay()
-	{
+	public MyLocationOverlay getMyLocationOverlay(){
 
 		return myLocationOverlay;
 	}
 
-	public GeoPoint getCurrentLocation()
-	{
+	public GeoPoint getCurrentLocation(){
 
 		return currentLocation;
 	}

@@ -22,14 +22,20 @@ public class ChooseLocationActivitySetupLocation
 
 	private GeoPoint currentLocation;
 
-	public GeoPoint getCurrentLocation()
-	{
+	/**
+	 * Get your current location
+	 * @return
+	 */
+	public GeoPoint getCurrentLocation(){
 
 		return currentLocation;
 	}
 
-	public void setCurrentLocation(GeoPoint currentLocation)
-	{
+	/**
+	 * set your curent geo location
+	 * @param currentLocation
+	 */
+	public void setCurrentLocation(GeoPoint currentLocation){
 
 		this.currentLocation = currentLocation;
 	}
@@ -39,19 +45,16 @@ public class ChooseLocationActivitySetupLocation
 	 */
 	public void setupMyLocation(
 			final ChooseLocationActivity chooseLocationActivity,
-			final MapView map)
-	{
+			final MapView map){
 
 		chooseLocationActivity.setMyLocationOverlay(new MyLocationOverlay(
 				chooseLocationActivity, map));
 		chooseLocationActivity.getMyLocationOverlay().enableMyLocation();
 		chooseLocationActivity.getMyLocationOverlay().runOnFirstFix(
-				new Runnable()
-				{
+				new Runnable(){
 
 					@Override
-					public void run()
-					{
+					public void run(){
 
 						currentLocation = chooseLocationActivity
 								.getMyLocationOverlay().getMyLocation();

@@ -346,8 +346,7 @@ public class ChooseLocationActivity extends MapActivity {
 	 * On back pressed pack up the geolocation that was selected and send back to parent activity to be processed
 	 * http://stackoverflow.com/questions/17242713/how-to-pass-parcelable-object-from-child-to-parent-activity
 	 */
-	public void onBackPressed()
-	{
+	public void onBackPressed(){
 		// Update _workorder object
 		Intent intent = getIntent();
 		intent.putExtra("SomeUniqueKey", geo);
@@ -356,14 +355,20 @@ public class ChooseLocationActivity extends MapActivity {
 
 	}
 
-	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay)
-	{
+	/**
+	 * sets your location overlay
+	 * @param myLocationOverlay
+	 */
+	public void setMyLocationOverlay(MyLocationOverlay myLocationOverlay){
 
 		this.myLocationOverlay = myLocationOverlay;
 	}
 
-	public MyLocationOverlay getMyLocationOverlay()
-	{
+	/**
+	 * return your location overlay
+	 * @return
+	 */
+	public MyLocationOverlay getMyLocationOverlay(){
 
 		return myLocationOverlay;
 	}

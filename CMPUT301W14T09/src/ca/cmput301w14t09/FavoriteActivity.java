@@ -42,8 +42,7 @@ import ca.cmput301w14t09.Model.User;
  * by the user in TopCommentsActivity. It creates the menu and the list in which the users favourites are displayed.
  * 
  */
-public class FavoriteActivity extends ListActivity
-{
+public class FavoriteActivity extends ListActivity{
 
 	//Initialize all activity vars
 	public static final int OBTAIN_PIC_REQUEST_CODE = 117;
@@ -62,6 +61,9 @@ public class FavoriteActivity extends ListActivity
 	ThreadAdapter adapter1;
 
 
+	/**
+	 * This method is called when the app is first starts up.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);

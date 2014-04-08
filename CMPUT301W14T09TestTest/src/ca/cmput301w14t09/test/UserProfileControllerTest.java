@@ -55,6 +55,47 @@ public class UserProfileControllerTest extends ActivityInstrumentationTestCase2<
 		assertNotNull(list);
 		assertEquals(1, list.size());
 	}
+	
+	public void testNewBio(){
+		Bitmap picture = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
+		picture = Bitmap.createScaledBitmap(picture, 70, 70, false);
+		String phone = "12312345678912";
+		String bio="recursion";
+		
+		while(bio.length() < 201)
+			bio=bio.concat(bio);
+		
+		//Checking to make sure the length of bio is in fact greater than 101
+		assertTrue(bio.length() > 200);
+		
+		testUPController.finalizeVariables("UniqueID", "Name", "Female", phone, "email@facebook.com", 
+				bio, picture);
+		bio = testUPController.getNewBio();
+		//Checking to see that the length of the bio is now less than its inital length
+		assertTrue(bio.length() < 150);
+		
+		//Checking to see the length was reduced to an exact length of 100
+		assertEquals(100, bio.length());
+		
+	}
+	
+	public void testNewPhone(){
+		Bitmap picture = BitmapFactory.decodeResource(this.getActivity().getResources(), R.drawable.no_img);
+		picture = Bitmap.createScaledBitmap(picture, 70, 70, false);
+		String phone = "12312345678912";
+		String bio="recursion";
+		
+		//Checking to make sure the length of phone is in fact greater than 12
+		assertEquals(14,phone.length());
+		
+		testUPController.finalizeVariables("UniqueID", "Name", "Female", phone, "email@facebook.com", 
+				bio, picture);
+		phone = testUPController.getNewPhone();
+		//Checking to see that the length of the phone is now infact 12
+		assertEquals(12,phone.length());
+
+		
+	}
 
 
 }

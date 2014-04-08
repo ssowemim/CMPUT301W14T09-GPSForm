@@ -93,7 +93,7 @@ public class UserProfileController{
 	 * returns the new bio, method was made to aid in testing.
 	 * @return
 	 */
-	public String getNewbio(){
+	public String getNewBio(){
 		return bio;
 	} 
 	
@@ -101,7 +101,7 @@ public class UserProfileController{
 	 * returns the new phone, method was ceated to aid in testing.
 	 * @return
 	 */
-	public String getNewphone(){
+	public String getNewPhone(){
 		return phone;
 	}
 	

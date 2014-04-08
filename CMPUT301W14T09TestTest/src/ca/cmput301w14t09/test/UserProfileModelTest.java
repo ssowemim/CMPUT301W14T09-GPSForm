@@ -21,6 +21,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 											"1234567899", "benjamin@gutton.com", "something long", 
 											null);
 	
+	/**
+	 * Testing to see if the unique Id were added properly
+	 */
 	public void testUniqueID(){
 		//check if the unique id matches the one created with the user profile
 		assertEquals("UNIQUEID", testUPModel.getUniqueID());
@@ -30,6 +33,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("CHANGEUNIQUEID", testUPModel.getUniqueID());
 	}
 	
+	/**
+	 * Testing to see if the name were added properly to the model
+	 */
 	public void testName(){
 		assertEquals("Benjamin Button", testUPModel.getFirstLastName());
 		
@@ -37,6 +43,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("Button Benjamin", testUPModel.getFirstLastName());
 	}
 	
+	/**
+	 * Testing to see if the sex of the model are added properly
+	 */
 	public void testSex(){
 		assertEquals("Male", testUPModel.getSex());
 		
@@ -44,6 +53,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("Female", testUPModel.getSex());
 	}
 	
+	/**
+	 * Testing to see if the phone number are added to the model properly
+	 */
 	public void testPhone(){
 		assertEquals("1234567899", testUPModel.getPhone());
 		
@@ -51,6 +63,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("9987654321", testUPModel.getPhone());
 	}
 	
+	/**
+	 * Testing to see if the email are added to the model properly
+	 */
 	public void testEmail(){
 		assertEquals("benjamin@gutton.com", testUPModel.getEmail());
 		
@@ -58,6 +73,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("bobby@brown.com", testUPModel.getEmail());
 	}
 	
+	/**
+	 * Testing to see if bio are added to the model properly
+	 */
 	public void testBio(){
 		assertEquals("something long", testUPModel.getBiography());
 		
@@ -65,6 +83,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertEquals("biography", testUPModel.getBiography());
 	}
 	
+	/**
+	 * Testing to see if pictures are added to the model properly
+	 */
 	public void testPicture(){
 		assertNull(testUPModel.getPicture());
 		
@@ -72,6 +93,9 @@ public class UserProfileModelTest extends ActivityInstrumentationTestCase2<TopCo
 		assertNotNull(testUPModel.getPicture());
 	}
 	
+	/**
+	 * Testing to see if the user profile model was made
+	 */
 	public void testUserModel(){
 		assertNotNull(testUPModel);
 	}

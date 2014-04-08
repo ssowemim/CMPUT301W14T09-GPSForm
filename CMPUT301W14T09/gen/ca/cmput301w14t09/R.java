@@ -141,6 +141,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int attachment_description=0x7f050008;
         public static final int camera_button_description=0x7f050006;
+        public static final int continue_button=0x7f05000f;
         public static final int continue_guest=0x7f05000e;
         public static final int favButton=0x7f05000a;
         public static final int final_app_name=0x7f05000c;

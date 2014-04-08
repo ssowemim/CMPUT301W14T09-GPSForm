@@ -37,7 +37,7 @@
      android:layout_alignLeft="@+id/button2"
      android:layout_alignParentRight="true"
      android:onClick="newUser"
-     android:text="@string/continue" />
+     android:text="@string/continue_button" />
 
  <ListView
      android:id="@+id/UserList"

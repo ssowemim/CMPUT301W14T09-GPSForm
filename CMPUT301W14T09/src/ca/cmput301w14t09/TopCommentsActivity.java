@@ -54,9 +54,6 @@ import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import ca.cmput301w14t09.elasticSearch.Server;
 import com.mapquest.android.Geocoder;
 import com.mapquest.android.maps.AnnotationView;
-import com.mapquest.android.maps.GeoPoint;
-import com.mapquest.android.maps.MapView;
-import com.mapquest.android.maps.MyLocationOverlay;
 
 
 /**
@@ -208,7 +205,7 @@ public class TopCommentsActivity extends ListActivity {
 		filter = Filter.LOCATION;
 
 		topCommentsActivityProduct.setupMyLocation(lc1, this);
-		ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getTopComments(true));
+		ArrayList<Comment> sortedList = sorting.sortTopComments(lc1, null, user.profile.cache.getTopComments());
 		adapter1 = new ThreadAdapter(this,R.layout.thread_view, sortedList);
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
@@ -220,7 +217,7 @@ public class TopCommentsActivity extends ListActivity {
 	private void sortByDate() {
 		filter = Filter.DATE;
 
-		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments(true));
+		adapter1 = new ThreadAdapter(this,R.layout.thread_view, user.profile.cache.getTopComments());
 		aCommentList.setAdapter(adapter1);
 		adapter1.notifyDataSetChanged();
 	}
@@ -233,7 +230,7 @@ public class TopCommentsActivity extends ListActivity {
 		filter = Filter.PICTURE;
 
 		ArrayList<Comment> commentList = null;
-		commentList = user.profile.cache.getTopComments(true);
+		commentList = user.profile.cache.getTopComments();
 		commentList = sorting1.sortPicTopComments(commentList);
 		adapter1 = new ThreadAdapter(this,R.layout.thread_view, commentList);
 		aCommentList.setAdapter(adapter1);
@@ -318,10 +315,10 @@ public class TopCommentsActivity extends ListActivity {
 
 			}
 
-			topComments = user.profile.cache.getTopComments(true);
+			topComments = user.profile.cache.getTopComments();
 			adapter1 = new ThreadAdapter(this,
 					R.layout.thread_view,
-					user.profile.cache.getTopComments(true));
+					user.profile.cache.getTopComments());
 			aCommentList.setAdapter(adapter1);
 
 			reapplyFilter();

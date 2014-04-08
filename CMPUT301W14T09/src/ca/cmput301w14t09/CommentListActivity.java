@@ -49,7 +49,6 @@ import ca.cmput301w14t09.elasticSearch.Server;
 import com.mapquest.android.Geocoder;
 import com.mapquest.android.maps.AnnotationView;
 import com.mapquest.android.maps.GeoPoint;
-import com.mapquest.android.maps.MapView;
 import com.mapquest.android.maps.MyLocationOverlay;
 
 /**

@@ -116,7 +116,7 @@ public class Cache implements Serializable {
      * Get a list of all top-comments from cache.
      * @return the comments
      */
-    public ArrayList<Comment> getTopComments(boolean isTopComment) {
+    public ArrayList<Comment> getTopComments() {
         ArrayList<Comment> topComments = new ArrayList<Comment>();
         for(int index = 0; index < MAX_LENGTH && index < comments.size(); index++) {
             if(comments.get(index).getTopComment() == true) {

@@ -1,11 +1,5 @@
 package ca.cmput301w14t09.test;
 
-
-import junit.framework.TestCase;
-
-
-import android.content.Context;
-import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Controller.LocationController;
@@ -16,11 +10,7 @@ import ca.cmput301w14t09.Model.GeoLocation;
  * @author Cameron Alexander 
  * 
  */
-
-
 public class LocationControllerTests extends ActivityInstrumentationTestCase2<TopCommentsActivity>{
-
-
 	public LocationControllerTests() {
 		super(TopCommentsActivity.class);
 	}
@@ -29,17 +19,17 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 	/**
 	 * @author Cameron Alexander 
 	 */
-	public void testGetGeolocation()
-	{
+	public void testGetGeolocation(){
+		
 		LocationController locationcontroller = new LocationController();
+		
 		GeoLocation geo2 = locationcontroller.getGeoLocation();
 		assertTrue(geo2 == locationcontroller.getGeoLocation());
 	}
 
 	/**
-	 * @author Cameron Alexander
 	 * Check dafault vs selected location, if selected location exists use it if not use default
-	 * 
+	 * @author Cameron Alexander & ssowemim 
 	 */
 	public void testCheckLocations(){
 
@@ -48,10 +38,18 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		GeoLocation geo2 = new GeoLocation();
 		geo2.setLatitude(4.234);
 		geo2.setLongitude(5.434);
+		
+		//Testing if geo2 was set properly
+		assertEquals(4.234, geo2.getLatitude());
+		assertEquals(5.434, geo2.getLongitude());
 
 		GeoLocation selectedgeo = new GeoLocation();
 		selectedgeo.setLatitude(9.345);
 		selectedgeo.setLongitude(10.234);
+		
+		//Testing if selectedgeo was set properly
+		assertEquals(9.345, selectedgeo.getLatitude());
+		assertEquals(10.234, selectedgeo.getLongitude());
 
 		LocationController locationcontroller = new LocationController();
 		locationcontroller.setGeo(geo);
@@ -62,9 +60,12 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 		//since selected location not 0.0 0.0 the geolocation used Geo should equal selected
 		assertTrue(locationcontroller.getGeoLocation() == selectedgeo);
 
-
 		selectedgeo.setLatitude(0.0);
 		selectedgeo.setLongitude(0.0);
+		
+		//Testing if selectedgeo was set properly
+		assertEquals(0.0, selectedgeo.getLatitude());
+		assertEquals(0.0, selectedgeo.getLongitude());
 
 		locationcontroller.checklocations(selectedgeo);
 
@@ -74,24 +75,26 @@ public class LocationControllerTests extends ActivityInstrumentationTestCase2<To
 	}
 
 	/**
-	 * @author Cameron Alexander
+	 * testing to see if resetting the selected location works just as implmented
+	 * @author Cameron Alexander & ssowemim
 	 */
 	public void testResetSelectedLocation(){
 
+		//Initializes variables
 		LocationController locationcontroller = new LocationController();
-
 		GeoLocation selectedgeo = new GeoLocation();
 		selectedgeo.setLatitude(9.345);
 		selectedgeo.setLongitude(10.234);
 
+		//Making sure that the location actually changes
+		assertEquals(9.345, selectedgeo.getLatitude());
+		assertEquals(10.234, selectedgeo.getLongitude());
+		
 		locationcontroller.resetselectedlocation(selectedgeo);
 
+		//Making sure that the location has actually been reset to 0.
 		assertTrue(selectedgeo.getLatitude() == 0);
 		assertTrue(selectedgeo.getLongitude() == 0);
 
 	}
-
-
-
-
 }

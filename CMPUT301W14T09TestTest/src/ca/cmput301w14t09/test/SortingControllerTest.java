@@ -2,7 +2,6 @@ package ca.cmput301w14t09.test;
 
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
 import ca.cmput301w14t09.R;
 import ca.cmput301w14t09.TopCommentsActivity;
 import ca.cmput301w14t09.Controller.LocationController;
@@ -11,7 +10,6 @@ import ca.cmput301w14t09.FileManaging.CommentFactory;
 import ca.cmput301w14t09.FileManaging.SerializableBitmap;
 import ca.cmput301w14t09.Model.Comment;
 import ca.cmput301w14t09.Model.GeoLocation;
-import ca.cmput301w14t09.elasticSearch.ElasticSearchOperations;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.test.ActivityInstrumentationTestCase2;

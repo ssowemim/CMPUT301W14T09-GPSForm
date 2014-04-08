@@ -66,7 +66,6 @@ public class CacheTest extends TestCase {
 	 */
 	public void testGetTopComments(){
 		Cache cache = new Cache();
-		boolean topcomments;
 		
 		ArrayList<Comment> comments = cache.getTopComments(true);
 		ArrayList<Comment> comments2 = cache.getTopComments(false);

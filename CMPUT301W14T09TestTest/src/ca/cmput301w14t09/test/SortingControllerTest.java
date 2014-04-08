@@ -66,8 +66,8 @@ public class SortingControllerTest extends ActivityInstrumentationTestCase2<TopC
 		assertTrue(commList.get(1).getAuthorName().equals("test2"));
 		
 		ArrayList<Comment> testList = sc.sortTopComments(lc, geo, commList);
-		String name = testList.get(0).getAuthorName();
-		String name2 = testList.get(1).getAuthorName();
+		String name = commList.get(1).getAuthorName();
+		String name2 = commList.get(0).getAuthorName();
 
 		// after sorting names are now reversed due to their comments location
 		assertEquals("test2", name);

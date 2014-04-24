@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CMPUT301W14T09Test</name>
+	<name>Geolocation-Forum</name>
 	<comment></comment>
 	<projects>
-		<project>CMPUT301W14T09</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

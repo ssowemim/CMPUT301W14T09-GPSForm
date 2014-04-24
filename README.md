@@ -1,4 +1,5 @@
 CMPUT301W14T09-GPSForm
 ======================
 
-Repository that will be used for CMPUT301 in the winter term by team 9
+This Repository was started as a Group Project for my CMPUT301 Class (Team 9) but has now become a project I improve on personally.
+
